@@ -1,0 +1,191 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org</groupId>
+  <artifactId>scribble</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Scribble</name>
+  <url>http://www.scribble.org</url>
+  <description>
+		Scribble
+  </description>
+
+  <scm>
+    <connection>scm:svn:https://</connection>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Gary Brown</name>
+      <id>objectiser</id>
+      <email>gary@pi4tech.com</email>
+      <organization>Scribble.org</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+  
+  <properties>
+  	<felix.version>2.0.1</felix.version>
+  </properties>
+
+  <modules>
+    <module>integration</module>
+  </modules>
+  
+  <dependencyManagement>
+   <dependencies> 
+   <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.framework</artifactId>      
+      <version>${felix.version}</version>
+    </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>jboss</id>
+      <name>JBoss Maven Repository</name>
+      <url>file://${jboss.maven.repository}</url>
+    </repository>
+    <snapshotRepository>
+      <id>jboss-snapshots</id>
+      <name>JBoss Snapshot Repository</name>
+      <url>dav:https://snapshots.jboss.org/maven2</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <build>
+    <!-- This section defines the default plugin settings inherited by child projects. -->
+    <pluginManagement>
+      <plugins>
+        <!-- Fixes how test resources of a project can be used in projects dependent on it  -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+            <aggregate>true</aggregate>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <!-- Specify the compiler options and settings -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!--version>2.0.2</version-->
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+          <showDeprecation>false</showDeprecation>
+          <showWarnings>false</showWarnings>
+          <optimize>true</optimize>
+          <compilerArgument>-verbose</compilerArgument>
+        </configuration>
+      </plugin>
+      <!-- Produce source jars during the 'verify' phase -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*TestCase.java</include>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <repositories>
+
+    <repository>
+      <id>jboss</id>
+      <url>http://repository.jboss.com/maven2/</url>
+    </repository>
+
+<!-- 
+    <repository>
+      <id>jboss-snapshot</id>
+      <url>http://snapshots.jboss.org/maven2</url>
+    </repository>
+-->
+
+    <repository>
+      <id>maven.repo</id>
+      <name>maven repository</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+
+    <repository>
+      <id>ibiblio</id>
+      <name>ibiblio repository</name>
+      <url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+    </repository>
+
+    <repository>
+      <id>codehaus</id>
+      <name>codehaus repository</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+    
+    <repository>
+       <id>apache-nexus</id>
+       <name>apache nexus</name>
+       <url>https://repository.apache.org/content/groups/public/</url>
+    </repository>
+    
+    <repository>
+       <id>intalio</id>
+       <name>intalio</name>
+       <url>http://www.intalio.org/public/maven2</url>
+    </repository>
+    
+
+    <!-- Not all dependencies are resolved when using this repository.
+        Complains about not finding appropriate version of
+        org.eclipse.equinox.app	plugin. -->
+    <!-- repository>
+          <id>eclipse</id>
+        <name>eclipse repository</name>
+        <url>http://repo1.maven.org/eclipse</url>
+      </repository-->
+
+  </repositories>
+
+
+</project>
+
