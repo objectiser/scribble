@@ -1,0 +1,6 @@
+.project
+
+integration/app/command/parse/bin
+integration/app/command/parse/target
+integration/app/scl/bin
+integration/app/scl/target
