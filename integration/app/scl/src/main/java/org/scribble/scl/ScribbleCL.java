@@ -10,6 +10,8 @@ import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
+import org.apache.felix.main.AutoProcessor;
+import org.apache.felix.main.Main;
 
 public class ScribbleCL
 {
@@ -34,23 +36,38 @@ public class ScribbleCL
     public ScribbleCL()
     {
         // Create a configuration property map.
-        Map configMap = new HashMap();
-        
+        //Map configMap = new HashMap();
+        Main.loadSystemProperties();
+
+        java.util.Properties configProps = Main.loadConfigProperties();
+        if (configProps == null)
+        {
+            System.err.println("No config.properties found.");
+            configProps = new java.util.Properties();
+        }
+
+        Main.copySystemProperties(configProps);
+
         // Export the host provided service interface package.
-        configMap.put(Constants.FRAMEWORK_SYSTEMPACKAGES_EXTRA,
+        configProps.put(Constants.FRAMEWORK_SYSTEMPACKAGES_EXTRA,
             "org.scribble.scl; version=1.0.0");
         
         // Create host activator;
         m_activator = new HostActivator();
         List list = new ArrayList();
         list.add(m_activator);
-        configMap.put(FelixConstants.SYSTEMBUNDLE_ACTIVATORS_PROP, list);
+        configProps.put(FelixConstants.SYSTEMBUNDLE_ACTIVATORS_PROP, list);
 
         try
         {
             // Now create an instance of the framework with
             // our configuration properties.
-            m_felix = new Felix(configMap);
+            m_felix = new Felix(configProps);
+
+            m_felix.init();
+            
+        	AutoProcessor.process(configProps, m_felix.getBundleContext());
+        	
             // Now start Felix instance.
             m_felix.start();
         }

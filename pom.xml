@@ -44,6 +44,11 @@
       <artifactId>org.apache.felix.framework</artifactId>      
       <version>${felix.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.main</artifactId>
+      <version>${felix.version}</version>
+    </dependency>
     </dependencies>
   </dependencyManagement>
 
