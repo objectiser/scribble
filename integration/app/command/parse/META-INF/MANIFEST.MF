@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Scribble Parse Command
-Bundle-SymbolicName: org.scribble.command.parse
-Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.scribble.command.parse.osgi.Activator
-Bundle-Vendor: www.scribble.org
-Import-Package: org.osgi.framework,
- org.scribble.scl
