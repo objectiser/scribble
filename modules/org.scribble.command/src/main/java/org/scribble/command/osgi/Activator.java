@@ -17,9 +17,8 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) {
         Properties props = new Properties();
 
-        System.out.println("REGISTERING PARSE COMMAND");
-        context.registerService(
-            Command.class.getName(), new ParseCommand(), props);
+        context.registerService(Command.class.getName(), 
+        				new ParseCommand(), props);
 	}
 
 	/*
@@ -27,7 +26,6 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) {
-    	System.out.println("STOPPING PARSE COMMAND");
-	}
+ 	}
 
 }

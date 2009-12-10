@@ -14,6 +14,7 @@ import org.apache.felix.main.AutoProcessor;
 import org.apache.felix.main.Main;
 
 import org.scribble.command.*;
+import org.scribble.scl.osgi.HostActivator;
 
 public class ScribbleCL
 {
@@ -24,8 +25,19 @@ public class ScribbleCL
     public static void main(String[] args) {
     	ScribbleCL scl=new ScribbleCL();
     	
+    	if (args.length == 0) {
+    		System.err.println("Command must be specified as first parameter");
+    		System.exit(1);
+    	}
+    	
     	try {
-    		if (scl.execute(args[0], args[1]) == false) {
+    		String[] parameters=new String[args.length-1];
+    		
+    		for (int i=1; i < args.length; i++) {
+    			parameters[i-1] = args[i];
+    		}
+    		
+    		if (scl.execute(args[0], parameters) == false) {
     			System.err.println("Command not executed");
     		}
     		
@@ -80,40 +92,14 @@ public class ScribbleCL
             ex.printStackTrace();
         }
         
-        /*
-        ServiceTrackerCustomizer stc=
-        		new ServiceTrackerCustomizer() {
 
-					@Override
-					public Object addingService(ServiceReference arg0) {
-						// TODO Auto-generated method stub
-						return null;
-					}
-
-					@Override
-					public void modifiedService(ServiceReference arg0,
-							Object arg1) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void removedService(ServiceReference arg0,
-							Object arg1) {
-						// TODO Auto-generated method stub
-						
-					}
-        	
-        };
-*/
-
-        m_tracker = new ServiceTracker(
-                m_activator.getContext(), org.scribble.command.Command.class.getName(), null);
-        //m_activator.getContext(), tutorial.example2.service.DictionaryService.class.getName(), null);
-               m_tracker.open();
+        m_tracker = new ServiceTracker(m_activator.getContext(),
+        		org.scribble.command.Command.class.getName(), null);
+        
+        m_tracker.open();
     }
 
-    public boolean execute(String name, String commandline)
+    public boolean execute(String name, String args[])
     {
         // See if any of the currently tracked command services
         // match the specified command name, if so then execute it.
@@ -125,7 +111,7 @@ public class ScribbleCL
             	//((tutorial.example2.service.DictionaryService)services[i]).checkWord("hello");
                 if (((Command) services[i]).getName().equals(name))
                 {
-                    return ((Command) services[i]).execute(commandline);
+                    return ((Command) services[i]).execute(args);
                 }
             }
             catch (Exception ex)
