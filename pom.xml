@@ -30,10 +30,12 @@
   </developers>
   
   <properties>
+  	<scribble.version>1.0-SNAPSHOT</scribble.version>
   	<felix.version>2.0.1</felix.version>
   </properties>
 
   <modules>
+    <module>modules</module>
     <module>integration</module>
   </modules>
   
