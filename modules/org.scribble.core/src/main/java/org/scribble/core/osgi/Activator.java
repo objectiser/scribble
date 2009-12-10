@@ -4,7 +4,8 @@ import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-//import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
 import org.scribble.core.internal.validation.ValidationManagerImpl;
 import org.scribble.core.validation.ValidationManager;
 
@@ -23,7 +24,6 @@ public class Activator implements BundleActivator {
         context.registerService(ValidationManager.class.getName(), 
 							vm, props);
         
-        /*
         m_tracker = new ServiceTracker(context,
         		org.scribble.core.validation.Validator.class.getName(),
         				null) {
@@ -36,7 +36,7 @@ public class Activator implements BundleActivator {
         };
         
         m_tracker.open();
-        */
+
 	}
 
 	/*
@@ -46,5 +46,5 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext context) throws Exception {
 	}
 
-	//private org.osgi.util.tracker.ServiceTracker m_tracker=null;
+	private org.osgi.util.tracker.ServiceTracker m_tracker=null;
 }

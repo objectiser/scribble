@@ -19,6 +19,11 @@
       <artifactId>org.osgi.core</artifactId>
       <version>${osgi.version}</version>
     </dependency>
+   <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.framework</artifactId>      
+      <version>${felix.version}</version>
+    </dependency>
   </dependencies>
   
   <build>
