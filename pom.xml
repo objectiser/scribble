@@ -32,6 +32,7 @@
   <properties>
   	<scribble.version>1.0-SNAPSHOT</scribble.version>
   	<felix.version>2.0.1</felix.version>
+  	<osgi.version>1.4.0</osgi.version>
   </properties>
 
   <modules>
@@ -50,6 +51,11 @@
       <groupId>org.apache.felix</groupId>
       <artifactId>org.apache.felix.main</artifactId>
       <version>${felix.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>${osgi.version}</version>
     </dependency>
     </dependencies>
   </dependencyManagement>

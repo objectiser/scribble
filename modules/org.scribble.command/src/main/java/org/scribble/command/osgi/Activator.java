@@ -5,8 +5,9 @@ import java.util.Properties;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import org.scribble.command.parse.*;
-import org.scribble.command.*;;
+import org.scribble.command.parse.ParseCommand;
+import org.scribble.command.validate.ValidateCommand;
+import org.scribble.command.*;
 
 public class Activator implements BundleActivator {
 
@@ -18,7 +19,15 @@ public class Activator implements BundleActivator {
         Properties props = new Properties();
 
         context.registerService(Command.class.getName(), 
-        				new ParseCommand(), props);
+				new ParseCommand(), props);
+        
+        ValidateCommand vc=new ValidateCommand();
+        
+        // Find ValidationManager
+        //context.
+        
+        context.registerService(Command.class.getName(), 
+				vc, props);
 	}
 
 	/*
