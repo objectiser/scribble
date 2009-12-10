@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 Pi4 Technologies Ltd
+ * Copyright 2009 Scribble.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- * Change History:
- * 20 Oct 2007 : Initial version created by gary
  */
 package org.scribble.core.model;
 
@@ -136,7 +133,7 @@ public abstract class ModelObject implements java.io.Serializable {
 							try {
 								Object refObject=pds[i].getReadMethod().invoke(this, (Object[])null);
 								
-								if (refObject instanceof java.util.List) {
+								if (refObject instanceof java.util.List<?>) {
 									java.util.List<?> list=(java.util.List<?>)refObject;
 									
 									for (int j=0; j < list.size(); j++) {
@@ -218,7 +215,7 @@ public abstract class ModelObject implements java.io.Serializable {
 						try {
 							Object refObject=pds[i].getReadMethod().invoke(this, (Object[])null);
 							
-							if (refObject instanceof java.util.List) {
+							if (refObject instanceof java.util.List<?>) {
 								java.util.List<?> list=(java.util.List<?>)refObject;
 								
 								for (int j=0; j < list.size(); j++) {
@@ -305,7 +302,7 @@ public abstract class ModelObject implements java.io.Serializable {
 			try {
 				Object refObject=pd.getReadMethod().invoke(this, (Object[])null);
 				
-				if (refObject instanceof java.util.List &&
+				if (refObject instanceof java.util.List<?> &&
 						pos != -1) {
 					java.util.List<?> list=(java.util.List<?>)refObject;
 					
