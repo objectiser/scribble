@@ -22,8 +22,11 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
+import org.scribble.core.internal.logger.ScribbleLoggerImpl;
 import org.scribble.core.internal.validation.ValidationManagerImpl;
+import org.scribble.core.logger.ScribbleLogger;
 import org.scribble.core.validation.ValidationManager;
+import org.scribble.core.validation.Validator;
 
 public class Activator implements BundleActivator {
 
@@ -39,7 +42,11 @@ public class Activator implements BundleActivator {
         
         context.registerService(ValidationManager.class.getName(), 
 							vm, props);
+        System.out.println("REGISTERED VALIDATION MANAGER");
         
+        context.registerService(ScribbleLogger.class.getName(), 
+				new ScribbleLoggerImpl(), props);
+
         m_tracker = new ServiceTracker(context,
         		org.scribble.core.validation.Validator.class.getName(),
         				null) {
@@ -47,6 +54,9 @@ public class Activator implements BundleActivator {
 			public Object addingService(ServiceReference ref) {
 				Object ret=super.addingService(ref);
 				System.out.println("VALIDATOR HAS BEEN ADDED: "+ret);
+				
+				vm.addValidator((Validator)ret);
+				
 				return(ret);
 			}
         };

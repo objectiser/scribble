@@ -5,5 +5,7 @@ Bundle-Version: 1.0.0
 Bundle-Activator: org.scribble.command.osgi.Activator
 Export-Package: org.scribble.command
 Import-Package: org.osgi.framework,
- org.scribble.core.model
+ org.scribble.core.logger,
+ org.scribble.core.model,
+ org.scribble.core.validation
 Bundle-SymbolicName: org.scribble.command

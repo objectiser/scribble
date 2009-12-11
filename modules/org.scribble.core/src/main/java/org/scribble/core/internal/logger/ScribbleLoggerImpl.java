@@ -14,23 +14,35 @@
  * limitations under the License.
  *
  */
-package org.scribble.core.logger;
+package org.scribble.core.internal.logger;
 
-public interface ScribbleLogger {
+import org.scribble.core.logger.ScribbleLogger;
+
+public class ScribbleLoggerImpl implements ScribbleLogger {
 
 	public void error(org.scribble.core.model.ModelObject modelObject,
-					String issue);
+					String issue) {
+		System.out.println("ERROR: "+issue);
+	}
 	
 	public void warning(org.scribble.core.model.ModelObject modelObject,
-			String issue);
+			String issue) {
+		System.out.println("WARN: "+issue);
+	}
 	
 	public void info(org.scribble.core.model.ModelObject modelObject,
-			String issue);
+			String issue) {
+		System.out.println("INFO: "+issue);
+	}
 
 	public void debug(org.scribble.core.model.ModelObject modelObject,
-			String issue);
+			String issue) {
+		System.out.println("DEBUG: "+issue);
+	}
 
 	public void trace(org.scribble.core.model.ModelObject modelObject,
-			String issue);
+			String issue) {
+		System.out.println("TRACE: "+issue);
+	}
 
 }

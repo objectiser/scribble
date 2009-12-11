@@ -16,8 +16,17 @@
  */
 package org.scribble.command.parse;
 
+import org.scribble.core.logger.ScribbleLogger;
+
 public class ParseCommand implements org.scribble.command.Command {
 
+	public ParseCommand() {	
+	}
+	
+	public void setLogger(ScribbleLogger sl) {
+		m_logger = sl;
+	}
+	
 	public String getName() {
 		return("parse");
 	}
@@ -30,13 +39,15 @@ public class ParseCommand implements org.scribble.command.Command {
 		boolean ret=false;
 		
 		if (args.length == 1) {
-			System.out.println("PARSE "+args[0]);
+			m_logger.info(null, "PARSE "+args[0]);
+			
 			ret = true;
 		} else {
-			System.err.println("PARSE EXPECTING 1 PARAMETER");
+			m_logger.error(null, "PARSE EXPECTING 1 PARAMETER");
 		}
 		
 		return(ret);
 	}
 
+	private ScribbleLogger m_logger=null;
 }

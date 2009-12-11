@@ -19,9 +19,22 @@ package org.scribble.command.validate;
 import java.util.List;
 
 import org.scribble.core.model.Definition;
+import org.scribble.core.validation.*;
+import org.scribble.core.logger.*;
 
 public class ValidateCommand implements org.scribble.command.Command {
 
+	public ValidateCommand() {
+	}
+	
+	public void setValidationManager(ValidationManager vm) {
+		m_validationManager = vm;
+	}
+	
+	public void setLogger(ScribbleLogger sl) {
+		m_logger = sl;
+	}
+	
 	public String getName() {
 		return("validate");
 	}
@@ -46,7 +59,7 @@ public class ValidateCommand implements org.scribble.command.Command {
 					}			
 			};
 			
-			
+			m_validationManager.validate(model, m_logger);
 			
 			ret = true;
 		} else {
@@ -56,4 +69,6 @@ public class ValidateCommand implements org.scribble.command.Command {
 		return(ret);
 	}
 
+	private ValidationManager m_validationManager=null;
+	private ScribbleLogger m_logger=null;
 }
