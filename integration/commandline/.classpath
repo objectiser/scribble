@@ -2,8 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/felix.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.scribble.command"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/felix/org.apache.felix.framework/2.0.1/org.apache.felix.framework-2.0.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/felix/org.apache.felix.main/2.0.1/org.apache.felix.main-2.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
