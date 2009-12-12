@@ -33,6 +33,7 @@
   	<scribble.version>1.0-SNAPSHOT</scribble.version>
   	<felix.version>2.0.1</felix.version>
   	<osgi.version>1.4.0</osgi.version>
+  	<antlr.version>3.2</antlr.version>
   </properties>
 
   <modules>
