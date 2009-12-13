@@ -14,16 +14,13 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.validator;
+package org.scribble.core.parser;
 
-import org.scribble.core.logger.ScribbleLogger;
 import org.scribble.core.model.Model;
-import org.scribble.core.validation.*;
+import org.scribble.core.logger.ScribbleLogger;
 
-public class ProtocolValidator implements Validator {
+public interface Parser<T extends Model<?>> {
 
-	public void validate(Model<?> model, ScribbleLogger logger) {
-		logger.warning(model, "PROTOCOL VALIDATOR: "+model);
-	}
-
+	public T parse(java.io.InputStream is, ScribbleLogger logger);
+	
 }

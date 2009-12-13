@@ -14,12 +14,10 @@
  * limitations under the License.
  *
  */
-package org.scribble.core.internal.validation;
+package org.scribble.core.validation;
 
-import org.scribble.core.validation.ValidationManager;
-import org.scribble.core.validation.Validator;
 
-public class ValidationManagerImpl implements ValidationManager {
+public class DefaultValidationManager implements ValidationManager {
 	
 	public void addValidator(Validator validator) {
 		m_validators.add(validator);

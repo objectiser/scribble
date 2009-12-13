@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ltk.core.refactoring,
  org.eclipse.ui.ide,
  org.scribble.core,
- org.scribble.protocol
+ org.scribble.protocol,
+ org.scribble.protocol.parser
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: www.scribble.org
 Scribble-Extensions: org.scribble.designer.editor.ScribbleEditorManager

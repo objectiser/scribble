@@ -29,6 +29,7 @@ import org.scribble.command.validate.ValidateCommand;
 import org.scribble.command.*;
 import org.scribble.core.logger.ScribbleLogger;
 import org.scribble.core.validation.ValidationManager;
+import org.scribble.protocol.parser.ProtocolParser;
 
 public class Activator implements BundleActivator {
 
@@ -84,12 +85,30 @@ public class Activator implements BundleActivator {
         	}
         };
               
+        ServiceListener sl3 = new ServiceListener() {
+        	public void serviceChanged(ServiceEvent ev) {
+        		ServiceReference sr = ev.getServiceReference();
+        		switch(ev.getType()) {
+        		case ServiceEvent.REGISTERED:
+        			ProtocolParser pp=
+        				(ProtocolParser)context.getService(sr);
+        			pc.setProtocolParser(pp);
+        			vc.setProtocolParser(pp);
+        			break;
+        		case ServiceEvent.UNREGISTERING:
+        			break;
+        		}
+        	}
+        };
+              
         String filter1 = "(objectclass=" + ValidationManager.class.getName() + ")";
         String filter2 = "(objectclass=" + ScribbleLogger.class.getName() + ")";
+        String filter3 = "(objectclass=" + ProtocolParser.class.getName() + ")";
         
         try {
         	context.addServiceListener(sl1, filter1);
         	context.addServiceListener(sl2, filter2);
+        	context.addServiceListener(sl3, filter3);
         } catch(Exception e) {
         	e.printStackTrace();
         }

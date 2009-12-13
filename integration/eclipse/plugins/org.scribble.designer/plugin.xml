@@ -42,32 +42,17 @@
    </extension>
 
   <extension
-        point="org.eclipse.ltk.core.refactoring.copyParticipants">
-     <copyParticipant
-           class="org.scribble.designer.refactoring.RefactorCopyParticipant"
-           id="org.scribble.copyParticipant"
-           name="Copy">
-        <enablement></enablement>
-     </copyParticipant>
+        id="org.scribble.ScribbleProblem"
+        name="Scribble Problem"
+        point="org.eclipse.core.resources.markers">
+     <super
+           type="org.eclipse.core.resources.problemmarker">
+     </super>
+     <persistent
+           value="true">
+     </persistent>
   </extension>
-  <extension
-        point="org.eclipse.ltk.core.refactoring.renameParticipants">
-     <renameParticipant
-           class="org.scribble.designer.refactoring.RefactorRenameParticipant"
-           id="org.scribble.renameParticipant"
-           name="Rename">
-        <enablement></enablement>
-     </renameParticipant>
-  </extension>
-  <extension
-        point="org.eclipse.ltk.core.refactoring.moveParticipants">
-     <moveParticipant
-           class="org.scribble.designer.refactoring.RefactorMoveParticipant"
-           id="org.scribble.moveParticipant"
-           name="Move">
-        <enablement></enablement>
-     </moveParticipant>
-  </extension>
+
   <extension
         point="org.eclipse.ui.preferencePages">
      <page
@@ -89,4 +74,25 @@
      </initializer>
   </extension>
 
+  <extension point="org.eclipse.ui.popupMenus"> 
+	<objectContribution 
+      id="org.scribble.contribution.spr"
+   			objectClass="org.eclipse.core.resources.IFile"
+   				nameFilter="*.spr">
+	  <menu
+         id="org.scribble.menu"
+         label="Scribble"
+         path="additions">
+      	<separator name="group1"/>
+      </menu>
+      <action
+           label="Validate Scribble"
+           class="org.scribble.designer.actions.ValidateAction"
+           menubarPath="org.scribble.menu/group1"
+           enablesFor="1"
+           id="org.scribble.designer.actions.ValidateAction">
+     </action> 
+    </objectContribution>
+  </extension>
+	
 </plugin>

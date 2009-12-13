@@ -14,16 +14,23 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.validator;
+package org.scribble.protocol.parser.antlr;
 
+import java.io.InputStream;
+
+import org.scribble.protocol.model.*;
+import org.scribble.protocol.parser.ProtocolParser;
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.Model;
-import org.scribble.core.validation.*;
+import org.scribble.core.model.*;
 
-public class ProtocolValidator implements Validator {
+public class ANTLRProtocolParser implements ProtocolParser {
 
-	public void validate(Model<?> model, ScribbleLogger logger) {
-		logger.warning(model, "PROTOCOL VALIDATOR: "+model);
+	public Model<Protocol> parse(InputStream is, ScribbleLogger logger) {
+		Model<Protocol> ret=new Model<Protocol>();
+		
+		logger.warning(null, "CALLED ANTLR PARSER");
+		
+		return(ret);
 	}
 
 }

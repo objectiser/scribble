@@ -21,6 +21,7 @@ import java.util.List;
 import org.scribble.core.model.Definition;
 import org.scribble.core.validation.*;
 import org.scribble.core.logger.*;
+import org.scribble.protocol.parser.ProtocolParser;
 
 public class ValidateCommand implements org.scribble.command.Command {
 
@@ -33,6 +34,10 @@ public class ValidateCommand implements org.scribble.command.Command {
 	
 	public void setLogger(ScribbleLogger sl) {
 		m_logger = sl;
+	}
+	
+	public void setProtocolParser(ProtocolParser parser) {
+		m_protocolParser = parser;
 	}
 	
 	public String getName() {
@@ -64,4 +69,5 @@ public class ValidateCommand implements org.scribble.command.Command {
 
 	private ValidationManager m_validationManager=null;
 	private ScribbleLogger m_logger=null;
+	private ProtocolParser m_protocolParser=null;
 }

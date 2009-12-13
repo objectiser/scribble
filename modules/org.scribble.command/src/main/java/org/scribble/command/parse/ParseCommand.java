@@ -17,6 +17,7 @@
 package org.scribble.command.parse;
 
 import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.protocol.parser.ProtocolParser;
 
 public class ParseCommand implements org.scribble.command.Command {
 
@@ -25,6 +26,10 @@ public class ParseCommand implements org.scribble.command.Command {
 	
 	public void setLogger(ScribbleLogger sl) {
 		m_logger = sl;
+	}
+	
+	public void setProtocolParser(ProtocolParser parser) {
+		m_protocolParser = parser;
 	}
 	
 	public String getName() {
@@ -41,7 +46,24 @@ public class ParseCommand implements org.scribble.command.Command {
 		if (args.length == 1) {
 			m_logger.info(null, "PARSE "+args[0]);
 			
-			ret = true;
+			java.io.File f=new java.io.File(args[0]);
+			
+			if (f.exists() == false) {
+				m_logger.error(null, "File not found '"+args[0]+"'");
+			} else {
+				// TODO: Check if protocol
+				try {
+					java.io.InputStream is=new java.io.FileInputStream(f);
+			
+					m_protocolParser.parse(is, m_logger);
+			
+					is.close();
+					
+					ret = true;
+				} catch(Exception e) {
+					m_logger.error(null, "Failed to parse file '"+args[0]+"'");
+				}
+			}
 		} else {
 			m_logger.error(null, "PARSE EXPECTING 1 PARAMETER");
 		}
@@ -50,4 +72,5 @@ public class ParseCommand implements org.scribble.command.Command {
 	}
 
 	private ScribbleLogger m_logger=null;
+	private ProtocolParser m_protocolParser=null;
 }

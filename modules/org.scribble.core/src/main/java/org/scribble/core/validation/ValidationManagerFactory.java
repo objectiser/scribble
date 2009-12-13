@@ -7,5 +7,5 @@ public class ValidationManagerFactory {
 	}
 	
 	private static ValidationManager m_instance=
-			new org.scribble.core.internal.validation.ValidationManagerImpl();
+			new org.scribble.core.validation.DefaultValidationManager();
 }

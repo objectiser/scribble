@@ -24,6 +24,16 @@
       <artifactId>org.scribble.core</artifactId>
       <version>${scribble.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol.parser</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
   </dependencies>
   
   <build>

@@ -23,9 +23,9 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.scribble.core.internal.logger.ScribbleLoggerImpl;
-import org.scribble.core.internal.validation.ValidationManagerImpl;
 import org.scribble.core.logger.ScribbleLogger;
 import org.scribble.core.validation.ValidationManager;
+import org.scribble.core.validation.DefaultValidationManager;
 import org.scribble.core.validation.Validator;
 
 public class Activator implements BundleActivator {
@@ -38,7 +38,7 @@ public class Activator implements BundleActivator {
 		
         Properties props = new Properties();
 
-        final ValidationManager vm=new ValidationManagerImpl();
+        final ValidationManager vm=new DefaultValidationManager();
         
         context.registerService(ValidationManager.class.getName(), 
 							vm, props);

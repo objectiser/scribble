@@ -19,7 +19,7 @@ package org.scribble.designer.logger;
 /**
  * This class contains Scribble Marker definitions.
  */
-public class ScribblerMarker {
+public class ScribbleMarker {
 
 	public static final String SCRIBBLE_PROBLEM = "org.scribble.ScribbleProblem";
 

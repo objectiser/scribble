@@ -8,4 +8,5 @@ Bundle-Vendor: www.scribble.org
 Import-Package: org.osgi.framework, org.osgi.util.tracker
 Export-Package: org.scribble.core.logger,
  org.scribble.core.model,
+ org.scribble.core.parser,
  org.scribble.core.validation

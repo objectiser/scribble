@@ -228,7 +228,7 @@ public class ScribbleEditor extends TextEditor {
 			
 			IMarker[] markers=
 				((IFileEditorInput)input).getFile().findMarkers(
-					org.scribble.designer.logger.ScribblerMarker.SCRIBBLE_PROBLEM,
+					org.scribble.designer.logger.ScribbleMarker.SCRIBBLE_PROBLEM,
 							true, IResource.DEPTH_INFINITE);
 			boolean f_error=false;
 			boolean f_warning=false;
