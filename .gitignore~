@@ -3,4 +3,3 @@ modules/*/target
 modules/*/bin
 integration/commandline/bin
 integration/commandline/target
-integration/eclipse/plugins/*/bin

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.scribble.wizard.category.ID"
+      name="Scribble">
+    </category>
+    <wizard
+      id = "org.scribble.designer.editor.NewScribbleWizardID"
+      name = "Scribble"
+      class = "org.scribble.designer.editor.NewScribbleWizard"
+      category = "org.scribble.wizard.category.ID"
+      icon = "icons/scribble.png">
+      <description>New Scribble Description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Scribble Editor"
+            icon="icons/scribble.png"
+            extensions="spr,scv,stp"
+            contributorClass="org.scribble.designer.editor.ScribbleActionContributor"
+            class="org.scribble.designer.editor.ScribbleEditor"
+            id="org.scribble.designer.editor.ScribbleEditor">
+      </editor>
+   </extension>
+   
+   <extension
+         id="ExampleJavaDocumentSetupParticipant"
+         name="%documentSetupParticipantName"
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            extensions="spr,scv,stp"
+            class="org.scribble.designer.editor.ScribbleDocumentSetupParticipant">
+      </participant>
+   </extension>
+
+  <extension
+        point="org.eclipse.ltk.core.refactoring.copyParticipants">
+     <copyParticipant
+           class="org.scribble.designer.refactoring.RefactorCopyParticipant"
+           id="org.scribble.copyParticipant"
+           name="Copy">
+        <enablement></enablement>
+     </copyParticipant>
+  </extension>
+  <extension
+        point="org.eclipse.ltk.core.refactoring.renameParticipants">
+     <renameParticipant
+           class="org.scribble.designer.refactoring.RefactorRenameParticipant"
+           id="org.scribble.renameParticipant"
+           name="Rename">
+        <enablement></enablement>
+     </renameParticipant>
+  </extension>
+  <extension
+        point="org.eclipse.ltk.core.refactoring.moveParticipants">
+     <moveParticipant
+           class="org.scribble.designer.refactoring.RefactorMoveParticipant"
+           id="org.scribble.moveParticipant"
+           name="Move">
+        <enablement></enablement>
+     </moveParticipant>
+  </extension>
+  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           class="org.scribble.designer.preferences.ScribblePreferencePage"
+           id="org.scribble.designer.preferences.ScribblePreferencePage"
+           name="Scribble">
+     </page>
+     <page
+           category="org.scribble.designer.preferences.ScribblePreferencePage"
+           class="org.scribble.designer.preferences.AnalysisPreferencePage"
+           id="org.scribble.designer.preferences.AnalysisPreferencePage"
+           name="Analysis">
+     </page>
+  </extension>
+  <extension
+        point="org.eclipse.core.runtime.preferences">
+     <initializer
+           class="org.scribble.designer.preferences.PreferenceInitializer">
+     </initializer>
+  </extension>
+
+</plugin>
