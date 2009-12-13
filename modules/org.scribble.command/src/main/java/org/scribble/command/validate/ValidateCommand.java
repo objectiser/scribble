@@ -50,14 +50,7 @@ public class ValidateCommand implements org.scribble.command.Command {
 			System.out.println("VALIDATE "+args[0]);
 			
 			org.scribble.core.model.Model model=
-				new org.scribble.core.model.Model() {
-
-					@Override
-					public List<Definition> getDefinitions() {
-						// TODO Auto-generated method stub
-						return null;
-					}			
-			};
+				new org.scribble.core.model.Model();
 			
 			m_validationManager.validate(model, m_logger);
 			

@@ -22,7 +22,7 @@ package org.scribble.core.model;
  * contained within derived classes.
  *
  */
-public abstract class Model extends ModelObject {
+public class Model<T extends Definition> extends ModelObject {
 
 	private static final long serialVersionUID = -1282833027993451521L;
 
@@ -71,14 +71,6 @@ public abstract class Model extends ModelObject {
 	}
 	
 	/**
-	 * This method returns the model name associated with
-	 * the model.
-	 * 
-	 * @return The model name
-	 */
-	//public abstract ModelName getModelName();
-
-	/**
 	 * This method returns a list of local model references
 	 * associated with a global conversation model. The
 	 * supplied reference provides the template for the
@@ -93,17 +85,20 @@ public abstract class Model extends ModelObject {
 		final java.util.List<ModelReference> localModelRefs=
 					new java.util.Vector<ModelReference>();
 		
-		java.util.List<Definition> defns=getDefinitions();
+		if (getDefinition() != null) {
 		
-		for (int i=0; i < defns.size(); i++) {
 			// Identify all of the roles defined in the
 			// top level definition
-			defns.get(i).visit(new Visitor() {
+			getDefinition().visit(new Visitor() {
 				
 				public boolean visit(ModelObject obj) {
 					boolean ret=true;
 					
-					if (obj instanceof RoleList &&
+					if (obj instanceof Definition &&
+							m_definition != obj) {
+						ret = false;
+						
+					} else if (obj instanceof RoleList &&
 							((RoleList)obj).isOpen() == false) {
 						RoleList plist=(RoleList)obj;
 						
@@ -119,7 +114,7 @@ public abstract class Model extends ModelObject {
 							Definition defn=plist.getEnclosingDefinition();
 							
 							while (defn != null &&
-										(defn.getParent() instanceof Model) == false) {
+										(defn.getParent() instanceof Model<?>) == false) {
 								lref.getSubDefinitionPath().addPathElement(0,
 											defn.getLocatedName().getName());
 								
@@ -151,12 +146,25 @@ public abstract class Model extends ModelObject {
 	}
 
 	/**
-	 * This method returns the list of definitions supported by
+	 * This method returns the definition associated with
 	 * this model.
 	 * 
-	 * @return The list of definitions
+	 * @return The definition
 	 */
-	public abstract java.util.List<Definition> getDefinitions();
+	@Reference(containment=true)
+	public T getDefinition() {
+		return(m_definition);
+	}
+	
+	/**
+	 * This method set the definition associated with the
+	 * model.
+	 * 
+	 * @param defn The definition
+	 */
+	public void setDefinition(T defn) {
+		m_definition = defn;
+	}
 	
 	/**
 	 * This method determines whether the model is located.
@@ -166,10 +174,8 @@ public abstract class Model extends ModelObject {
 	public boolean isLocated() {
 		boolean ret=false;
 		
-		java.util.List<Definition> defns=getDefinitions();
-		
-		if (defns.size() > 0) {
-			ret = (defns.get(0).getLocatedName().getRole() != null);
+		if (getDefinition() != null) {
+			ret = (getDefinition().getLocatedName().getRole() != null);
 		}
 		
 		return(ret);
@@ -205,6 +211,7 @@ public abstract class Model extends ModelObject {
 	}
 	
 	private Namespace m_namespace=null;
+	private T m_definition=null;
 	private java.util.List<Import> m_imports=
 				new ContainmentList<Import>(this, Import.class);
 }
