@@ -14,18 +14,20 @@
  * limitations under the License.
  *
  */
-package org.scribble.core.logger;
+package org.scribble.core.util;
 
-public interface ScribbleLogger {
+import static org.junit.Assert.*;
 
-	public void error(String issue, java.util.Properties props);
-	
-	public void warning(String issue, java.util.Properties props);
-	
-	public void info(String issue, java.util.Properties props);
+public class MessageUtilTest {
 
-	public void debug(String issue, java.util.Properties props);
-
-	public void trace(String issue, java.util.Properties props);
-
+	@org.junit.Test
+	public void testFormatWithNoParams() {
+		String mesg="Message 1";
+		
+		String result=MessageUtil.format(mesg, null);
+		
+		assertNotNull(result);
+		
+		assertEquals(mesg, result);
+	}
 }

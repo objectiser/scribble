@@ -20,28 +20,23 @@ import org.scribble.core.logger.ScribbleLogger;
 
 public class ScribbleLoggerImpl implements ScribbleLogger {
 
-	public void error(org.scribble.core.model.ModelObject modelObject,
-					String issue) {
+	public void error(String issue, java.util.Properties props) {
 		System.out.println("ERROR: "+issue);
 	}
 	
-	public void warning(org.scribble.core.model.ModelObject modelObject,
-			String issue) {
+	public void warning(String issue, java.util.Properties props) {
 		System.out.println("WARN: "+issue);
 	}
 	
-	public void info(org.scribble.core.model.ModelObject modelObject,
-			String issue) {
+	public void info(String issue, java.util.Properties props) {
 		System.out.println("INFO: "+issue);
 	}
 
-	public void debug(org.scribble.core.model.ModelObject modelObject,
-			String issue) {
+	public void debug(String issue, java.util.Properties props) {
 		System.out.println("DEBUG: "+issue);
 	}
 
-	public void trace(org.scribble.core.model.ModelObject modelObject,
-			String issue) {
+	public void trace(String issue, java.util.Properties props) {
 		System.out.println("TRACE: "+issue);
 	}
 

@@ -44,12 +44,12 @@ public class ParseCommand implements org.scribble.command.Command {
 		boolean ret=false;
 		
 		if (args.length == 1) {
-			m_logger.info(null, "PARSE "+args[0]);
+			m_logger.info("PARSE "+args[0], null);
 			
 			java.io.File f=new java.io.File(args[0]);
 			
 			if (f.exists() == false) {
-				m_logger.error(null, "File not found '"+args[0]+"'");
+				m_logger.error("File not found '"+args[0]+"'", null);
 			} else {
 				// TODO: Check if protocol
 				try {
@@ -61,11 +61,11 @@ public class ParseCommand implements org.scribble.command.Command {
 					
 					ret = true;
 				} catch(Exception e) {
-					m_logger.error(null, "Failed to parse file '"+args[0]+"'");
+					m_logger.error("Failed to parse file '"+args[0]+"'", null);
 				}
 			}
 		} else {
-			m_logger.error(null, "PARSE EXPECTING 1 PARAMETER");
+			m_logger.error("PARSE EXPECTING 1 PARAMETER", null);
 		}
 		
 		return(ret);

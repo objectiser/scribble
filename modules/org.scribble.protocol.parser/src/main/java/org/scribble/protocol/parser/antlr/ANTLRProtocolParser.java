@@ -28,7 +28,7 @@ public class ANTLRProtocolParser implements ProtocolParser {
 	public Model<Protocol> parse(InputStream is, ScribbleLogger logger) {
 		Model<Protocol> ret=new Model<Protocol>();
 		
-		logger.warning(null, "CALLED ANTLR PARSER");
+		logger.warning("CALLED ANTLR PARSER", null);
 		
 		return(ret);
 	}

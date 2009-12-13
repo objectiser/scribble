@@ -23,7 +23,13 @@ import org.scribble.core.validation.*;
 public class ProtocolValidator implements Validator {
 
 	public void validate(Model<?> model, ScribbleLogger logger) {
-		logger.warning(model, "PROTOCOL VALIDATOR: "+model);
+		logger.warning("PROTOCOL VALIDATOR: "+model, null);
+		
+		logger.error(org.scribble.core.util.MessageUtil.format(
+				java.util.ResourceBundle.getBundle(
+				"org.scribble.protocol.validator.Messages"),
+					"_PROTOCOL",
+					new String[]{"test"}), null);
 	}
 
 }

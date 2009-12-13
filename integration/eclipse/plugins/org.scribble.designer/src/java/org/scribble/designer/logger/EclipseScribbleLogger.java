@@ -19,7 +19,6 @@ package org.scribble.designer.logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.ModelObject;
 
 public class EclipseScribbleLogger implements ScribbleLogger {
 
@@ -27,12 +26,12 @@ public class EclipseScribbleLogger implements ScribbleLogger {
 		m_file = file;
 	}
 
-	public void debug(ModelObject modelObject, String issue) {
+	public void debug(String issue, java.util.Properties props) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void error(ModelObject modelObject, String issue) {
+	public void error(String issue, java.util.Properties props) {
 		reportIssue(issue, ReportEntry.ERROR_TYPE);
 		m_errorOccurred = true;
 	}
@@ -41,16 +40,16 @@ public class EclipseScribbleLogger implements ScribbleLogger {
 		return(m_errorOccurred);
 	}
 	
-	public void info(ModelObject modelObject, String issue) {
+	public void info(String issue, java.util.Properties props) {
 		reportIssue(issue, ReportEntry.INFORMATION_TYPE);
 	}
 
-	public void trace(ModelObject modelObject, String issue) {
+	public void trace(String issue, java.util.Properties props) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void warning(ModelObject modelObject, String issue) {
+	public void warning(String issue, java.util.Properties props) {
 		reportIssue(issue, ReportEntry.WARNING_TYPE);
 	}
 	

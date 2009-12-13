@@ -25,7 +25,7 @@
       <roles>
         <role>Developer</role>
       </roles>
-      <timezone>+1</timezone>
+      <timezone>+0</timezone>
     </developer>
   </developers>
   
@@ -34,11 +34,14 @@
   	<felix.version>2.0.1</felix.version>
   	<osgi.version>1.4.0</osgi.version>
   	<antlr.version>3.2</antlr.version>
+  	<junit.version>4.7</junit.version>
   </properties>
 
   <modules>
     <module>modules</module>
     <module>integration</module>
+    <module>docs</module>
+    <module>distribution</module>
   </modules>
   
   <dependencyManagement>
