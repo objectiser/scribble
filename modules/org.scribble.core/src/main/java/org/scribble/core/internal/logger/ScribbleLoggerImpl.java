@@ -16,27 +16,29 @@
  */
 package org.scribble.core.internal.logger;
 
+import java.io.Serializable;
+
 import org.scribble.core.logger.ScribbleLogger;
 
 public class ScribbleLoggerImpl implements ScribbleLogger {
 
-	public void error(String issue, java.util.Properties props) {
+	public void error(String issue, java.util.Map<String,Serializable> props) {
 		System.out.println("ERROR: "+issue);
 	}
 	
-	public void warning(String issue, java.util.Properties props) {
+	public void warning(String issue, java.util.Map<String,Serializable> props) {
 		System.out.println("WARN: "+issue);
 	}
 	
-	public void info(String issue, java.util.Properties props) {
+	public void info(String issue, java.util.Map<String,Serializable> props) {
 		System.out.println("INFO: "+issue);
 	}
 
-	public void debug(String issue, java.util.Properties props) {
+	public void debug(String issue, java.util.Map<String,Serializable> props) {
 		System.out.println("DEBUG: "+issue);
 	}
 
-	public void trace(String issue, java.util.Properties props) {
+	public void trace(String issue, java.util.Map<String,Serializable> props) {
 		System.out.println("TRACE: "+issue);
 	}
 

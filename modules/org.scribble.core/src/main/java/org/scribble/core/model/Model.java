@@ -127,12 +127,6 @@ public class Model<T extends Definition> extends ModelObject {
 								}
 							}
 							
-							// Associate role annotations with local model reference
-							// NOTE: This may be a temporary measure while Role objects
-							// have the Contract model associated with them, as a
-							// convenient way to make the info available to the generator.
-							lref.getAnnotations().putAll(role.getAnnotations());
-							
 							localModelRefs.add(lref);
 						}
 					}
@@ -176,35 +170,6 @@ public class Model<T extends Definition> extends ModelObject {
 		
 		if (getDefinition() != null) {
 			ret = (getDefinition().getLocatedName().getRole() != null);
-		}
-		
-		return(ret);
-	}
-	
-	/**
-	 * This method initializes the URIs for the model
-	 * objects contained in the model.
-	 *
-	 */
-	public void initializeURIs() {
-		initializeURIPart("");
-	}
-	
-	/**
-	 * This method returns the contained model object,
-	 * within the model, based on the supplied URI.
-	 * 
-	 * @param uri The URI
-	 * @return The model object, or null if not found
-	 */
-	public ModelObject findModelObject(String uri) {
-		ModelObject ret=this;
-		
-		String[] parts=uri.split("/");
-		
-		// Start at position 2, as the URI begins with "//"
-		for (int i=2; ret != null && i < parts.length; i++) {
-			ret = ret.findChild(parts[i]);
 		}
 		
 		return(ret);

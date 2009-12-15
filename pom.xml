@@ -34,6 +34,7 @@
   	<felix.version>2.0.1</felix.version>
   	<osgi.version>1.4.0</osgi.version>
   	<antlr.version>3.2</antlr.version>
+  	<log4j.version>1.2.14</log4j.version>
   	<junit.version>4.7</junit.version>
   </properties>
 
@@ -60,6 +61,16 @@
       <groupId>org.apache.felix</groupId>
       <artifactId>org.osgi.core</artifactId>
       <version>${osgi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
     </dependency>
     </dependencies>
   </dependencyManagement>

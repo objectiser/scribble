@@ -16,9 +16,14 @@
  */
 package org.scribble.core.validation;
 
-public interface Validator {
+import org.scribble.core.model.ModelObject;
+import org.scribble.core.logger.ScribbleLogger;
 
-	public void validate(org.scribble.core.model.Model<?> model,
-			org.scribble.core.logger.ScribbleLogger logger);
+public interface ComponentValidatorRule {
+
+	public Class<? extends ModelObject> getValidatedClass();
+	
+	public void validate(ModelObject obj,
+					ScribbleLogger logger);
 
 }

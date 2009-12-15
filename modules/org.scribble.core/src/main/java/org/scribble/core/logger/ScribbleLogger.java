@@ -16,16 +16,18 @@
  */
 package org.scribble.core.logger;
 
+import java.io.Serializable;
+
 public interface ScribbleLogger {
 
-	public void error(String issue, java.util.Properties props);
+	public void error(String issue, java.util.Map<String,Serializable> props);
 	
-	public void warning(String issue, java.util.Properties props);
+	public void warning(String issue, java.util.Map<String,Serializable> props);
 	
-	public void info(String issue, java.util.Properties props);
+	public void info(String issue, java.util.Map<String,Serializable> props);
 
-	public void debug(String issue, java.util.Properties props);
+	public void debug(String issue, java.util.Map<String,Serializable> props);
 
-	public void trace(String issue, java.util.Properties props);
+	public void trace(String issue, java.util.Map<String,Serializable> props);
 
 }

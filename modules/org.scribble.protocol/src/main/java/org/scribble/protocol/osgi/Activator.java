@@ -21,7 +21,7 @@ import java.util.Properties;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.scribble.core.validation.Validator;
-import org.scribble.protocol.validator.ProtocolValidator;
+import org.scribble.protocol.validation.ProtocolComponentValidator;
 
 public class Activator implements BundleActivator {
 
@@ -35,7 +35,7 @@ public class Activator implements BundleActivator {
         Properties props = new Properties();
 
         context.registerService(Validator.class.getName(), 
-				new ProtocolValidator(), props);
+				new ProtocolComponentValidator(), props);
 	}
 
 	/*

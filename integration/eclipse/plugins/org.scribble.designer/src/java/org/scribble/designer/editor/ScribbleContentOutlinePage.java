@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
+import org.scribble.core.model.ModelProperties;
 import org.scribble.designer.editor.outliner.DefaultModelOutliner;
 
 /**
@@ -193,12 +194,19 @@ public class ScribbleContentOutlinePage extends ContentOutlinePage {
 				org.scribble.core.model.ModelObject mobj=
 						(org.scribble.core.model.ModelObject)
 							((IStructuredSelection) selection).getFirstElement();
-				int start=mobj.getSource().getStartPosition();
-				int length=mobj.getSource().getEndPosition()-mobj.getSource().getStartPosition();
-				try {
-					fTextEditor.setHighlightRange(start, length, true);
-				} catch (IllegalArgumentException x) {
-					fTextEditor.resetHighlightRange();
+				
+				if (mobj.getProperties().containsKey(ModelProperties.START_LOCATION) &&
+						mobj.getProperties().containsKey(ModelProperties.END_LOCATION)) {
+					int start=(Integer)mobj.getProperties().get(ModelProperties.START_LOCATION);
+					int length=(Integer)mobj.getProperties().get(ModelProperties.END_LOCATION);
+
+					try {
+						fTextEditor.setHighlightRange(start, length, true);
+					} catch (IllegalArgumentException x) {
+						fTextEditor.resetHighlightRange();
+					}
+				} else {
+					fTextEditor.resetHighlightRange();					
 				}
 			} else {
 				fTextEditor.resetHighlightRange();				

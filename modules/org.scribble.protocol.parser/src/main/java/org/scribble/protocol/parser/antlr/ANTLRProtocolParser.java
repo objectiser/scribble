@@ -30,6 +30,18 @@ public class ANTLRProtocolParser implements ProtocolParser {
 		
 		logger.warning("CALLED ANTLR PARSER", null);
 		
+		Protocol p=new Protocol();
+		ret.setDefinition(p);
+		
+		Raise r=new Raise();
+		
+		TypeReference type=new TypeReference();
+		type.setLocalpart("lp");
+		type.setNamespace("ns");
+		r.setType(type);
+		
+		p.getBlock().getContents().add(r);
+		
 		return(ret);
 	}
 

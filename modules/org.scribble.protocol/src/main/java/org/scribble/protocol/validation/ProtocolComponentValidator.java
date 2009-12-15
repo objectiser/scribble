@@ -14,14 +14,19 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.validator;
+package org.scribble.protocol.validation;
 
-import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.Model;
-import org.scribble.core.validation.*;
+import org.scribble.core.validation.DefaultComponentValidator;
 
-public class ProtocolValidator implements Validator {
+public class ProtocolComponentValidator extends DefaultComponentValidator {
 
+	public ProtocolComponentValidator() {
+		
+		// Register protocol component validator rules
+		register(new RaiseValidatorRule());
+		
+	}
+	/*
 	public void validate(Model<?> model, ScribbleLogger logger) {
 		logger.warning("PROTOCOL VALIDATOR: "+model, null);
 		
@@ -31,5 +36,5 @@ public class ProtocolValidator implements Validator {
 					"_PROTOCOL",
 					new String[]{"test"}), null);
 	}
-
+	*/
 }

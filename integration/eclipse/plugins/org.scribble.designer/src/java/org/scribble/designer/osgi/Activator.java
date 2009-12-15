@@ -62,7 +62,7 @@ public class Activator extends AbstractUIPlugin {
 		DesignerServices.setProtocolParser(new org.scribble.protocol.parser.antlr.ANTLRProtocolParser());
 		
 		ValidationManager vm=new DefaultValidationManager();
-		vm.addValidator(new org.scribble.protocol.validator.ProtocolValidator());
+		vm.addValidator(new org.scribble.protocol.validation.ProtocolComponentValidator());
 		
 		DesignerServices.setValidationManager(vm);
 		
