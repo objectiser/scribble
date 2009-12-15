@@ -18,14 +18,14 @@ package org.scribble.core.validation;
 
 import org.scribble.core.logger.ScribbleLogger;
 import org.scribble.core.model.ModelObject;
-import org.apache.log4j.*;
+import java.util.logging.*;
 
 public class DefaultComponentValidator implements Validator {
 	
 	private java.util.Map<Class<? extends ModelObject>, ComponentValidatorRule> m_rules=
 		new java.util.HashMap<Class<? extends ModelObject>, ComponentValidatorRule>();
 
-	private static Logger _log=Logger.getLogger(DefaultComponentValidator.class);
+	private static Logger _log=Logger.getLogger(DefaultComponentValidator.class.getName());
 	
 	protected void register(ComponentValidatorRule rule) {
 		m_rules.put(rule.getValidatedClass(), rule);
@@ -62,8 +62,8 @@ public class DefaultComponentValidator implements Validator {
 			while (cls != null) {
 				ComponentValidatorRule rule=getRule(cls);
 				
-				if (_log.isTraceEnabled()) {
-					_log.trace("Component rule for class="+cls+" is "+rule);
+				if (_log.isLoggable(Level.FINEST)) {
+					_log.finest("Component rule for class="+cls+" is "+rule);
 				}
 				
 				if (rule != null) {
