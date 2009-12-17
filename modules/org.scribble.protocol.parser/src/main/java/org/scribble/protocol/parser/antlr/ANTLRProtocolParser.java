@@ -18,6 +18,8 @@ package org.scribble.protocol.parser.antlr;
 
 import java.io.InputStream;
 
+import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CommonTokenStream;
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ProtocolParser;
 import org.scribble.core.logger.ScribbleLogger;
@@ -41,6 +43,17 @@ public class ANTLRProtocolParser implements ProtocolParser {
 		r.setType(type);
 		
 		p.getBlock().getContents().add(r);
+		
+        try {
+            ScribbleProtocolLexer lex = new ScribbleProtocolLexer(new ANTLRInputStream(is));
+           	CommonTokenStream tokens = new CommonTokenStream(lex);
+
+    		ScribbleProtocolParser parser = new ScribbleProtocolParser(tokens);
+
+            parser.description();
+        } catch (Exception e)  {
+            e.printStackTrace();
+        }
 		
 		return(ret);
 	}
