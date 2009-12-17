@@ -100,7 +100,7 @@ public class DeclarationValidatorRule implements ComponentValidatorRule {
 						// inside a block
 						if ((cur instanceof Definition) == false &&
 								cur.getParent() instanceof Block) {
-							b = (Block)elem.getParent();
+							b = (Block)cur.getParent();
 						} else {
 							b = null;
 						}

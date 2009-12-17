@@ -62,7 +62,7 @@ public class RaiseValidatorRule implements ComponentValidatorRule {
 						java.util.PropertyResourceBundle.getBundle(
 						"org.scribble.protocol.validation.rules.Messages"),
 							"_RAISED_TYPE_NOT_CAUGHT",
-							new String[]{elem.getType().toString()}),
+							new String[]{elem.getType().toText()}),
 							obj.getProperties());
 			}
 		}

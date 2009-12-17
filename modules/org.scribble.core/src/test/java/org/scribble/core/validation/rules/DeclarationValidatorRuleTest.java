@@ -70,4 +70,76 @@ public class DeclarationValidatorRuleTest {
 							new String[]{TEST_NAME})
 		});
 	}
+	
+	@org.junit.Test
+	public void testValidateDuplicateInSinglePathBehaviour() {
+		Definition defn=new TestDefinition();
+		TestDeclaration decl1=new TestDeclaration();
+		decl1.setName(TEST_NAME);
+
+		defn.getBlock().getContents().add(decl1);
+		
+		TestSinglePathBehaviour spb=new TestSinglePathBehaviour();
+		defn.getBlock().getContents().add(spb);
+		
+		Interaction in=new Interaction();
+		spb.getBlock().getContents().add(in);
+	
+		TestDeclaration decl2=new TestDeclaration();
+		decl2.setName(TEST_NAME);
+
+		spb.getBlock().getContents().add(decl2);
+	
+		DeclarationValidatorRule rule=new DeclarationValidatorRule();
+		
+		TestScribbleLogger logger=new TestScribbleLogger();
+		
+		rule.validate(decl2, logger);
+		
+		logger.verifyErrors(new String[]{
+				org.scribble.core.util.MessageUtil.format(
+						java.util.PropertyResourceBundle.getBundle(
+						"org.scribble.core.validation.rules.Messages"),
+							"_EXISTING_DECLARATION",
+							new String[]{TEST_NAME})
+		});
+	}
+	
+	@org.junit.Test
+	public void testValidateDuplicateInMultiPathBehaviour() {
+		Definition defn=new TestDefinition();
+		TestDeclaration decl1=new TestDeclaration();
+		decl1.setName(TEST_NAME);
+
+		defn.getBlock().getContents().add(decl1);
+		
+		TestMultiPathBehaviour mpb=new TestMultiPathBehaviour();
+		defn.getBlock().getContents().add(mpb);
+		
+		mpb.createNewPath();
+		
+		Block path=mpb.createNewPath();
+		
+		Interaction in=new Interaction();
+		path.getContents().add(in);
+	
+		TestDeclaration decl2=new TestDeclaration();
+		decl2.setName(TEST_NAME);
+
+		path.getContents().add(decl2);
+	
+		DeclarationValidatorRule rule=new DeclarationValidatorRule();
+		
+		TestScribbleLogger logger=new TestScribbleLogger();
+		
+		rule.validate(decl2, logger);
+		
+		logger.verifyErrors(new String[]{
+				org.scribble.core.util.MessageUtil.format(
+						java.util.PropertyResourceBundle.getBundle(
+						"org.scribble.core.validation.rules.Messages"),
+							"_EXISTING_DECLARATION",
+							new String[]{TEST_NAME})
+		});
+	}
 }

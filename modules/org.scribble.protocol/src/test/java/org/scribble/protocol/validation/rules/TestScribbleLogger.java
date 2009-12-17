@@ -14,10 +14,12 @@
  * limitations under the License.
  *
  */
-package org.scribble.core.logger;
+package org.scribble.protocol.validation.rules;
 
 import java.io.Serializable;
 import java.util.Map;
+
+import org.scribble.core.logger.ScribbleLogger;
 
 import static org.junit.Assert.*;
 
