@@ -19,7 +19,7 @@ package org.scribble.core.model;
 /**
  * This class represents the channel declaration.
  */
-public class Channel extends ModelObject implements Declaration {
+public class Channel extends Declaration {
 
 	private static final long serialVersionUID = 1158151945766114601L;
 

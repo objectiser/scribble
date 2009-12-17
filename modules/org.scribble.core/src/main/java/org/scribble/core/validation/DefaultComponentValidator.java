@@ -51,6 +51,17 @@ public class DefaultComponentValidator implements Validator {
 			m_logger = logger;
 		}
 		
+		/**
+		 * This method can be used to prepare for
+		 * visiting the supplied model object.
+		 * 
+		 * @param obj The model object
+		 */
+		public void prepare(ModelObject obj) {
+			
+			// TODO: Decide how best to deal with grouping constructs
+		}
+		
 		@SuppressWarnings("unchecked")
 		public boolean visit(ModelObject obj) {
 		
@@ -80,6 +91,18 @@ public class DefaultComponentValidator implements Validator {
 			return(true);
 		}
 		
+		/**
+		 * This method can be used to conclude any
+		 * work associated with visiting the supplied 
+		 * model object.
+		 * 
+		 * @param obj The model object
+		 */
+		public void conclude(ModelObject obj) {
+			
+			// TODO: Decide how best to deal with grouping constructs
+		}
+
 		private ScribbleLogger m_logger=null;
 	}
 }

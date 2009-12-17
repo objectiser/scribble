@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.validation;
+package org.scribble.protocol.validation.rules;
 
 import org.scribble.core.model.*;
 import org.scribble.core.validation.ComponentValidatorRule;
@@ -60,7 +60,7 @@ public class RaiseValidatorRule implements ComponentValidatorRule {
 			if (f_found == false) {
 				logger.error(org.scribble.core.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle(
-						"org.scribble.protocol.validation.Messages"),
+						"org.scribble.protocol.validation.rules.Messages"),
 							"_RAISED_TYPE_NOT_CAUGHT",
 							new String[]{elem.getType().toString()}),
 							obj.getProperties());

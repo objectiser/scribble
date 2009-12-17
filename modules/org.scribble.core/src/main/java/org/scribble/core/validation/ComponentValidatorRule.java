@@ -19,10 +19,26 @@ package org.scribble.core.validation;
 import org.scribble.core.model.ModelObject;
 import org.scribble.core.logger.ScribbleLogger;
 
+/**
+ * This interface represents the validation rule for the
+ * model components.
+ *
+ */
 public interface ComponentValidatorRule {
 
+	/**
+	 * This method returns the class being validated.
+	 * 
+	 * @return The class being validated
+	 */
 	public Class<? extends ModelObject> getValidatedClass();
 	
+	/**
+	 * This method validates the supplied model object.
+	 * 
+	 * @param obj The model object being validated
+	 * @param logger The logger
+	 */
 	public void validate(ModelObject obj,
 					ScribbleLogger logger);
 

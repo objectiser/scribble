@@ -20,9 +20,7 @@ package org.scribble.core.model;
  * This interface represents behaviours that are associated
  * with a single path.
  */
-public abstract class SinglePathBehaviour extends Behaviour {
-
-	private static final long serialVersionUID = -2129339015295636976L;
+public interface SinglePathBehaviour {
 
 	/**
 	 * This method returns whether the behaviour is a grouping
@@ -30,10 +28,7 @@ public abstract class SinglePathBehaviour extends Behaviour {
 	 * 
 	 * @return Whether the behaviour is a grouping construct 
 	 */
-	@Override
-	public boolean isGroupingConstruct() {
-		return(true);
-	}
+	public boolean isGroupingConstruct();
 	
 	/**
 	 * This method returns the block of activities
@@ -41,7 +36,7 @@ public abstract class SinglePathBehaviour extends Behaviour {
 	 * 
 	 * @return The block of activities
 	 */
-	public abstract Block getBlock();
+	public Block getBlock();
 	
 	/**
 	 * This method indicates whether the construct requires a
@@ -52,9 +47,7 @@ public abstract class SinglePathBehaviour extends Behaviour {
 	 * 
 	 * @return Whether a strict scope should be maintained
 	 */
-	public boolean isStrictScope() {
-		return(false);
-	}
+	public boolean isStrictScope();
 	
 	/**
 	 * This method indicates whether the construct is
@@ -62,9 +55,7 @@ public abstract class SinglePathBehaviour extends Behaviour {
 	 * 
 	 * @return Whether the construct is conditional
 	 */
-	public boolean isConditional() {
-		return(false);
-	}
+	public boolean isConditional();
 	
 	/**
 	 * This method indicates whether the construct is
@@ -72,8 +63,6 @@ public abstract class SinglePathBehaviour extends Behaviour {
 	 * 
 	 * @return Whether the construct supports repetition
 	 */
-	public boolean isRepetition() {
-		return(false);
-	}
+	public boolean isRepetition();
 	
 }

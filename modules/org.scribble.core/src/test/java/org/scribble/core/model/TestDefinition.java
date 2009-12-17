@@ -14,17 +14,10 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.validation;
+package org.scribble.core.model;
 
-import org.scribble.core.validation.DefaultComponentValidator;
-import org.scribble.protocol.validation.rules.RaiseValidatorRule;
+public class TestDefinition extends Definition {
 
-public class ProtocolComponentValidator extends DefaultComponentValidator {
+	private static final long serialVersionUID = -4237844294291660702L;
 
-	public ProtocolComponentValidator() {
-		
-		// Register protocol component validator rules
-		register(new RaiseValidatorRule());
-		
-	}
 }

@@ -21,13 +21,28 @@ package org.scribble.core.model;
  * the scope of a Scribble block.
  * 
  */
-public interface Declaration {
+public abstract class Declaration extends Activity {
+
+	private static final long serialVersionUID = 3454553862451229587L;
 
 	/**
 	 * The name associated with the declaration.
 	 * 
 	 * @return The declaration name
 	 */
-	public String getName();
+	public String getName() {
+		return(m_name);
+	}
 	
+	/**
+	 * This method sets the name associated with the
+	 * declaration.
+	 * 
+	 * @param name The name
+	 */
+	public void setName(String name) {
+		m_name = name;
+	}
+	
+	private String m_name=null;
 }

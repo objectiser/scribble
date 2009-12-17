@@ -23,11 +23,28 @@ package org.scribble.core.model;
 public interface Visitor {
 
 	/**
+	 * This method can be used to prepare for
+	 * visiting the supplied model object.
+	 * 
+	 * @param obj The model object
+	 */
+	public void prepare(ModelObject obj);
+	
+	/**
 	 * This method visits the supplied model object.
 	 * 
 	 * @param obj The model object
 	 * @return Whether contained objects should be visited
 	 */
 	public boolean visit(ModelObject obj);
+	
+	/**
+	 * This method can be used to conclude any
+	 * work associated with visiting the supplied 
+	 * model object.
+	 * 
+	 * @param obj The model object
+	 */
+	public void conclude(ModelObject obj);
 	
 }

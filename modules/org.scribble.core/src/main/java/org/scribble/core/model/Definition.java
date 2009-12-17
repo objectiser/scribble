@@ -140,13 +140,13 @@ public abstract class Definition extends Activity {
 	 * @return The model, or null if not contained within
 	 * 					a model
 	 */
-	public Model getModel() {
-		Model ret=null;
+	public Model<?> getModel() {
+		Model<?> ret=null;
 		ModelObject cur=this;
 		
 		while (ret == null && cur != null) {
-			if (cur instanceof Model) {
-				ret = (Model)cur;
+			if (cur instanceof Model<?>) {
+				ret = (Model<?>)cur;
 			} else {
 				cur = cur.getParent();
 			}

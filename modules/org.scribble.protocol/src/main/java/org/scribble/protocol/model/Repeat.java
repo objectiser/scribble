@@ -22,7 +22,7 @@ import org.scribble.core.model.*;
  * This class represents the Repeat construct.
  * 
  */
-public class Repeat extends SinglePathBehaviour {
+public class Repeat extends Behaviour implements SinglePathBehaviour {
 
 	private static final long serialVersionUID = -3254432118077412347L;
 

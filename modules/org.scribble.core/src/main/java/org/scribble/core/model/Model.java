@@ -91,6 +91,9 @@ public class Model<T extends Definition> extends ModelObject {
 			// top level definition
 			getDefinition().visit(new Visitor() {
 				
+				public void prepare(ModelObject obj) {
+				}
+				
 				public boolean visit(ModelObject obj) {
 					boolean ret=true;
 					
@@ -132,6 +135,9 @@ public class Model<T extends Definition> extends ModelObject {
 					}
 					
 					return(ret);
+				}
+				
+				public void conclude(ModelObject obj) {
 				}
 			});
 		}

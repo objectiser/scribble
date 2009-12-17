@@ -22,8 +22,8 @@ import org.scribble.core.model.*;
  * This class represents the RecursionBlock construct.
  * 
  */
-public class RecursionBlock extends SinglePathBehaviour
-					implements Declaration {
+public class RecursionBlock extends Declaration
+				implements SinglePathBehaviour {
 
 	private static final long serialVersionUID = -3777899920653462575L;
 
@@ -85,6 +85,36 @@ public class RecursionBlock extends SinglePathBehaviour
 	 */
 	public boolean isStrictScope() {
 		return(true);
+	}
+	
+	/**
+	 * This method returns whether the behaviour is a grouping
+	 * construct.
+	 * 
+	 * @return Whether the behaviour is a grouping construct 
+	 */
+	public boolean isGroupingConstruct() {
+		return(true);
+	}
+	
+	/**
+	 * This method indicates whether the construct is
+	 * conditional.
+	 * 
+	 * @return Whether the construct is conditional
+	 */
+	public boolean isConditional() {
+		return(false);
+	}
+	
+	/**
+	 * This method indicates whether the construct is
+	 * repetitive.
+	 * 
+	 * @return Whether the construct supports repetition
+	 */
+	public boolean isRepetition() {
+		return(false);
 	}
 	
 	private String m_name=null;
