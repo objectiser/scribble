@@ -1,5 +1,9 @@
 grammar ScribbleProtocol;
 
+options {
+	output=AST;
+}
+
 tokens {
 	PLUS 	= '+' ;
 	MINUS	= '-' ;
@@ -38,8 +42,16 @@ package org.scribble.protocol.parser.antlr;
 
 		ScribbleProtocolParser parser = new ScribbleProtocolParser(tokens);
 
+		//parser.setTreeAdaptor(new ProtocolTreeAdapter());
+		
         try {
-            parser.description();
+            ScribbleProtocolParser.description_return r=parser.description();
+            
+            //CommonTree t=(CommonTree)r.getTree();
+            Tree t=(Tree)r.getTree();
+            
+            System.out.println(t.toStringTree());
+            
         } catch (RecognitionException e)  {
             e.printStackTrace();
         }
@@ -52,39 +64,39 @@ package org.scribble.protocol.parser.antlr;
 
 description: ( namespaceDeclaration )? ( importStatement )* protocolDef ;
 
-namespaceDeclaration: 'namespace' qualifiedName ';' ;
+namespaceDeclaration: 'namespace'^ qualifiedName ';'! ;
 
 qualifiedName: ID ( '.' ID )* ;
 
 qualifiedNameWithMeta: ID ( '.' ( '*' | qualifiedNameWithMeta ) )? ;
 
-importStatement: 'import' qualifiedNameWithMeta ( 'as' ID )? ';' ;
+importStatement: 'import'^ qualifiedNameWithMeta ( 'as' ID )? ';'! ;
 
-protocolDef: 'protocol' ID ( '@' ID )? sequenceDef ;
+protocolDef: 'protocol'^ ID ( '@' ID )? sequenceDef ;
 
-sequenceDef: '{' activityListDef '}' ;
+sequenceDef: '{'! activityListDef '}'! ;
 
 activityListDef: ( activityDef )* ;
 
 activityDef: interactionDef | roleListDef ;
 
-roleListDef: 'role' roleDef ( ',' roleDef )* ';' ;
+roleListDef: 'role'^ roleDef ( ',' roleDef )* ';'! ;
 
 roleDef: ID ;
 
-channelListDef: 'channel' channelDef ( ',' channelDef )* ';' ;
+channelListDef: 'channel'^ channelDef ( ',' channelDef )* ';'! ;
 
 channelDef: ID ( 'from' ID )? ( 'to' ID )? ;
 
-interactionDef: ( qualifiedName | ID '(' ')' ) ( 'from' ID )? ( 'to' ID )? ( 'via' ID )? ';' ;
+interactionDef: ( qualifiedName | ID '(' ')' ) ( 'from' ID )? ( 'to' ID )? ( 'via' ID )? ';'! ;
 
-choiceDef: 'choice' '@' ID sequenceDef ( 'or' sequenceDef )* ;
+choiceDef: 'choice'^ '@' ID sequenceDef ( 'or' sequenceDef )* ;
 
-repeatDef: 'repeat' '@' ID sequenceDef ;
+repeatDef: 'repeat'^ '@' ID sequenceDef ;
 
-runDef: 'run' ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';' ) ;
+runDef: 'run'^ ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';'! ) ;
 
-inlineProtocolDef: 'protocol' ( boundParameters )? sequenceDef ;
+inlineProtocolDef: 'protocol'^ ( boundParameters )? sequenceDef ;
 
 boundParameters: '(' boundParameter ( ',' boundParameter )* ')' ;
 
