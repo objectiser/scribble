@@ -1,10 +1,18 @@
 grammar ScribbleProtocol;
 
 tokens {
+	PLUS 	= '+' ;
+	MINUS	= '-' ;
+	MULT	= '*' ;
+	DIV	= '/' ;
+}
+
+/* Problem is that when tokens are defined, it uses the token name,
+   rather than the value, in the error messages.
+   
 	NAMESPACE = 'namespace';
 	IMPORT = 'import';
 	AS = 'as';
-	PROTOCOL = 'protocol';
 	IMPLEMENTS = 'implements';
 	CONFORMS = 'conforms';
 	TO = 'to';
@@ -13,11 +21,7 @@ tokens {
 	ROLE = 'role';
 	FROM = 'from';
 	TO = 'to';
-	PLUS 	= '+' ;
-	MINUS	= '-' ;
-	MULT	= '*' ;
-	DIV	= '/' ;
-}
+*/
 
 @header {
 package org.scribble.protocol.parser.antlr;
@@ -46,29 +50,48 @@ package org.scribble.protocol.parser.antlr;
  * PARSER RULES
  *------------------------------------------------------------------*/
 
-description: ( namespaceDeclaration )? ( importStatement )* protocolDefinition ;
+description: ( namespaceDeclaration )? ( importStatement )* protocolDef ;
 
-namespaceDeclaration: NAMESPACE qualifiedName ';' ;
+namespaceDeclaration: 'namespace' qualifiedName ';' ;
 
 qualifiedName: ID ( '.' ID )* ;
 
-importStatement: IMPORT qualifiedName ';' ;
+qualifiedNameWithMeta: ID ( '.' ( '*' | qualifiedNameWithMeta ) )? ;
 
-protocolDefinition: PROTOCOL ID ( '@' ID )? '{' activityList '}' ;
+importStatement: 'import' qualifiedNameWithMeta ( 'as' ID )? ';' ;
 
-activityList: ( activity )* ;
+protocolDef: 'protocol' ID ( '@' ID )? sequenceDef ;
 
-activity: interaction | roleList ;
+sequenceDef: '{' activityListDef '}' ;
 
-roleList: ROLE roleDef ( ',' roleDef )* ';' ;
+activityListDef: ( activityDef )* ;
+
+activityDef: interactionDef | roleListDef ;
+
+roleListDef: 'role' roleDef ( ',' roleDef )* ';' ;
 
 roleDef: ID ;
 
-channelList: CHANNEL channelDef ( ',' channelDef )* ';' ;
+channelListDef: 'channel' channelDef ( ',' channelDef )* ';' ;
 
-channelDef: ID ( FROM ID )? ( TO ID )? ;
+channelDef: ID ( 'from' ID )? ( 'to' ID )? ;
 
-interaction: ( qualifiedName | ID '(' ')' ) ( FROM ID )? ( TO ID )? ( VIA ID )? ';' ;
+interactionDef: ( qualifiedName | ID '(' ')' ) ( 'from' ID )? ( 'to' ID )? ( 'via' ID )? ';' ;
+
+choiceDef: 'choice' '@' ID sequenceDef ( 'or' sequenceDef )* ;
+
+repeatDef: 'repeat' '@' ID sequenceDef ;
+
+runDef: 'run' ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';' ) ;
+
+inlineProtocolDef: 'protocol' ( boundParameters )? sequenceDef ;
+
+boundParameters: '(' boundParameter ( ',' boundParameter )* ')' ;
+
+boundParameter: ID 'for' ID ;
+
+
+
 
 expr	: term ( ( PLUS | MINUS )  term )* ;
 

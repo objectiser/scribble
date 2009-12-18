@@ -30,8 +30,6 @@ public class ANTLRProtocolParser implements ProtocolParser {
 	public Model<Protocol> parse(InputStream is, ScribbleLogger logger) {
 		Model<Protocol> ret=new Model<Protocol>();
 		
-		logger.warning("CALLED ANTLR PARSER", null);
-		
 		Protocol p=new Protocol();
 		ret.setDefinition(p);
 		
@@ -51,6 +49,7 @@ public class ANTLRProtocolParser implements ProtocolParser {
     		ScribbleProtocolParser parser = new ScribbleProtocolParser(tokens);
 
             parser.description();
+            
         } catch (Exception e)  {
             e.printStackTrace();
         }
