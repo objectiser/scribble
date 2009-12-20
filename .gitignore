@@ -1,6 +1,8 @@
 .project
 modules/*/target
 modules/*/bin
+qa/*/target
+qa/*/bin
 integration/commandline/bin
 integration/commandline/target
 integration/eclipse/plugins/*/bin

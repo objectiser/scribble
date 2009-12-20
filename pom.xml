@@ -41,6 +41,7 @@
   <modules>
     <module>modules</module>
     <module>integration</module>
+    <module>qa</module>
     <module>docs</module>
     <module>distribution</module>
   </modules>
