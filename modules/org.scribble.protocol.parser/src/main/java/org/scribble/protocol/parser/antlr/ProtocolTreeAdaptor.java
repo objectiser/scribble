@@ -17,8 +17,6 @@
 package org.scribble.protocol.parser.antlr;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.logging.Logger;
 
 import org.antlr.runtime.RecognitionException;
@@ -34,6 +32,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		new java.util.HashMap<String, String>();
 	private static java.util.Map<String,Class<?>> m_tokenClass=
 		new java.util.HashMap<String, Class<?>>();
+	private static java.util.Map<String,Class<?>> m_listClass=
+		new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_parserRuleClass=
 		new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_parserGroupingRuleClass=
@@ -42,9 +42,14 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 	private ScribbleProtocolParser m_parser=null;
 	private Token m_currentToken=null;
 	
+	private Model<Protocol> m_model=null;
+	
 	private static final Logger _log=Logger.getLogger(ProtocolTreeAdaptor.class.getName());
 	
 	static {
+		// The map of root tokens, that begin a grammer
+		// rule, and the model class they are associated
+		// with
 		m_tokenClass.put("namespace", Namespace.class);
 		m_tokenClass.put("import", Import.class);
 		m_tokenClass.put("protocol", Protocol.class);
@@ -52,6 +57,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 
 		m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
 
+		// This may defines the model object that should be
+		// created after processing the named grammer rule
 		m_parserGroupingRuleClass.put("qualifiedName", String.class);
 		m_parserGroupingRuleClass.put("qualifiedNameWithMeta", String.class);
 		m_parserGroupingRuleClass.put("sequenceDef", Block.class);
@@ -59,8 +66,17 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("interactionSignatureDef", MessageSignature.class);
 		m_parserGroupingRuleClass.put("roleName", Role.class);
 		
+		// When a partcular class has multiple properties of the
+		// same type, then a preceding token must be used to
+		// determine which property to set. This map provides the
+		// mapping between the property name and the token.
 		m_propertyToken.put("fromRole", "from");
 		m_propertyToken.put("toRole", "to");
+		
+		// Defines the list element base type associated with a
+		// property name
+		m_listClass.put("imports", Import.class);
+		m_listClass.put("contents", Activity.class);
 	}
 	
 	public void setParser(ScribbleProtocolParser parser) {
@@ -159,6 +175,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		_log.finest("SET TOKEN BOUNDARIES "+arg0+" "+arg1+" "+arg2);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addChild(Object parent, Object child) {
 		_log.info("Add child: parent="+parent+" child="+child);
@@ -204,7 +221,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 
 				nil.add(child);
 				
-			} else if (isNil(child) == false){
+			} else {
 				try {
 					// Get property descriptors for parent class
 					java.beans.BeanInfo bi=
@@ -214,7 +231,6 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 					PropertyDescriptor pd=null;
 					
 					for (int i=0; i < pds.length; i++) {
-						Class<?> cls=pds[i].getPropertyType();
 						
 						if (pds[i].getPropertyType().isAssignableFrom(child.getClass()) &&
 								pds[i].getName().equals("parent") == false) {
@@ -225,6 +241,19 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 									(m_currentToken != null && 
 										token.equals(m_currentToken.getText()))) {
 								pd = pds[i];
+							}
+						} else if (pds[i].getPropertyType() == java.util.List.class) {
+							
+							Class<?> listElementCls=m_listClass.get(pds[i].getName());
+							
+							if (listElementCls != null &&
+									listElementCls.isAssignableFrom(child.getClass())) {
+								java.util.List list=(java.util.List)
+										pds[i].getReadMethod().invoke(parent);
+								
+								_log.finest("Adding "+child+" to list: "+
+										list+" on parent "+parent);
+								list.add(child);
 							}
 						}
 					}
@@ -254,8 +283,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 			addChild(newRoot, oldRoot);
 			
 			if (isNil(newRoot)) {
-				java.util.List<Object> nil=
-					(java.util.Vector<Object>)newRoot;
+				java.util.List<?> nil=
+					(java.util.Vector<?>)newRoot;
 				
 				if (nil.size() == 1) {
 					newRoot = nil.get(0);
@@ -340,13 +369,22 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 	}
 
 	@Override
-	public boolean isNil(Object arg0) {
-		return(arg0 instanceof java.util.List<?>);
+	public boolean isNil(Object obj) {
+		return(obj instanceof java.util.List<?>);
 	}
 
 	@Override
 	public Object nil() {
-		return(new java.util.Vector<Object>());
+		Object ret=null;
+		
+		if (m_model == null) {
+			m_model = new Model<Protocol>();
+			ret = m_model;
+		} else {
+			ret = new java.util.Vector<Object>();
+		}
+		
+		return(ret);
 	}
 
 	@Override
@@ -401,8 +439,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		}
 		
 		if (isNil(ret)) {
-			java.util.List<Object> nil=
-					(java.util.List<Object>)ret;
+			java.util.List<?> nil=
+					(java.util.List<?>)ret;
 			
 			if (nil.size() == 1) {
 				return(nil.get(0));
