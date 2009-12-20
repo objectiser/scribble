@@ -91,7 +91,13 @@ public class Role extends Declaration {
 	}
 	
 	public String toString() {
-		return(getName());
+		String ret=getName();
+		
+		if (ret == null) {
+			ret = "<Unnamed Role>";
+		}
+		
+		return(ret);
 	}
 	
 	private String m_name=null;	

@@ -24,6 +24,12 @@ public class MessageSignature extends ModelObject {
 	private static final long serialVersionUID = 8952431919812954593L;
 
 	/**
+	 * The default constructor.
+	 */
+	public MessageSignature() {
+	}
+	
+	/**
 	 * This method returns the optional operation.
 	 * 
 	 * @return The optional operation
@@ -76,6 +82,10 @@ public class MessageSignature extends ModelObject {
 		if (getOperation() != null &&
 				getOperation().trim().length() > 0) {
 			ret += ")";
+		}
+		
+		if (ret == null) {
+			ret = "<No Signature>";
 		}
 		
 		return(ret);
