@@ -5,6 +5,7 @@ options {
 }
 
 tokens {
+	INTERACTION = 'interaction' ;
 	PLUS 	= '+' ;
 	MINUS	= '-' ;
 	MULT	= '*' ;
@@ -42,15 +43,19 @@ package org.scribble.protocol.parser.antlr;
 
 		ScribbleProtocolParser parser = new ScribbleProtocolParser(tokens);
 
-		//parser.setTreeAdaptor(new ProtocolTreeAdapter());
+		ProtocolTreeAdaptor adaptor=new ProtocolTreeAdaptor();
+		adaptor.setParser(parser);
+		
+		parser.setTreeAdaptor(adaptor);
 		
         try {
             ScribbleProtocolParser.description_return r=parser.description();
             
             //CommonTree t=(CommonTree)r.getTree();
-            Tree t=(Tree)r.getTree();
             
-            System.out.println(t.toStringTree());
+            //Tree t=(Tree)r.getTree();
+            
+            //System.out.println(t.toStringTree());
             
         } catch (RecognitionException e)  {
             e.printStackTrace();
@@ -88,11 +93,17 @@ channelListDef: 'channel'^ channelDef ( ',' channelDef )* ';'! ;
 
 channelDef: ID ( 'from' ID )? ( 'to' ID )? ;
 
-interactionDef: ( qualifiedName | ID '(' ')' ) ( 'from' ID )? ( 'to' ID )? ( 'via' ID )? ';'! ;
+typeReferenceDef: qualifiedName ;
 
-choiceDef: 'choice'^ '@' ID sequenceDef ( 'or' sequenceDef )* ;
+interactionSignatureDef: ( typeReferenceDef | ID '(' ')' ) ;
 
-repeatDef: 'repeat'^ '@' ID sequenceDef ;
+roleName: ID ;
+
+interactionDef: interactionSignatureDef ( 'from' roleName )? ( 'to' roleName )? ( 'via' ID )? ';'! ;
+
+choiceDef: 'choice'^ '@' roleName sequenceDef ( 'or' sequenceDef )* ;
+
+repeatDef: 'repeat'^ '@' roleName sequenceDef ;
 
 runDef: 'run'^ ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';'! ) ;
 
