@@ -18,12 +18,21 @@ package org.scribble.protocol.parser.ctk;
 
 import static org.junit.Assert.*;
 
+import java.util.Comparator;
+
 import org.scribble.core.logger.*;
 import org.scribble.core.model.*;
 import org.scribble.protocol.model.*;
-import org.scribble.protocol.parser.*;
+import org.scribble.protocol.parser.ctk.comparators.NamespaceComparator;
 
 public class ProtocolParserTest {
+	
+	private static java.util.Map<Class<? extends ModelObject>,Comparator<ModelObject>> m_comparators=
+			new java.util.HashMap<Class<? extends ModelObject>,Comparator<ModelObject>>();
+	
+	static {
+		m_comparators.put(Namespace.class, new NamespaceComparator());
+	}
 	
 	public Model<Protocol> getModel(String filename, ScribbleLogger logger) {
 		Model<Protocol> ret=null;
@@ -83,6 +92,15 @@ public class ProtocolParserTest {
 				fail("Element ("+i+") mismatch class model="+
 						mlist.get(i).getClass()+" expected="+
 						elist.get(i).getClass());
+			} else {
+				Comparator<ModelObject> comparator=
+					m_comparators.get(mlist.get(i).getClass());
+				
+				if (comparator != null &&
+						comparator.compare(mlist.get(i), elist.get(i)) != 0) {
+					fail("Element ("+i+") did not match: "+mlist.get(i)+
+							" expected="+elist.get(i));
+				}
 			}
 		}
 		
@@ -134,7 +152,7 @@ public class ProtocolParserTest {
 		Model<Protocol> expected=new Model<Protocol>();
 		
 		Namespace ns=new Namespace();
-		ns.setName("example.helloworld");
+		ns.setName("example.helloworld1");
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
