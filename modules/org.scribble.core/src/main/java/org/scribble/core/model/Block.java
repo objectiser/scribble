@@ -45,8 +45,8 @@ public class Block extends Activity {
 	 * @return The list of initiator roles
 	 */
 	@Override
-	public java.util.List<Role> getInitiatorRoles() {
-		java.util.List<Role> ret=super.getInitiatorRoles();
+	public java.util.List<Role> initiatorRoles() {
+		java.util.List<Role> ret=super.initiatorRoles();
 		boolean f_end=false;
 		
 		for (int i=0; f_end == false &&
@@ -54,7 +54,7 @@ public class Block extends Activity {
 			
 			if (getContents().get(i) instanceof Behaviour) {
 				java.util.List<Role> roleList=
-					getContents().get(i).getInitiatorRoles();
+					getContents().get(i).initiatorRoles();
 				
 				for (int j=0; j < roleList.size(); j++) {
 					if (ret.contains(roleList.get(j)) == false) {

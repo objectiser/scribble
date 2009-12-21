@@ -49,9 +49,9 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 		// Identify definition and whether it has a located role
 		Role locatedRole=null;
 		
-		if (elem.getEnclosingDefinition() != null &&
-				elem.getEnclosingDefinition().getLocatedName() != null) {
-			locatedRole = elem.getEnclosingDefinition().getLocatedName().getRole();
+		if (elem.enclosingDefinition() != null &&
+				elem.enclosingDefinition().getLocatedName() != null) {
+			locatedRole = elem.enclosingDefinition().getLocatedName().getRole();
 		}
 
 		// Check that between the channel and the interaction, there

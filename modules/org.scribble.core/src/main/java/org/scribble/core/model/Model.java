@@ -114,7 +114,7 @@ public class Model<T extends Definition> extends ModelObject {
 							
 							lref.setLocatedRole(role.getName());
 							
-							Definition defn=plist.getEnclosingDefinition();
+							Definition defn=plist.enclosingDefinition();
 							
 							while (defn != null &&
 										(defn.getParent() instanceof Model<?>) == false) {
@@ -124,7 +124,7 @@ public class Model<T extends Definition> extends ModelObject {
 								ModelObject parent=defn.getParent();
 								
 								if (parent instanceof Activity) {
-									defn = ((Activity)defn.getParent()).getEnclosingDefinition();
+									defn = ((Activity)defn.getParent()).enclosingDefinition();
 								} else {
 									defn = null;
 								}

@@ -44,7 +44,7 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	public boolean isWaitState() {
 		boolean ret=false;
 		
-		Role role=getLocatedRole();
+		Role role=locatedRole();
 		
 		// Check if not a decision making role
 		if (role != null && m_roles.contains(role) == false) {
@@ -134,8 +134,8 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	 * @return The list of initiator roles
 	 */
 	@Override
-	public java.util.List<Role> getInitiatorRoles() {
-		java.util.List<Role> ret=super.getInitiatorRoles();
+	public java.util.List<Role> initiatorRoles() {
+		java.util.List<Role> ret=super.initiatorRoles();
 
 		for (int i=0; i < getRoles().size(); i++) {
 			if (ret.contains(getRoles().get(i)) == false) {
@@ -153,8 +153,8 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	 * @return The list of final roles
 	 */
 	@Override
-	public java.util.List<Role> getFinalRoles() {
-		java.util.List<Role> ret=super.getFinalRoles();
+	public java.util.List<Role> finalRoles() {
+		java.util.List<Role> ret=super.finalRoles();
 				
 		return(ret);
 	}

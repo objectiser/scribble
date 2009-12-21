@@ -28,19 +28,7 @@ import org.scribble.core.model.*;
 public class ANTLRProtocolParser implements ProtocolParser {
 
 	public Model<Protocol> parse(InputStream is, ScribbleLogger logger) {
-		Model<Protocol> ret=new Model<Protocol>();
-		
-		Protocol p=new Protocol();
-		ret.setDefinition(p);
-		
-		Raise r=new Raise();
-		
-		TypeReference type=new TypeReference();
-		type.setLocalpart("lp");
-		type.setNamespace("ns");
-		r.setType(type);
-		
-		p.getBlock().getContents().add(r);
+		Model<Protocol> ret=null;
 		
         try {
             ScribbleProtocolLexer lex = new ScribbleProtocolLexer(new ANTLRInputStream(is));
@@ -48,7 +36,14 @@ public class ANTLRProtocolParser implements ProtocolParser {
 
     		ScribbleProtocolParser parser = new ScribbleProtocolParser(tokens);
 
-            parser.description();
+    		ProtocolTreeAdaptor adaptor=new ProtocolTreeAdaptor();
+    		adaptor.setParser(parser);
+    		
+    		parser.setTreeAdaptor(adaptor);
+
+    		parser.description();
+    		
+    		ret = adaptor.getProtocolModel();
             
         } catch (Exception e)  {
             e.printStackTrace();

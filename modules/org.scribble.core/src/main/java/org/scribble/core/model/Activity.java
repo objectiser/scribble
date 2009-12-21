@@ -33,7 +33,7 @@ public abstract class Activity extends Statement {
 	 * 
 	 * @return The list of initiator roles
 	 */
-	public java.util.List<Role> getInitiatorRoles() {
+	public java.util.List<Role> initiatorRoles() {
 		return(new java.util.Vector<Role>());
 	}
 
@@ -43,7 +43,7 @@ public abstract class Activity extends Statement {
 	 * 
 	 * @return The list of final roles
 	 */
-	public java.util.List<Role> getFinalRoles() {
+	public java.util.List<Role> finalRoles() {
 		return(new java.util.Vector<Role>());
 	}
 	
@@ -54,11 +54,11 @@ public abstract class Activity extends Statement {
 	 * @return The located role, or null if the
 	 * 			enclosing definition is not located
 	 */
-	protected Role getLocatedRole() {
+	protected Role locatedRole() {
 		Role ret=null;
 		
 		if (getParent() instanceof Activity) {
-			ret = ((Activity)getParent()).getLocatedRole();
+			ret = ((Activity)getParent()).locatedRole();
 		}
 		
 		return(ret);
@@ -70,11 +70,11 @@ public abstract class Activity extends Statement {
 	 * 
 	 * @return The definition, or null if not found
 	 */
-	public Definition getEnclosingDefinition() {
+	public Definition enclosingDefinition() {
 		Definition ret=null;
 		
 		if (getParent() instanceof Activity) {
-			ret = ((Activity)getParent()).getEnclosingDefinition();
+			ret = ((Activity)getParent()).enclosingDefinition();
 		}
 		
 		return(ret);

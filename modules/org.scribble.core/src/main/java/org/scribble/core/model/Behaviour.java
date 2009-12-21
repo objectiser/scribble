@@ -50,7 +50,7 @@ public abstract class Behaviour extends Activity {
 	 * 
 	 * @return The list of associated roles
 	 */
-	public java.util.List<Role> getAssociatedRoles() {
+	public java.util.List<Role> associatedRoles() {
 		return(new java.util.Vector<Role>());
 	}
 }

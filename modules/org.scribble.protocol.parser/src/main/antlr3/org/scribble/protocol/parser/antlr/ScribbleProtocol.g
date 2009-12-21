@@ -77,7 +77,9 @@ qualifiedNameWithMeta: ID ( '.' ( '*' | qualifiedNameWithMeta ) )? ;
 
 importStatement: 'import'^ qualifiedNameWithMeta ( 'as' ID )? ';'! ;
 
-protocolDef: 'protocol'^ ID ( '@' ID )? sequenceDef ;
+protocolDef: 'protocol'^ locatedNameDef sequenceDef ;
+
+locatedNameDef: ID ( '@' roleName )? ;
 
 sequenceDef: '{'! activityListDef '}'! ;
 

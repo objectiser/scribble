@@ -156,8 +156,8 @@ public class Interaction extends Behaviour {
 	 * @return The list of initiator roles
 	 */
 	@Override
-	public java.util.List<Role> getInitiatorRoles() {
-		java.util.List<Role> ret=super.getInitiatorRoles();
+	public java.util.List<Role> initiatorRoles() {
+		java.util.List<Role> ret=super.initiatorRoles();
 		
 		if (getFromRole() != null) {
 			
@@ -165,7 +165,7 @@ public class Interaction extends Behaviour {
 				ret.add(getFromRole());
 			}
 		} else {
-			Definition defn=getEnclosingDefinition();
+			Definition defn=enclosingDefinition();
 			
 			if (defn != null) {
 				Role locatedRole=defn.getLocatedName().getRole();
@@ -188,8 +188,8 @@ public class Interaction extends Behaviour {
 	 * @return The list of final roles
 	 */
 	@Override
-	public java.util.List<Role> getFinalRoles() {
-		java.util.List<Role> ret=super.getFinalRoles();
+	public java.util.List<Role> finalRoles() {
+		java.util.List<Role> ret=super.finalRoles();
 		
 		if (getToRole() != null) {
 			
@@ -197,7 +197,7 @@ public class Interaction extends Behaviour {
 				ret.add(getToRole());
 			}
 		} else {
-			Definition defn=getEnclosingDefinition();
+			Definition defn=enclosingDefinition();
 			
 			if (defn != null) {
 				Role locatedRole=defn.getLocatedName().getRole();
@@ -220,8 +220,8 @@ public class Interaction extends Behaviour {
 	 * @return The list of associated roles
 	 */
 	@Override
-	public java.util.List<Role> getAssociatedRoles() {
-		java.util.List<Role> ret=super.getAssociatedRoles();
+	public java.util.List<Role> associatedRoles() {
+		java.util.List<Role> ret=super.associatedRoles();
 		
 		if (getToRole() != null &&
 					ret.contains(getToRole()) == false) {
@@ -234,7 +234,7 @@ public class Interaction extends Behaviour {
 		}
 		
 		if (getToRole() == null || getFromRole() == null) {
-			Role locatedRole=getLocatedRole();
+			Role locatedRole=locatedRole();
 			
 			if (locatedRole != null && ret.contains(locatedRole) == false) {
 				ret.add(locatedRole);
@@ -253,7 +253,7 @@ public class Interaction extends Behaviour {
 	@Override
 	public boolean isWaitState() {
 		boolean ret=false;
-		Role role=getLocatedRole();
+		Role role=locatedRole();
 		
 		// Check if interaction is a receive
 		if (role != null &&

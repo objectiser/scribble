@@ -102,13 +102,13 @@ public abstract class ModelInclude extends Behaviour {
 	 * @return The list of initiator roles
 	 */
 	@Override
-	public java.util.List<Role> getInitiatorRoles() {
-		java.util.List<Role> ret=super.getInitiatorRoles();
+	public java.util.List<Role> initiatorRoles() {
+		java.util.List<Role> ret=super.initiatorRoles();
 		
 		Definition defn=getDefinition();
 		
 		if (defn != null) {
-			ret.addAll(defn.getBlock().getInitiatorRoles());
+			ret.addAll(defn.getBlock().initiatorRoles());
 		}
 		
 		return(ret);
@@ -121,19 +121,19 @@ public abstract class ModelInclude extends Behaviour {
 	 * @return The list of final roles
 	 */
 	@Override
-	public java.util.List<Role> getFinalRoles() {
+	public java.util.List<Role> finalRoles() {
 		java.util.List<Role> ret=null;
 		
 		if (isAsynchronous()) {
-			ret = getInitiatorRoles();
+			ret = initiatorRoles();
 			
 		} else {
-			ret = super.getFinalRoles();
+			ret = super.finalRoles();
 			
 			Definition defn=getDefinition();
 			
 			if (defn != null) {
-				ret.addAll(defn.getBlock().getFinalRoles());
+				ret.addAll(defn.getBlock().finalRoles());
 			}	
 		}
 		

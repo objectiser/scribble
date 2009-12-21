@@ -18,11 +18,154 @@ package org.scribble.protocol.parser.ctk;
 
 import static org.junit.Assert.*;
 
-public class ProtocolParserTest {
+import org.scribble.core.logger.*;
+import org.scribble.core.model.*;
+import org.scribble.protocol.model.*;
+import org.scribble.protocol.parser.*;
 
-	@org.junit.Test
-	public void testPlaceholder() {
+public class ProtocolParserTest {
+	
+	public Model<Protocol> getModel(String filename, ScribbleLogger logger) {
+		Model<Protocol> ret=null;
 		
-		assertTrue(true);
+		java.io.InputStream is=
+				ClassLoader.getSystemResourceAsStream("tests/"+
+							filename+".spr");
+		
+		if (is == null) {
+			fail("Failed to load protocol '"+filename+"'");
+		}
+		
+		org.scribble.protocol.parser.ProtocolParser parser=null;
+		
+		try {
+			String clsName=System.getProperty("scribble.protocol.parser");
+			
+			if (clsName == null) {
+				clsName = "org.scribble.protocol.parser.antlr.ANTLRProtocolParser";
+			}
+			
+			Class<?> cls=Class.forName(clsName);
+			
+			parser = (org.scribble.protocol.parser.ProtocolParser)
+								cls.newInstance();
+
+		} catch(Exception e) {
+			fail("Failed to get Protocol parser: "+e);
+		}
+
+		ret = parser.parse(is, logger);
+		
+		return(ret);
+	}
+
+	/**
+	 * This method validates a model against the expected model.
+	 * 
+	 * @param model The model constructed by the parser
+	 * @param expected The expected model
+	 */
+	public void verify(Model<Protocol> model, Model<Protocol> expected) {
+		java.util.List<ModelObject> mlist=sequence(model);
+		java.util.List<ModelObject> elist=sequence(expected);
+		
+		assertNotNull(mlist);
+		assertNotNull(elist);
+		
+		int len=mlist.size();
+		
+		if (len > elist.size()) {
+			len = elist.size();
+		}
+		
+		for (int i=0; i < len; i++) {
+			if (mlist.get(i).getClass() != elist.get(i).getClass()) {
+				fail("Element ("+i+") mismatch class model="+
+						mlist.get(i).getClass()+" expected="+
+						elist.get(i).getClass());
+			}
+		}
+		
+		assertTrue(mlist.size() == elist.size());
+	}
+	
+	/**
+	 * This method converts the model tree into a flat list of model
+	 * objects which can be compared.
+	 * 
+	 * @param model The model
+	 * @return The list of model objects
+	 */
+	protected java.util.List<ModelObject> sequence(Model<Protocol> model) {
+		final java.util.List<ModelObject> ret=new java.util.Vector<ModelObject>();
+		
+		model.visit(new Visitor() {
+
+			@Override
+			public void conclude(ModelObject obj) {
+			}
+
+			@Override
+			public void prepare(ModelObject obj) {
+			}
+
+			@Override
+			public boolean visit(ModelObject obj) {
+				ret.add(obj);
+				return true;
+			}
+			
+		});
+		
+		return(ret);
+	}
+	
+	@org.junit.Test
+	public void testSingleInteraction() {
+		TestScribbleLogger logger=new TestScribbleLogger();
+		
+		Model<Protocol> model=getModel("SingleInteraction", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		Model<Protocol> expected=new Model<Protocol>();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("SingleInteraction");
+		protocol.setLocatedName(ln);
+		
+		RoleList rl=new RoleList();
+		Role buyer=new Role();
+		buyer.setName("buyer");
+		rl.getRoles().add(buyer);
+		Role seller=new Role();
+		seller.setName("seller");
+		rl.getRoles().add(seller);
+		
+		protocol.getBlock().getContents().add(rl);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setLocalpart("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromRole(buyer);
+		interaction.setToRole(seller);
+		
+		protocol.getBlock().getContents().add(interaction);
+		
+		verify(model, expected);
 	}
 }

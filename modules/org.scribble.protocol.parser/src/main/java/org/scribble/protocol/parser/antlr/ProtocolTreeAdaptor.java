@@ -34,8 +34,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_listClass=
 		new java.util.HashMap<String, Class<?>>();
-	private static java.util.Map<String,Class<?>> m_parserRuleClass=
-		new java.util.HashMap<String, Class<?>>();
+	//private static java.util.Map<String,Class<?>> m_parserRuleClass=
+	//	new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_parserGroupingRuleClass=
 		new java.util.HashMap<String, Class<?>>();
 	
@@ -55,7 +55,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("protocol", Protocol.class);
 		m_tokenClass.put("role", RoleList.class);
 
-		m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
+		//m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
 
 		// This may defines the model object that should be
 		// created after processing the named grammer rule
@@ -64,7 +64,10 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("sequenceDef", Block.class);
 		m_parserGroupingRuleClass.put("interactionDef", Interaction.class);
 		m_parserGroupingRuleClass.put("interactionSignatureDef", MessageSignature.class);
+		m_parserGroupingRuleClass.put("typeReferenceDef", TypeReference.class);
 		m_parserGroupingRuleClass.put("roleName", Role.class);
+		m_parserGroupingRuleClass.put("roleDef", Role.class);
+		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		
 		// When a partcular class has multiple properties of the
 		// same type, then a preceding token must be used to
@@ -77,6 +80,12 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		// property name
 		m_listClass.put("imports", Import.class);
 		m_listClass.put("contents", Activity.class);
+		m_listClass.put("roles", Role.class);
+		m_listClass.put("types", TypeReference.class);
+	}
+	
+	public Model<Protocol> getProtocolModel() {
+		return(m_model);
 	}
 	
 	public void setParser(ScribbleProtocolParser parser) {
@@ -94,6 +103,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		_log.finest("Token class for '"+token.getText()+
 				"' is: "+cls);
 
+		/*
 		if (cls == null && m_parser != null &&
 				m_parser.getRuleInvocationStack().size() > 0) {
 			
@@ -106,6 +116,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 						"' is: "+cls);
 			}
 		}
+		*/
 		
 		if (cls != null) {
 			try {

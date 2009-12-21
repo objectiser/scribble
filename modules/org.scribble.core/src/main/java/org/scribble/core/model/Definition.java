@@ -162,7 +162,7 @@ public abstract class Definition extends Activity {
 	 * @return The definition, or null if not found
 	 */
 	@Override
-	public Definition getEnclosingDefinition() {
+	public Definition enclosingDefinition() {
 		return(this);
 	}
 	
@@ -303,7 +303,7 @@ public abstract class Definition extends Activity {
 	 * 			enclosing definition is not located
 	 */
 	@Override
-	protected Role getLocatedRole() {
+	protected Role locatedRole() {
 		Role ret=null;
 		
 		if (getLocatedName() != null) {
