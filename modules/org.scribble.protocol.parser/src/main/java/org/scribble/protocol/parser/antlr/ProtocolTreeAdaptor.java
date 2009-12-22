@@ -34,8 +34,6 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_listClass=
 		new java.util.HashMap<String, Class<?>>();
-	//private static java.util.Map<String,Class<?>> m_parserRuleClass=
-	//	new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_parserGroupingRuleClass=
 		new java.util.HashMap<String, Class<?>>();
 	
@@ -53,7 +51,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("namespace", Namespace.class);
 		m_tokenClass.put("import", Import.class);
 		m_tokenClass.put("protocol", Protocol.class);
-		m_tokenClass.put("role", RoleList.class);
+		m_tokenClass.put("participant", ParticipantList.class);
 
 		//m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
 
@@ -65,22 +63,22 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("interactionDef", Interaction.class);
 		m_parserGroupingRuleClass.put("interactionSignatureDef", MessageSignature.class);
 		m_parserGroupingRuleClass.put("typeReferenceDef", TypeReference.class);
-		m_parserGroupingRuleClass.put("roleName", Role.class);
-		m_parserGroupingRuleClass.put("roleDef", Role.class);
+		m_parserGroupingRuleClass.put("participantName", Participant.class);
+		m_parserGroupingRuleClass.put("participantDef", Participant.class);
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		
 		// When a partcular class has multiple properties of the
 		// same type, then a preceding token must be used to
 		// determine which property to set. This map provides the
 		// mapping between the property name and the token.
-		m_propertyToken.put("fromRole", "from");
-		m_propertyToken.put("toRole", "to");
+		m_propertyToken.put("fromParticipant", "from");
+		m_propertyToken.put("toParticipant", "to");
 		
 		// Defines the list element base type associated with a
 		// property name
 		m_listClass.put("imports", Import.class);
 		m_listClass.put("contents", Activity.class);
-		m_listClass.put("roles", Role.class);
+		m_listClass.put("participants", Participant.class);
 		m_listClass.put("types", TypeReference.class);
 	}
 	

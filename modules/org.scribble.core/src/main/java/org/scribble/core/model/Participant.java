@@ -17,29 +17,39 @@
 package org.scribble.core.model;
 
 /**
- * This class represents the channel declaration.
+ * This class represents a role.
+ * 
  */
-public class Channel extends Declaration {
+public class Participant extends Declaration {
 
-	private static final long serialVersionUID = 1158151945766114601L;
+	private static final long serialVersionUID = 3368940100177769548L;
 
 	/**
 	 * This is the default constructor.
 	 */
-	public Channel() {
+	public Participant() {
 	}
 	
 	/**
-	 * This constructor initializes the channel with a name.
+	 * This is the copy constructor.
 	 * 
-	 * @param name The channel name
+	 * @param role The role
 	 */
-	public Channel(String name) {
-		m_name = name;
+	public Participant(Participant role) {
+		m_name = role.getName();
 	}
 	
 	/**
-	 * This method returns the name of the channel.
+	 * This constructor initializes the role with a name.
+	 * 
+	 * @param roleName The role name
+	 */
+	public Participant(String roleName) {
+		m_name = roleName;
+	}
+	
+	/**
+	 * This method returns the name of the role.
 	 * 
 	 * @return The name
 	 */
@@ -48,7 +58,7 @@ public class Channel extends Declaration {
 	}
 	
 	/**
-	 * This method sets the name of the channel.
+	 * This method sets the name of the role.
 	 * 
 	 * @param name The name
 	 */
@@ -56,47 +66,11 @@ public class Channel extends Declaration {
 		m_name = name;
 	}
 	
-	/**
-	 * This method returns the 'from' role.
-	 * 
-	 * @return The 'from' role
-	 */
-	public Participant getFromRole() {
-		return(m_fromRole);
-	}
-	
-	/**
-	 * This method sets the 'from' role.
-	 * 
-	 * @param role The 'from' role
-	 */
-	public void setFromRole(Participant role) {
-		m_fromRole = role;
-	}
-	
-	/**
-	 * This method returns the 'to' role.
-	 * 
-	 * @return The 'to' role
-	 */
-	public Participant getToRole() {
-		return(m_toRole);
-	}
-	
-	/**
-	 * This method sets the 'to' role.
-	 * 
-	 * @param role The 'to' role
-	 */
-	public void setToRole(Participant role) {
-		m_toRole = role;
-	}
-	
 	public boolean equals(Object obj) {
 		boolean ret=false;
 	
-		if (obj instanceof Channel) {
-			Channel other=(Channel)obj;
+		if (obj instanceof Participant) {
+			Participant other=(Participant)obj;
 			
 			if (other.getName() != null && other.getName().equals(m_name)) {
 				ret = true;
@@ -117,10 +91,14 @@ public class Channel extends Declaration {
 	}
 	
 	public String toString() {
-		return(getName());
+		String ret=getName();
+		
+		if (ret == null) {
+			ret = "<Unnamed Role>";
+		}
+		
+		return(ret);
 	}
-
-	private String m_name=null;
-	private Participant m_fromRole=null;
-	private Participant m_toRole=null;
+	
+	private String m_name=null;	
 }

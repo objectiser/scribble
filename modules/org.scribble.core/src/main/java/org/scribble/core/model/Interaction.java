@@ -71,39 +71,39 @@ public class Interaction extends Behaviour {
 	}
 	
 	/**
-	 * This method returns the optional 'from' role.
+	 * This method returns the optional 'from' participant.
 	 * 
-	 * @return The optional 'from' role
+	 * @return The optional 'from' participant
 	 */
-	public Role getFromRole() {
-		return(m_fromRole);
+	public Participant getFromParticipant() {
+		return(m_fromParticipant);
 	}
 	
 	/**
-	 * This method sets the optional 'from' role.
+	 * This method sets the optional 'from' participant.
 	 * 
-	 * @param part The optional 'from' role
+	 * @param part The optional 'from' participant
 	 */
-	public void setFromRole(Role part) {
-		m_fromRole = part;
+	public void setFromRole(Participant part) {
+		m_fromParticipant = part;
 	}
 	
 	/**
-	 * This method returns the optional 'to' role.
+	 * This method returns the optional 'to' participant.
 	 * 
-	 * @return The optional 'to' role
+	 * @return The optional 'to' participant
 	 */
-	public Role getToRole() {
-		return(m_toRole);
+	public Participant getToParticipant() {
+		return(m_toParticipant);
 	}
 	
 	/**
-	 * This method sets the optional 'to' role.
+	 * This method sets the optional 'to' participant.
 	 * 
-	 * @param part The optional 'to' role
+	 * @param part The optional 'to' participant
 	 */
-	public void setToRole(Role part) {
-		m_toRole = part;
+	public void setToParticipant(Participant part) {
+		m_toParticipant = part;
 	}
 	
 	/**
@@ -156,24 +156,24 @@ public class Interaction extends Behaviour {
 	 * @return The list of initiator roles
 	 */
 	@Override
-	public java.util.List<Role> initiatorRoles() {
-		java.util.List<Role> ret=super.initiatorRoles();
+	public java.util.List<Participant> initiatorParticipants() {
+		java.util.List<Participant> ret=super.initiatorParticipants();
 		
-		if (getFromRole() != null) {
+		if (getFromParticipant() != null) {
 			
-			if (ret.contains(getFromRole()) == false) {
-				ret.add(getFromRole());
+			if (ret.contains(getFromParticipant()) == false) {
+				ret.add(getFromParticipant());
 			}
 		} else {
 			Definition defn=enclosingDefinition();
 			
 			if (defn != null) {
-				Role locatedRole=defn.getLocatedName().getRole();
+				Participant located=defn.getLocatedName().getParticipant();
 				
-				if (locatedRole != null && getToRole() != null &&
-						getToRole().equals(locatedRole) == false &&
-						ret.contains(locatedRole) == false) {
-					ret.add(locatedRole);
+				if (located != null && getToParticipant() != null &&
+						getToParticipant().equals(located) == false &&
+						ret.contains(located) == false) {
+					ret.add(located);
 				}
 			}
 		}
@@ -188,24 +188,24 @@ public class Interaction extends Behaviour {
 	 * @return The list of final roles
 	 */
 	@Override
-	public java.util.List<Role> finalRoles() {
-		java.util.List<Role> ret=super.finalRoles();
+	public java.util.List<Participant> finalParticipants() {
+		java.util.List<Participant> ret=super.finalParticipants();
 		
-		if (getToRole() != null) {
+		if (getToParticipant() != null) {
 			
-			if (ret.contains(getToRole()) == false) {
-				ret.add(getToRole());
+			if (ret.contains(getToParticipant()) == false) {
+				ret.add(getToParticipant());
 			}
 		} else {
 			Definition defn=enclosingDefinition();
 			
 			if (defn != null) {
-				Role locatedRole=defn.getLocatedName().getRole();
+				Participant located=defn.getLocatedName().getParticipant();
 				
-				if (locatedRole != null && getFromRole() != null &&
-						getFromRole().equals(locatedRole) == false &&
-						ret.contains(locatedRole) == false) {
-					ret.add(locatedRole);
+				if (located != null && getFromParticipant() != null &&
+						getFromParticipant().equals(located) == false &&
+						ret.contains(located) == false) {
+					ret.add(located);
 				}
 			}
 		}
@@ -220,24 +220,24 @@ public class Interaction extends Behaviour {
 	 * @return The list of associated roles
 	 */
 	@Override
-	public java.util.List<Role> associatedRoles() {
-		java.util.List<Role> ret=super.associatedRoles();
+	public java.util.List<Participant> associatedParticipants() {
+		java.util.List<Participant> ret=super.associatedParticipants();
 		
-		if (getToRole() != null &&
-					ret.contains(getToRole()) == false) {
-			ret.add(getToRole());
+		if (getToParticipant() != null &&
+					ret.contains(getToParticipant()) == false) {
+			ret.add(getToParticipant());
 		}
 		
-		if (getFromRole() != null &&
-					ret.contains(getFromRole()) == false) {
-			ret.add(getFromRole());
+		if (getFromParticipant() != null &&
+					ret.contains(getFromParticipant()) == false) {
+			ret.add(getFromParticipant());
 		}
 		
-		if (getToRole() == null || getFromRole() == null) {
-			Role locatedRole=locatedRole();
+		if (getToParticipant() == null || getFromParticipant() == null) {
+			Participant located=locatedParticipant();
 			
-			if (locatedRole != null && ret.contains(locatedRole) == false) {
-				ret.add(locatedRole);
+			if (located != null && ret.contains(located) == false) {
+				ret.add(located);
 			}
 		}
 		
@@ -253,12 +253,12 @@ public class Interaction extends Behaviour {
 	@Override
 	public boolean isWaitState() {
 		boolean ret=false;
-		Role role=locatedRole();
+		Participant role=locatedParticipant();
 		
 		// Check if interaction is a receive
 		if (role != null &&
-			((getToRole() != null && role.equals(getToRole())) ||
-			(getFromRole() != null && role.equals(getFromRole()) == false))) {
+			((getToParticipant() != null && role.equals(getToParticipant())) ||
+			(getFromParticipant() != null && role.equals(getFromParticipant()) == false))) {
 			ret = true;
 		}
 		
@@ -273,18 +273,18 @@ public class Interaction extends Behaviour {
 			ret.append(" ");
 		}
 		
-		if (getFromRole() != null) {
-			ret.append(getFromRole());
+		if (getFromParticipant() != null) {
+			ret.append(getFromParticipant());
 			ret.append("->");
 			
-			if (getToRole() != null) {
-				ret.append(getToRole());
+			if (getToParticipant() != null) {
+				ret.append(getToParticipant());
 			}
 		} else {
 			ret.append("->");
 			
-			if (getToRole() != null) {
-				ret.append(getToRole());
+			if (getToParticipant() != null) {
+				ret.append(getToParticipant());
 			}
 		}
 		
@@ -293,8 +293,8 @@ public class Interaction extends Behaviour {
 	
 	private MessageSignature m_messageSignature=null;
 	private Channel m_channel=null;
-	private Role m_fromRole=null;
-	private Role m_toRole=null;
+	private Participant m_fromParticipant=null;
+	private Participant m_toParticipant=null;
 	private String m_requestLabel=null;
 	private String m_replyToLabel=null;
 }

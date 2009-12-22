@@ -5,6 +5,6 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="target/generated-sources/antlr3"/>
 	<classpathentry kind="var" path="M2_REPO/org/antlr/antlr/3.2/antlr-3.2.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/antlr-runtime-3.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

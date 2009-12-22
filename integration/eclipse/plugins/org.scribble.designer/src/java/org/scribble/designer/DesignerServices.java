@@ -25,7 +25,7 @@ import org.scribble.protocol.parser.ProtocolParser;
  *
  */
 public class DesignerServices {
-
+	
 	public static ValidationManager getValidationManager() {
 		return(m_validationManager);
 	}

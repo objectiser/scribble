@@ -17,6 +17,7 @@
 package org.scribble.designer.osgi;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
@@ -58,47 +59,44 @@ public class Activator extends AbstractUIPlugin {
 	public void start(final BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		
-		DesignerServices.setProtocolParser(new org.scribble.protocol.parser.antlr.ANTLRProtocolParser());
+
+		// TODO: Obtain validation manager pre-initialised
 		
 		ValidationManager vm=new DefaultValidationManager();
 		vm.addValidator(new org.scribble.protocol.validation.ProtocolComponentValidator());
 		
 		DesignerServices.setValidationManager(vm);
 		
-		// TODO: Fix plugin initialization issue
-		/* Module activator code not being called currently - need
-		 * to use temporary direct instantiation.
-		 * 
+		// Obtain reference to protocol parser
 		ServiceReference sr=context.getServiceReference(ProtocolParser.class.getName());
 	
 		if (sr != null) {
 			DesignerServices.setProtocolParser((ProtocolParser)context.getService(sr));				
+		} else {
+			
+	        ServiceListener sl1 = new ServiceListener() {
+	        	public void serviceChanged(ServiceEvent ev) {
+	        		ServiceReference sr = ev.getServiceReference();
+	        		switch(ev.getType()) {
+	        		case ServiceEvent.REGISTERED:
+	        			ProtocolParser pp=
+	        				(ProtocolParser)context.getService(sr);
+	        			DesignerServices.setProtocolParser(pp);
+	        			break;
+	        		case ServiceEvent.UNREGISTERING:
+	        			break;
+	        		}
+	        	}
+	        };
+	              
+	        String filter1 = "(objectclass=" + ProtocolParser.class.getName() + ")";
+	        
+	        try {
+	        	context.addServiceListener(sl1, filter1);
+	        } catch(Exception e) {
+	        	e.printStackTrace();
+	        }
 		}
-		
-        ServiceListener sl1 = new ServiceListener() {
-        	public void serviceChanged(ServiceEvent ev) {
-        		ServiceReference sr = ev.getServiceReference();
-        		switch(ev.getType()) {
-        		case ServiceEvent.REGISTERED:
-        			ProtocolParser pp=
-        				(ProtocolParser)context.getService(sr);
-        			DesignerServices.setProtocolParser(pp);
-        			break;
-        		case ServiceEvent.UNREGISTERING:
-        			break;
-        		}
-        	}
-        };
-              
-        String filter1 = "(objectclass=" + ProtocolParser.class.getName() + ")";
-        
-        try {
-        	context.addServiceListener(sl1, filter1);
-        } catch(Exception e) {
-        	e.printStackTrace();
-        }
-        */
 	}
 
 	/*

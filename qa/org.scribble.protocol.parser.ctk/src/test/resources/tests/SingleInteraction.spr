@@ -1,7 +1,7 @@
 namespace example.helloworld;
 
 protocol SingleInteraction {
-	role Buyer, Seller;
+	participant Buyer, Seller;
 
 	Order from Buyer to Seller;
 }

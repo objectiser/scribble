@@ -35,9 +35,9 @@ public class LocatedName extends ModelObject {
 	 * @param name The name
 	 * @param located The optional located role
 	 */
-	public LocatedName(String name, Role located) {
+	public LocatedName(String name, Participant located) {
 		m_name = name;
-		m_role = located;
+		m_participant = located;
 	}
 	
 	/**
@@ -59,34 +59,34 @@ public class LocatedName extends ModelObject {
 	}
 	
 	/**
-	 * This method returns the located role. This
+	 * This method returns the located participant. This
 	 * field is set when the protocol represents a local
 	 * model.
 	 * 
-	 * @return The located role
+	 * @return The located participant
 	 */
 	@Reference(containment=true)
-	public Role getRole() {
-		return(m_role);
+	public Participant getParticipant() {
+		return(m_participant);
 	}
 	
 	/**
-	 * This method sets the located role. This
+	 * This method sets the located participant. This
 	 * field is set when the protocol represents a local
 	 * model.
 	 * 
-	 * @param role The located role
+	 * @param participant The located participant
 	 */
-	public void setRole(Role role) {
+	public void setParticipant(Participant participant) {
 		
-		if (m_role != null) {
-			m_role.setParent(null);
+		if (m_participant != null) {
+			m_participant.setParent(null);
 		}
 		
-		m_role = role;
+		m_participant = participant;
 		
-		if (m_role != null) {
-			m_role.setParent(this);
+		if (m_participant != null) {
+			m_participant.setParent(this);
 		}
 	}
 	
@@ -108,12 +108,12 @@ public class LocatedName extends ModelObject {
 				((LocatedName)other).m_name != null &&
 				m_name.equals(((LocatedName)other).m_name)) {
 			
-			if (m_role == null &&
-					((LocatedName)other).m_role == null) {
+			if (m_participant == null &&
+					((LocatedName)other).m_participant == null) {
 				ret = true;
-			} else if (m_role != null &&
-					((LocatedName)other).m_role != null &&
-					m_role.equals(((LocatedName)other).m_role)) {
+			} else if (m_participant != null &&
+					((LocatedName)other).m_participant != null &&
+					m_participant.equals(((LocatedName)other).m_participant)) {
 				ret = true;
 			}
 		}
@@ -122,9 +122,9 @@ public class LocatedName extends ModelObject {
 	}
 			
 	public String toString() {
-		return("Name["+getName()+" loc="+m_role+"]");
+		return("Name["+getName()+" loc="+m_participant+"]");
 	}
 	
 	private String m_name=null;
-	private Role m_role=null;
+	private Participant m_participant=null;
 }

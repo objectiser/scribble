@@ -11,4 +11,5 @@ Require-Bundle: org.scribble.protocol,
 Export-Package: org.scribble.protocol.parser,
  org.scribble.protocol.parser.antlr
 Bundle-ClassPath: .,
- lib/antlr-runtime-3.2.jar
+ lib/antlr-runtime-3.2.jar,
+ src/main/resources/lib/antlr-runtime-3.2.jar

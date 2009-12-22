@@ -38,6 +38,7 @@ public class ValidateAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		
+System.out.println("RUNNING VALIDATE ACTION");		
 		if (m_selection instanceof StructuredSelection) {
 			StructuredSelection sel=(StructuredSelection)m_selection;
 			

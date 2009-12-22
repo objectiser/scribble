@@ -234,8 +234,8 @@ public abstract class Definition extends Activity {
 		java.util.Set<Declaration> ret=new java.util.HashSet<Declaration>();
 		
 		// Check if definition has a located role
-		if (getLocatedName().getRole() != null) {
-			ret.add(getLocatedName().getRole());
+		if (getLocatedName().getParticipant() != null) {
+			ret.add(getLocatedName().getParticipant());
 		}
 		
 		// Check activities for suitable declarations
@@ -244,8 +244,8 @@ public abstract class Definition extends Activity {
 		while (iter.hasNext()) {
 			Activity act=iter.next();
 			
-			if (act instanceof RoleList) {
-				ret.addAll(((RoleList)act).getRoles());
+			if (act instanceof ParticipantList) {
+				ret.addAll(((ParticipantList)act).getParticipants());
 			} else if (act instanceof ChannelList) {
 				ret.addAll(((ChannelList)act).getChannels());
 			}
@@ -282,13 +282,13 @@ public abstract class Definition extends Activity {
 	 * 
 	 * @return The list of roles
 	 */
-	public java.util.List<Role> getRoles() {
-		java.util.List<Role> ret=new java.util.Vector<Role>();
+	public java.util.List<Participant> getRoles() {
+		java.util.List<Participant> ret=new java.util.Vector<Participant>();
 		
 		for (int i=0; i < getBlock().getContents().size(); i++) {
 		
-			if (getBlock().getContents().get(i) instanceof RoleList) {
-				ret.addAll(((RoleList)getBlock().getContents().get(i)).getRoles());
+			if (getBlock().getContents().get(i) instanceof ParticipantList) {
+				ret.addAll(((ParticipantList)getBlock().getContents().get(i)).getParticipants());
 			}
 		}
 		
@@ -303,11 +303,11 @@ public abstract class Definition extends Activity {
 	 * 			enclosing definition is not located
 	 */
 	@Override
-	protected Role locatedRole() {
-		Role ret=null;
+	protected Participant locatedParticipant() {
+		Participant ret=null;
 		
 		if (getLocatedName() != null) {
-			ret = getLocatedName().getRole();
+			ret = getLocatedName().getParticipant();
 		}
 		
 		return(ret);

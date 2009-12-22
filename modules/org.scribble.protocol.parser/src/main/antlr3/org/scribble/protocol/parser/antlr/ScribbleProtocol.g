@@ -12,22 +12,6 @@ tokens {
 	DIV	= '/' ;
 }
 
-/* Problem is that when tokens are defined, it uses the token name,
-   rather than the value, in the error messages.
-   
-	NAMESPACE = 'namespace';
-	IMPORT = 'import';
-	AS = 'as';
-	IMPLEMENTS = 'implements';
-	CONFORMS = 'conforms';
-	TO = 'to';
-	CHANNEL = 'channel';
-	VIA = 'via';
-	ROLE = 'role';
-	FROM = 'from';
-	TO = 'to';
-*/
-
 @header {
 package org.scribble.protocol.parser.antlr;
 }
@@ -93,17 +77,17 @@ importStatement: 'import'^ qualifiedNameWithMeta ( 'as' ID )? ';'! ;
 
 protocolDef: 'protocol'^ locatedNameDef sequenceDef ;
 
-locatedNameDef: ID ( '@' roleName )? ;
+locatedNameDef: ID ( '@' participantName )? ;
 
 sequenceDef: '{'! activityListDef '}'! ;
 
 activityListDef: ( activityDef )* ;
 
-activityDef: interactionDef | roleListDef ;
+activityDef: interactionDef | participantListDef ;
 
-roleListDef: 'role'^ roleDef ( ',' roleDef )* ';'! ;
+participantListDef: 'participant'^ participantDef ( ',' participantDef )* ';'! ;
 
-roleDef: ID ;
+participantDef: ID ;
 
 channelListDef: 'channel'^ channelDef ( ',' channelDef )* ';'! ;
 
@@ -113,13 +97,13 @@ typeReferenceDef: qualifiedName ;
 
 interactionSignatureDef: ( typeReferenceDef | ID '(' ')' ) ;
 
-roleName: ID ;
+participantName: ID ;
 
-interactionDef: interactionSignatureDef ( 'from' roleName )? ( 'to' roleName )? ( 'via' ID )? ';'! ;
+interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' ID )? ';'! ;
 
-choiceDef: 'choice'^ '@' roleName sequenceDef ( 'or' sequenceDef )* ;
+choiceDef: 'choice'^ '@' participantName sequenceDef ( 'or' sequenceDef )* ;
 
-repeatDef: 'repeat'^ '@' roleName sequenceDef ;
+repeatDef: 'repeat'^ '@' participantName sequenceDef ;
 
 runDef: 'run'^ ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';'! ) ;
 

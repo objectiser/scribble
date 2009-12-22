@@ -17,7 +17,7 @@
 package org.scribble.protocol.model;
 
 import org.scribble.core.model.Block;
-import org.scribble.core.model.Role;
+import org.scribble.core.model.Participant;
 
 /**
  * This class represents a group of activities within
@@ -34,9 +34,9 @@ public abstract class EscapeBlock extends Block {
 	 * 
 	 * @return The list of roles
 	 */
-	public java.util.List<Role> getRoles() {
+	public java.util.List<Participant> getRoles() {
 		return(m_roles);
 	}
 		
-	private java.util.List<Role> m_roles=new java.util.Vector<Role>();
+	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 }

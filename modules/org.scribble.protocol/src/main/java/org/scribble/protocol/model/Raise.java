@@ -39,7 +39,7 @@ public class Raise extends Behaviour {
 	 * 
 	 * @return The list of roles
 	 */
-	public java.util.List<Role> getRoles() {
+	public java.util.List<Participant> getRoles() {
 		return(m_roles);
 	}
 		
@@ -73,6 +73,6 @@ public class Raise extends Behaviour {
 		}
 	}
 	
-	private java.util.List<Role> m_roles=new java.util.Vector<Role>();
+	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 	private TypeReference m_type=null;
 }

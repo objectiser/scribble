@@ -47,23 +47,23 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 		Interaction elem=(Interaction)obj;
 		
 		// Identify definition and whether it has a located role
-		Role locatedRole=null;
+		Participant locatedRole=null;
 		
 		if (elem.enclosingDefinition() != null &&
 				elem.enclosingDefinition().getLocatedName() != null) {
-			locatedRole = elem.enclosingDefinition().getLocatedName().getRole();
+			locatedRole = elem.enclosingDefinition().getLocatedName().getParticipant();
 		}
 
 		// Check that between the channel and the interaction, there
 		// are 'to' and 'from' roles defined
-		if (elem.getFromRole() == null &&
+		if (elem.getFromParticipant() == null &&
 				(elem.getChannel() == null ||
 						elem.getChannel().getFromRole() == null)) {
 			
 			// Check if local model and 'to' is not the same as the
 			// located role
-			if (locatedRole == null || elem.getToRole() == null ||
-					locatedRole.equals(elem.getToRole().getName())) {
+			if (locatedRole == null || elem.getToParticipant() == null ||
+					locatedRole.equals(elem.getToParticipant().getName())) {
 			
 				logger.error(org.scribble.core.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle("org.scribble.validation.Messages"),
@@ -72,14 +72,14 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 			}
 		}
 
-		if (elem.getToRole() == null &&
+		if (elem.getToParticipant() == null &&
 				(elem.getChannel() == null ||
 						elem.getChannel().getToRole() == null)) {
 			
 			// Check if local model and 'from' is not the same as the
 			// located role
-			if (locatedRole == null || elem.getFromRole() == null ||
-					locatedRole.equals(elem.getFromRole().getName())) {
+			if (locatedRole == null || elem.getFromParticipant() == null ||
+					locatedRole.equals(elem.getFromParticipant().getName())) {
 			
 				logger.error(org.scribble.core.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle("org.scribble.validation.Messages"),

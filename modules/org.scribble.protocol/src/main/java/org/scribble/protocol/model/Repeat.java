@@ -44,7 +44,7 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	public boolean isWaitState() {
 		boolean ret=false;
 		
-		Role role=locatedRole();
+		Participant role=locatedParticipant();
 		
 		// Check if not a decision making role
 		if (role != null && m_roles.contains(role) == false) {
@@ -60,7 +60,7 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	 * 
 	 * @return The list of roles
 	 */
-	public java.util.List<Role> getRoles() {
+	public java.util.List<Participant> getRoles() {
 		return(m_roles);
 	}
 	
@@ -134,8 +134,8 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	 * @return The list of initiator roles
 	 */
 	@Override
-	public java.util.List<Role> initiatorRoles() {
-		java.util.List<Role> ret=super.initiatorRoles();
+	public java.util.List<Participant> initiatorParticipants() {
+		java.util.List<Participant> ret=super.initiatorParticipants();
 
 		for (int i=0; i < getRoles().size(); i++) {
 			if (ret.contains(getRoles().get(i)) == false) {
@@ -153,12 +153,12 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 	 * @return The list of final roles
 	 */
 	@Override
-	public java.util.List<Role> finalRoles() {
-		java.util.List<Role> ret=super.finalRoles();
+	public java.util.List<Participant> finalParticipants() {
+		java.util.List<Participant> ret=super.finalParticipants();
 				
 		return(ret);
 	}
 
 	private Block m_block=new Block();
-	private java.util.List<Role> m_roles=new java.util.Vector<Role>();
+	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 }

@@ -101,12 +101,12 @@ public class Model<T extends Definition> extends ModelObject {
 							m_definition != obj) {
 						ret = false;
 						
-					} else if (obj instanceof RoleList &&
-							((RoleList)obj).isOpen() == false) {
-						RoleList plist=(RoleList)obj;
+					} else if (obj instanceof ParticipantList &&
+							((ParticipantList)obj).isOpen() == false) {
+						ParticipantList plist=(ParticipantList)obj;
 						
-						for (int i=0; i < plist.getRoles().size(); i++) {
-							Role role=plist.getRoles().get(i);
+						for (int i=0; i < plist.getParticipants().size(); i++) {
+							Participant role=plist.getParticipants().get(i);
 							
 							// Create model reference for this role
 							ModelReference lref=
@@ -175,7 +175,7 @@ public class Model<T extends Definition> extends ModelObject {
 		boolean ret=false;
 		
 		if (getDefinition() != null) {
-			ret = (getDefinition().getLocatedName().getRole() != null);
+			ret = (getDefinition().getLocatedName().getParticipant() != null);
 		}
 		
 		return(ret);

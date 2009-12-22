@@ -162,13 +162,13 @@ public class ProtocolParserTest {
 		ln.setName("SingleInteraction");
 		protocol.setLocatedName(ln);
 		
-		RoleList rl=new RoleList();
-		Role buyer=new Role();
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
 		buyer.setName("buyer");
-		rl.getRoles().add(buyer);
-		Role seller=new Role();
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
 		seller.setName("seller");
-		rl.getRoles().add(seller);
+		rl.getParticipants().add(seller);
 		
 		protocol.getBlock().getContents().add(rl);
 		
@@ -180,7 +180,7 @@ public class ProtocolParserTest {
 		ms.getTypes().add(tref);
 		interaction.setMessageSignature(ms);
 		interaction.setFromRole(buyer);
-		interaction.setToRole(seller);
+		interaction.setToParticipant(seller);
 		
 		protocol.getBlock().getContents().add(interaction);
 		

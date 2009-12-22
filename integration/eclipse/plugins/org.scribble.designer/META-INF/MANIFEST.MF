@@ -20,3 +20,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: www.scribble.org
 Scribble-Extensions: org.scribble.designer.editor.ScribbleEditorManager
 Export-Package: org.scribble.designer.editor
+Bundle-ClassPath: src/lib/antlr-runtime-3.2.jar,
+ .

@@ -25,40 +25,40 @@ public abstract class Activity extends Statement {
 	private static final long serialVersionUID = 907254090600526766L;
 
 	/**
-	 * This method returns the list of roles that are
+	 * This method returns the list of participants that are
 	 * responsible for initiating the activity. This can
 	 * be used to determine whether the model is
 	 * consistent in terms of decision makers subsequently
 	 * initiating actions.
 	 * 
-	 * @return The list of initiator roles
+	 * @return The list of initiator participants
 	 */
-	public java.util.List<Role> initiatorRoles() {
-		return(new java.util.Vector<Role>());
+	public java.util.List<Participant> initiatorParticipants() {
+		return(new java.util.Vector<Participant>());
 	}
 
 	/**
-	 * This method returns the list of roles that are
+	 * This method returns the list of participants that are
 	 * associated with the outcome of the activity.
 	 * 
-	 * @return The list of final roles
+	 * @return The list of final participants
 	 */
-	public java.util.List<Role> finalRoles() {
-		return(new java.util.Vector<Role>());
+	public java.util.List<Participant> finalParticipants() {
+		return(new java.util.Vector<Participant>());
 	}
 	
 	/**
-	 * This method returns the optional located role
+	 * This method returns the optional located participant
 	 * associated with the enclosing definition.
 	 * 
-	 * @return The located role, or null if the
+	 * @return The located participant, or null if the
 	 * 			enclosing definition is not located
 	 */
-	protected Role locatedRole() {
-		Role ret=null;
+	protected Participant locatedParticipant() {
+		Participant ret=null;
 		
 		if (getParent() instanceof Activity) {
-			ret = ((Activity)getParent()).locatedRole();
+			ret = ((Activity)getParent()).locatedParticipant();
 		}
 		
 		return(ret);

@@ -2,6 +2,7 @@ package org.scribble.protocol.parser.osgi;
 
 import java.util.Properties;
 
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.scribble.protocol.parser.ProtocolParser;
@@ -14,13 +15,13 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+				
         Properties props = new Properties();
         
         ProtocolParser pp=new ANTLRProtocolParser();
         
         context.registerService(ProtocolParser.class.getName(), 
 							pp, props);
-System.out.println("REGISTERED PROTOCOL PARSER");
 	}
 
 	/*

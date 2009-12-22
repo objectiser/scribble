@@ -45,12 +45,12 @@ public abstract class Behaviour extends Activity {
 	}
 	
 	/**
-	 * This method returns the list of roles that are
+	 * This method returns the list of participants that are
 	 * associated with the behaviour.
 	 * 
-	 * @return The list of associated roles
+	 * @return The list of associated participants
 	 */
-	public java.util.List<Role> associatedRoles() {
-		return(new java.util.Vector<Role>());
+	public java.util.List<Participant> associatedParticipants() {
+		return(new java.util.Vector<Participant>());
 	}
 }
