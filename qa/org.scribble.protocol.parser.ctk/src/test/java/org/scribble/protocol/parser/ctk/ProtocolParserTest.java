@@ -152,7 +152,7 @@ public class ProtocolParserTest {
 		Model<Protocol> expected=new Model<Protocol>();
 		
 		Namespace ns=new Namespace();
-		ns.setName("example.helloworld1");
+		ns.setName("example.helloworld");
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();

@@ -37,6 +37,8 @@ package org.scribble.protocol.parser.antlr;
 }
    
 @members {
+	private org.scribble.core.logger.ScribbleLogger m_logger=null;
+	
 	public static void main(String[] args) throws Exception {
         ScribbleProtocolLexer lex = new ScribbleProtocolLexer(new ANTLRFileStream(args[0]));
        	CommonTokenStream tokens = new CommonTokenStream(lex);
@@ -60,6 +62,18 @@ package org.scribble.protocol.parser.antlr;
         } catch (RecognitionException e)  {
             e.printStackTrace();
         }
+    }
+    
+    public void setLogger(org.scribble.core.logger.ScribbleLogger logger) {
+    	m_logger = logger;
+    }
+    
+    public void emitErrorMessage(String mesg) {
+    	if (m_logger == null) {
+    		super.emitErrorMessage(mesg);
+    	} else {
+    		m_logger.error(mesg, null);
+    	}
     }
 }
 

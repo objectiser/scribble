@@ -40,6 +40,8 @@ public class ANTLRProtocolParser implements ProtocolParser {
     		adaptor.setParser(parser);
     		
     		parser.setTreeAdaptor(adaptor);
+    		
+    		parser.setLogger(logger);
 
     		parser.description();
     		
