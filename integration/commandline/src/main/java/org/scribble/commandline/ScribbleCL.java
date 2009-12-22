@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.scribble.scl;
+package org.scribble.commandline;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import org.apache.felix.main.AutoProcessor;
 import org.apache.felix.main.Main;
 
 import org.scribble.command.*;
-import org.scribble.scl.osgi.HostActivator;
+import org.scribble.commandline.osgi.HostActivator;
 
 public class ScribbleCL
 {

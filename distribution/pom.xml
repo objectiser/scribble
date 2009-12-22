@@ -14,6 +14,49 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>${osgi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.framework</artifactId>
+      <version>${felix.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.main</artifactId>
+      <version>${felix.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.integration</groupId>
+      <artifactId>org.scribble.commandline</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.command</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.core</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol.parser</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+  </dependencies>
+
     <build>
         <resources>
             <resource>
@@ -42,6 +85,21 @@
                   </descriptors>
                 </configuration>
                 </execution>
+		          <execution>
+		            <id>distribution-package-source</id>
+		            <phase>package</phase>
+		            <goals>
+		              <goal>single</goal>
+		            </goals>
+		            <configuration>
+		              <finalName>scribble-${project.version}-src</finalName>
+		              <appendAssemblyId>false</appendAssemblyId>
+		              <descriptors>
+		                <descriptor>src/main/assembly/src.xml</descriptor>
+		              </descriptors>
+		              <tarLongFileMode>gnu</tarLongFileMode>
+		            </configuration>
+		          </execution>
                </executions>
               </plugin>
         </plugins>

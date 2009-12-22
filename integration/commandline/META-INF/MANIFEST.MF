@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: scribble_command_line
-Bundle-SymbolicName: scribble_command_line
+Bundle-Name: Scribble Command Line
+Bundle-SymbolicName: org.scribble.commandline
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: scribble-command-line.jar
 Export-Package: 
+Bundle-Vendor: www.scribble.org

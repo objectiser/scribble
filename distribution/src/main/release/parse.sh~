@@ -1,0 +1,3 @@
+
+
+java -classpath lib/felix.jar:bundle/org.scribble.command_1.0-SNAPSHOT.jar:lib/org.scribble.commandline-1.0-SNAPSHOT.jar org.scribble.commandline.ScribbleCL parse $1

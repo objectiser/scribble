@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.scribble.scl.osgi;
+package org.scribble.commandline.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

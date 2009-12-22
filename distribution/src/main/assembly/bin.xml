@@ -25,31 +25,102 @@
 
     <fileSets>
 
-        <!--Copy files like License and samples etc -->	
+        <!--Copy top level files -->	
+        
     	<fileSet>
             <directory>src/main/release</directory>
             <outputDirectory>/</outputDirectory>
 			<includes>
 			  <include>*.txt</include>
 			  <include>*.properties</include>
+			  <include>*.sh</include>
 			</includes>
         </fileSet>
+        
+        <!--  Copy configuration -->
                 
-        <!-- copy samples -->
+	    <fileSet>
+	    	<directory>src/main/release/conf</directory>
+	    	<outputDirectory>/conf</outputDirectory>
+	    </fileSet>
+
+		<!-- Copy libs -->
+		
+	    <fileSet>
+	    	<directory>../integration/commandline/target</directory>
+	    	<outputDirectory>/lib</outputDirectory>
+	    	<includes>
+	        	<include>scribble-cl_${version}.jar</include>
+	    	</includes>
+	    </fileSet>
+
+		<!-- Copy modules -->
+		
+		<!-- 
+	    <fileSet>
+	    	<directory>../modules/org.scribble.command/target</directory>
+	    	<outputDirectory>/modules</outputDirectory>
+	    	<includes>
+	        	<include>org.scribble.command_${version}.jar</include>
+	    	</includes>
+	    </fileSet>
+	    
+	    <fileSet>
+	    	<directory>../modules/org.scribble.core/target</directory>
+	    	<outputDirectory>/modules</outputDirectory>
+	    	<includes>
+	        	<include>org.scribble.core_${version}.jar</include>
+	    	</includes>
+	    </fileSet>
+	    
+	    <fileSet>
+	    	<directory>../modules/org.scribble.protocol/target</directory>
+	    	<outputDirectory>/modules</outputDirectory>
+	    	<includes>
+	        	<include>org.scribble.protocol_${version}.jar</include>
+	    	</includes>
+	    </fileSet>
+	    
+	    <fileSet>
+	    	<directory>../modules/org.scribble.protocol.parser/target</directory>
+	    	<outputDirectory>/modules</outputDirectory>
+	    	<includes>
+	        	<include>org.scribble.protocol.parser_${version}.jar</include>
+	    	</includes>
+	    </fileSet>
+	    -->
+
+        <!-- Copy samples -->
         
         <fileSet>
 		    <directory>../samples</directory>
 			<outputDirectory>samples</outputDirectory>
 		</fileSet>
         
+	    <fileSet>
+	    	<directory>../docs/docbook/protocolguide/target/docbook/publish/en-US</directory>
+	    	<outputDirectory>docs/protocolguide</outputDirectory>
+	    </fileSet>
+
     </fileSets>
     
     <dependencySets>
         <dependencySet>
-            <outputDirectory>bundles</outputDirectory>
-	    	<unpack>false</unpack>
+            <outputDirectory>/bundle</outputDirectory>
             <includes>
-               <include>org.scribble.modules:org.scribble.command:jar:dist</include>
+               <include>org.scribble.modules:org.scribble.command</include>
+               <include>org.scribble.modules:org.scribble.core</include>
+               <include>org.scribble.modules:org.scribble.protocol</include>
+               <include>org.scribble.modules:org.scribble.protocol.parser</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+            <includes>
+               <include>org.apache.felix:org.osgi.core</include>
+               <include>org.apache.felix:org.apache.felix.framework</include>
+               <include>org.apache.felix:org.apache.felix.main</include>
+               <include>org.scribble.integration:org.scribble.commandline</include>
             </includes>
         </dependencySet>
     </dependencySets>

@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.scribble.integration</groupId>
-  <artifactId>commandline</artifactId>
+  <artifactId>org.scribble.commandline</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>Scribble::Integration::CommandLine</name>
@@ -32,7 +32,7 @@
   </dependencies>
   
   <build>
-  	<finalName>scribble-cl-${scribble.version}</finalName>
+  	<finalName>${artifactId}_${scribble.version}</finalName>
   	
     <!-- This section defines the default plugin settings inherited by child projects. -->
     <pluginManagement>
