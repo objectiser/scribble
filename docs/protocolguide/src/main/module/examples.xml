@@ -11,15 +11,15 @@
 		<title>Buyer Seller Protocol</title>
 		
 		<para>
-		This example shows how a <emphasis>Buyer</emphasis> role and
-		<emphasis>Seller</emphasis> role may interact in an ordering
+		This example shows how a <emphasis>Buyer</emphasis> participant and
+		<emphasis>Seller</emphasis> participant may interact in an ordering
 		process.
 		</para>
 
 		<informalexample>
   			<programlisting>
 <emphasis role="bold">protocol</emphasis> BuyerSeller {
-    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    <emphasis role="bold">participant</emphasis> Buyer, Seller;
     Order <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
     <emphasis role="bold">choice</emphasis> @ Seller {
         Invoice <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
@@ -36,14 +36,14 @@
 		<title>Credit Check Protocol</title>
 		
 		<para>
-		This example shows how a <emphasis>Client</emphasis> role performs a credit check
-		against a <emphasis>CreditAgency</emphasis> role.
+		This example shows how a <emphasis>Client</emphasis> participant performs a credit check
+		against a <emphasis>CreditAgency</emphasis> participant.
 		</para>
 		
 		<informalexample>
   			<programlisting>
 <emphasis role="bold">protocol</emphasis> CreditCheck {
-    <emphasis role="bold">role</emphasis> Client, CreditAgency;
+    <emphasis role="bold">participant</emphasis> Client, CreditAgency;
     CheckCredit <emphasis role="bold">from</emphasis> Client <emphasis role="bold">to</emphasis> CreditAgency;
     <emphasis role="bold">choice</emphasis> @ CreditAgency {
         CreditOk <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Client;
@@ -68,7 +68,7 @@
   			<programlisting>
 <emphasis role="bold">conversation</emphasis> PurchaseGoods <emphasis role="bold">implements</emphasis> BuyerSeller(Customer <emphasis role="bold">for</emphasis> Buyer,
         Supplier <emphasis role="bold">for</emphasis> Seller), CreditCheck(Supplier <emphasis role="bold">for</emphasis> Client, CreditAgency <emphasis role="bold">for</emphasis> CreditAgency) {
-    <emphasis role="bold">role</emphasis> Customer, Supplier, CreditAgency;
+    <emphasis role="bold">participant</emphasis> Customer, Supplier, CreditAgency;
     Order order;
     Invoice inv;
     Order <emphasis role="bold">from</emphasis> order@Customer <emphasis role="bold">to</emphasis> order@Supplier;

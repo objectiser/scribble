@@ -51,9 +51,9 @@
   				<programlisting>
 <emphasis role="bold">namespace</emphasis> &lt;namespace&gt; ";"
 
-{ <emphasis role="bold">import</emphasis> &lt;fully qualified type&gt; [ <emphasis role="bold">as</emphasis> &lt;AliasName$gt; ] ";" }*
+{ <emphasis role="bold">import</emphasis> &lt;fully qualified type&gt; [ <emphasis role="bold">as</emphasis> &lt;AliasName&gt; ] ";" }*
 
-<emphasis role="bold">protocol</emphasis> &lt;name&gt; [ "@" &lt;Role&gt; [ <emphasis role="bold">conforms</emphasis> 
+<emphasis role="bold">protocol</emphasis> &lt;name&gt; [ "@" &lt;Participant&gt; [ <emphasis role="bold">conforms</emphasis> 
                [<emphasis role="bold">to</emphasis>] &lt;protocolName&gt; { "," &lt;protocolName&gt; }* ] "{"
     .... ";"
 "}"
@@ -103,18 +103,18 @@
 			<para>
 			The final part of the protocol definition is the declaration of the protocol
 			itself. This defines the name of the protocol, whether it is located at
-			a particular role, and whether it conforms to other protocol definitions.
+			a particular participant, and whether it conforms to other protocol definitions.
 			</para>
 			
 			<para>
 			The conforms clause is only applicable if the protocol definition is a
 			global (i.e. non-located) protocol. The conforms clause can refer to
-			global or local (i.e. located at a particular role) protocol definitions.
+			global or local (i.e. located at a particular participant) protocol definitions.
 			</para>
 			
 			<para>
 			When specifying a 'conforms to' protocol, it is also possible to specify
-			binding between roles in the protocol definition, and roles in the
+			binding between participants in the protocol definition, and participants in the
 			specified conformance protocol.
 			</para>
 		</section>
@@ -135,7 +135,7 @@
 <emphasis role="bold">import</emphasis> my.scribble.type.Trade <emphasis role="bold">as</emphasis> MyTrade;
 
 <emphasis role="bold">protocol</emphasis> PurchaseGoods {
-    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    <emphasis role="bold">participant</emphasis> Buyer, Seller;
     ....
 }
 				</programlisting>
@@ -158,7 +158,7 @@
 			<para>
 			The global protocol is then defined, named as <emphasis>PurchaseGoods</emphasis>.
 			This is a global protocol becaused it does not specify a particular
-			role at which the definition is located.
+			participant at which the definition is located.
 			</para>
 			
 			<para>
@@ -168,7 +168,7 @@
 			<informalexample>
   				<programlisting>
 <emphasis role="bold">protocol</emphasis> PurchaseGoods @ Buyer {
-    <emphasis role="bold">role</emphasis> Seller;
+    <emphasis role="bold">participant</emphasis> Seller;
     ....
 }
 				</programlisting>
@@ -184,7 +184,7 @@
 <emphasis role="bold">protocol</emphasis> PurchaseGoods <emphasis role="bold">conforms to</emphasis> 
                          CreditCheck(Seller <emphasis role="bold">for</emphasis> Client,
                                      CreditAgency<emphasis role="bold">for</emphasis> CreditAgency) {
-    <emphasis role="bold">role</emphasis> Buyer, Seller, CreditAgency;
+    <emphasis role="bold">participant</emphasis> Buyer, Seller, CreditAgency;
     ....
 }
 				</programlisting>
@@ -209,7 +209,7 @@
         	</listitem>
 			<listitem>
 	        	<para>
-    	    	Message order preservation for messages sent to same role and channel
+    	    	Message order preservation for messages sent to same participant and channel
         		</para>
         	</listitem>
         </itemizedlist>
@@ -219,14 +219,14 @@
 
 			<informalexample>
   				<programlisting>
-&lt;MessageSignature&gt; [<emphasis role="bold">from</emphasis> &lt;Role&gt;] [<emphasis role="bold">to</emphasis> &lt;Role&gt;]
+&lt;MessageSignature&gt; [<emphasis role="bold">from</emphasis> &lt;Participant&gt;] [<emphasis role="bold">to</emphasis> &lt;Participant&gt;]
 				[<emphasis role="bold">via</emphasis> &lt;Channel&gt;] [<emphasis role="bold">passing</emphasis> &lt;Channel&gt;]
 				[<emphasis role="bold">replyTo</emphasis> &lt;Channel&gt;]
 				</programlisting>
 			</informalexample>
 	
 			<para>
-        	Channel is optional as each role is assumed to have a default channel.
+        	Channel is optional as each participant is assumed to have a default channel.
         	</para>
         	
         	<para>
@@ -247,16 +247,16 @@
 
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">role</emphasis> Customer, Supplier;
+<emphasis role="bold">participant</emphasis> Customer, Supplier;
 Order <emphasis role="bold">from</emphasis> Customer <emphasis role="bold">to</emphasis> Supplier;
 				</programlisting>
 			</informalexample>
 			
 			<para>
-			In this sample, two roles are declared, with the interaction indicating that
-			a message of type 'Order' will be sent from role 'Customer' to role 'Supplier'.
+			In this sample, two participants are declared, with the interaction indicating that
+			a message of type 'Order' will be sent from participant 'Customer' to participant 'Supplier'.
 			In this example, we demonstrate the use of the default channel associated with
-			the target role (i.e. Supplier), enabling the interaction to be simplified
+			the target participant (i.e. Supplier), enabling the interaction to be simplified
 			to its basic details.
 			</para>
 			
@@ -271,7 +271,7 @@ placeOrder(Order) <emphasis role="bold">from</emphasis> Customer <emphasis role=
 			This sample adds two new aspects. The first is an explicit channel declaration
 			<emphasis>chA</emphasis> which is used in the interaction construct associated
 			with the <emphasis>via</emphasis> keyword. This enables more than one channel
-			to be associated with the target role <emphasis>Supplier</emphasis>.
+			to be associated with the target participant <emphasis>Supplier</emphasis>.
 			</para>
 			
 			<para>
@@ -291,9 +291,9 @@ cancelOrder(Order,Reason) <emphasis role="bold">via</emphasis> chB;
 			</informalexample>
 			
 			<para>
-			In this sample, the source and target roles have been defined against the
+			In this sample, the source and target participants have been defined against the
 			explicitly declared channel. This means that whenever the channel is referenced
-			in an interaction, the source and target roles can be inferred.
+			in an interaction, the source and target participants can be inferred.
 			</para>
 			
 			<informalexample>
@@ -321,14 +321,14 @@ ItemRequest <emphasis role="bold">via</emphasis> serviceCh;
 			
 			<para>
 			This final example demonstrates how channel passing can be used to
-			redirect a client role from one server to another. The channel
+			redirect a client participant from one server to another. The channel
 			<emphasis>servicech</emphasis> initially defines the relationship
 			between the <emphasis>User</emphasis> and <emphasis>AuthorisationSystem</emphasis>
-			role. However the <emphasis>AuthorisationSystem</emphasis> then
+			participant. However the <emphasis>AuthorisationSystem</emphasis> then
 			passes its server endpoint for this channel to the <emphasis>Service</emphasis>
-			role. Thus when the final interaction is performed on the channel,
+			participant. Thus when the final interaction is performed on the channel,
 			it actually sends the <emphasis>ItemRequest</emphasis> message from
-			the <emphasis>User</emphasis> role to the <emphasis>Service</emphasis>.
+			the <emphasis>User</emphasis> participant to the <emphasis>Service</emphasis>.
 			</para>
 			
 		</section>		
@@ -393,7 +393,7 @@ ItemRequest <emphasis role="bold">via</emphasis> serviceCh;
 
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">choice</emphasis> "@" &lt;Role&gt; { "," &lt;Role&gt; }* "{"
+<emphasis role="bold">choice</emphasis> "@" &lt;Participant&gt; { "," &lt;Participant&gt; }* "{"
     ...
 { "}" <emphasis role="bold">or</emphasis> "{"
     ... }*
@@ -431,14 +431,14 @@ CreditCheck <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">t
 		
 		<para>
 		The repetition construct represents the 'while' style loop. A decision will be
-		made at one or more nominated roles. If more than one located role is defined,
-		then all of those roles must synchronize in their decision making, using some
+		made at one or more nominated participants. If more than one located participant is defined,
+		then all of those participants must synchronize in their decision making, using some
 		non-observable mechanism.
 		</para>
 		
 		<para>
 		The first activity contains within the repetition construct must be initiated
-		at one of the located roles associated with the construct.
+		at one of the located participants associated with the construct.
 		</para>
 		
         <section>
@@ -446,7 +446,7 @@ CreditCheck <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">t
 
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">repeat</emphasis> "@" &lt;Role&gt; { "," &lt;Role&gt; }* "{"
+<emphasis role="bold">repeat</emphasis> "@" &lt;Participant&gt; { "," &lt;Participant&gt; }* "{"
     ...
 "}"
      			</programlisting>
@@ -462,7 +462,7 @@ CreditCheck <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">t
 
 			<para>
 			The following example shows a repeat construct, located at the
-			<emphasis>Buyer</emphasis> role. This means that the Buyer will
+			<emphasis>Buyer</emphasis> participant. This means that the Buyer will
 			be responsible for deciding when to iterate, and when to terminate
 			the repetition.
 			</para>
@@ -643,7 +643,7 @@ transaction: {
 			<informalexample>
   				<programlisting>
 <emphasis role="bold">run</emphasis> &lt;ProtocolName&gt;"(" &lt;R1&gt; <emphasis role="bold">for</emphasis> &lt;CR1&gt; { "," &lt;Rn&gt; <emphasis role="bold">for</emphasis> &lt;CRn&gt; }* ")" "{"
-    <emphasis role="bold">role</emphasis> CR1 { "," CRn }* ";"
+    <emphasis role="bold">participant</emphasis> CR1 { "," CRn }* ";"
     ...
 "}"
      			</programlisting>
@@ -664,10 +664,10 @@ transaction: {
 
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">role</emphasis> Client, Supplier;
+<emphasis role="bold">participant</emphasis> Client, Supplier;
 ....
 <emphasis role="bold">run</emphasis> protocol (Client <emphasis role="bold">for</emphasis> Buyer, Supplier <emphasis role="bold">for</emphasis> Seller) {
-    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    <emphasis role="bold">participant</emphasis> Buyer, Seller;
     ....
 }
 				</programlisting>
@@ -679,12 +679,12 @@ transaction: {
 
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">role</emphasis> Client, Supplier;
+<emphasis role="bold">participant</emphasis> Client, Supplier;
 ....
 <emphasis role="bold">run</emphasis> PlaceOrder(Client <emphasis role="bold">for</emphasis> Buyer, Supplier <emphasis role="bold">for</emphasis> Seller);
 ....
 <emphasis role="bold">protocol</emphasis> PlaceOrder {
-    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    <emphasis role="bold">participant</emphasis> Buyer, Seller;
     ....
 }
 				</programlisting>
@@ -699,7 +699,7 @@ transaction: {
 			
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">role</emphasis> Client, Supplier;
+<emphasis role="bold">participant</emphasis> Client, Supplier;
 ....
 <emphasis role="bold">spawn</emphasis> PlaceOrder(Client <emphasis role="bold">for</emphasis> Buyer, Supplier <emphasis role="bold">for</emphasis> Seller);
 				</programlisting>
@@ -728,10 +728,10 @@ transaction: {
 <emphasis role="bold">try</emphasis> "{"
     ...
 { (
-"}" <emphasis role="bold">catch</emphasis> [ "@" &lt;Role&gt; {"," &lt;Role&gt;}* ] &lt;Type&gt; "{"
+"}" <emphasis role="bold">catch</emphasis> [ "@" &lt;Participant&gt; {"," &lt;Participant&gt;}* ] &lt;Type&gt; "{"
 ...
 |
-"}" <emphasis role="bold">interrupt</emphasis> [ "@" &lt;Role&gt; {"," &lt;Role&gt;} ] "{"
+"}" <emphasis role="bold">interrupt</emphasis> [ "@" &lt;Participant&gt; {"," &lt;Participant&gt;} ] "{"
     ...
 ) }*
 "}"
@@ -744,21 +744,21 @@ transaction: {
         	
         	<para>
         	The <emphasis>catch</emphasis> block represents a set of activities triggered
-        	based on an exception being raised at local role (see the <emphasis>raise</emphasis>
-        	activity. If a located role is specified, then this will be the role at which the
-        	exception will be raised - and the initiator role for any subsequent activity
-        	performed in the block. If more than one role is specified, then each of
-        	these roles will need to be synchronized in their decision to escape from the
+        	based on an exception being raised at local participant (see the <emphasis>raise</emphasis>
+        	activity. If a located participant is specified, then this will be the participant at which the
+        	exception will be raised - and the initiator participant for any subsequent activity
+        	performed in the block. If more than one participant is specified, then each of
+        	these participants will need to be synchronized in their decision to escape from the
         	try block.
         	</para>
         	
         	<para>
         	The <emphasis>interrupt</emphasis> block represents a set of activities triggered
-        	by some internal condition. If a located role is specified, then this will
-        	be the role at which the interrupt will occur. As with the catch block, 
-        	this will also be the initiator role for any subsequent activity
-        	performed in the block. If more than one role is specified, then each of
-        	these roles will need to be synchronized in their decision to escape from the
+        	by some internal condition. If a located participant is specified, then this will
+        	be the participant at which the interrupt will occur. As with the catch block, 
+        	this will also be the initiator participant for any subsequent activity
+        	performed in the block. If more than one participant is specified, then each of
+        	these participants will need to be synchronized in their decision to escape from the
         	try block.
         	</para>
 			
@@ -838,7 +838,7 @@ transaction: {
 
 			<informalexample>
   				<programlisting>
-<emphasis role="bold">raise</emphasis> "@" &lt;Role&gt; &lt;Type&gt;;
+<emphasis role="bold">raise</emphasis> "@" &lt;Participant&gt; &lt;Type&gt;;
      			</programlisting>
 			</informalexample>
 	
