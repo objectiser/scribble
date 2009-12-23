@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="architecture">
+	<title>Architecture</title>
+	<para>
+	</para>
+	
+	<section>
+		<title>OSGi Infrastructure</title>
+		
+		<para>
+		The Scribble architecture is based on OSGi, to provide a means
+		of managing the individual modules, but without causing tight
+		coupling.
+		</para>
+		
+		<para>
+		Service bundles enable implementations to be specified that
+		implement defined interfaces. Other services can then
+		request access to services that implement a particular interface.
+		</para>
+		
+		<para>
+		The OSGi service container takes responsibility of managing the
+		services, and providing access to requesting components.
+		</para>
+		
+		<para>
+		This provides flexibility for Scribble tooling in two respects:
+		</para>
+		
+		<orderedlist>
+			<listitem>
+			Replaceable
+			<para>
+			The implementation of a particular Scribble interface can
+			easily be replaced. This enables different research or
+			industry groups to replace specific modules, with
+			alternative implementations, while still reusing other
+			modules.
+			</para>
+			</listitem>
+			<listitem>
+			Extensibility
+			<para>
+			Some aspects of the architecture allow for multiple implementations
+			of the same interface. Therefore, using OSGi, enables
+			additional implementations of the same interface to be
+			easily plugged in, without having to define any
+			additional configuration information.
+			</para>
+			</listitem>
+		</orderedlist>
+	</section>
+		
+	<section>
+		<title>Core Components</title>
+
+		<section>
+			<title>Protocol Notation</title>
+		</section>
+		
+		<section>
+			<title>Protocol Parser</title>
+		</section>
+		
+		<section>
+			<title>Protocol Model</title>
+		</section>
+		
+		<section>
+			<title>Error Logging</title>
+		</section>
+		
+		<section>
+			<title>Type Resolution</title>
+			
+			<note>
+			<para>
+			Placeholder for component to resolve references from one
+			model to other models and types. This will be required
+			where one protocol references an external protocol - to
+			enable other validation to span across the multiple
+			protocols seemlessly.
+			</para>
+			</note>
+		</section>
+		
+		<section>
+			<title>Validation Manager and Validators</title>
+		</section>
+	</section>
+	
+	<section>
+		<title>Command Line Actions</title>
+		
+		<section>
+			<title>Defining the command</title>
+		</section>
+		
+		<section>
+			<title>Creating the script</title>
+		</section>
+	</section>
+</chapter>

@@ -44,62 +44,21 @@
 	    	<outputDirectory>/conf</outputDirectory>
 	    </fileSet>
 
-		<!-- Copy libs -->
-		
-	    <fileSet>
-	    	<directory>../integration/commandline/target</directory>
-	    	<outputDirectory>/lib</outputDirectory>
-	    	<includes>
-	        	<include>scribble-cl_${version}.jar</include>
-	    	</includes>
-	    </fileSet>
-
-		<!-- Copy modules -->
-		
-		<!-- 
-	    <fileSet>
-	    	<directory>../modules/org.scribble.command/target</directory>
-	    	<outputDirectory>/modules</outputDirectory>
-	    	<includes>
-	        	<include>org.scribble.command_${version}.jar</include>
-	    	</includes>
-	    </fileSet>
-	    
-	    <fileSet>
-	    	<directory>../modules/org.scribble.core/target</directory>
-	    	<outputDirectory>/modules</outputDirectory>
-	    	<includes>
-	        	<include>org.scribble.core_${version}.jar</include>
-	    	</includes>
-	    </fileSet>
-	    
-	    <fileSet>
-	    	<directory>../modules/org.scribble.protocol/target</directory>
-	    	<outputDirectory>/modules</outputDirectory>
-	    	<includes>
-	        	<include>org.scribble.protocol_${version}.jar</include>
-	    	</includes>
-	    </fileSet>
-	    
-	    <fileSet>
-	    	<directory>../modules/org.scribble.protocol.parser/target</directory>
-	    	<outputDirectory>/modules</outputDirectory>
-	    	<includes>
-	        	<include>org.scribble.protocol.parser_${version}.jar</include>
-	    	</includes>
-	    </fileSet>
-	    -->
-
         <!-- Copy samples -->
         
         <fileSet>
 		    <directory>../samples</directory>
-			<outputDirectory>samples</outputDirectory>
+			<outputDirectory>/samples</outputDirectory>
 		</fileSet>
         
 	    <fileSet>
-	    	<directory>../docs/docbook/protocolguide/target/docbook/publish/en-US</directory>
-	    	<outputDirectory>docs/protocolguide</outputDirectory>
+	    	<directory>../docs/protocolguide/target/docbook/publish/en-US</directory>
+	    	<outputDirectory>/docs/protocolguide</outputDirectory>
+	    </fileSet>
+
+	    <fileSet>
+	    	<directory>../docs/developerguide/target/docbook/publish/en-US</directory>
+	    	<outputDirectory>/docs/developerguide</outputDirectory>
 	    </fileSet>
 
     </fileSets>
@@ -108,10 +67,7 @@
         <dependencySet>
             <outputDirectory>/bundle</outputDirectory>
             <includes>
-               <include>org.scribble.modules:org.scribble.command</include>
-               <include>org.scribble.modules:org.scribble.core</include>
-               <include>org.scribble.modules:org.scribble.protocol</include>
-               <include>org.scribble.modules:org.scribble.protocol.parser</include>
+            	<include>org.scribble.modules:*</include>
             </includes>
         </dependencySet>
         <dependencySet>

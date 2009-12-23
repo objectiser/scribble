@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="constructs">
+	<title>Protocol Constructs</title>
+	
+	<para>
+	</para>
+	
+	<section>
+		<title>Protocol Definition</title>
+		
+		<para>
+		The protocol definition has comprised of a:
+		</para>
+		
+		<itemizedlist>
+			<listitem>
+				<para>
+				Namespace
+				</para>
+				<para>
+				The namespace helps to organise protocol definitions into
+				categories based on a hierarchical naming convention.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Imports
+				</para>
+				<para>
+				A list of import statements that can reference types in other
+				namespaces, and in some cases define an alias for those
+				types.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Name
+				</para>
+				<para>
+				The name of the protocol, within the specified namespace.
+				</para>
+			</listitem>
+		</itemizedlist>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">namespace</emphasis> &lt;namespace&gt; ";"
+
+{ <emphasis role="bold">import</emphasis> &lt;fully qualified type&gt; [ <emphasis role="bold">as</emphasis> &lt;AliasName$gt; ] ";" }*
+
+<emphasis role="bold">protocol</emphasis> &lt;name&gt; [ "@" &lt;Role&gt; [ <emphasis role="bold">conforms</emphasis> 
+               [<emphasis role="bold">to</emphasis>] &lt;protocolName&gt; { "," &lt;protocolName&gt; }* ] "{"
+    .... ";"
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+			The namespace can define a user specific hierarchy to organise protocol
+			definitions. The separate parts of the hierarchy can be specified separated
+			by '.'.
+        	</para>
+        	
+        	<para>
+        	The import statement enables fully qualified types to be referenced within
+        	the protocol definition based on their local name. For example, the type
+        	<emphasis>my.scribble.type.Order</emphasis> could be imported into
+        	a protocol definition, and subsequently referenced based only on the
+        	local part of the fully qualified name, i.e. Order.
+        	</para>
+        	
+        	<para>
+        	If local part names may conflict, by referencing the same local part name
+        	is two or more separate namespaces, then the alias mechanism can be used
+        	to rename a particular fully qualified name using a different local name.
+        	</para>
+        	
+        	<para>
+        	The '*' meta character can also be used in place of the local part of
+        	a specified namespace, on an import statement, as a means of indicating
+        	that all types within that namespace should be imported into the protocol
+        	definition.
+        	</para>
+			
+			<para>
+			The types can represent any scribble type that needs to be referenced. This
+			could be message types, exchanged as part of an interaction, or other
+			protocol definitions.
+			</para>
+			
+			<para>
+			Although the import statement enables types to be referenced just based
+			on their local name within the protocol definition, they are not mandatory.
+			Types can be directly referenced based on their fully qualified (dot notation)
+			name within the protocol definition aswell.
+			</para>
+			
+			<para>
+			The final part of the protocol definition is the declaration of the protocol
+			itself. This defines the name of the protocol, whether it is located at
+			a particular role, and whether it conforms to other protocol definitions.
+			</para>
+			
+			<para>
+			The conforms clause is only applicable if the protocol definition is a
+			global (i.e. non-located) protocol. The conforms clause can refer to
+			global or local (i.e. located at a particular role) protocol definitions.
+			</para>
+			
+			<para>
+			When specifying a 'conforms to' protocol, it is also possible to specify
+			binding between roles in the protocol definition, and roles in the
+			specified conformance protocol.
+			</para>
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			The following represents a 'global' protocol example:
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">namespace</emphasis>my.scribble.examples;
+
+<emphasis role="bold">import</emphasis> my.scribble.type.Order;
+<emphasis role="bold">import</emphasis> my.scribble.type.purchasing.*;
+<emphasis role="bold">import</emphasis> my.scribble.type.Trade <emphasis role="bold">as</emphasis> MyTrade;
+
+<emphasis role="bold">protocol</emphasis> PurchaseGoods {
+    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    ....
+}
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			The namespace can be any used defined scope. In this case it is
+			<emphasis>my.scribble.examples</emphasis>.
+			</para>
+			
+			<para>
+			This example shows three variations of the import statement.
+			The first importing a single type based on its fully qualified
+			name. The second importing all types from a particular namespace.
+			This third importing a particular type but aliasing it as a
+			user specified type that will be used subsequently in the
+			protocol definition.
+			</para>
+			
+			<para>
+			The global protocol is then defined, named as <emphasis>PurchaseGoods</emphasis>.
+			This is a global protocol becaused it does not specify a particular
+			role at which the definition is located.
+			</para>
+			
+			<para>
+			A local protocol variation would be:
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">protocol</emphasis> PurchaseGoods @ Buyer {
+    <emphasis role="bold">role</emphasis> Seller;
+    ....
+}
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			If we want to show that a global protocol definition conforms
+			to a particular local protocol definition, this would be:
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">protocol</emphasis> PurchaseGoods <emphasis role="bold">conforms to</emphasis> 
+                         CreditCheck(Seller <emphasis role="bold">for</emphasis> Client,
+                                     CreditAgency<emphasis role="bold">for</emphasis> CreditAgency) {
+    <emphasis role="bold">role</emphasis> Buyer, Seller, CreditAgency;
+    ....
+}
+				</programlisting>
+			</informalexample>
+			
+		</section>
+		
+	</section>
+
+	<section>
+		<title>Interaction</title>
+		
+		<para>
+		Interactions in Scribble are based on two assumptions:
+		</para>
+		
+		<itemizedlist>
+			<listitem>
+				<para>
+        		Asynchrony, so no wait on sends, and
+        		</para>
+        	</listitem>
+			<listitem>
+	        	<para>
+    	    	Message order preservation for messages sent to same role and channel
+        		</para>
+        	</listitem>
+        </itemizedlist>
+        
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+&lt;MessageSignature&gt; [<emphasis role="bold">from</emphasis> &lt;Role&gt;] [<emphasis role="bold">to</emphasis> &lt;Role&gt;]
+				[<emphasis role="bold">via</emphasis> &lt;Channel&gt;] [<emphasis role="bold">passing</emphasis> &lt;Channel&gt;]
+				[<emphasis role="bold">replyTo</emphasis> &lt;Channel&gt;]
+				</programlisting>
+			</informalexample>
+	
+			<para>
+        	Channel is optional as each role is assumed to have a default channel.
+        	</para>
+        	
+        	<para>
+	        Channels only explicitly declared and used if necessary, e.g. where specific
+    	    properties or quality of services may need to be supported on individual
+        	channels.
+			</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			The following example shows a similar type of interaction as shown in the
+			'hello world' example.
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">role</emphasis> Customer, Supplier;
+Order <emphasis role="bold">from</emphasis> Customer <emphasis role="bold">to</emphasis> Supplier;
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			In this sample, two roles are declared, with the interaction indicating that
+			a message of type 'Order' will be sent from role 'Customer' to role 'Supplier'.
+			In this example, we demonstrate the use of the default channel associated with
+			the target role (i.e. Supplier), enabling the interaction to be simplified
+			to its basic details.
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">channel</emphasis> chA;
+placeOrder(Order) <emphasis role="bold">from</emphasis> Customer <emphasis role="bold">to</emphasis> Supplier <emphasis role="bold">via</emphasis> chA;
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			This sample adds two new aspects. The first is an explicit channel declaration
+			<emphasis>chA</emphasis> which is used in the interaction construct associated
+			with the <emphasis>via</emphasis> keyword. This enables more than one channel
+			to be associated with the target role <emphasis>Supplier</emphasis>.
+			</para>
+			
+			<para>
+			The second new aspect is the change in the way that the exchanged message is
+			specified. In the first sample a message-style was used. In this sample, an
+			RPC style has been used, specifying the operation name with type parameters.
+			In this case, only a single typed parameter <emphasis>Order</emphasis> has
+			been specified, but this could be a comma separated list of zero or more
+			types.
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">channel</emphasis> chB <emphasis role="bold">from</emphasis> Customer <emphasis role="bold">to</emphasis> Supplier;
+cancelOrder(Order,Reason) <emphasis role="bold">via</emphasis> chB;
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			In this sample, the source and target roles have been defined against the
+			explicitly declared channel. This means that whenever the channel is referenced
+			in an interaction, the source and target roles can be inferred.
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+Order <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller <emphasis role="bold">request</emphasis> "PlaceOrder";
+Invoice <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer <emphasis role="bold">replyTo</emphasis> "PlaceOrder";
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			This sample establishes a correlation between two interactions (e.g. a request
+			and a response) by declaring a <emphasis>request</emphasis> label as part
+			of the first interaction, which is referenced in the second interaction using the
+			<emphasis>replyTo</emphasis> keyword.
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">channel</emphasis> serviceCh <emphasis role="bold">from</emphasis> User <emphasis role="bold">to</emphasis> AuthorisationSystem;
+SignOn <emphasis role="bold">via</emphasis> serviceCh;
+NewSession <emphasis role="bold">from</emphasis> AuthorisationSystem <emphasis role="bold">to</emphasis> Service <emphasis role="bold">passing</emphasis> serviceCh;
+ItemRequest <emphasis role="bold">via</emphasis> serviceCh;
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			This final example demonstrates how channel passing can be used to
+			redirect a client role from one server to another. The channel
+			<emphasis>servicech</emphasis> initially defines the relationship
+			between the <emphasis>User</emphasis> and <emphasis>AuthorisationSystem</emphasis>
+			role. However the <emphasis>AuthorisationSystem</emphasis> then
+			passes its server endpoint for this channel to the <emphasis>Service</emphasis>
+			role. Thus when the final interaction is performed on the channel,
+			it actually sends the <emphasis>ItemRequest</emphasis> message from
+			the <emphasis>User</emphasis> role to the <emphasis>Service</emphasis>.
+			</para>
+			
+		</section>		
+		
+	</section>
+	
+	<section>
+		<title>Sequence</title>
+		
+		<para>
+		The <emphasis>sequence</emphasis> construct a list of activities, separated by
+		a semi-colon, such that each subsequent activity is only performed after the
+		completion of the preceding activity.
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+"{"
+    { &lt;Activity&gt; ";" }+
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	where <emphasis>Activity&lt;i&gt;</emphasis> represents any protocol based activity
+        	or construct.
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			The following example shows a sequence of interactions.
+			</para>
+
+			<informalexample>
+  				<programlisting>
+{
+    Order <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    Invoice <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+    Payment <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    Confirmation <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+}
+				</programlisting>
+			</informalexample>
+		</section>
+	</section>
+
+	<section>
+		<title>Choice</title>
+		
+		<para>
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">choice</emphasis> "@" &lt;Role&gt; { "," &lt;Role&gt; }* "{"
+    ...
+{ "}" <emphasis role="bold">or</emphasis> "{"
+    ... }*
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			</para>
+
+			<informalexample>
+  				<programlisting>
+CreditCheck <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> CreditAgency;
+<emphasis role="bold">choice</emphasis> @ CreditAgency {
+    CreditRefused <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Seller;
+} <emphasis role="bold">or</emphasis> {
+    CreditOk <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Seller;
+}
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+	
+	<section>
+		<title>Repetition</title>
+		
+		<para>
+		The repetition construct represents the 'while' style loop. A decision will be
+		made at one or more nominated roles. If more than one located role is defined,
+		then all of those roles must synchronize in their decision making, using some
+		non-observable mechanism.
+		</para>
+		
+		<para>
+		The first activity contains within the repetition construct must be initiated
+		at one of the located roles associated with the construct.
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">repeat</emphasis> "@" &lt;Role&gt; { "," &lt;Role&gt; }* "{"
+    ...
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			The following example shows a repeat construct, located at the
+			<emphasis>Buyer</emphasis> role. This means that the Buyer will
+			be responsible for deciding when to iterate, and when to terminate
+			the repetition.
+			</para>
+			
+			<para>
+			It also means that the initial activity (in this case interaction)
+			defined within the repeat construct must be initiated by the Buyer.
+			In this case, the <emphasis>Buyer</emphasis> is sending an <emphasis>Order</emphasis>
+			message to the <emphasis>Seller</emphasis>.
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">repeat</emphasis> @ Buyer {
+    Order <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    Invoice <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+}
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+	<section>
+		<title>Recursion</title>
+		
+		<para>
+		The recursion construct can be used to recursively process a block.
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis>label</emphasis>:"{"
+    ...
+    <emphasis role="bold">recur</emphasis> <emphasis>label</emphasis> ";"
+    ...
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			</para>
+
+			<informalexample>
+  				<programlisting>
+transaction: {
+    Order <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    <emphasis role="bold">choice</emphasis> @ Seller {
+        OutOfStock <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+        <emphasis role="bold">recur</emphasis> transaction;
+    } <emphasis role="bold">or</emphasis> {
+        Invoice <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+    }
+}
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+	<section>
+		<title>Parallel</title>
+		
+		<para>
+		The <emphasis>parallel</emphasis> construct defines a set of paths
+		that represent behaviour that should occur concurrently.
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">parallel</emphasis> "{"
+    ...
+{ "}" <emphasis role="bold">and</emphasis> "{"
+    ... }+
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">parallel</emphasis> {
+    CheckStock <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Wholesaler;
+    StockAvailability <emphasis role="bold">from</emphasis> Wholesaler <emphasis role="bold">to</emphasis> Seller;
+} <emphasis role="bold">and</emphasis> {
+    CreditCheck <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> CreditAgency;
+    CreditReport <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Seller;
+}
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+	<section>
+		<title>Composition</title>
+		
+		<para>
+		Protocols can be defined in a modular way, with one protocol
+		being able to compose another using either the <emphasis>run</emphasis>
+		or <emphasis>spawn</emphasis> construct. 
+		</para>
+		
+		<para>
+		The <emphasis>run</emphasis> construct composes another protocol in
+		a synchronous manner. This means that the composed protocol will
+		complete before any subsequent activity in the composing protocol
+		can proceed.
+		</para>
+		
+		<para>
+		The <emphasis>spawn</emphasis> construct composes another protocol in
+		an asynchronous manner. This means that the composed protocol is
+		performed concurrently with subsequent activities after the
+		<emphasis>spawn</emphasis> construct.
+		</para>
+		
+		<para>
+		As well as the synchronous and asynchronous variations, there are three
+		ways in which another protocol can be composed. These are:
+		</para>
+		
+		<itemizedlist>
+			<listitem>
+			Inner
+			<para>
+			The inner variation defines the sub-protocol as an inner part of the
+			composing protocol - in a similar way to an inner class in Java.
+			</para>
+			</listitem>
+			<listitem>
+			Inline
+			<para>
+			The inline variation defines the sub-protocol as part of the
+			composition construct.
+			</para>
+			</listitem>
+			<listitem>
+			External
+			<para>
+			The external variation defines the sub-protocol in a separate
+			protocol definition, which is then referenced within the
+			composing protocol.
+			</para>
+			</listitem>
+		</itemizedlist>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<para>
+			The inline variation has the following syntax (shown with the
+			<emphasis>run</emphasis> construct, although the <emphasis>spawn</emphasis>
+			would be the same):
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">run</emphasis> &lt;ProtocolName&gt;"(" &lt;R1&gt; <emphasis role="bold">for</emphasis> &lt;CR1&gt; { "," &lt;Rn&gt; <emphasis role="bold">for</emphasis> &lt;CRn&gt; }* ")" "{"
+    <emphasis role="bold">role</emphasis> CR1 { "," CRn }* ";"
+    ...
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+			The inner and external variations have the following syntax:
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			An example of the inner variation, using the <emphasis>run</emphasis>, is:	
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">role</emphasis> Client, Supplier;
+....
+<emphasis role="bold">run</emphasis> protocol (Client <emphasis role="bold">for</emphasis> Buyer, Supplier <emphasis role="bold">for</emphasis> Seller) {
+    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    ....
+}
+				</programlisting>
+			</informalexample>
+
+			<para>
+			An example of the internal variation, using the <emphasis>run</emphasis>, is:	
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">role</emphasis> Client, Supplier;
+....
+<emphasis role="bold">run</emphasis> PlaceOrder(Client <emphasis role="bold">for</emphasis> Buyer, Supplier <emphasis role="bold">for</emphasis> Seller);
+....
+<emphasis role="bold">protocol</emphasis> PlaceOrder {
+    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    ....
+}
+				</programlisting>
+			</informalexample>
+			
+			<para>
+			The external variation is similar to the internal variation above, except
+			that the composed protocol definition (i.e. PlaceOrder in this case), would
+			be stored in a separate definition. A <emphasis>spawn</emphasis> based
+			external variation for the composing protocol would be:
+			</para>
+			
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">role</emphasis> Client, Supplier;
+....
+<emphasis role="bold">spawn</emphasis> PlaceOrder(Client <emphasis role="bold">for</emphasis> Buyer, Supplier <emphasis role="bold">for</emphasis> Seller);
+				</programlisting>
+			</informalexample>
+			
+		</section>
+		
+	</section>
+
+	<section>
+		<title>Global Escape</title>
+		
+		<para>
+		The concept of a 'global escape' is to support the abrupt termination of
+		a set of activities based on the occurance of a situation. The situation
+		may result from an interaction, or an internal condition within one
+		of the co-operating participants, which subsequently results in the other
+		parties being informed to 'escape' from their normal activities.
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">try</emphasis> "{"
+    ...
+{ (
+"}" <emphasis role="bold">catch</emphasis> [ "@" &lt;Role&gt; {"," &lt;Role&gt;}* ] &lt;Type&gt; "{"
+...
+|
+"}" <emphasis role="bold">interrupt</emphasis> [ "@" &lt;Role&gt; {"," &lt;Role&gt;} ] "{"
+    ...
+) }*
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+			There can be zero or more catch blocks, and zero or more interupt blocks.
+        	</para>
+        	
+        	<para>
+        	The <emphasis>catch</emphasis> block represents a set of activities triggered
+        	based on an exception being raised at local role (see the <emphasis>raise</emphasis>
+        	activity. If a located role is specified, then this will be the role at which the
+        	exception will be raised - and the initiator role for any subsequent activity
+        	performed in the block. If more than one role is specified, then each of
+        	these roles will need to be synchronized in their decision to escape from the
+        	try block.
+        	</para>
+        	
+        	<para>
+        	The <emphasis>interrupt</emphasis> block represents a set of activities triggered
+        	by some internal condition. If a located role is specified, then this will
+        	be the role at which the interrupt will occur. As with the catch block, 
+        	this will also be the initiator role for any subsequent activity
+        	performed in the block. If more than one role is specified, then each of
+        	these roles will need to be synchronized in their decision to escape from the
+        	try block.
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			The following example shows how internal decisions within the <emphasis>Buyer</emphasis>
+			can be used to escape from the repetition of receiving quotes from the
+			<emphasis>Seller</emphasis>, and result in either accept or cancel quote messages being
+			sent to the <emphasis>Seller</emphasis>.
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">try</emphasis> {
+    <emphasis role="bold">repeat</emphasis> @ Seller {
+        Quote <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+    }
+} <emphasis role="bold">interrupt</emphasis> @ Buyer {
+    AcceptQuote <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller
+} <emphasis role="bold">interrupt</emphasis> @ Buyer {
+    CancelQuote <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller
+}
+				</programlisting>
+			</informalexample>
+
+			<para>
+			The following variation repetitively gets a quote from the
+			<emphasis>Supplier</emphasis> until the <emphasis>Buyer</emphasis>
+			decides to escape from the normal block by raising a <emphasis>Quit</emphasis>
+			type that is caught at the <emphasis>Buyer</emphasis> and used to
+			send a <emphasis>CancelQuote</emphasis> message to the
+			<emphasis>Seller</emphasis>.
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">try</emphasis> {
+    Enquiry <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    <emphasis role="bold">repeat</emphasis> @ Seller {
+        Quote <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+        <emphasis role="bold">choice</emphasis> @ Buyer {
+            <emphasis role="bold">raise</emphasis> @ Buyer Quit;
+        } <emphasis role="bold">or</emphasis> {
+            ...;
+        }
+    }
+} <emphasis role="bold">catch</emphasis> @ Buyer Quit {
+    CancelQuote <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller
+}
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+
+	<section>
+		<title>Raise</title>
+		
+		<para>
+		The <emphasis>raise</emphasis> construct is used in conjunction with the
+		global escape <emphasis>catch</emphasis> block, to enable a normal flow
+		to terminate and jump to the appropriate <emphasis>catch</emphasis>
+		block.
+		</para>
+		
+		<note><para>
+		How do we handle propagation - if no catch block exists for
+		raised type, then it is passed out? Does this apply to sub-protocols?
+		</para></note>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">raise</emphasis> "@" &lt;Role&gt; &lt;Type&gt;;
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			As shown in the previous section on global escape, the <emphasis>raise</emphasis>
+			can be used to escape from a normal flow of activities into a <emphasis>catch</emphasis>
+			block.
+			</para>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">try</emphasis> {
+    Enquiry <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    <emphasis role="bold">repeat</emphasis> @ Seller {
+        Quote <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+        <emphasis role="bold">choice</emphasis> @ Buyer {
+            <emphasis role="bold">raise</emphasis> @ Buyer Quit;
+        }
+    }
+} <emphasis role="bold">catch</emphasis> @ Buyer Quit {
+    CancelQuote <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller
+}
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+
+</chapter>

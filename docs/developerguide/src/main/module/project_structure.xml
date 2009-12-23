@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="project_structure">
+	<title>Project Structure</title>
+	
+	<para>
+	</para>
+
+	<section>
+		<title>Project Management</title>
+		
+		<para>
+		This section outlines the technology used to manage the
+		different aspects of the project.
+		</para>
+		
+		<section>
+			<title>Source Code Management (SCM) using GIT</title>
+			
+			<para>
+			GIT is a relatively new source code management system.
+			</para>
+			
+			<para>
+			The distinguishing feature of GIT, over other more common
+			SCM systems such as subversion and cvs, is that it works
+			as a network of repositories.
+			</para>
+			
+			<para>
+			Most, if not all other, SCM technologies use a central
+			repository that all users check code in and out of. GIT
+			makes a local repository on the users box that is then
+			synchronized with the network based repository.
+			</para>
+			
+			<para>
+			When someone wishes to enhance the project in some way,
+			they can opt to collaborate on that network based repository,
+			or fork the repository and work independently of the main
+			repository. At a suitable point in the future, they can
+			then request that their changes are 'pulled' back into 
+			the main project, or simply remain as a separate project.
+			</para>
+			
+			<para>
+			For the purposes of the Scribble project, this way of working
+			seems ideal. Different groups, whether industry or
+			academic, can take their own forks of the project and
+			make use of them in their own specific ways.
+			</para>
+			
+			<para>
+			When those groups produce something that they feel is
+			generally useful for the Scribble community, they
+			can request that the main Scribble project 'pulls'
+			the relevant changes to incorporate the new functionality.
+			</para>
+			
+			<para>
+			However, it also means that those separate groups can build
+			their own specific features that can remain localised
+			to their version of the project.
+			</para>
+			
+			<para>
+			Although these forked projects would be separate from
+			the main project, they can be configured to be
+			notified when changes are made to the main project,
+			so that they can opt to merge in the new changes.
+			This way, it enables all of the satellite projects to
+			remain up-to-date with changes in the new project.
+			</para>
+			
+			<para>
+			GIT has been specifically designed to make forking and
+			merging repositories easy.
+			</para>
+			
+			<para>
+			The project is currently hosted at <ulink url="http://www.github.com">GIT Hub</ulink>
+			which provide useful tools around the GIT repository.
+			</para>
+			
+		</section>
+		
+		<section>
+			<title>Issue Management</title>
+			
+			<para>
+			Currently issue management is handled by the Scribble
+			project hosted on github.
+			</para>
+			
+			<para>
+			However each separate (forked) project may maintain its
+			own set of issues, relate to its own functionality.
+			Although hopefully issues that effect the functionality
+			in the core (shared) project should be reported to the
+			main GIT project.
+			</para>
+			
+		</section>
+		
+		<section>
+			<title>Project Build Management</title>
+			
+			<para>
+			The project build is performed using maven.
+			</para>
+			
+			<para>
+			The maven plugins, used to build the OSGi bundles,
+			are fairly common. Although specific maven plugins
+			do exist for building OSGi bundles, they don't currently
+			work well.
+			</para>
+			
+			<para>
+			However, basically all that is required is the ability
+			to package the relevant classes in a jar with a
+			manifest that defines the relevant OSGi properties. Therefore
+			this is what we use.
+			</para>
+			
+			<para>
+			The other generally used maven plugins relate to
+			compilation of the Java classes, execution and
+			analysis of JUnit tests.
+			</para>
+		</section>
+	</section>
+	
+	<section>
+		<title>Distribution</title>
+		
+		<para>
+		The distribution mechanism is aimed at providing a zipped
+		archive that contains the necessary environment.
+		</para>
+		
+		<para>
+		This environment provides the ability to execute Scribble
+		commands from the command line. However it is also possible
+		to use the jars, contained in the <filename>lib</filename>
+		and <filename>bundle</filename> sub-folders, directly within
+		other Java applications.
+		</para>
+		
+		<para>
+		To automatically include a new bundle in the distribution
+		(<filename>bundle</filename> subfolder), it should be
+		defined in the <emphasis>org.scribble.modules</emphasis>
+		maven group.
+		</para>
+		
+		<note>
+		<para>
+		In the future, it will also be possible to use the
+		OSGi bundles within an Eclipse environment. A separate
+		update site will be made available, including the
+		relevant bundles, and Eclipse specific plugins.
+		</para>
+		</note>
+	</section>
+	
+	<section>
+		<title>Integration</title>
+		
+		<para>
+		The <filename>integration</filename> branch of the project
+		is concerned with providing integration of the OSGi
+		bundles, defined in the <filename>modules</filename> branch,
+		in different execution environments.
+		</para>
+		
+		<section>
+			<title>Command Line</title>
+			
+			<para>
+			The Scribble tools architecture is based on OSGi, which means
+			that the OSGi compliant bundles can run within any OSGi
+			compliant service container. However
+			OSGi is a service framework, intended to manage services
+			in a service container (or server).
+			</para>
+			
+			<para>
+			Therefore, to leverage OSGi bundles (or services), from
+			a command line invoked application, we need to select
+			a specific OSGi implementation that supports this approach,
+			as it is not defined as part of the OSGi standard.
+			</para>
+			
+			<para>
+			Therefore, to provide this command line capability, we
+			have selected the <ulink url="http://felix.apache.org">Apache Felix</ulink>
+			OSGi implementation. This is the reason that the
+			<emphasis>Felix</emphasis> jars are included in the
+			distribution's <filename>lib</filename> sub-folder,
+			rather than just implementation independent OSGi
+			jars.
+			</para>
+			
+			<para>
+			Although it is possible to define new modules as part
+			of the Scribble project, it is also possible to develop
+			them independently and just place them within the
+			<filename>bundle</filename> folder of the installed
+			(unpacked) Scribble distribution. This will make them
+			available as part of the command line commands (e.g.
+			if the bundle represents an additional validation
+			module).
+			</para>
+		</section>
+		
+		<section>
+			<title>Embedded Java</title>
+			
+			<para>
+			OSGi is about defining components, with well defined
+			interfaces, and managing their isolation, to enable
+			modules to be dyamically added or removed as necessary.
+			</para>
+			
+			<para>
+			However, it is also possible to use these same
+			components, based on the separate of interfaces and
+			implementations, using any suitable factory or
+			direct injection approach.
+			</para>
+			
+			<para>
+			The bundles are just normal <emphasis>jar</emphasis>
+			archives. They only have special significants when
+			placed in an OSGi container.
+			</para>
+			
+		</section>
+		
+		<section>
+			<title>Eclipse</title>
+			
+			<note>
+			<para>
+			Currently the modules can be used inside Eclipse, when
+			launched in a 'runtime workbench' - i.e. where the
+			Eclipse environment is launched from another Eclipse
+			environment that contains the plugin projects.
+			</para>
+			
+			<para>
+			The remaining step is to construct an update site, with
+			appropriate features, and these bundles as the plugins.
+			</para>
+			</note>
+			
+			<para>
+			As well as incorporating the OSGi bundles defined in the
+			<filename>modules</filename> sub-folder, the Eclipse
+			integration has some additional Eclipse specific plugins.
+			</para>
+			
+			<para>
+			For example, the Scribble Designer is included as an
+			additional plugin within the Eclipse integration
+			branch of the project structure.
+			</para>
+		</section>
+		
+	</section>
+	
+	<section>
+		<title>Modules</title>
+		
+		<para>
+		The <filename>modules</filename> sub-folder contains all of the
+		OSGi compliant bundles that can be used in any of the integration
+		environments.
+		</para>
+		
+		<note>
+		<para>
+		TO DO: List the main modules and how they are related.
+		</para>
+		</note>
+	</section>
+	
+	<section>
+		<title>QA</title>
+		
+		<para>
+		There are two types of QA that are performed as part of
+		the project:
+		</para>
+		
+		<orderedlist>
+			<listitem>
+			Local test cases
+			<para>
+			Unit tests would be used to test the individual classes
+			within the specific implementation of an interface.
+			</para>
+			</listitem>
+			<listitem>
+			Integration tests
+			<para>
+			Where multiple implementations of a particular module could
+			exist, an integration test strategy may be useful to ensure that
+			all implementations of the same interface behaviour in the
+			same way.
+			</para>
+			</listitem>
+		</orderedlist>
+		
+		<para>
+		This section will discuss the second type of QA, aimed at
+		ensuring multiple implementations behaviour in the same way.
+		</para>
+		
+		<section>
+			<title>Protocol Parser - Conformance Test Kit (CTK)</title>
+			
+			<para>
+			This part of the project structure provides a set of
+			tests to check that the parser (being tested) processes
+			the supplied set of test 'protocol' descriptions, and
+			returns the correct object model.
+			</para>
+			
+			<para>
+			The test protocol descriptions are stored in the
+			<filename>src/test/resources/tests</filename> folder.
+			</para>
+			
+			<para>
+			Each test is accompanied by a junit test, defined in
+			the class <emphasis>org.scribble.protocol.parser.ctk</emphasis>.
+			For example:
+			</para>
+			
+			<programlisting>
+	@org.junit.Test
+	public void testSingleInteraction() {
+		TestScribbleLogger logger=new TestScribbleLogger();
+		
+		Model&lt;Protocol> model=getModel("SingleInteraction", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		Model&lt;Protocol> expected=new Model&lt;Protocol>();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("SingleInteraction");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().getContents().add(rl);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setLocalpart("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromRole(buyer);
+		interaction.setToParticipant(seller);
+		
+		protocol.getBlock().getContents().add(interaction);
+		
+		verify(model, expected);
+	}
+			</programlisting>
+			
+			<para>
+			The <emphasis>getModel()</emphasis> method retrieves the
+			protocol description from a named file, and invokes the
+			parser implementation being tested.
+			</para>
+			
+			<para>
+			The parser implementation is defined using the
+			<emphasis>scribble.protocol.parser</emphasis> system property.
+			If this property is not set, then it will default to the
+			ANTLR based implementation.
+			</para>
+			
+			<para>
+			Once the model has been retrieved using the parser, the
+			unit test will construct an 'expected' object model.
+			</para>
+			
+			<para>
+			The final step in the unit test is to invoke the
+			<emphasis>verify()</emphasis> method to compare the
+			model retrieved against the 'expected' version.
+			</para>
+			
+			<para>
+			To perform the verification, each model is flattened
+			to produce a list of 'model objects'. Then the
+			verification mechanism iterates through the list,
+			checking that the same entry in each list is
+			identical - first checking they are the same class,
+			and then invoking a 'comparator' implementation for
+			that class.
+			</para>
+			
+			<para>
+			The 'comparator' implementations are defined in the
+			<emphasis>org.scribble.protocol.parser.ctk.comparators</emphasis>
+			package. The comparator implementations are
+			registered in the static initializer for the
+			<emphasis>org.scribble.protocol.parser.ctk.ProtocolParserTest</emphasis>
+			class.
+			</para>
+		</section>
+	</section>
+	
+	<section>
+		<title>Samples</title>
+		
+		<para>
+		The <filename>samples</filename> sub-folder will provide
+		samples that reflect different aspects of the Scribble
+		notation.
+		</para>
+	</section>
+</chapter>

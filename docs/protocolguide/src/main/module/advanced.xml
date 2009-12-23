@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="advanced">
+	<title>Advanced Topics</title>
+
+	<section>
+		<title>Unordered</title>
+		
+		<para>
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+<emphasis role="bold">unordered</emphasis> "{"
+    ( &lt;Activity1&gt; ";" )+
+"}"
+     			</programlisting>
+			</informalexample>
+	
+			<note>
+			<para>
+			Syntax to be defined. One possibility would be to find a symbol, other than
+			';' to represent an ordered relationship between the activities. However this
+			is easy to misread, and therefore misunderstand the description. We could
+			use a similar structure as with <emphasis role="bold">parallel</emphasis>,
+			with each unordered activity being in a separate path - this would enable
+			groups of activities to be unordered - but then this would get confusing
+			with parallel. The syntax above is another possibility, so use the same
+			';' separate as sequence, but enclose in an 'unordered' region.
+        	</para>
+			</note>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			</para>
+
+			<informalexample>
+  				<programlisting>
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+	
+	<section>
+		<title>Merge</title>
+		
+		<para>
+		</para>
+		
+        <section>
+        	<title>Syntax</title>
+
+			<informalexample>
+  				<programlisting>
+     			</programlisting>
+			</informalexample>
+	
+			<para>
+        	</para>
+			
+		</section>
+		
+		<section>
+			<title>Usage</title>
+
+			<para>
+			</para>
+
+			<informalexample>
+  				<programlisting>
+				</programlisting>
+			</informalexample>
+		</section>
+		
+	</section>
+
+</chapter>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="examples">
+	<title>Examples</title>
+  
+	<para>
+	</para>
+	
+	<section>
+		<title>Buyer Seller Protocol</title>
+		
+		<para>
+		This example shows how a <emphasis>Buyer</emphasis> role and
+		<emphasis>Seller</emphasis> role may interact in an ordering
+		process.
+		</para>
+
+		<informalexample>
+  			<programlisting>
+<emphasis role="bold">protocol</emphasis> BuyerSeller {
+    <emphasis role="bold">role</emphasis> Buyer, Seller;
+    Order <emphasis role="bold">from</emphasis> Buyer <emphasis role="bold">to</emphasis> Seller;
+    <emphasis role="bold">choice</emphasis> @ Seller {
+        Invoice <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+    } <emphasis role="bold">or</emphasis> {
+        Rejected <emphasis role="bold">from</emphasis> Seller <emphasis role="bold">to</emphasis> Buyer;
+    }
+}
+			</programlisting>
+		</informalexample>
+		
+	</section>
+
+	<section>
+		<title>Credit Check Protocol</title>
+		
+		<para>
+		This example shows how a <emphasis>Client</emphasis> role performs a credit check
+		against a <emphasis>CreditAgency</emphasis> role.
+		</para>
+		
+		<informalexample>
+  			<programlisting>
+<emphasis role="bold">protocol</emphasis> CreditCheck {
+    <emphasis role="bold">role</emphasis> Client, CreditAgency;
+    CheckCredit <emphasis role="bold">from</emphasis> Client <emphasis role="bold">to</emphasis> CreditAgency;
+    <emphasis role="bold">choice</emphasis> @ CreditAgency {
+        CreditOk <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Client;
+    } <emphasis role="bold">or</emphasis> {
+        NoCredit <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Client;
+    }
+}
+			</programlisting>
+		</informalexample>
+		
+	</section>
+
+	<section>
+		<title>Purchasing Goods Conversation</title>
+		
+		<para>
+		This example shows how a conversation model may 'implement' the
+		previous two protocol examples.
+		</para>
+		
+		<informalexample>
+  			<programlisting>
+<emphasis role="bold">conversation</emphasis> PurchaseGoods <emphasis role="bold">implements</emphasis> BuyerSeller(Customer <emphasis role="bold">for</emphasis> Buyer,
+        Supplier <emphasis role="bold">for</emphasis> Seller), CreditCheck(Supplier <emphasis role="bold">for</emphasis> Client, CreditAgency <emphasis role="bold">for</emphasis> CreditAgency) {
+    <emphasis role="bold">role</emphasis> Customer, Supplier, CreditAgency;
+    Order order;
+    Invoice inv;
+    Order <emphasis role="bold">from</emphasis> order@Customer <emphasis role="bold">to</emphasis> order@Supplier;
+    CheckCredit <emphasis role="bold">from</emphasis> Supplier <emphasis role="bold">to</emphasis> CreditAgency;
+    <emphasis role="bold">if</emphasis> @ CreditAgency (....) {
+        CreditOk <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Supplier;
+        Invoice <emphasis role="bold">from</emphasis> inv@Supplier <emphasis role="bold">to</emphasis> inv@Customer;
+    } <emphasis role="bold">else</emphasis> {
+        NoCredit <emphasis role="bold">from</emphasis> CreditAgency <emphasis role="bold">to</emphasis> Supplier;
+        Rejected <emphasis role="bold">from</emphasis> Supplier <emphasis role="bold">to</emphasis> Customer;
+    }
+}
+			</programlisting>
+		</informalexample>
+		
+	</section>
+
+</chapter>
