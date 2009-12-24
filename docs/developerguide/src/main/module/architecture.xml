@@ -71,6 +71,90 @@
 		
 		<section>
 			<title>Error Logging</title>
+			
+			<para>
+			There is a generic logging API within the Scribble
+			framework that can be used for reporting errors,
+			warnings, information or debuging details.
+			This API is <emphasis>org.scribble.core.logging.ScribbleLogger</emphasis>.
+			</para>
+			
+			<para>
+			The methods generally take two parameters, a message
+			and a property map. The message is simply a description
+			of the issue being reported. The property map contain
+			specific details about the issue being reported.
+			</para>
+			
+			<para>
+			For example, when the parser detects a problem, it
+			can report the nature of the problem, and provide the
+			location of the issue in the source file.
+			</para>
+			
+			<section>
+				<title>Internationalization</title>
+				
+				<para>
+				To enable errors reported from the Scribble parser
+				and validation modules, in a number of different
+				languages, internationalization should be used.
+				</para>
+			
+				<para>
+				The following code fragment provides an example
+				of how internationalization can be achieved, using
+				parameterised messages.
+				</para>	
+				
+				<programlisting>
+logger.error(org.scribble.core.util.MessageUtil.format(
+			java.util.PropertyResourceBundle.getBundle(
+				"org.scribble.core.validation.rules.Messages"),
+							"_EXISTING_DECLARATION",
+						new String[]{elem.getName()}),
+							obj.getProperties());
+				</programlisting>
+				
+				<para>
+				The main message content is obtained from a
+				properties file, with the name being supplied
+				as the first parameter to the <emphasis>getBundle</emphasis>
+				method. The property file must be placed
+				the correct package within the
+				<filename>src/main/resources</filename> folder, to
+				ensure the properties are correctly packaged
+				by maven.
+				</para>
+				
+				<para>
+				The messages within the property files can have
+				values that include parameters. Parameters are
+				numbered in sequential order, and defined between
+				curly braces (e.g. {n} where 'n' is the number).
+				For example,
+				</para>
+				
+				<programlisting>
+_EXISTING_DECLARATION=Declaration already exists for name '{0}'				
+				</programlisting>
+				
+				<para>
+				This message only has a single parameters.
+				</para>
+				
+				<para>
+				In the previous code fragment, the
+				<emphasis>MessageUtil.format()</emphasis>
+				method takes the message as the first parameter,
+				and an array of strings as the parameter values
+				to be substituted in the message. So in the
+				code fragment, the value in the <emphasis>elem.getName()</emphasis>
+				would be substituted in the <emphasis>{0}</emphasis>
+				parameter of the <emphasis>_EXISTING_DECLARATION</emphasis>
+				message, and then reported to the Scribble logger.
+				</para>
+			</section>
 		</section>
 		
 		<section>

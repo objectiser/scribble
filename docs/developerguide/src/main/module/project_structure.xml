@@ -242,19 +242,38 @@
 		<section>
 			<title>Eclipse</title>
 			
-			<note>
 			<para>
-			Currently the modules can be used inside Eclipse, when
-			launched in a 'runtime workbench' - i.e. where the
-			Eclipse environment is launched from another Eclipse
-			environment that contains the plugin projects.
+			To integrate the Scribble protocol model, parser and
+			supporting validating modules into Eclipse, it is
+			necessary to package them in the form of an update
+			site.
+			</para>			
+
+			<para>
+			The <filename>integration/eclipse/updatesite</filename>
+			folder contains the Eclipse artifacts used to build
+			the update site (specifically the <filename>site.xml</filename>
+			file). When this file is opened within an Eclipse
+			environment, that contains the Plugin Development Environment (PDE),
+			it will open the file in a special editor. The
+			update site can be built by selecting the <emphasis>Build All</emphasis>
+			button.
 			</para>
 			
 			<para>
-			The remaining step is to construct an update site, with
-			appropriate features, and these bundles as the plugins.
+			Once the plugins and features have been built, then
+			the <filename>updatesite</filename> folder contents should
+			be zipped up, and distributed as necessary. This can be
+			downloaded for use as a local update site, or exploded
+			into a suitable location on the network, to be made
+			available as a remote update site.
+			</para>			
+			
+			<para>
+			The details of which features, and therefore plugins,
+			are included in the update site, are defined in the
+			<filename>site.xml</filename> file.
 			</para>
-			</note>
 			
 			<para>
 			As well as incorporating the OSGi bundles defined in the
@@ -267,6 +286,32 @@
 			additional plugin within the Eclipse integration
 			branch of the project structure.
 			</para>
+			
+			<note>
+			<para>
+			Currently the project is setup to only checkin the
+			update site <filename>.project</filename> and
+			<filename>site.xml</filename> files. The built
+			<filename>features</filename> and <filename>plugins</filename>
+			folders, as well as the generated jar files, will
+			not be checked into the project.
+			</para>
+			<para>
+			However when the update site is built, it modifies the
+			<filename>site.xml</filename> to reference the
+			specific features (and versions) that it incorporates.
+			Therefore, before any files are subsequently checked in,
+			it will be necessary to remove the features from the
+			<filename>site.xml</filename>, and re-add them, to
+			reset them to the generic version.
+			</para>
+			<para>
+			In the future, a more automated mechanism will be
+			used to build the update sites. However, until
+			then, it will be necessary to use this manual
+			approach.
+			</para>
+			</note>
 		</section>
 		
 	</section>
