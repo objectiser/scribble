@@ -6,5 +6,8 @@ qa/*/bin
 integration/commandline/bin
 integration/commandline/target
 integration/eclipse/plugins/*/bin
+integration/eclipse/updatesite/features
+integration/eclipse/updatesite/plugins
+integration/eclipse/updatesite/*.jar
 docs/*/target
 distribution/target
