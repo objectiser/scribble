@@ -179,7 +179,7 @@ public class ProtocolParserTest {
 		tref.setLocalpart("Order");
 		ms.getTypes().add(tref);
 		interaction.setMessageSignature(ms);
-		interaction.setFromRole(buyer);
+		interaction.setFromParticipant(buyer);
 		interaction.setToParticipant(seller);
 		
 		protocol.getBlock().getContents().add(interaction);

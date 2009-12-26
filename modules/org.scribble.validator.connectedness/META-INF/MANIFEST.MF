@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Scribble Validator for Connectedness
+Bundle-SymbolicName: org.scribble.validator.connectedness
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.scribble.validator.connectedness.osgi.Activator
+Bundle-Vendor: www.scribble.org
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: org.scribble.core;bundle-version="1.0.0",
+ org.junit4

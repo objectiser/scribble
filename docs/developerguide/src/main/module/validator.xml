@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="validator">
+	<title>Developing a Validator</title>
+	
+	<para>
+	This section will describe how to create a validator as part
+	of the Scribble project structure. The same approach can
+	also be used to create a validator module outside the scope
+	of the Scribble project.
+	</para>
+	
+	<para>
+	To explain how to create a validator, we will use the
+	'connectedness' validator as an example.
+	</para>
+	
+	<section>
+		<title>Create the Validator OSGi bundle</title>
+		
+		<para>
+		This section will explain how to create the OSGi bundle,
+		for the validator, from within the Eclipse environment.
+		</para>
+		
+		<para>
+		The first step is to create the plugin project, using the
+		<emphasis>New->Project->Plugin Project</emphasis> menu item.
+		When the dialog window is displayed, uncheck the
+		"Use default location" checkbox, and browse to find the
+		appropriate location for the new project.
+		</para>
+		
+		<para>
+		For this project, the location will be the
+		<filename>modules/org.scribble.validator.connectedness</filename>
+		folder within the Scribble project structure.
+		It will be necessary to create the folder for the
+		<emphasis>org.scribble.validator.connectednesss</emphasis>
+		part of the location - the folder being named after the
+		OSGi bundle identity.
+		</para>
+		
+		<imageobject>
+			<imagedata fileref="images/NewValidatorPluginDialog.png" align="center" width="4in" />
+		</imageobject>
+		
+		<para>
+		Ensure the 'Create java project' checkbox is ticked, and then
+		set the source folder to be <filename>src/main/java</filename>
+		and set the <emphasis>Target Platform</emphasis> to a
+		standard 'OSGi Framework'.
+		</para>
+
+		<imageobject>
+			<imagedata fileref="images/NewValidatorPluginDetails.png" align="center" width="4in" />
+		</imageobject>
+		
+		<para>
+		Then press the <emphasis>Next</emphasis> button to set some details
+		associated with the plugin, such as the version, description,
+		provider, etc.
+		</para>
+		
+		<para>
+		In this example, we will be registering the validator using
+		the OSGi <emphasis>registerService</emphasis> method. This is
+		performed in the bundle activator, whose class is set in the
+		plugin details. For example, in the start method of the
+		created Activator, we would have:
+		</para>
+		
+		<programlisting>
+	public void start(BundleContext context) throws Exception {
+        Properties props = new Properties();
+        
+        Validator validator=new ConnectednessValidator();
+        
+        context.registerService(Validator.class.getName(), 
+				validator, props);
+	}		
+		</programlisting>
+		
+		<note>
+		<para>
+		Need to investigate whether it is also possible to use the 
+		OSGi Declarative Services approach. Issue may be location of
+		the component.xml file, so that both Eclipse and the maven
+		archive plugin picks them up.
+		</para>
+		</note>
+	</section>
+
+	<section>
+		<title>Establish Bundle Dependencies</title>
+		
+		<para>
+		Depending on the type of bundle being developed, it may
+		have a different set of dependencies than the ones
+		required by this 'connectedness' validator. However the
+		configuration approach will be the same.
+		</para>
+		
+		<para>
+		Go to the <filename>META-INF/MANIFEST.MF</filename> file
+		and select it. This will cause the plugin manifest
+		editor to be displayed.
+		</para>
+		
+		<para>
+		Select the <emphasis>Dependencies</emphasis> tab and
+		select the other bundles that will be required, or
+		preferrably select the packages to be imported (as this
+		avoids dependency on specific bundles, and instead
+		just identifies the packages required). For this
+		example validator, we just need to add the packages
+		from the <emphasis>org.scribble.core</emphasis> bundle
+		which is used by all Scribble plugins. However if
+		additional packages were required, then they could be
+		added as imported packages.
+		</para>
+	</section>
+	
+	<section>
+		<title>Implement the Module</title>
+	</section>
+	
+	<section>
+		<title>Implement the Tests</title>
+		
+		<para>
+		Tests can be implemented in two ways, depending upon the
+		nature of the bundle.
+		</para>
+		
+		<para>
+		If the bundle is representing an implementation of a common
+		interface, where the result returned from the bundle is
+		the key point, then integration tests associated with the
+		interface can be useful.
+		</para>
+		
+		<para>
+		For example, there is a special bundle used to provide
+		a <emphasis>Conformance Test Kit</emphasis> for the 
+		protocol parser. This means that the same set of
+		integration tests can be used regardless of the
+		implementation of the parser that is used.
+		</para>
+		
+		<para>
+		The other set of tests that are useful are specific to
+		the bundle implementation. These tests will usually be
+		provided within the bundle itself, by defining the
+		JUnit test classes within the <filename>src/test/java</filename>
+		location, with any required resources being placed in
+		<filename>src/test/resources</filename>. Both of these
+		locations also need to be added to the Eclipse project's
+		classpath.
+		</para>
+		
+		<para>
+		The next step is to create the JUnit test. First create the
+		appropriate package within the <filename>src/test/java</filename>
+		location.
+		</para>
+		
+		<para>
+		Then select the <emphasis>New->Other->JUnit Test Case</emphasis>
+		menu item associated with the package. When this is first
+		performed, you will be asked which version of JUnit should
+		be used. Select the <emphasis>New JUnit 4</emphasis>
+		radio button.
+		</para>
+		
+		<imageobject>
+			<imagedata fileref="images/NewJUnitTestCase.png" align="center" width="6in" />
+		</imageobject>
+		
+		<para>
+		After pressing the <emphasis>Next</emphasis> button, you
+		will be asked about adding JUnit to the classpath. Leave
+		the default option, which is to perform the action, and
+		press the <emphasis>Ok</emphasis> button.
+		</para>
+
+		<imageobject>
+			<imagedata fileref="images/AddJUnit4Bundle.png" align="center" width="6in" />
+		</imageobject>
+
+		<para>
+		The final step is to associate JUnit with the Maven
+		<filename>pom.xml</filename> file associated with the
+		bundle. This is achieved by adding the following snippet
+		to the dependencies section:
+		</para>
+		
+		<informalexample>
+  			<programlisting role="XML" ><![CDATA[
+	<dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>      
+      <scope>test</scope>
+    </dependency>
+		 	]]></programlisting>
+		</informalexample>
+		
+		<para>
+		The version of the JUnit bundle is defined in the top
+		level <filename>pom.xml</filename> for the Scribble
+		project.
+		</para>
+		
+	</section>
+	
+	<section>
+		<title>Create the Maven POM</title>
+		
+		<para>
+		The best approach is to copy the <filename>pom.xml</filename>
+		file from one of the other modules, and simply update the
+		relevant sections (e.g. artifact id, description
+		and dependencies).
+		</para>
+		
+		<para>
+		Once the <filename>pom.xml</filename> for the module has
+		been defined, it needs to be linked into the
+		<filename>pom.xml</filename> (in the modules section)
+		associated with the parent <filename>modules</filename> folder.
+		</para>
+	</section>
+</chapter>

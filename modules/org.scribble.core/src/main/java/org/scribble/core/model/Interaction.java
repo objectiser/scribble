@@ -84,7 +84,7 @@ public class Interaction extends Behaviour {
 	 * 
 	 * @param part The optional 'from' participant
 	 */
-	public void setFromRole(Participant part) {
+	public void setFromParticipant(Participant part) {
 		m_fromParticipant = part;
 	}
 	
