@@ -16,11 +16,9 @@
  */
 package org.scribble.command.validate;
 
-import java.util.List;
-
-import org.scribble.core.model.Definition;
 import org.scribble.core.validation.*;
 import org.scribble.core.logger.*;
+import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.parser.ProtocolParser;
 
 public class ValidateCommand implements org.scribble.command.Command {
@@ -52,14 +50,34 @@ public class ValidateCommand implements org.scribble.command.Command {
 		boolean ret=false;
 		
 		if (args.length == 1) {
-			System.out.println("VALIDATE "+args[0]);
+			m_logger.info("PARSE "+args[0], null);
 			
-			org.scribble.core.model.Model model=
-				new org.scribble.core.model.Model();
+			java.io.File f=new java.io.File(args[0]);
 			
-			m_validationManager.validate(model, m_logger);
+			if (f.exists() == false) {
+				m_logger.error("File not found '"+args[0]+"'", null);
+			} else {
+				// TODO: Check if protocol
+				try {
+					java.io.InputStream is=new java.io.FileInputStream(f);
 			
-			ret = true;
+					org.scribble.core.model.Model<Protocol> model=
+							m_protocolParser.parse(is, m_logger);
+			
+					if (model != null) {
+						System.out.println("VALIDATE "+args[0]);
+						
+						m_validationManager.validate(model, m_logger);
+						
+						ret = true;						
+					}
+					
+					is.close();
+					
+				} catch(Exception e) {
+					m_logger.error("Failed to parse file '"+args[0]+"'", null);
+				}
+			}
 		} else {
 			System.err.println("VALIDATE EXPECTING 1 PARAMETER");
 		}

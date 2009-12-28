@@ -124,6 +124,25 @@
 	
 	<section>
 		<title>Implement the Module</title>
+		
+		<para>
+		Each modules will be different, and therefore discussing
+		specific implementation details will not be possible.
+		</para>
+		
+		<para>
+		However validation modules will tend to access the complete
+		model, but possibly only be interested in certain parts
+		of it. Therefore usually the validation modules will
+		define an implementation of the
+		<filename>org.scribble.core.model.Visitor</filename> interface.
+		</para>
+		
+		<para>
+		The actual main class within the validator module would
+		implement the <filename>org.scribble.core.validation.Validator</filename>
+		interface.
+		</para>
 	</section>
 	
 	<section>
@@ -180,14 +199,32 @@
 		
 		<para>
 		After pressing the <emphasis>Next</emphasis> button, you
-		will be asked about adding JUnit to the classpath. Leave
-		the default option, which is to perform the action, and
-		press the <emphasis>Ok</emphasis> button.
+		will be asked about adding JUnit to the classpath.
 		</para>
-
+		
 		<imageobject>
 			<imagedata fileref="images/AddJUnit4Bundle.png" align="center" width="6in" />
 		</imageobject>
+
+		<para>Choose the
+		<emphasis>Open the build path property page</emphasis> option and
+		press the <emphasis>Ok</emphasis> button. The reason for not
+		adding JUnit directly, is that this would cause it to be included in
+		the list of bundle dependencies in the OSGi manifest, which would
+		mean that the runtime environment that includes the validator would
+		also have a dependency on JUnit.
+		</para>
+		
+		<para>
+		Therefore we need to add the JUnit jars to the Eclipse project
+		in a different way. In the build path dialog, select the
+		<emphasis>Libraries</emphasis> tab and then select the
+		<emphasis>Add Library</emphasis> button. When the list of
+		libraries is presented, select the <emphasis>JUnit</emphasis>
+		entry and press <emphasis>Next</emphasis> where the 
+		JUnit version should be set to <emphasis>JUnit4</emphasis>
+		and then press the <emphasis>Finish</emphasis> button.
+		</para>
 
 		<para>
 		The final step is to associate JUnit with the Maven

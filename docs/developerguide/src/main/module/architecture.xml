@@ -109,11 +109,11 @@
 				
 				<programlisting>
 logger.error(org.scribble.core.util.MessageUtil.format(
-			java.util.PropertyResourceBundle.getBundle(
-				"org.scribble.core.validation.rules.Messages"),
-							"_EXISTING_DECLARATION",
-						new String[]{elem.getName()}),
-							obj.getProperties());
+				java.util.PropertyResourceBundle.getBundle(
+						"org.scribble.core.validation.rules.Messages"),
+										"_EXISTING_DECLARATION",
+										new String[]{elem.getName()}),
+										obj.getProperties());
 				</programlisting>
 				
 				<para>
@@ -173,6 +173,29 @@ _EXISTING_DECLARATION=Declaration already exists for name '{0}'
 		
 		<section>
 			<title>Validation Manager and Validators</title>
+			
+			<para>
+			The validation manager, when used in a OSGi runtime
+			environment, will listen for the activation of any
+			implementations of the
+			<filename>org.scribble.core.validation.Validator</filename>
+			interface.
+			</para>
+			
+			<para>
+			This means that the validation of any model can be
+			performed using the 
+			<emphasis>org.scribble.core.validation.ValidationManager</emphasis>,
+			rather than having to obtain instances of
+			multiple implementations of the <filename>Validator</filename>
+			interface.
+			</para>
+			
+			<para>
+			When the <filename>ValidatorManager</filename> is used
+			outside of an OSGi environment, it is necessary for the
+			validators to be added to the manager by other means.
+			</para>
 		</section>
 	</section>
 	
