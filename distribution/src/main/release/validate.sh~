@@ -1,3 +1,0 @@
-. ./env.sh
-
-java -classpath $CLASSPATH org.scribble.scl.ScribbleCL validate $1

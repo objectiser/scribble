@@ -24,9 +24,11 @@ import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
 
+import org.scribble.command.conforms.ConformsCommand;
 import org.scribble.command.parse.ParseCommand;
 import org.scribble.command.validate.ValidateCommand;
 import org.scribble.command.*;
+import org.scribble.core.conformance.Conformer;
 import org.scribble.core.logger.ScribbleLogger;
 import org.scribble.core.validation.ValidationManager;
 import org.scribble.protocol.parser.ProtocolParser;
@@ -51,6 +53,12 @@ public class Activator implements BundleActivator {
         
         context.registerService(Command.class.getName(), 
 				vc, props);
+
+        // Register validate command
+        final ConformsCommand cc=new ConformsCommand();
+        
+        context.registerService(Command.class.getName(), 
+				cc, props);
 
         // Register service listeners to establish dependent
         // components
@@ -78,6 +86,7 @@ public class Activator implements BundleActivator {
         				(ScribbleLogger)context.getService(sr);
         			pc.setLogger(sl);
         			vc.setLogger(sl);
+        			cc.setLogger(sl);
         			break;
         		case ServiceEvent.UNREGISTERING:
         			break;
@@ -94,6 +103,22 @@ public class Activator implements BundleActivator {
         				(ProtocolParser)context.getService(sr);
         			pc.setProtocolParser(pp);
         			vc.setProtocolParser(pp);
+        			cc.setProtocolParser(pp);
+        			break;
+        		case ServiceEvent.UNREGISTERING:
+        			break;
+        		}
+        	}
+        };
+              
+        ServiceListener sl4 = new ServiceListener() {
+        	public void serviceChanged(ServiceEvent ev) {
+        		ServiceReference sr = ev.getServiceReference();
+        		switch(ev.getType()) {
+        		case ServiceEvent.REGISTERED:
+        			Conformer conformer=
+        				(Conformer)context.getService(sr);
+        			cc.setConformer(conformer);
         			break;
         		case ServiceEvent.UNREGISTERING:
         			break;
@@ -104,11 +129,13 @@ public class Activator implements BundleActivator {
         String filter1 = "(objectclass=" + ValidationManager.class.getName() + ")";
         String filter2 = "(objectclass=" + ScribbleLogger.class.getName() + ")";
         String filter3 = "(objectclass=" + ProtocolParser.class.getName() + ")";
+        String filter4 = "(objectclass=" + Conformer.class.getName() + ")";
         
         try {
         	context.addServiceListener(sl1, filter1);
         	context.addServiceListener(sl2, filter2);
         	context.addServiceListener(sl3, filter3);
+        	context.addServiceListener(sl4, filter4);
         } catch(Exception e) {
         	e.printStackTrace();
         }

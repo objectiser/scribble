@@ -202,12 +202,54 @@ _EXISTING_DECLARATION=Declaration already exists for name '{0}'
 	<section>
 		<title>Command Line Actions</title>
 		
-		<section>
-			<title>Defining the command</title>
-		</section>
+		<para>
+		The first step is to define the command implementation
+		of the <emphasis>org.scribble.command.Command</emphasis>
+		interface. This can be created in the
+		<emphasis>org.scribble.command</emphasis> Eclipse plugin.
+		</para>
 		
-		<section>
-			<title>Creating the script</title>
-		</section>
+		<para>
+		To the initialise the command, as part of an OSGi
+		runtime environment, the command implementation can be
+		instantiated in the <emphasis>org.scribble.command</emphasis>
+		plugin's <emphasis>Activator</emphasis>, and then
+		registered with the bundle context.
+		</para>
+		
+		<para>
+		If the command requires other OSGi services, then
+		these can be established by setting up service listeners
+		for the relevant service interface classes. When
+		OSGi services are registered, then the relationship
+		can be established.
+		</para>
+		
+		<para>
+		This command mechanism will generally only be used
+		as part of the command line approach, and therefore
+		does not need to be initialised in other ways. However
+		other dependency injection techniques could be
+		used if appropriate.
+		</para>
+		
+		<para>
+		The only remaining step is to create the scripts
+		necessary to enable a user to invoke the command.
+		This can be achieved by copying one of the existing
+		scripts, in the <filename>distribution/src/main/release</filename>
+		folder (such as <filename>parse.sh</filename>),
+		and modify the parameter details as necessary.
+		</para>
+		
+		<note>
+		<para>
+		The first parameter of the Java application, invoked
+		within the script, must be the name of the command.
+		This must match the value returned by the
+		<emphasis>getName()</emphasis> method on the command
+		interface.
+		</para>
+		</note>
 	</section>
 </chapter>

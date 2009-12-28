@@ -28,8 +28,7 @@ import org.apache.felix.main.Main;
 import org.scribble.command.*;
 import org.scribble.commandline.osgi.HostActivator;
 
-public class ScribbleCL
-{
+public class ScribbleCL {
     private HostActivator m_activator = null;
     private Felix m_felix = null;
     private ServiceTracker m_tracker = null;
@@ -59,15 +58,14 @@ public class ScribbleCL
     	}
     }
     
-    public ScribbleCL()
-    {
+    public ScribbleCL() {
+    	
         // Create a configuration property map.
         //Map configMap = new HashMap();
         Main.loadSystemProperties();
 
         java.util.Properties configProps = Main.loadConfigProperties();
-        if (configProps == null)
-        {
+        if (configProps == null) {
             System.err.println("No config.properties found.");
             configProps = new java.util.Properties();
         }
@@ -77,7 +75,6 @@ public class ScribbleCL
         // Export the host provided service interface package.
         configProps.put(Constants.FRAMEWORK_SYSTEMPACKAGES_EXTRA,
         			"org.scribble.command");
-    				//"tutorial.example2.service; version=1.0.0");
         
         // Create host activator;
         m_activator = new HostActivator();
@@ -85,8 +82,7 @@ public class ScribbleCL
         list.add(m_activator);
         configProps.put(FelixConstants.SYSTEMBUNDLE_ACTIVATORS_PROP, list);
 
-        try
-        {
+        try {
             // Now create an instance of the framework with
             // our configuration properties.
             m_felix = new Felix(configProps);
@@ -97,13 +93,10 @@ public class ScribbleCL
         	
             // Now start Felix instance.
             m_felix.start();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.err.println("Could not create framework: " + ex);
             ex.printStackTrace();
         }
-        
 
         m_tracker = new ServiceTracker(m_activator.getContext(),
         		org.scribble.command.Command.class.getName(), null);
@@ -111,34 +104,28 @@ public class ScribbleCL
         m_tracker.open();
     }
 
-    public boolean execute(String name, String args[])
-    {
+    public boolean execute(String name, String args[]) {
         // See if any of the currently tracked command services
         // match the specified command name, if so then execute it.
         Object[] services = m_tracker.getServices();
-        for (int i = 0; (services != null) && (i < services.length); i++)
-        {
-            try
-            {
-            	//((tutorial.example2.service.DictionaryService)services[i]).checkWord("hello");
-                if (((Command) services[i]).getName().equals(name))
-                {
+        
+        for (int i = 0; (services != null) && (i < services.length); i++) {
+            try {
+                if (((Command) services[i]).getName().equals(name)) {
                     return ((Command) services[i]).execute(args);
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 // Since the services returned by the tracker could become
                 // invalid at any moment, we will catch all exceptions, log
                 // a message, and then ignore faulty services.
                 System.err.println(ex);
             }
         }
+        
         return false;
     }
 
-    public void shutdownApplication() throws Exception
-    {
+    public void shutdownApplication() throws Exception {
         // Shut down the felix framework when stopping the
         // host application.
         m_felix.stop();
