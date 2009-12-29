@@ -58,7 +58,7 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 		// are 'to' and 'from' roles defined
 		if (elem.getFromParticipant() == null &&
 				(elem.getChannel() == null ||
-						elem.getChannel().getFromRole() == null)) {
+						elem.getChannel().getFromParticipant() == null)) {
 			
 			// Check if local model and 'to' is not the same as the
 			// located role
@@ -74,7 +74,7 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 
 		if (elem.getToParticipant() == null &&
 				(elem.getChannel() == null ||
-						elem.getChannel().getToRole() == null)) {
+						elem.getChannel().getToParticipant() == null)) {
 			
 			// Check if local model and 'from' is not the same as the
 			// located role

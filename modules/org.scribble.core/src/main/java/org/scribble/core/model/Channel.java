@@ -57,39 +57,39 @@ public class Channel extends Declaration {
 	}
 	
 	/**
-	 * This method returns the 'from' role.
+	 * This method returns the 'from' participant.
 	 * 
-	 * @return The 'from' role
+	 * @return The 'from' participant
 	 */
-	public Participant getFromRole() {
-		return(m_fromRole);
+	public Participant getFromParticipant() {
+		return(m_fromParticipant);
 	}
 	
 	/**
-	 * This method sets the 'from' role.
+	 * This method sets the 'from' participant.
 	 * 
-	 * @param role The 'from' role
+	 * @param participant The 'from' participant
 	 */
-	public void setFromRole(Participant role) {
-		m_fromRole = role;
+	public void setFromParticipant(Participant participant) {
+		m_fromParticipant = participant;
 	}
 	
 	/**
-	 * This method returns the 'to' role.
+	 * This method returns the 'to' participant.
 	 * 
-	 * @return The 'to' role
+	 * @return The 'to' participant
 	 */
-	public Participant getToRole() {
-		return(m_toRole);
+	public Participant getToParticipant() {
+		return(m_toParticipant);
 	}
 	
 	/**
-	 * This method sets the 'to' role.
+	 * This method sets the 'to' participant.
 	 * 
-	 * @param role The 'to' role
+	 * @param role The 'to' participant
 	 */
-	public void setToRole(Participant role) {
-		m_toRole = role;
+	public void setToRole(Participant participant) {
+		m_toParticipant = participant;
 	}
 	
 	public boolean equals(Object obj) {
@@ -121,6 +121,6 @@ public class Channel extends Declaration {
 	}
 
 	private String m_name=null;
-	private Participant m_fromRole=null;
-	private Participant m_toRole=null;
+	private Participant m_fromParticipant=null;
+	private Participant m_toParticipant=null;
 }

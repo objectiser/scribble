@@ -83,6 +83,7 @@ public class ConformsCommand implements org.scribble.command.Command {
 				} catch(Exception e) {
 					m_logger.error("Failed to check conformance of '"+
 							args[0]+"' against '"+args[1]+"': "+e, null);
+					e.printStackTrace();
 				}
 			}
 		} else {
