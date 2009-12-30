@@ -94,7 +94,7 @@ public class Participant extends Declaration {
 		String ret=getName();
 		
 		if (ret == null) {
-			ret = "<Unnamed Role>";
+			ret = "<Unnamed Participant>";
 		}
 		
 		return(ret);

@@ -23,7 +23,7 @@ import java.util.Comparator;
 import org.scribble.core.logger.*;
 import org.scribble.core.model.*;
 import org.scribble.protocol.model.*;
-import org.scribble.protocol.parser.ctk.comparators.NamespaceComparator;
+import org.scribble.protocol.parser.ctk.comparators.*;
 
 public class ProtocolParserTest {
 	
@@ -32,6 +32,12 @@ public class ProtocolParserTest {
 	
 	static {
 		m_comparators.put(Namespace.class, new NamespaceComparator());
+		m_comparators.put(Model.class, new ModelComparator());
+		m_comparators.put(Protocol.class, new ProtocolComparator());
+		m_comparators.put(Block.class, new BlockComparator());
+		m_comparators.put(ParticipantList.class, new ParticipantListComparator());
+		m_comparators.put(Participant.class, new ParticipantComparator());
+		m_comparators.put(Interaction.class, new InteractionComparator());
 	}
 	
 	public Model<Protocol> getModel(String filename, ScribbleLogger logger) {
@@ -96,8 +102,9 @@ public class ProtocolParserTest {
 				Comparator<ModelObject> comparator=
 					m_comparators.get(mlist.get(i).getClass());
 				
-				if (comparator != null &&
-						comparator.compare(mlist.get(i), elist.get(i)) != 0) {
+				if (comparator == null) {
+					fail("No comparator found for type: "+mlist.get(i).getClass());
+				} else if (comparator.compare(mlist.get(i), elist.get(i)) != 0) {
 					fail("Element ("+i+") did not match: "+mlist.get(i)+
 							" expected="+elist.get(i));
 				}
@@ -164,10 +171,10 @@ public class ProtocolParserTest {
 		
 		ParticipantList rl=new ParticipantList();
 		Participant buyer=new Participant();
-		buyer.setName("buyer");
+		buyer.setName("Buyer");
 		rl.getParticipants().add(buyer);
 		Participant seller=new Participant();
-		seller.setName("seller");
+		seller.setName("Seller");
 		rl.getParticipants().add(seller);
 		
 		protocol.getBlock().getContents().add(rl);
