@@ -187,7 +187,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void addChild(Object parent, Object child) {
-		_log.info("Add child: parent="+parent+" child="+child);
+		_log.fine("Add child: parent="+parent+" child="+child);
 		
 		// Check if child is a list
 		if (isNil(child)) {
@@ -273,7 +273,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 					// must have a set method
 					if (pd != null && pd.getWriteMethod() != null) {
 						
-						_log.info("Set property '"+pd.getName()+
+						_log.fine("Set property '"+pd.getName()+
 								"' on="+parent+" to="+child);
 						
 						pd.getWriteMethod().invoke(parent, child);

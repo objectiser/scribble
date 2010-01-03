@@ -23,7 +23,6 @@ import org.scribble.core.model.Model;
 public class ModelConformer implements Conformer {
 
 	public void conforms(Model<?> model, Model<?> ref, ScribbleLogger logger) {
-		logger.info("CONFORMS: "+model+" ref="+ref, null);
 
 		BehaviourList mainBehaviourList=BehaviourList.createBehaviourList(model.getDefinition().getBlock());
 		BehaviourList refBehaviourList=BehaviourList.createBehaviourList(ref.getDefinition().getBlock());

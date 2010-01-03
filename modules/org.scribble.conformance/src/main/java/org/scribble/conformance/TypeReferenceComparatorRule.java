@@ -68,17 +68,11 @@ public class TypeReferenceComparatorRule implements ComparatorRule {
 		TypeReference rtr=(TypeReference)reference;
 		
 		if ((ret = mtr.equals(rtr)) == false) {
-			String text=rtr.getLocalpart();
-			
-			if (rtr.getNamespace() != null) {
-				text = "{"+rtr.getNamespace()+"}"+text;
-			}
-			
 			String mesg=org.scribble.core.util.MessageUtil.format(
 					java.util.PropertyResourceBundle.getBundle(
 					"org.scribble.conformance.Messages").
 					getString("_TYPE_MISMATCH"),
-					new String[]{text});
+					new String[]{rtr.getName()});
 			
 			/*
 			ModelIssue issue=new ModelIssue(mtr, mesg);

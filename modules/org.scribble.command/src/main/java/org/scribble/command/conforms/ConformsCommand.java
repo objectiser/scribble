@@ -50,8 +50,6 @@ public class ConformsCommand implements org.scribble.command.Command {
 		boolean ret=false;
 		
 		if (args.length == 2) {
-			m_logger.info("CONFORMS "+args[0]+" "+args[1], null);
-			
 			java.io.File f1=new java.io.File(args[0]);
 			java.io.File f2=new java.io.File(args[1]);
 			

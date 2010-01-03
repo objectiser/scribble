@@ -17,6 +17,7 @@
 package org.scribble.core.osgi;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -30,6 +31,8 @@ import org.scribble.core.validation.Validator;
 
 public class Activator implements BundleActivator {
 
+	private static final Logger _log=Logger.getLogger(Activator.class.getName());
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
@@ -42,7 +45,8 @@ public class Activator implements BundleActivator {
         
         context.registerService(ValidationManager.class.getName(), 
 							vm, props);
-        System.out.println("REGISTERED VALIDATION MANAGER");
+        
+        _log.fine("Registered Validation Manager");
         
         context.registerService(ScribbleLogger.class.getName(), 
 				new ScribbleLoggerImpl(), props);
@@ -53,7 +57,8 @@ public class Activator implements BundleActivator {
         	
 			public Object addingService(ServiceReference ref) {
 				Object ret=super.addingService(ref);
-				System.out.println("VALIDATOR HAS BEEN ADDED: "+ret);
+				
+				_log.fine("Validator has been added: "+ret);
 				
 				vm.addValidator((Validator)ret);
 				
@@ -62,7 +67,6 @@ public class Activator implements BundleActivator {
         };
         
         m_tracker.open();
-
 	}
 
 	/*
