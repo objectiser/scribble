@@ -139,7 +139,19 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 								}
 							}
 							
-							ModelReference ref=new ModelReference(namespace, local, located, type);
+							String name=namespace;
+							
+							if (name.length() > 0) {
+								name += '.';
+							}
+							
+							name += local;
+							
+							if (located != null) {
+								name += ModelReference.LOCATED_REFERENCE_SEPARATOR + located;
+							}
+							
+							ModelReference ref=new ModelReference(name);
 							
 							String initDesc=notation.getInitialDescription(ref);
 							

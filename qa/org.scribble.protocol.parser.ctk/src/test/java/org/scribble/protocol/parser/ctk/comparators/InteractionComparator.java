@@ -18,6 +18,7 @@ package org.scribble.protocol.parser.ctk.comparators;
 
 import java.util.Comparator;
 import org.scribble.core.model.*;
+import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
 public class InteractionComparator implements Comparator<ModelObject> {
 
@@ -26,7 +27,14 @@ public class InteractionComparator implements Comparator<ModelObject> {
 		Interaction m=(Interaction)arg0;
 		Interaction e=(Interaction)arg1;
 		
-		if (m.getMessageSignature().equals(e.getMessageSignature()) == false) {
+		Comparator<ModelObject> mscomp=
+			ComparatorUtil.getComparator(MessageSignature.class);
+		
+		Comparator<ModelObject> pcomp=
+			ComparatorUtil.getComparator(Participant.class);
+		
+		if (mscomp.compare(m.getMessageSignature(),
+					e.getMessageSignature()) != 0) {
 			return(1);
 		}
 		
@@ -34,7 +42,8 @@ public class InteractionComparator implements Comparator<ModelObject> {
 			if (e.getFromParticipant() != null) {
 				return(1);
 			}
-		} else if (m.getFromParticipant().equals(e.getFromParticipant()) == false) {
+		} else if (pcomp.compare(m.getFromParticipant(),
+				e.getFromParticipant()) != 0) {
 			return(1);
 		}
 		
@@ -42,7 +51,8 @@ public class InteractionComparator implements Comparator<ModelObject> {
 			if (e.getToParticipant() != null) {
 				return(1);
 			}
-		} else if (m.getToParticipant().equals(e.getToParticipant()) == false) {
+		} else if (pcomp.compare(m.getToParticipant(),
+				e.getToParticipant()) != 0) {
 			return(1);
 		}
 		

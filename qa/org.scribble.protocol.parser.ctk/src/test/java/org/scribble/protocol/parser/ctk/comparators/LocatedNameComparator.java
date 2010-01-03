@@ -19,14 +19,14 @@ package org.scribble.protocol.parser.ctk.comparators;
 import java.util.Comparator;
 import org.scribble.core.model.*;
 
-public class ParticipantComparator implements Comparator<ModelObject> {
+public class LocatedNameComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		Participant m=(Participant)arg0;
-		Participant e=(Participant)arg1;
+		LocatedName m=(LocatedName)arg0;
+		LocatedName e=(LocatedName)arg1;
 		
-		if (m.getName().equals(e.getName())) {
+		if (m.equals(e)) {
 			return(0);
 		}
 		

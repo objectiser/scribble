@@ -81,6 +81,7 @@ public class Model<T extends Definition> extends ModelObject {
 	 * 				references
 	 * @return The list of local model references
 	 */
+	/*
 	public java.util.List<ModelReference> getLocalModels(final ModelReference template) {
 		final java.util.List<ModelReference> localModelRefs=
 					new java.util.Vector<ModelReference>();
@@ -144,6 +145,7 @@ public class Model<T extends Definition> extends ModelObject {
 		
 		return(localModelRefs);
 	}
+	*/
 
 	/**
 	 * This method returns the definition associated with

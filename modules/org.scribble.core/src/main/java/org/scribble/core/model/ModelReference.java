@@ -27,10 +27,8 @@ public class ModelReference extends ModelObject {
 	/**
 	 * This is the constructor for the model reference.
 	 * 
-	 * @param notation The notation
 	 */
 	public ModelReference() {
-		//m_notation = notation;
 		
 		// Mark as placeholder, until either alias or
 		// local part set
@@ -43,12 +41,9 @@ public class ModelReference extends ModelObject {
 	 * @param ref The reference to copy
 	 */
 	public ModelReference(ModelReference ref) {
-		m_alias = ref.m_alias;
-		m_namespace = ref.m_namespace;
-		m_localpart = ref.m_localpart;
+		m_name = ref.m_name;
 		m_subDefinitionPath = new SubDefinitionPath(ref.getSubDefinitionPath());
-		m_locatedRole = ref.m_locatedRole;
-		m_notation = ref.m_notation;
+		m_locatedParticipant = ref.m_locatedParticipant;
 		m_inner = ref.m_inner;
 		m_fullyQualified = ref.m_fullyQualified;
 		
@@ -69,50 +64,40 @@ public class ModelReference extends ModelObject {
 	/**
 	 * This is the constructor for the model reference.
 	 * 
-	 * @param namespace The namespace
-	 * @param localpart The localpart
-	 * @param located The optional located role
-	 * @param notation The notation
+	 * @param name The name
 	 */
-	public ModelReference(String namespace, String localpart,
-					String located, String notation) {
-		m_namespace = namespace;
-		m_localpart = localpart;
-		m_locatedRole = located;
-		m_notation = notation;
-
+	public ModelReference(String name) {
+		setName(name);
 	}
 	
 	/**
-	 * This method returns the alias.
+	 * This method returns the name associated with the
+	 * model reference.
 	 * 
-	 * @return The alias
+	 * @return The name
 	 */
-	public String getAlias() {
-		String ret=m_alias;
-
-		// If alias not defined, then use local part
-		// (The getLocalpart method will do the reverse,
-		// so if only one field is defined, then they
-		// will be treated as the same).
-		if (ret == null) {
-			ret = m_localpart;
+	public String getName() {
+		return(m_name);
+	}
+	
+	/**
+	 * This method sets the name associated with the
+	 * model reference.
+	 * 
+	 * @param name The name
+	 */
+	public void setName(String name) {
+		m_name = name;
+		m_locatedParticipant = null;
+		
+		if (m_name != null) {
+			// Find located participant part
+			int ind=m_name.indexOf(LOCATED_REFERENCE_SEPARATOR);
+			
+			if (ind != -1) {
+				m_locatedParticipant = m_name.substring(ind+1);
+			}
 		}
-		
-		return(ret);
-	}
-	
-	/**
-	 * This method sets the alias.
-	 * 
-	 * @param alias The alias
-	 */
-	public void setAlias(String alias) {
-		m_alias = alias;
-		
-		// If the alias is set, then model reference
-		// is not a placeholder
-		m_placeholder = false;
 	}
 	
 	/**
@@ -121,16 +106,14 @@ public class ModelReference extends ModelObject {
 	 * @return The namespace
 	 */
 	public String getNamespace() {
-		return(m_namespace);
-	}
-	
-	/**
-	 * This method sets the namespace.
-	 * 
-	 * @param namespace The namespace
-	 */
-	public void setNamespace(String namespace) {
-		m_namespace = namespace;
+		String ret="";
+		int ind=-1;
+		
+		if (m_name != null && (ind=m_name.lastIndexOf('.')) != -1) {
+			ret = m_name.substring(0, ind);
+		}
+		
+		return(ret);
 	}
 	
 	/**
@@ -139,30 +122,21 @@ public class ModelReference extends ModelObject {
 	 * @return The localpart
 	 */
 	public String getLocalpart() {
-		String ret=m_localpart;
+		String ret="";
 		
-		// If local part not defined, then use alias
-		// (The getAlias method will do the reverse,
-		// so if only one field is defined, then they
-		// will be treated as the same).
-		if (ret == null) {
-			ret = m_alias;
+		if (m_name != null) {
+			int start=m_name.lastIndexOf('.');
+			
+			int end=m_name.lastIndexOf(ModelReference.LOCATED_REFERENCE_SEPARATOR);
+			
+			if (end == -1) {
+				end = m_name.length();
+			}
+			
+			ret = m_name.substring(start+1, end);
 		}
-
-		return(ret);
-	}
-	
-	/**
-	 * This method sets the localpart.
-	 * 
-	 * @param localpart The localpart
-	 */
-	public void setLocalpart(String localpart) {
-		m_localpart = localpart;
 		
-		// If the local part is set, then model reference
-		// is not a placeholder
-		m_placeholder = false;
+		return(ret);
 	}
 	
 	/**
@@ -177,43 +151,13 @@ public class ModelReference extends ModelObject {
 	}
 	
 	/**
-	 * This method returns the located role associated
+	 * This method returns the located participant associated
 	 * with the model reference.
 	 * 
-	 * @return The located role
+	 * @return The located participant, or null if not located
 	 */
-	public String getLocatedRole() {
-		return(m_locatedRole);
-	}
-	
-	/**
-	 * This method sets the located role associated
-	 * with the model reference.
-	 * 
-	 * @param located The located role
-	 */
-	public void setLocatedRole(String located) {
-		m_locatedRole = located;
-	}
-	
-	/**
-	 * This method returns the notation code associated with the
-	 * model reference.
-	 * 
-	 * @return The notation code
-	 */
-	public String getNotation() {
-		return(m_notation);
-	}
-	
-	/**
-	 * This method sets the notation code associated with the
-	 * model reference.
-	 * 
-	 * @param notation The notation code
-	 */
-	public void setNotation(String notation) {
-		m_notation = notation;
+	public String getLocatedParticipant() {
+		return(m_locatedParticipant);
 	}
 	
 	/**
@@ -259,7 +203,12 @@ public class ModelReference extends ModelObject {
 	 * @return Whether the reference has been resolved
 	 */
 	public boolean isResolved() {
-		return(m_namespace != null || isInner());
+		boolean ret=isInner();
+		
+		// TODO: Check if bound type
+		// Or could just be based on namespace being specified?
+		
+		return(ret);
 	}
 	
 	/**
@@ -353,24 +302,18 @@ public class ModelReference extends ModelObject {
 		if (other instanceof ModelReference) {
 			ModelReference ref=(ModelReference)other;
 			
-			ret = compare(m_namespace, ref.m_namespace);
-			
-			if (ret) {
-				ret = compare(m_localpart, ref.m_localpart);
-			}
+			ret = compare(m_name, ref.m_name);
 			
 			if (ret) {
 				ret = m_subDefinitionPath.equals(
 							ref.m_subDefinitionPath);
 			}
 			
+			/*
 			if (ret) {
 				ret = compare(m_locatedRole, ref.m_locatedRole);
 			}
-			
-			if (ret) {
-				ret = compare(m_notation, ref.m_notation);
-			}
+			*/			
 		}
 		
 		return(ret);
@@ -405,8 +348,8 @@ public class ModelReference extends ModelObject {
 	public int hashCode() {
 		int ret=0;
 		
-		if (getAlias() != null) {
-			ret = getAlias().hashCode();
+		if (getName() != null) {
+			ret = getName().hashCode();
 		}
 		
 		return(ret);
@@ -419,38 +362,27 @@ public class ModelReference extends ModelObject {
 	 * @return The textual representation
 	 */
 	public String toText() {
-		String ret=getNamespace();
-		
-		if (ret == null) {
-			ret = getAlias();
-		} else {
-			ret += "."+getAlias();
-		}
-		
-		if (getLocatedRole() != null) {
-			ret += LOCATED_REFERENCE_SEPARATOR+getLocatedRole();
-		}
+		String ret=getName();
 		
 		return(ret);
 	}
 	
 	public String toString() {
 		String subdefnpath=m_subDefinitionPath.toString();
+		
+		if (subdefnpath.length() > 0) {
+			subdefnpath = "/"+subdefnpath;
+		}
 				
-		return("Ref["+getAlias()+" ns="+m_namespace+" lp="+
-				m_localpart+subdefnpath+" loc="+m_locatedRole+
-				" "+m_notation+"]");
+		return("Ref["+getName()+subdefnpath+"]");
 	}
 	
 	public static final String NAMESPACES_TO_MONITOR="NamespacesToMonitor";
 	public static final String LOCATED_REFERENCE_SEPARATOR="@";
 	
-	private String m_alias=null;
-	private String m_namespace=null;
-	private String m_localpart=null;
+	private String m_name=null;
 	private SubDefinitionPath m_subDefinitionPath=new SubDefinitionPath();
-	private String m_locatedRole=null;
-	private String m_notation=null;
+	private String m_locatedParticipant=null;
 	private boolean m_inner=false;
 	private boolean m_fullyQualified=false;
 	private boolean m_placeholder=false;

@@ -18,13 +18,38 @@ package org.scribble.protocol.parser.ctk.comparators;
 
 import java.util.Comparator;
 import org.scribble.core.model.*;
+import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
 public class MessageSignatureComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		Interaction m=(Interaction)arg0;
-		Interaction e=(Interaction)arg1;
+		MessageSignature m=(MessageSignature)arg0;
+		MessageSignature e=(MessageSignature)arg1;
+		
+		if (m.getOperation() == null &&
+				e.getOperation() == null) {
+			// Matches
+		} else if (m.getOperation() != null &&
+				e.getOperation() != null &&
+				m.getOperation().equals(e.getOperation())) {
+			// Matches
+		} else {
+			return(1);
+		}
+		
+		if (m.getTypes().size() != e.getTypes().size()) {
+			return(1);
+		}
+		
+		Comparator<ModelObject> trcomp=
+				ComparatorUtil.getComparator(TypeReference.class);
+		
+		for (int i=0; i < m.getTypes().size(); i++) {
+			if (trcomp.compare(m.getTypes().get(i), e.getTypes().get(i)) != 0) {
+				return(1);
+			}
+		}
 		
 		return(0);
 	}

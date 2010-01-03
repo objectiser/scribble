@@ -49,9 +49,9 @@ public class ProtocolNotation extends org.scribble.core.model.AbstractNotation {
 		buf.append("protocol ");
 		buf.append(ref.getLocalpart());
 		
-		if (ref.getLocatedRole() != null) {
+		if (ref.getLocatedParticipant() != null) {
 			buf.append(ModelReference.LOCATED_REFERENCE_SEPARATOR);
-			buf.append(ref.getLocatedRole());
+			buf.append(ref.getLocatedParticipant());
 			buf.append(" {\r\n\trole\tP;\r\n\r\n}\r\n");
 		} else {		
 			buf.append(" {\r\n\trole\tP1, P2;\r\n\r\n}\r\n");

@@ -26,18 +26,18 @@ public class RaiseValidatorRuleTest {
 		
 		Raise raise=new Raise();
 		TypeReference tref=new TypeReference();
-		tref.setNamespace("ns");
-		tref.setLocalpart("lp");
-		tref.setNotation("spr");
+		tref.setName("ns.lp");
+		//tref.setLocalpart("lp");
+		//tref.setNotation("spr");
 		raise.setType(tref);
 		
 		TryEscape te=new TryEscape();
 		te.getBlock().getContents().add(raise);
 		
 		TypeReference catchType=new TypeReference();
-		catchType.setNamespace("ns");
-		catchType.setLocalpart("lp");
-		catchType.setNotation("spr");
+		catchType.setName("ns.lp");
+		//catchType.setLocalpart("lp");
+		//catchType.setNotation("spr");
 		
 		CatchBlock cb=new CatchBlock();
 		cb.setType(catchType);
@@ -58,18 +58,18 @@ public class RaiseValidatorRuleTest {
 		
 		Raise raise=new Raise();
 		TypeReference tref=new TypeReference();
-		tref.setNamespace("ns");
-		tref.setLocalpart("lp1");
-		tref.setNotation("spr");
+		tref.setName("ns.lp1");
+		//tref.setLocalpart("lp1");
+		//tref.setNotation("spr");
 		raise.setType(tref);
 		
 		TryEscape te=new TryEscape();
 		te.getBlock().getContents().add(raise);
 		
 		TypeReference catchType=new TypeReference();
-		catchType.setNamespace("ns");
-		catchType.setLocalpart("lp2");
-		catchType.setNotation("spr");
+		catchType.setName("ns.lp2");
+		//catchType.setLocalpart("lp2");
+		//catchType.setNotation("spr");
 		
 		CatchBlock cb=new CatchBlock();
 		cb.setType(catchType);

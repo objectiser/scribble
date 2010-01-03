@@ -27,19 +27,6 @@ import org.scribble.protocol.parser.ctk.comparators.*;
 
 public class ProtocolParserTest {
 	
-	private static java.util.Map<Class<? extends ModelObject>,Comparator<ModelObject>> m_comparators=
-			new java.util.HashMap<Class<? extends ModelObject>,Comparator<ModelObject>>();
-	
-	static {
-		m_comparators.put(Namespace.class, new NamespaceComparator());
-		m_comparators.put(Model.class, new ModelComparator());
-		m_comparators.put(Protocol.class, new ProtocolComparator());
-		m_comparators.put(Block.class, new BlockComparator());
-		m_comparators.put(ParticipantList.class, new ParticipantListComparator());
-		m_comparators.put(Participant.class, new ParticipantComparator());
-		m_comparators.put(Interaction.class, new InteractionComparator());
-	}
-	
 	public Model<Protocol> getModel(String filename, ScribbleLogger logger) {
 		Model<Protocol> ret=null;
 		
@@ -100,7 +87,7 @@ public class ProtocolParserTest {
 						elist.get(i).getClass());
 			} else {
 				Comparator<ModelObject> comparator=
-					m_comparators.get(mlist.get(i).getClass());
+					ComparatorUtil.getComparator(mlist.get(i).getClass());
 				
 				if (comparator == null) {
 					fail("No comparator found for type: "+mlist.get(i).getClass());
@@ -183,7 +170,7 @@ public class ProtocolParserTest {
 		
 		MessageSignature ms=new MessageSignature();
 		TypeReference tref=new TypeReference();
-		tref.setLocalpart("Order");
+		tref.setName("Order");
 		ms.getTypes().add(tref);
 		interaction.setMessageSignature(ms);
 		interaction.setFromParticipant(buyer);

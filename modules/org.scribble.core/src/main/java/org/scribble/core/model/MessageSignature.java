@@ -76,7 +76,7 @@ public class MessageSignature extends ModelObject {
 			if (i > 0) {
 				ret += ",";
 			}
-			ret += m_types.get(i).getAlias();	
+			ret += m_types.get(i).getName();	
 		}
 		
 		if (getOperation() != null &&

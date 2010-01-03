@@ -246,9 +246,10 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 							
 							String token=m_propertyToken.get(pds[i].getName());
 							
-							if (token == null ||
+							if ((token == null ||
 									(m_currentToken != null && 
-										token.equals(m_currentToken.getText()))) {
+										token.equals(m_currentToken.getText()))) &&
+										pds[i].getWriteMethod() != null) {
 								pd = pds[i];
 							}
 						} else if (pds[i].getPropertyType() == java.util.List.class) {

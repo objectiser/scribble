@@ -16,20 +16,6 @@
  */
 package org.scribble.protocol.parser.ctk.comparators;
 
-import java.util.Comparator;
-import org.scribble.core.model.*;
+public class TypeReferenceComparator extends ModelReferenceComparator {
 
-public class ParticipantComparator implements Comparator<ModelObject> {
-
-	@Override
-	public int compare(ModelObject arg0, ModelObject arg1) {
-		Participant m=(Participant)arg0;
-		Participant e=(Participant)arg1;
-		
-		if (m.getName().equals(e.getName())) {
-			return(0);
-		}
-		
-		return(1);
-	}
 }
