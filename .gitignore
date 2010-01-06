@@ -1,4 +1,3 @@
-.project
 modules/*/target
 modules/*/bin
 qa/*/target
