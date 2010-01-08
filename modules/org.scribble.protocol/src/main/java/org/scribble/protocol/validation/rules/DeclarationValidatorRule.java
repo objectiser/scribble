@@ -18,7 +18,7 @@ package org.scribble.protocol.validation.rules;
 
 import java.util.logging.Logger;
 
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 import org.scribble.protocol.model.Block;
 import org.scribble.protocol.model.Declaration;
 import org.scribble.protocol.model.Definition;
@@ -82,7 +82,7 @@ public class DeclarationValidatorRule implements ComponentValidatorRule {
 							
 							if (decl.getName() != null &&
 									elem.getName().equals(decl.getName())) {
-								logger.error(org.scribble.core.util.MessageUtil.format(
+								logger.error(org.scribble.common.util.MessageUtil.format(
 										java.util.PropertyResourceBundle.getBundle(
 										"org.scribble.protocol.validation.rules.Messages"),
 											"_EXISTING_DECLARATION",

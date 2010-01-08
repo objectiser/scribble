@@ -16,7 +16,7 @@
  */
 package org.scribble.protocol.validation.rules;
 
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 import org.scribble.protocol.model.Interaction;
 import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.model.Participant;
@@ -67,7 +67,7 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 			if (locatedRole == null || elem.getToParticipant() == null ||
 					locatedRole.equals(elem.getToParticipant().getName())) {
 			
-				logger.error(org.scribble.core.util.MessageUtil.format(
+				logger.error(org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle("org.scribble.validation.Messages"),
 						"_INTERACTION_ROLE",
 						new String[]{"from"}), obj.getProperties());
@@ -83,7 +83,7 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 			if (locatedRole == null || elem.getFromParticipant() == null ||
 					locatedRole.equals(elem.getFromParticipant().getName())) {
 			
-				logger.error(org.scribble.core.util.MessageUtil.format(
+				logger.error(org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle("org.scribble.validation.Messages"),
 						"_INTERACTION_ROLE",
 						new String[]{"to"}), obj.getProperties());

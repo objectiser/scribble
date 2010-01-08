@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 
 public class EclipseScribbleLogger implements ScribbleLogger {
 

@@ -82,7 +82,7 @@ public class RaiseValidatorRuleTest {
 		rule.validate(raise, logger);
 		
 		logger.verifyErrors(new String[]{
-				org.scribble.core.util.MessageUtil.format(
+				org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle(
 						"org.scribble.protocol.validation.rules.Messages"),
 							"_RAISED_TYPE_NOT_CAUGHT",

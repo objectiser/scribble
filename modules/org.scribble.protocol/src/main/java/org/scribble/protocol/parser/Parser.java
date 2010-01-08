@@ -16,7 +16,7 @@
  */
 package org.scribble.protocol.parser;
 
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 import org.scribble.protocol.model.Model;
 
 public interface Parser<T extends Model<?>> {

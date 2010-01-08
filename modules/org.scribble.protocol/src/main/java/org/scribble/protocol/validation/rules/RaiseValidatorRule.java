@@ -18,7 +18,7 @@ package org.scribble.protocol.validation.rules;
 
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.validation.ComponentValidatorRule;
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 
 public class RaiseValidatorRule implements ComponentValidatorRule {
 
@@ -57,7 +57,7 @@ public class RaiseValidatorRule implements ComponentValidatorRule {
 			}
 			
 			if (f_found == false) {
-				logger.error(org.scribble.core.util.MessageUtil.format(
+				logger.error(org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle(
 						"org.scribble.protocol.validation.rules.Messages"),
 							"_RAISED_TYPE_NOT_CAUGHT",

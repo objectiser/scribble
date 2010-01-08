@@ -21,7 +21,7 @@
     </dependency>
     <dependency>
       <groupId>org.scribble.modules</groupId>
-      <artifactId>org.scribble.core</artifactId>
+      <artifactId>org.scribble.common</artifactId>
       <version>${scribble.version}</version>
     </dependency>
     <dependency>
@@ -31,7 +31,7 @@
     </dependency>
     <dependency>
       <groupId>org.scribble.modules</groupId>
-      <artifactId>org.scribble.conformance</artifactId>
+      <artifactId>org.scribble.protocol.conformance</artifactId>
       <version>${scribble.version}</version>
     </dependency>
     <dependency>

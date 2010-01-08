@@ -28,8 +28,8 @@ import org.scribble.command.conforms.ConformsCommand;
 import org.scribble.command.parse.ParseCommand;
 import org.scribble.command.validate.ValidateCommand;
 import org.scribble.command.*;
-import org.scribble.conformance.Conformer;
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.protocol.conformance.Conformer;
 import org.scribble.protocol.parser.ProtocolParser;
 import org.scribble.protocol.validation.ValidationManager;
 

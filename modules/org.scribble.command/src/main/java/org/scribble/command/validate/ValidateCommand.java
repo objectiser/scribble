@@ -16,7 +16,7 @@
  */
 package org.scribble.command.validate;
 
-import org.scribble.core.logger.*;
+import org.scribble.common.logger.*;
 import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.parser.ProtocolParser;
 import org.scribble.protocol.validation.ValidationManager;

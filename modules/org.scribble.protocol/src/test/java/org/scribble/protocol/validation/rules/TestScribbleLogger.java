@@ -19,7 +19,7 @@ package org.scribble.protocol.validation.rules;
 import java.io.Serializable;
 import java.util.Map;
 
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 
 import static org.junit.Assert.*;
 

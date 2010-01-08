@@ -15,11 +15,11 @@
 	</parent>
 
 	<modules>
-		<module>org.scribble.core</module>
+		<module>org.scribble.common</module>
 		<module>org.scribble.protocol</module>
 		<module>org.scribble.protocol.parser</module>
-		<module>org.scribble.validator.connectedness</module>
-		<module>org.scribble.conformance</module>
+		<module>org.scribble.protocol.validation.connectedness</module>
+		<module>org.scribble.protocol.conformance</module>
 		<module>org.scribble.command</module>
 	</modules>
 

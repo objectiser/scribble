@@ -16,7 +16,6 @@
  */
 package org.scribble.protocol.validation;
 
-
 public class DefaultValidationManager implements ValidationManager {
 	
 	public void addValidator(Validator validator) {
@@ -28,7 +27,7 @@ public class DefaultValidationManager implements ValidationManager {
 	}
 
 	public void validate(org.scribble.protocol.model.Model<?> model,
-				org.scribble.core.logger.ScribbleLogger logger) {
+				org.scribble.common.logger.ScribbleLogger logger) {
 	
 		for (Validator v : m_validators) {
 			v.validate(model, logger);

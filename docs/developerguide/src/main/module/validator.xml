@@ -115,7 +115,7 @@
 		avoids dependency on specific bundles, and instead
 		just identifies the packages required). For this
 		example validator, we just need to add the packages
-		from the <emphasis>org.scribble.core</emphasis> bundle
+		from the <emphasis>org.scribble.common</emphasis> bundle
 		which is used by all Scribble plugins. However if
 		additional packages were required, then they could be
 		added as imported packages.
@@ -135,12 +135,12 @@
 		model, but possibly only be interested in certain parts
 		of it. Therefore usually the validation modules will
 		define an implementation of the
-		<filename>org.scribble.core.model.Visitor</filename> interface.
+		<filename>org.scribble.protocol.model.Visitor</filename> interface.
 		</para>
 		
 		<para>
 		The actual main class within the validator module would
-		implement the <filename>org.scribble.core.validation.Validator</filename>
+		implement the <filename>org.scribble.protocol.validation.Validator</filename>
 		interface.
 		</para>
 	</section>

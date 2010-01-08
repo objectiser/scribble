@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 import java.util.Comparator;
 
-import org.scribble.core.logger.*;
+import org.scribble.common.logger.*;
 import org.scribble.protocol.model.*;
 
 public class ProtocolParserTest {

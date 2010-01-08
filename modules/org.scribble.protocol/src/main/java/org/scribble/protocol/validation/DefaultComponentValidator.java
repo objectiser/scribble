@@ -16,7 +16,7 @@
  */
 package org.scribble.protocol.validation;
 
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 import org.scribble.protocol.model.ModelObject;
 
 import java.util.logging.*;

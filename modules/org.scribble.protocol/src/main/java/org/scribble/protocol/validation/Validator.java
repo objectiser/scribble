@@ -19,6 +19,6 @@ package org.scribble.protocol.validation;
 public interface Validator {
 
 	public void validate(org.scribble.protocol.model.Model<?> model,
-			org.scribble.core.logger.ScribbleLogger logger);
+			org.scribble.common.logger.ScribbleLogger logger);
 
 }

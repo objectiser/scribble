@@ -16,8 +16,8 @@
  */
 package org.scribble.command.conforms;
 
-import org.scribble.conformance.Conformer;
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.protocol.conformance.Conformer;
 import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.parser.ProtocolParser;
 

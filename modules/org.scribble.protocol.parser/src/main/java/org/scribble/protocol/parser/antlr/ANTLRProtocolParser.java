@@ -22,7 +22,7 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ProtocolParser;
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 
 public class ANTLRProtocolParser implements ProtocolParser {
 

@@ -16,7 +16,7 @@
  */
 package org.scribble.command.parse;
 
-import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.common.logger.ScribbleLogger;
 import org.scribble.protocol.parser.ProtocolParser;
 
 public class ParseCommand implements org.scribble.command.Command {

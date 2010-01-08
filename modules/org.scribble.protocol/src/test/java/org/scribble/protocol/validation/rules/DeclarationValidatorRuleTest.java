@@ -69,7 +69,7 @@ public class DeclarationValidatorRuleTest {
 		rule.validate(decl2, logger);
 		
 		logger.verifyErrors(new String[]{
-				org.scribble.core.util.MessageUtil.format(
+				org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle(
 						"org.scribble.protocol.validation.rules.Messages"),
 							"_EXISTING_DECLARATION",
@@ -103,7 +103,7 @@ public class DeclarationValidatorRuleTest {
 		rule.validate(decl2, logger);
 		
 		logger.verifyErrors(new String[]{
-				org.scribble.core.util.MessageUtil.format(
+				org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle(
 						"org.scribble.protocol.validation.rules.Messages"),
 							"_EXISTING_DECLARATION",
@@ -141,7 +141,7 @@ public class DeclarationValidatorRuleTest {
 		rule.validate(decl2, logger);
 		
 		logger.verifyErrors(new String[]{
-				org.scribble.core.util.MessageUtil.format(
+				org.scribble.common.util.MessageUtil.format(
 						java.util.PropertyResourceBundle.getBundle(
 						"org.scribble.protocol.validation.rules.Messages"),
 							"_EXISTING_DECLARATION",

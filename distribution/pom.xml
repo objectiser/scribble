@@ -42,7 +42,7 @@
     </dependency>
     <dependency>
       <groupId>org.scribble.modules</groupId>
-      <artifactId>org.scribble.core</artifactId>
+      <artifactId>org.scribble.common</artifactId>
       <version>${scribble.version}</version>
     </dependency>
     <dependency>

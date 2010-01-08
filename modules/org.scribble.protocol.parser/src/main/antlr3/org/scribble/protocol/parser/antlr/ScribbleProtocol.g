@@ -21,7 +21,7 @@ package org.scribble.protocol.parser.antlr;
 }
    
 @members {
-	private org.scribble.core.logger.ScribbleLogger m_logger=null;
+	private org.scribble.common.logger.ScribbleLogger m_logger=null;
 	
 	public static void main(String[] args) throws Exception {
         ScribbleProtocolLexer lex = new ScribbleProtocolLexer(new ANTLRFileStream(args[0]));
@@ -48,7 +48,7 @@ package org.scribble.protocol.parser.antlr;
         }
     }
     
-    public void setLogger(org.scribble.core.logger.ScribbleLogger logger) {
+    public void setLogger(org.scribble.common.logger.ScribbleLogger logger) {
     	m_logger = logger;
     }
     

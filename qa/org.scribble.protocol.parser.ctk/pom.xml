@@ -5,7 +5,7 @@
   <artifactId>org.scribble.protocol.parser.ctk</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Scribble::QA::ProtocolParser::CTK</name>
+  <name>Scribble::QA::Protocol::Parser::CTK</name>
 
   <parent>
     <groupId>org.scribble</groupId>
@@ -16,7 +16,7 @@
   <dependencies>
     <dependency>
       <groupId>org.scribble.modules</groupId>
-      <artifactId>org.scribble.core</artifactId>
+      <artifactId>org.scribble.common</artifactId>
       <version>${scribble.version}</version>
     </dependency>
     <dependency>

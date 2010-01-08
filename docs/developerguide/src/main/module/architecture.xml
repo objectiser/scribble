@@ -76,7 +76,7 @@
 			There is a generic logging API within the Scribble
 			framework that can be used for reporting errors,
 			warnings, information or debuging details.
-			This API is <emphasis>org.scribble.core.logging.ScribbleLogger</emphasis>.
+			This API is <emphasis>org.scribble.common.logging.ScribbleLogger</emphasis>.
 			</para>
 			
 			<para>
@@ -108,9 +108,9 @@
 				</para>	
 				
 				<programlisting>
-logger.error(org.scribble.core.util.MessageUtil.format(
+logger.error(org.scribble.common.util.MessageUtil.format(
 				java.util.PropertyResourceBundle.getBundle(
-						"org.scribble.core.validation.rules.Messages"),
+						"org.scribble.common.validation.rules.Messages"),
 										"_EXISTING_DECLARATION",
 										new String[]{elem.getName()}),
 										obj.getProperties());
@@ -172,20 +172,20 @@ _EXISTING_DECLARATION=Declaration already exists for name '{0}'
 		</section>
 		
 		<section>
-			<title>Validation Manager and Validators</title>
+			<title>Protocol Validation Manager and Validators</title>
 			
 			<para>
 			The validation manager, when used in a OSGi runtime
 			environment, will listen for the activation of any
 			implementations of the
-			<filename>org.scribble.core.validation.Validator</filename>
+			<filename>org.scribble.protocol.validation.Validator</filename>
 			interface.
 			</para>
 			
 			<para>
 			This means that the validation of any model can be
 			performed using the 
-			<emphasis>org.scribble.core.validation.ValidationManager</emphasis>,
+			<emphasis>org.scribble.protocol.validation.ValidationManager</emphasis>,
 			rather than having to obtain instances of
 			multiple implementations of the <filename>Validator</filename>
 			interface.
