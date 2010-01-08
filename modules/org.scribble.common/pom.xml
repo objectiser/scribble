@@ -20,10 +20,6 @@
       <version>${osgi.version}</version>
     </dependency>
    <dependency>
-      <groupId>org.apache.felix</groupId>
-      <artifactId>org.apache.felix.framework</artifactId>      
-    </dependency>
-   <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>      
       <scope>test</scope>

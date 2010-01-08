@@ -28,8 +28,8 @@ public interface Conformer {
 	 * @param ref The reference model
 	 * @param logger The logger
 	 */
-	public void conforms(org.scribble.protocol.model.Model<?> model,
-			org.scribble.protocol.model.Model<?> ref,
+	public void conforms(org.scribble.protocol.model.ProtocolModel model,
+			org.scribble.protocol.model.ProtocolModel ref,
 				ScribbleLogger logger);
 	
 }

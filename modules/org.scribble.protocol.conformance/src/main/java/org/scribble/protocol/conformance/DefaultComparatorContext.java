@@ -157,7 +157,7 @@ public class DefaultComparatorContext implements ComparatorContext {
 			// can be navigated
 			String mesg=org.scribble.common.util.MessageUtil.format(
 					java.util.PropertyResourceBundle.getBundle(
-					"org.scribble.conformance.Messages").
+					"org.scribble.protocol.conformance.Messages").
 					getString("_UNEXPECTED_BEHAVIOUR"), null);
 			
 			/*

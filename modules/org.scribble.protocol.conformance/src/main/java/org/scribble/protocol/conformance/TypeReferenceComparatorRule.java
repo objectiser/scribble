@@ -71,7 +71,7 @@ public class TypeReferenceComparatorRule implements ComparatorRule {
 		if ((ret = mtr.equals(rtr)) == false) {
 			String mesg=org.scribble.common.util.MessageUtil.format(
 					java.util.PropertyResourceBundle.getBundle(
-					"org.scribble.conformance.Messages").
+					"org.scribble.protocol.conformance.Messages").
 					getString("_TYPE_MISMATCH"),
 					new String[]{rtr.getName()});
 			

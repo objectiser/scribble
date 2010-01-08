@@ -1,0 +1,10 @@
+namespace example.helloworld;
+
+import my.types.Order;
+
+protocol test {
+	participant Buyer, Seller, ARole, BRole;
+
+	Order from Buyer to Seller;
+	Order from ARole to BRole;
+}

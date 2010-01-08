@@ -16,13 +16,7 @@
  */
 package org.scribble.protocol.validation.rules;
 
-import org.scribble.protocol.model.Block;
-import org.scribble.protocol.model.Definition;
-import org.scribble.protocol.model.Interaction;
-import org.scribble.protocol.model.TestDeclaration;
-import org.scribble.protocol.model.TestDefinition;
-import org.scribble.protocol.model.TestMultiPathBehaviour;
-import org.scribble.protocol.model.TestSinglePathBehaviour;
+import org.scribble.protocol.model.*;
 import org.scribble.protocol.validation.rules.DeclarationValidatorRule;
 
 public class DeclarationValidatorRuleTest {
@@ -113,7 +107,7 @@ public class DeclarationValidatorRuleTest {
 	
 	@org.junit.Test
 	public void testValidateDuplicateInMultiPathBehaviour() {
-		Definition defn=new TestDefinition();
+		Protocol defn=new Protocol();
 		TestDeclaration decl1=new TestDeclaration();
 		decl1.setName(TEST_NAME);
 

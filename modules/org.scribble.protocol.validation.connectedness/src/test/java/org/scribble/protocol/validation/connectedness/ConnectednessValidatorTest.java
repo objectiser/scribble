@@ -16,10 +16,11 @@
  */
 package org.scribble.protocol.validation.connectedness;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
 import org.scribble.protocol.model.Interaction;
-import org.scribble.protocol.model.Model;
+import org.scribble.protocol.model.Protocol;
+import org.scribble.protocol.model.ProtocolModel;
 import org.scribble.protocol.model.Participant;
 import org.scribble.protocol.validation.connectedness.ConnectednessValidator;
 
@@ -28,9 +29,9 @@ public class ConnectednessValidatorTest {
 	@org.junit.Test
 	public void testInteractionReqResp() {
 		
-		Model<TestDefinition> model=new Model<TestDefinition>();
+		ProtocolModel model=new ProtocolModel();
 
-		TestDefinition defn=new TestDefinition();
+		Protocol defn=new Protocol();
 		model.setDefinition(defn);
 		
 		Interaction interaction1=new Interaction();
@@ -62,9 +63,9 @@ public class ConnectednessValidatorTest {
 	
 	@org.junit.Test
 	public void testInteractionsDisconnected() {
-		Model<TestDefinition> model=new Model<TestDefinition>();
+		ProtocolModel model=new ProtocolModel();
 
-		TestDefinition defn=new TestDefinition();
+		Protocol defn=new Protocol();
 		model.setDefinition(defn);
 		
 		Interaction interaction1=new Interaction();

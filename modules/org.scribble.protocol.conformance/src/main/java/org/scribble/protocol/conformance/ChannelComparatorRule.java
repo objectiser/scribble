@@ -76,7 +76,7 @@ public class ChannelComparatorRule implements ComparatorRule {
 		if (ret == false) {
 			String mesg=org.scribble.common.util.MessageUtil.format(
 					java.util.PropertyResourceBundle.getBundle(
-					"org.scribble.conformance.Messages").
+					"org.scribble.protocol.conformance.Messages").
 					getString("_CHANNEL_MISMATCH"),
 							new String[]{mainName, refName});
 			

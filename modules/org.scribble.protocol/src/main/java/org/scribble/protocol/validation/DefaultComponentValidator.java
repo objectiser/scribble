@@ -40,7 +40,7 @@ public class DefaultComponentValidator implements Validator {
 		return(m_rules.get(cls));
 	}
 
-	public void validate(org.scribble.protocol.model.Model<?> model,
+	public void validate(org.scribble.protocol.model.ProtocolModel model,
 						ScribbleLogger logger) {
 		
 		model.visit(new ValidatingVisitor(logger));

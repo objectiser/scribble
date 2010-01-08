@@ -17,12 +17,12 @@
 package org.scribble.protocol.validation.connectedness;
 
 import org.scribble.common.logger.ScribbleLogger;
-import org.scribble.protocol.model.Model;
+import org.scribble.protocol.model.ProtocolModel;
 import org.scribble.protocol.validation.Validator;
 
 public class ConnectednessValidator implements Validator {
 
-	public void validate(Model<?> model, ScribbleLogger logger) {
+	public void validate(ProtocolModel model, ScribbleLogger logger) {
 		ConnectednessVisitor visitor=new ConnectednessVisitor(logger);
 		
 		model.visit(visitor);

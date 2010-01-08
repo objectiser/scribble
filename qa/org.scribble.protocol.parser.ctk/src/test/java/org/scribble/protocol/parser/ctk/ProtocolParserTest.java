@@ -25,8 +25,8 @@ import org.scribble.protocol.model.*;
 
 public class ProtocolParserTest {
 	
-	public Model<Protocol> getModel(String filename, ScribbleLogger logger) {
-		Model<Protocol> ret=null;
+	public ProtocolModel getModel(String filename, ScribbleLogger logger) {
+		ProtocolModel ret=null;
 		
 		java.io.InputStream is=
 				ClassLoader.getSystemResourceAsStream("tests/"+
@@ -65,7 +65,7 @@ public class ProtocolParserTest {
 	 * @param model The model constructed by the parser
 	 * @param expected The expected model
 	 */
-	public void verify(Model<Protocol> model, Model<Protocol> expected) {
+	public void verify(ProtocolModel model, ProtocolModel expected) {
 		java.util.List<ModelObject> mlist=sequence(model);
 		java.util.List<ModelObject> elist=sequence(expected);
 		
@@ -106,7 +106,7 @@ public class ProtocolParserTest {
 	 * @param model The model
 	 * @return The list of model objects
 	 */
-	protected java.util.List<ModelObject> sequence(Model<Protocol> model) {
+	protected java.util.List<ModelObject> sequence(ProtocolModel model) {
 		final java.util.List<ModelObject> ret=new java.util.Vector<ModelObject>();
 		
 		model.visit(new Visitor() {
@@ -134,14 +134,14 @@ public class ProtocolParserTest {
 	public void testSingleInteraction() {
 		TestScribbleLogger logger=new TestScribbleLogger();
 		
-		Model<Protocol> model=getModel("SingleInteraction", logger);
+		ProtocolModel model=getModel("SingleInteraction", logger);
 		
 		assertNotNull(model);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Build expected model
-		Model<Protocol> expected=new Model<Protocol>();
+		ProtocolModel expected=new ProtocolModel();
 		
 		Namespace ns=new Namespace();
 		ns.setName("example.helloworld");

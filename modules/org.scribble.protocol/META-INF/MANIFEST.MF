@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.scribble.protocol
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.scribble.protocol.osgi.Activator
 Bundle-Vendor: www.scribble.org
-Import-Package: org.osgi.framework;version="1.3.0"
+Import-Package: org.osgi.framework,
+ org.osgi.util.tracker
 Require-Bundle: org.scribble.common
 Export-Package: org.scribble.protocol.model,
  org.scribble.protocol.parser,

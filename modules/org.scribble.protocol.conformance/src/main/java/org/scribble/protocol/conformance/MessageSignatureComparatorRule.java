@@ -89,7 +89,7 @@ public class MessageSignatureComparatorRule implements ComparatorRule {
 		} else {
 			String mesg=org.scribble.common.util.MessageUtil.format(
 					java.util.PropertyResourceBundle.getBundle(
-					"org.scribble.conformance.Messages").
+					"org.scribble.protocol.conformance.Messages").
 					getString("_MSIG_MISMATCH"),
 					new String[]{r.toString()});
 			

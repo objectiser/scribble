@@ -24,10 +24,15 @@ import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ProtocolParser;
 import org.scribble.common.logger.ScribbleLogger;
 
+/**
+ * This class provides the ANTLR implementation of the Protocol Parser
+ * interface.
+ *
+ */
 public class ANTLRProtocolParser implements ProtocolParser {
 
-	public Model<Protocol> parse(InputStream is, ScribbleLogger logger) {
-		Model<Protocol> ret=null;
+	public ProtocolModel parse(InputStream is, ScribbleLogger logger) {
+		ProtocolModel ret=null;
 		
         try {
             ScribbleProtocolLexer lex = new ScribbleProtocolLexer(new ANTLRInputStream(is));

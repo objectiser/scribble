@@ -16,8 +16,15 @@
  */
 package org.scribble.protocol.parser;
 
+import org.scribble.common.logger.ScribbleLogger;
 import org.scribble.protocol.model.*;
 
-public interface ProtocolParser extends Parser<Model<Protocol>> {
+/**
+ * This interface represents the protocol parser.
+ *
+ */
+public interface ProtocolParser {
+
+	public ProtocolModel parse(java.io.InputStream is, ScribbleLogger logger);
 
 }

@@ -26,7 +26,7 @@ public class DefaultValidationManager implements ValidationManager {
 		m_validators.remove(validator);
 	}
 
-	public void validate(org.scribble.protocol.model.Model<?> model,
+	public void validate(org.scribble.protocol.model.ProtocolModel model,
 				org.scribble.common.logger.ScribbleLogger logger) {
 	
 		for (Validator v : m_validators) {

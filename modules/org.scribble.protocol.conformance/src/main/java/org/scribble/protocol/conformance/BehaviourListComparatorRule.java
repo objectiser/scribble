@@ -94,7 +94,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 								if (isConditionalDecisionMaker(mainPoint) == false) {
 									String mesg=org.scribble.common.util.MessageUtil.format(
 										java.util.PropertyResourceBundle.getBundle(
-										"org.scribble.conformance.Messages").
+										"org.scribble.protocol.conformance.Messages").
 										getString("_UNEXPECTED_BEHAVIOUR"), null);
 								
 									//ModelIssue issue=new ModelIssue(mainPoint, mesg);
@@ -133,7 +133,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 									
 									String mesg=org.scribble.common.util.MessageUtil.format(
 											java.util.PropertyResourceBundle.getBundle(
-											"org.scribble.conformance.Messages").
+											"org.scribble.protocol.conformance.Messages").
 											getString("_EXPECTING_ACTIVITY"), null);
 										
 									/*
@@ -580,7 +580,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 							// role
 							
 							String mesg=java.util.PropertyResourceBundle.getBundle(
-									"org.scribble.conformance.Messages").
+									"org.scribble.protocol.conformance.Messages").
 									getString("_ADDITIONAL_UNMATCHED_REF_PATHS");
 							
 							/*
@@ -619,7 +619,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 								src.getBehaviourList().size() > 0) {
 		
 							String mesg=java.util.PropertyResourceBundle.getBundle(
-									"org.scribble.conformance.Messages").
+									"org.scribble.protocol.conformance.Messages").
 									getString("_ADDITIONAL_UNMATCHED_PATHS");
 					
 							/*

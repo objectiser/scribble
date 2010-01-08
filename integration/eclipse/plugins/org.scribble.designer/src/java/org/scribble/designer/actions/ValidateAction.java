@@ -26,7 +26,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.scribble.designer.DesignerServices;
 import org.scribble.designer.logger.EclipseScribbleLogger;
-import org.scribble.protocol.model.Model;
+import org.scribble.protocol.model.ProtocolModel;
 import org.scribble.protocol.model.Protocol;
 
 public class ValidateAction implements IObjectActionDelegate {
@@ -52,7 +52,7 @@ System.out.println("RUNNING VALIDATE ACTION");
 					
 					java.io.InputStream is=((IFile)res).getContents();
 					
-					Model<Protocol> model=
+					ProtocolModel model=
 						DesignerServices.getProtocolParser().parse(is,
 								logger);
 					

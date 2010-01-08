@@ -28,7 +28,7 @@ public class ComparatorUtil {
 
 	static {
 		m_comparators.put(Namespace.class, new NamespaceComparator());
-		m_comparators.put(Model.class, new ModelComparator());
+		m_comparators.put(ProtocolModel.class, new ModelComparator());
 		m_comparators.put(Protocol.class, new ProtocolComparator());
 		m_comparators.put(Block.class, new BlockComparator());
 		m_comparators.put(ParticipantList.class, new ParticipantListComparator());

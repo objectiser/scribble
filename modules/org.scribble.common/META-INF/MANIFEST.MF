@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.scribble.common
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.scribble.common.osgi.Activator
 Bundle-Vendor: www.scribble.org
-Import-Package: org.osgi.framework,
- org.osgi.util.tracker
+Import-Package: org.osgi.framework
 Export-Package: org.scribble.common.logger,
  org.scribble.common.util

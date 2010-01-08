@@ -61,7 +61,7 @@ public class ValidateCommand implements org.scribble.command.Command {
 				try {
 					java.io.InputStream is=new java.io.FileInputStream(f);
 			
-					org.scribble.protocol.model.Model<Protocol> model=
+					org.scribble.protocol.model.ProtocolModel model=
 							m_protocolParser.parse(is, m_logger);
 			
 					if (model != null) {

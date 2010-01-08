@@ -22,7 +22,7 @@ public interface ValidationManager {
 
 	public void removeValidator(Validator validator);
 
-	public void validate(org.scribble.protocol.model.Model<?> model,
+	public void validate(org.scribble.protocol.model.ProtocolModel model,
 				org.scribble.common.logger.ScribbleLogger logger);
 	
 }

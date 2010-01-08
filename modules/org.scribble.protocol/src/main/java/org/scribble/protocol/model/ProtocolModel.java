@@ -22,14 +22,14 @@ package org.scribble.protocol.model;
  * contained within derived classes.
  *
  */
-public class Model<T extends Definition> extends ModelObject {
+public class ProtocolModel extends ModelObject {
 
 	private static final long serialVersionUID = -1282833027993451521L;
 
 	/**
 	 * The default constructor for the model.
 	 */
-	public Model() {
+	public ProtocolModel() {
 	}
 	
 	/**
@@ -71,90 +71,13 @@ public class Model<T extends Definition> extends ModelObject {
 	}
 	
 	/**
-	 * This method returns a list of local model references
-	 * associated with a global conversation model. The
-	 * supplied reference provides the template for the
-	 * local model references.
-	 * 
-	 * @param template The global model reference that should
-	 * 				be used as the template for the local model
-	 * 				references
-	 * @return The list of local model references
-	 */
-	/*
-	public java.util.List<ModelReference> getLocalModels(final ModelReference template) {
-		final java.util.List<ModelReference> localModelRefs=
-					new java.util.Vector<ModelReference>();
-		
-		if (getDefinition() != null) {
-		
-			// Identify all of the roles defined in the
-			// top level definition
-			getDefinition().visit(new Visitor() {
-				
-				public void prepare(ModelObject obj) {
-				}
-				
-				public boolean visit(ModelObject obj) {
-					boolean ret=true;
-					
-					if (obj instanceof Definition &&
-							m_definition != obj) {
-						ret = false;
-						
-					} else if (obj instanceof ParticipantList &&
-							((ParticipantList)obj).isOpen() == false) {
-						ParticipantList plist=(ParticipantList)obj;
-						
-						for (int i=0; i < plist.getParticipants().size(); i++) {
-							Participant role=plist.getParticipants().get(i);
-							
-							// Create model reference for this role
-							ModelReference lref=
-								new ModelReference(template);
-							
-							lref.setLocatedRole(role.getName());
-							
-							Definition defn=plist.enclosingDefinition();
-							
-							while (defn != null &&
-										(defn.getParent() instanceof Model<?>) == false) {
-								lref.getSubDefinitionPath().addPathElement(0,
-											defn.getLocatedName().getName());
-								
-								ModelObject parent=defn.getParent();
-								
-								if (parent instanceof Activity) {
-									defn = ((Activity)defn.getParent()).enclosingDefinition();
-								} else {
-									defn = null;
-								}
-							}
-							
-							localModelRefs.add(lref);
-						}
-					}
-					
-					return(ret);
-				}
-				
-				public void conclude(ModelObject obj) {
-				}
-			});
-		}
-		
-		return(localModelRefs);
-	}
-	*/
-
-	/**
 	 * This method returns the definition associated with
 	 * this model.
 	 * 
 	 * @return The definition
 	 */
 	@Reference(containment=true)
-	public T getDefinition() {
+	public Protocol getDefinition() {
 		return(m_definition);
 	}
 	
@@ -164,7 +87,7 @@ public class Model<T extends Definition> extends ModelObject {
 	 * 
 	 * @param defn The definition
 	 */
-	public void setDefinition(T defn) {
+	public void setDefinition(Protocol defn) {
 		m_definition = defn;
 	}
 	
@@ -184,7 +107,7 @@ public class Model<T extends Definition> extends ModelObject {
 	}
 	
 	private Namespace m_namespace=null;
-	private T m_definition=null;
+	private Protocol m_definition=null;
 	private java.util.List<Import> m_imports=
 				new ContainmentList<Import>(this, Import.class);
 }

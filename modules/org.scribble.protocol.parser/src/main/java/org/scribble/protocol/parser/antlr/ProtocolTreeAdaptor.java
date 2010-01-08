@@ -39,7 +39,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 	private ScribbleProtocolParser m_parser=null;
 	private Token m_currentToken=null;
 	
-	private Model<Protocol> m_model=null;
+	private ProtocolModel m_model=null;
 	
 	private static final Logger _log=Logger.getLogger(ProtocolTreeAdaptor.class.getName());
 	
@@ -81,7 +81,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_listClass.put("types", TypeReference.class);
 	}
 	
-	public Model<Protocol> getProtocolModel() {
+	public ProtocolModel getProtocolModel() {
 		return(m_model);
 	}
 	
@@ -387,7 +387,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		Object ret=null;
 		
 		if (m_model == null) {
-			m_model = new Model<Protocol>();
+			m_model = new ProtocolModel();
 			ret = m_model;
 		} else {
 			ret = new java.util.Vector<Object>();

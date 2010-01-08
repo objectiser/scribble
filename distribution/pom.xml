@@ -55,6 +55,16 @@
       <artifactId>org.scribble.protocol.parser</artifactId>
       <version>${scribble.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol.conformance</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol.validation.connectedness</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
   </dependencies>
 
     <build>

@@ -151,7 +151,7 @@ public class InteractionComparatorRule implements ComparatorRule {
 				if (f_directionMismatch) {
 					String mesg=org.scribble.util.MessageUtil.format(
 							java.util.PropertyResourceBundle.getBundle(
-							"org.scribble.conformance.Messagess").
+							"org.scribble.protocol.conformance.Messagess").
 							getString("_INTERACTION_DIRECTION_MISMATCH"),
 									new String[]{});
 					

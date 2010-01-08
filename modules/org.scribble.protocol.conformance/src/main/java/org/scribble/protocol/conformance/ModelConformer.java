@@ -17,11 +17,11 @@
 package org.scribble.protocol.conformance;
 
 import org.scribble.common.logger.ScribbleLogger;
-import org.scribble.protocol.model.Model;
+import org.scribble.protocol.model.ProtocolModel;
 
 public class ModelConformer implements Conformer {
 
-	public void conforms(Model<?> model, Model<?> ref, ScribbleLogger logger) {
+	public void conforms(ProtocolModel model, ProtocolModel ref, ScribbleLogger logger) {
 
 		BehaviourList mainBehaviourList=BehaviourList.createBehaviourList(model.getDefinition().getBlock());
 		BehaviourList refBehaviourList=BehaviourList.createBehaviourList(ref.getDefinition().getBlock());

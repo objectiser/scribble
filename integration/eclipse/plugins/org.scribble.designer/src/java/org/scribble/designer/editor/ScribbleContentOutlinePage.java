@@ -263,7 +263,7 @@ public class ScribbleContentOutlinePage extends ContentOutlinePage {
 		}
 	}
 	
-	private org.scribble.protocol.model.Model m_model=null;
+	private org.scribble.protocol.model.ProtocolModel m_model=null;
 	private org.scribble.protocol.model.ModelReference m_reference=null;
 	private org.scribble.designer.editor.outliner.ModelOutliner m_outliner=null;
 }

@@ -61,14 +61,14 @@ public class ConformsCommand implements org.scribble.command.Command {
 				try {
 					java.io.InputStream is=new java.io.FileInputStream(f1);
 					
-					org.scribble.protocol.model.Model<Protocol> p1=
+					org.scribble.protocol.model.ProtocolModel p1=
 							m_protocolParser.parse(is, m_logger);
 			
 					is.close();
 					
 					is=new java.io.FileInputStream(f2);
 					
-					org.scribble.protocol.model.Model<Protocol> p2=
+					org.scribble.protocol.model.ProtocolModel p2=
 							m_protocolParser.parse(is, m_logger);
 			
 					is.close();
