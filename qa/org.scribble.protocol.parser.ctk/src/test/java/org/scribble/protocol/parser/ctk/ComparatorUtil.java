@@ -18,7 +18,6 @@ package org.scribble.protocol.parser.ctk;
 
 import java.util.Comparator;
 
-import org.scribble.core.model.*;
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ctk.comparators.*;
 

@@ -7,9 +7,5 @@ Bundle-Activator: org.scribble.core.osgi.Activator
 Bundle-Vendor: www.scribble.org
 Import-Package: org.osgi.framework,
  org.osgi.util.tracker
-Export-Package: org.scribble.core.conformance,
- org.scribble.core.logger,
- org.scribble.core.model,
- org.scribble.core.parser,
- org.scribble.core.util,
- org.scribble.core.validation
+Export-Package: org.scribble.core.logger,
+ org.scribble.core.util

@@ -16,12 +16,11 @@
  */
 package org.scribble.protocol.model;
 
-import org.scribble.core.model.ModelReference;
 
 /**
  * This class represents the protocol notation.
  */
-public class ProtocolNotation extends org.scribble.core.model.AbstractNotation {
+public class ProtocolNotation extends org.scribble.protocol.model.AbstractNotation {
 
 	public static final String NOTATION_CODE="spr";
 	

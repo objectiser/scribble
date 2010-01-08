@@ -21,9 +21,7 @@ import static org.junit.Assert.*;
 import java.util.Comparator;
 
 import org.scribble.core.logger.*;
-import org.scribble.core.model.*;
 import org.scribble.protocol.model.*;
-import org.scribble.protocol.parser.ctk.comparators.*;
 
 public class ProtocolParserTest {
 	

@@ -20,10 +20,10 @@ import java.io.Serializable;
 
 import org.scribble.core.logger.CachedScribbleLogger;
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.Behaviour;
-import org.scribble.core.model.Definition;
-import org.scribble.core.model.ModelObject;
-import org.scribble.core.model.MultiPathBehaviour;
+import org.scribble.protocol.model.Behaviour;
+import org.scribble.protocol.model.Definition;
+import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.MultiPathBehaviour;
 
 public class BehaviourListComparatorRule implements ComparatorRule {
 

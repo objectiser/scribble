@@ -4,8 +4,8 @@ import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.scribble.conformance.Conformer;
 import org.scribble.conformance.ModelConformer;
-import org.scribble.core.conformance.Conformer;
 
 public class Activator implements BundleActivator {
 

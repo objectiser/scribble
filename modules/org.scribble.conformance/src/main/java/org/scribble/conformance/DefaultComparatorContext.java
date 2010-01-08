@@ -20,7 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.ModelReference;
 
 /**
  * This class represents the default comparator context.

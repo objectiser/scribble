@@ -16,7 +16,9 @@
  */
 package org.scribble.conformance;
 
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.Behaviour;
+import org.scribble.protocol.model.ModelInclude;
+import org.scribble.protocol.model.ModelReference;
 
 /**
  * This class provides an iterator implementation over a behaviour list.

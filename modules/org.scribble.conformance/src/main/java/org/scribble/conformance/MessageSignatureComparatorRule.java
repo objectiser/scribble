@@ -17,7 +17,8 @@
 package org.scribble.conformance;
 
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.MessageSignature;
+import org.scribble.protocol.model.ModelObject;
 
 /**
  * This class provides the MessageSignature comparator rule.

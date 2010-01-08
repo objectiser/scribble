@@ -24,9 +24,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.scribble.core.model.Model;
 import org.scribble.designer.DesignerServices;
 import org.scribble.designer.logger.EclipseScribbleLogger;
+import org.scribble.protocol.model.Model;
 import org.scribble.protocol.model.Protocol;
 
 public class ValidateAction implements IObjectActionDelegate {

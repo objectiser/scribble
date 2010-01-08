@@ -16,7 +16,7 @@
  */
 package org.scribble.conformance;
 
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.*;
 
 /**
  * This class provides a list mechanism for serialising the
@@ -24,7 +24,7 @@ import org.scribble.core.model.*;
  * easier to compare the behaviours between definitions.
  */
 public class BehaviourList extends Behaviour
-						implements org.scribble.core.model.Visitor,
+						implements org.scribble.protocol.model.Visitor,
 								NameMap {
 
 	private static final long serialVersionUID = -7039686106355918961L;
@@ -63,7 +63,7 @@ public class BehaviourList extends Behaviour
 	 * @param defn The block
 	 * @param include The model inclusion construct
 	 */
-	protected BehaviourList(Block defn, org.scribble.core.model.ModelInclude include) {
+	protected BehaviourList(Block defn, org.scribble.protocol.model.ModelInclude include) {
 		m_block = defn;
 		m_include = include;
 		

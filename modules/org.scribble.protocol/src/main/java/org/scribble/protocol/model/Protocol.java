@@ -16,12 +16,11 @@
  */
 package org.scribble.protocol.model;
 
-import org.scribble.core.model.Declaration;
 
 /**
  * This class represents the protocol notation.
  */
-public class Protocol extends org.scribble.core.model.Definition {
+public class Protocol extends org.scribble.protocol.model.Definition {
 	
 	private static final long serialVersionUID = 5352253730676464788L;
 

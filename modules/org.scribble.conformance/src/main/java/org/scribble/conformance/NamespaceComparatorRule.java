@@ -17,7 +17,8 @@
 package org.scribble.conformance;
 
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.Namespace;
 
 /**
  * This class provides the Namespace comparator rule.

@@ -16,7 +16,7 @@
  */
 package org.scribble.designer.editor.outliner;
 
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.ModelReference;
 
 /**
  * This interface represents the component responsible for providing

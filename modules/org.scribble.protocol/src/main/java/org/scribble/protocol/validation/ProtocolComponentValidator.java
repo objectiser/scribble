@@ -16,7 +16,6 @@
  */
 package org.scribble.protocol.validation;
 
-import org.scribble.core.validation.DefaultComponentValidator;
 import org.scribble.protocol.validation.rules.RaiseValidatorRule;
 
 public class ProtocolComponentValidator extends DefaultComponentValidator {

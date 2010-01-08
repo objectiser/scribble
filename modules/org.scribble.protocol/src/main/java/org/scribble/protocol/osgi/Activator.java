@@ -17,25 +17,65 @@
 package org.scribble.protocol.osgi;
 
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.scribble.core.validation.Validator;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
+import org.scribble.core.logger.ScribbleLogger;
+import org.scribble.core.logger.ConsoleScribbleLogger;
+import org.scribble.protocol.validation.DefaultValidationManager;
+import org.scribble.protocol.validation.ValidationManager;
 import org.scribble.protocol.validation.ProtocolComponentValidator;
+import org.scribble.protocol.validation.Validator;
 
 public class Activator implements BundleActivator {
+
+	private static final Logger _log=Logger.getLogger(Activator.class.getName());
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
-		
-		// Register protocol validator
+
         Properties props = new Properties();
 
+        final ValidationManager vm=new DefaultValidationManager();
+        
+        context.registerService(ValidationManager.class.getName(), 
+							vm, props);
+        
+        _log.fine("Registered Validation Manager");
+        
+        context.registerService(ScribbleLogger.class.getName(), 
+				new ConsoleScribbleLogger(), props);
+
+        m_tracker = new ServiceTracker(context,
+        		org.scribble.protocol.validation.Validator.class.getName(),
+        				null) {
+        	
+			public Object addingService(ServiceReference ref) {
+				Object ret=super.addingService(ref);
+				
+				_log.fine("Validator has been added: "+ret);
+				
+				vm.addValidator((Validator)ret);
+				
+				return(ret);
+			}
+        };
+        
+        m_tracker.open();
+
+        
+		
+		// Register protocol validator
+        props = new Properties();
+
         context.registerService(Validator.class.getName(), 
-				new ProtocolComponentValidator(), props);
+				new ProtocolComponentValidator(), props);        
 	}
 
 	/*
@@ -47,4 +87,5 @@ public class Activator implements BundleActivator {
 		//context.ungetService(arg0);
 	}
 
+	private org.osgi.util.tracker.ServiceTracker m_tracker=null;
 }

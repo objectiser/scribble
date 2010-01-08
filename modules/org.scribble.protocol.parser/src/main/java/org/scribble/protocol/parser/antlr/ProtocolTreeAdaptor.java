@@ -23,7 +23,6 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 
-import org.scribble.core.model.*;
 import org.scribble.protocol.model.*;
 
 public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {

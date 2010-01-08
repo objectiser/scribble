@@ -17,8 +17,8 @@
 package org.scribble.designer.editor.outliner;
 
 import org.eclipse.swt.graphics.Image;
-import org.scribble.core.model.*;
 import org.scribble.designer.editor.ScribbleImages;
+import org.scribble.protocol.model.ModelReference;
 
 /**
  * This is the abstract base implementation of the ModelOutliner
@@ -41,8 +41,8 @@ public class DefaultModelOutliner implements ModelOutliner {
 		
 		if (ret == null) {
 			
-			if (obj instanceof org.scribble.core.model.Declaration) {
-				ret = ((org.scribble.core.model.Declaration)obj).getName();
+			if (obj instanceof org.scribble.protocol.model.Declaration) {
+				ret = ((org.scribble.protocol.model.Declaration)obj).getName();
 			}
 		}
 		
@@ -64,9 +64,9 @@ public class DefaultModelOutliner implements ModelOutliner {
 
 		if (ret == null) {
 			
-			if (obj instanceof org.scribble.core.model.Declaration) {
+			if (obj instanceof org.scribble.protocol.model.Declaration) {
 				ret = ScribbleImages.getImage("declaration.png");
-			} else if (obj instanceof org.scribble.core.model.Activity) {
+			} else if (obj instanceof org.scribble.protocol.model.Activity) {
 				ret = ScribbleImages.getImage("activity.png");
 			}
 		}

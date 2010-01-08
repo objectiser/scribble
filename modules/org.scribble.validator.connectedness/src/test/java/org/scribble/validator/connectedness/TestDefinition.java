@@ -16,7 +16,7 @@
  */
 package org.scribble.validator.connectedness;
 
-import org.scribble.core.model.Definition;
+import org.scribble.protocol.model.Definition;
 
 public class TestDefinition extends Definition {
 

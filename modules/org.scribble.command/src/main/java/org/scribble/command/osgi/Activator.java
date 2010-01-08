@@ -28,10 +28,10 @@ import org.scribble.command.conforms.ConformsCommand;
 import org.scribble.command.parse.ParseCommand;
 import org.scribble.command.validate.ValidateCommand;
 import org.scribble.command.*;
-import org.scribble.core.conformance.Conformer;
+import org.scribble.conformance.Conformer;
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.validation.ValidationManager;
 import org.scribble.protocol.parser.ProtocolParser;
+import org.scribble.protocol.validation.ValidationManager;
 
 public class Activator implements BundleActivator {
 

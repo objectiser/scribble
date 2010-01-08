@@ -20,6 +20,11 @@
       <version>${scribble.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.scribble.modules</groupId>
+      <artifactId>org.scribble.protocol</artifactId>
+      <version>${scribble.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.osgi.core</artifactId>
       <version>${osgi.version}</version>

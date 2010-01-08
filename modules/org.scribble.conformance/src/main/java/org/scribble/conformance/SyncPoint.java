@@ -16,7 +16,7 @@
  */
 package org.scribble.conformance;
 
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.Behaviour;
 
 public class SyncPoint {
 

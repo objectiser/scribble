@@ -16,8 +16,6 @@
  */
 package org.scribble.protocol.model;
 
-import org.scribble.core.model.*;
-
 /**
  * This class represents the Repeat construct.
  * 

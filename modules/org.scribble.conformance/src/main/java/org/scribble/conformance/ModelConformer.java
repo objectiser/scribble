@@ -16,9 +16,8 @@
  */
 package org.scribble.conformance;
 
-import org.scribble.core.conformance.Conformer;
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.Model;
+import org.scribble.protocol.model.Model;
 
 public class ModelConformer implements Conformer {
 

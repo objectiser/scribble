@@ -16,10 +16,10 @@
  */
 package org.scribble.command.validate;
 
-import org.scribble.core.validation.*;
 import org.scribble.core.logger.*;
 import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.parser.ProtocolParser;
+import org.scribble.protocol.validation.ValidationManager;
 
 public class ValidateCommand implements org.scribble.command.Command {
 
@@ -61,7 +61,7 @@ public class ValidateCommand implements org.scribble.command.Command {
 				try {
 					java.io.InputStream is=new java.io.FileInputStream(f);
 			
-					org.scribble.core.model.Model<Protocol> model=
+					org.scribble.protocol.model.Model<Protocol> model=
 							m_protocolParser.parse(is, m_logger);
 			
 					if (model != null) {

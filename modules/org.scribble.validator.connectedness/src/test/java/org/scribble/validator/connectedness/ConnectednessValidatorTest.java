@@ -18,7 +18,9 @@ package org.scribble.validator.connectedness;
 
 import static org.junit.Assert.*;
 
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.Interaction;
+import org.scribble.protocol.model.Model;
+import org.scribble.protocol.model.Participant;
 
 public class ConnectednessValidatorTest {
 

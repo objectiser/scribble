@@ -47,8 +47,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
-import org.scribble.core.model.ModelReference;
-import org.scribble.core.model.Notation;
+import org.scribble.protocol.model.ModelReference;
+import org.scribble.protocol.model.Notation;
 
 /**
  * This class provides the wizard responsible for creating
@@ -295,8 +295,8 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 
     private IWorkbench m_workbench=null;
 	private IStructuredSelection m_selection=null;
-	private java.util.List<org.scribble.core.model.Notation> m_notations=
-			new java.util.Vector<org.scribble.core.model.Notation>();
+	private java.util.List<org.scribble.protocol.model.Notation> m_notations=
+			new java.util.Vector<org.scribble.protocol.model.Notation>();
 	private ScribbleNewFileCreationPage m_newFileCreationPage=null;
 	private NotationSelectionPage m_notationSelection=null;
 	

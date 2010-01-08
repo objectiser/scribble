@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.scribble.core.validation.Validator;
+import org.scribble.protocol.validation.Validator;
 import org.scribble.validator.connectedness.ConnectednessValidator;
 
 public class Activator implements BundleActivator {

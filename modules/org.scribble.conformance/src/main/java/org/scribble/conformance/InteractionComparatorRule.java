@@ -20,7 +20,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.Definition;
+import org.scribble.protocol.model.Interaction;
+import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.Participant;
 
 /**
  * This class provides the Interaction comparator rule.

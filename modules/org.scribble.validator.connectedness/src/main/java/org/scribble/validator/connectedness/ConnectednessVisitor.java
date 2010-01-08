@@ -19,10 +19,10 @@ package org.scribble.validator.connectedness;
 import java.util.Collections;
 
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.Block;
-import org.scribble.core.model.ModelObject;
-import org.scribble.core.model.Participant;
-import org.scribble.core.model.Visitor;
+import org.scribble.protocol.model.Block;
+import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.Participant;
+import org.scribble.protocol.model.Visitor;
 
 public class ConnectednessVisitor implements Visitor {
 	
@@ -30,7 +30,6 @@ public class ConnectednessVisitor implements Visitor {
 		m_logger = logger;
 	}
 
-	@Override
 	public boolean visit(ModelObject obj) {
 		
 		if (obj instanceof Block) {
@@ -66,11 +65,9 @@ public class ConnectednessVisitor implements Visitor {
 		return(true);
 	}
 
-	@Override
 	public void conclude(ModelObject obj) {
 	}
 
-	@Override
 	public void prepare(ModelObject obj) {
 	}
 	

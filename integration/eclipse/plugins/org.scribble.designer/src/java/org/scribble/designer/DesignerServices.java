@@ -16,8 +16,8 @@
  */
 package org.scribble.designer;
 
-import org.scribble.core.validation.ValidationManager;
 import org.scribble.protocol.parser.ProtocolParser;
+import org.scribble.protocol.validation.ValidationManager;
 
 /**
  * This class provides a manager for accessing services used

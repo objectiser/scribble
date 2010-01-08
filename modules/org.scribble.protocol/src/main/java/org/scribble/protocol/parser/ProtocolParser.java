@@ -17,8 +17,6 @@
 package org.scribble.protocol.parser;
 
 import org.scribble.protocol.model.*;
-import org.scribble.core.model.*;
-import org.scribble.core.parser.*;
 
 public interface ProtocolParser extends Parser<Model<Protocol>> {
 

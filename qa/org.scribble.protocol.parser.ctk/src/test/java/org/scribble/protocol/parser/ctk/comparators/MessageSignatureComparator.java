@@ -17,7 +17,7 @@
 package org.scribble.protocol.parser.ctk.comparators;
 
 import java.util.Comparator;
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
 public class MessageSignatureComparator implements Comparator<ModelObject> {

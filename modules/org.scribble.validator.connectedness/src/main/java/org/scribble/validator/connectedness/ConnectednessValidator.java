@@ -17,8 +17,8 @@
 package org.scribble.validator.connectedness;
 
 import org.scribble.core.logger.ScribbleLogger;
-import org.scribble.core.model.*;
-import org.scribble.core.validation.Validator;
+import org.scribble.protocol.model.Model;
+import org.scribble.protocol.validation.Validator;
 
 public class ConnectednessValidator implements Validator {
 

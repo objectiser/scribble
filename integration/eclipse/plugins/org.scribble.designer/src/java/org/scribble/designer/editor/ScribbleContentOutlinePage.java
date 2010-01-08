@@ -23,8 +23,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
-import org.scribble.core.model.ModelProperties;
 import org.scribble.designer.editor.outliner.DefaultModelOutliner;
+import org.scribble.protocol.model.ModelProperties;
 
 /**
  * A content outline page which always represents the content of the
@@ -190,9 +190,9 @@ public class ScribbleContentOutlinePage extends ContentOutlinePage {
 		} else {
 			
 			if (((IStructuredSelection) selection).getFirstElement() instanceof 
-					org.scribble.core.model.ModelObject) {
-				org.scribble.core.model.ModelObject mobj=
-						(org.scribble.core.model.ModelObject)
+					org.scribble.protocol.model.ModelObject) {
+				org.scribble.protocol.model.ModelObject mobj=
+						(org.scribble.protocol.model.ModelObject)
 							((IStructuredSelection) selection).getFirstElement();
 				
 				if (mobj.getProperties().containsKey(ModelProperties.START_LOCATION) &&
@@ -263,7 +263,7 @@ public class ScribbleContentOutlinePage extends ContentOutlinePage {
 		}
 	}
 	
-	private org.scribble.core.model.Model m_model=null;
-	private org.scribble.core.model.ModelReference m_reference=null;
+	private org.scribble.protocol.model.Model m_model=null;
+	private org.scribble.protocol.model.ModelReference m_reference=null;
 	private org.scribble.designer.editor.outliner.ModelOutliner m_outliner=null;
 }

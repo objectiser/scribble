@@ -17,7 +17,6 @@
 package org.scribble.protocol.validation.rules;
 
 import org.scribble.protocol.model.*;
-import org.scribble.core.model.*;
 
 public class RaiseValidatorRuleTest {
 

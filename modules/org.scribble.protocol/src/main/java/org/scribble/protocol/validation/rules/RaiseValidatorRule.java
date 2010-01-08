@@ -16,9 +16,8 @@
  */
 package org.scribble.protocol.validation.rules;
 
-import org.scribble.core.model.*;
-import org.scribble.core.validation.ComponentValidatorRule;
 import org.scribble.protocol.model.*;
+import org.scribble.protocol.validation.ComponentValidatorRule;
 import org.scribble.core.logger.ScribbleLogger;
 
 public class RaiseValidatorRule implements ComponentValidatorRule {

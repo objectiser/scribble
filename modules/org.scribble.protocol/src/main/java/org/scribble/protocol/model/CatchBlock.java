@@ -16,8 +16,6 @@
  */
 package org.scribble.protocol.model;
 
-import org.scribble.core.model.Reference;
-import org.scribble.core.model.TypeReference;
 
 /**
  * This class represents a group of activities within

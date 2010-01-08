@@ -16,7 +16,11 @@
  */
 package org.scribble.conformance;
 
-import org.scribble.core.model.*;
+import org.scribble.protocol.model.Behaviour;
+import org.scribble.protocol.model.Definition;
+import org.scribble.protocol.model.MultiPathBehaviour;
+import org.scribble.protocol.model.Participant;
+import org.scribble.protocol.model.SinglePathBehaviour;
 
 /**
  * This class represents the group of behaviour list paths

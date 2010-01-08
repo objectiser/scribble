@@ -22,13 +22,13 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
-import org.scribble.core.validation.DefaultValidationManager;
-import org.scribble.core.validation.ValidationManager;
 import org.scribble.designer.DesignerServices;
 import org.scribble.designer.editor.*;
 import org.scribble.designer.editor.lang.*;
 import org.scribble.designer.editor.util.*;
 import org.scribble.protocol.parser.ProtocolParser;
+import org.scribble.protocol.validation.DefaultValidationManager;
+import org.scribble.protocol.validation.ValidationManager;
 
 import java.util.logging.*;
 import org.eclipse.core.runtime.IStatus;
