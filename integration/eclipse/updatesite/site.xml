@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.scribble.designer.feature_1.0.0.qualifier.jar" id="org.scribble.designer.feature" version="1.0.0.qualifier"/>
-   <feature url="features/org.scribble.protocol.feature_1.0.0.qualifier.jar" id="org.scribble.protocol.feature" version="1.0.0.qualifier"/>
-   <feature url="features/org.scribble.protocol.parser.feature_1.0.0.qualifier.jar" id="org.scribble.protocol.parser.feature" version="1.0.0.qualifier"/>
+   <feature url="features/org.scribble.protocol.designer.feature_1.0.0.201001082241.jar" id="org.scribble.protocol.designer.feature" version="1.0.0.201001082241"/>
+   <feature url="features/org.scribble.protocol.feature_1.0.0.201001082241.jar" id="org.scribble.protocol.feature" version="1.0.0.201001082241"/>
+   <feature url="features/org.scribble.protocol.parser.feature_1.0.0.201001082241.jar" id="org.scribble.protocol.parser.feature" version="1.0.0.201001082241"/>
 </site>
