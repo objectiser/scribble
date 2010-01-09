@@ -23,7 +23,7 @@ import org.scribble.common.logging.Journal;
 
 import static org.junit.Assert.*;
 
-public class TestScribbleLogger implements Journal {
+public class TestJournal implements Journal {
 
 	public void debug(String issue, Map<String, Serializable> props) {
 	}

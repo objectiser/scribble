@@ -37,7 +37,7 @@ public class Raise extends Behaviour {
 	 * 
 	 * @return The list of roles
 	 */
-	public java.util.List<Participant> getRoles() {
+	public java.util.List<Participant> getParticipants() {
 		return(m_roles);
 	}
 		

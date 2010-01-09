@@ -83,7 +83,8 @@ sequenceDef: '{'! activityListDef '}'! ;
 
 activityListDef: ( activityDef )* ;
 
-activityDef: interactionDef | participantListDef ;
+activityDef: participantListDef | channelListDef | interactionDef | 
+			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef;
 
 participantListDef: 'participant'^ participantDef ( ',' participantDef )* ';'! ;
 
@@ -101,7 +102,13 @@ participantName: ID ;
 
 interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' ID )? ';'! ;
 
+raiseDef: 'raise'^ '@' participantName typeReferenceDef ';'! ;
+
 choiceDef: 'choice'^ '@' participantName sequenceDef ( 'or' sequenceDef )* ;
+
+parallelDef: 'parallel'^ sequenceDef ( 'and' sequenceDef )* ;
+
+splitDef: 'split'^ sequenceDef ( 'and' sequenceDef )* ;
 
 repeatDef: 'repeat'^ '@' participantName sequenceDef ;
 

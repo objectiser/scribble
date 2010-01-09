@@ -132,7 +132,7 @@ public class ProtocolParserTest {
 	
 	@org.junit.Test
 	public void testSingleInteraction() {
-		TestScribbleLogger logger=new TestScribbleLogger();
+		TestJournal logger=new TestJournal();
 		
 		ProtocolModel model=getModel("SingleInteraction", logger);
 		
@@ -175,6 +175,53 @@ public class ProtocolParserTest {
 		interaction.setToParticipant(seller);
 		
 		protocol.getBlock().getContents().add(interaction);
+		
+		verify(model, expected);
+	}
+	
+	@org.junit.Test
+	public void testRaise() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("Raise", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("Raise");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().getContents().add(rl);
+
+		Raise raise=new Raise();
+		
+		TypeReference tref=new TypeReference();
+		tref.setName("ExcType");
+		raise.setType(tref);
+		
+		raise.getParticipants().add(seller);
+		
+		protocol.getBlock().getContents().add(raise);
 		
 		verify(model, expected);
 	}
