@@ -39,13 +39,13 @@ public class ScribbleColorProvider {
 	public static final RGB JAVADOC_LINK= new RGB(128, 128, 128);
 	public static final RGB JAVADOC_DEFAULT= new RGB(0, 128, 128);
 
-	protected Map fColorTable= new HashMap(10);
+	protected Map<RGB,Color> fColorTable= new HashMap<RGB,Color>(10);
 
 	/**
 	 * Release all of the color resources held onto by the receiver.
 	 */	
 	public void dispose() {
-		Iterator e= fColorTable.values().iterator();
+		Iterator<Color> e= fColorTable.values().iterator();
 		while (e.hasNext())
 			 ((Color) e.next()).dispose();
 	}

@@ -27,7 +27,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.scribble.protocol.designer.DesignerServices;
 import org.scribble.protocol.designer.logger.EclipseScribbleLogger;
 import org.scribble.protocol.model.ProtocolModel;
-import org.scribble.protocol.model.Protocol;
 
 public class ValidateAction implements IObjectActionDelegate {
 
@@ -38,7 +37,6 @@ public class ValidateAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		
-System.out.println("RUNNING VALIDATE ACTION");		
 		if (m_selection instanceof StructuredSelection) {
 			StructuredSelection sel=(StructuredSelection)m_selection;
 			

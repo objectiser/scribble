@@ -82,6 +82,7 @@ public class ScribblePartitionScanner extends RuleBasedPartitionScanner {
 	/**
 	 * Creates the partitioner and sets up the appropriate rules.
 	 */
+	@SuppressWarnings("unchecked")
 	public ScribblePartitionScanner() {
 		super();
 

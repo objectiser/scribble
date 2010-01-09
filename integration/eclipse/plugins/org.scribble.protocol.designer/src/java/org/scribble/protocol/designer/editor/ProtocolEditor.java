@@ -65,7 +65,7 @@ import org.scribble.protocol.designer.keywords.ProtocolKeyWordProvider;
 /**
  * Scribble text editor.
  */
-public class ScribbleEditor extends TextEditor {
+public class ProtocolEditor extends TextEditor {
 	
 	
 	private class DefineFoldingRegionAction extends TextEditorAction {
@@ -116,7 +116,7 @@ public class ScribbleEditor extends TextEditor {
 	/**
 	 * Default constructor.
 	 */
-	public ScribbleEditor() {
+	public ProtocolEditor() {
 		super();
 	}
 	
@@ -127,15 +127,15 @@ public class ScribbleEditor extends TextEditor {
 	protected void createActions() {
 		super.createActions();
 		
-		IAction a= new TextOperationAction(ScribbleEditorMessages.getResourceBundle(), "ContentAssistProposal.", this, ISourceViewer.CONTENTASSIST_PROPOSALS); //$NON-NLS-1$
+		IAction a= new TextOperationAction(ProtocolEditorMessages.getResourceBundle(), "ContentAssistProposal.", this, ISourceViewer.CONTENTASSIST_PROPOSALS); //$NON-NLS-1$
 		a.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 		setAction("ContentAssistProposal", a); //$NON-NLS-1$
 		
-		a= new TextOperationAction(ScribbleEditorMessages.getResourceBundle(), "ContentAssistTip.", this, ISourceViewer.CONTENTASSIST_CONTEXT_INFORMATION);  //$NON-NLS-1$
+		a= new TextOperationAction(ProtocolEditorMessages.getResourceBundle(), "ContentAssistTip.", this, ISourceViewer.CONTENTASSIST_CONTEXT_INFORMATION);  //$NON-NLS-1$
 		a.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_CONTEXT_INFORMATION);
 		setAction("ContentAssistTip", a); //$NON-NLS-1$
 		
-		a= new DefineFoldingRegionAction(ScribbleEditorMessages.getResourceBundle(), "DefineFoldingRegion.", this); //$NON-NLS-1$
+		a= new DefineFoldingRegionAction(ProtocolEditorMessages.getResourceBundle(), "DefineFoldingRegion.", this); //$NON-NLS-1$
 		setAction("DefineFoldingRegion", a); //$NON-NLS-1$
 	}
 	
@@ -277,6 +277,7 @@ public class ScribbleEditor extends TextEditor {
 	 * @param required the required type
 	 * @return an adapter for the required type or <code>null</code>
 	 */ 
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(Class required) {
 		if (IContentOutlinePage.class.equals(required)) {
 			if (fOutlinePage == null) {
@@ -389,8 +390,8 @@ public class ScribbleEditor extends TextEditor {
 								        						
 								        						Object editor=refs[k].getEditor(true);
 				
-								        						if (editor instanceof ScribbleEditor) {									        							
-							        								((ScribbleEditor)editor).updateTitle();
+								        						if (editor instanceof ProtocolEditor) {									        							
+							        								((ProtocolEditor)editor).updateTitle();
 								        						}
 								        					}
 							        					} catch(Exception e) {

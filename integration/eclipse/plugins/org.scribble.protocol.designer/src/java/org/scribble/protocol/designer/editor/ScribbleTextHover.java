@@ -37,7 +37,7 @@ public class ScribbleTextHover implements ITextHover {
 			} catch (BadLocationException x) {
 			}
 		}
-		return ScribbleEditorMessages.getString("JavaTextHover.emptySelection"); //$NON-NLS-1$
+		return ProtocolEditorMessages.getString("JavaTextHover.emptySelection"); //$NON-NLS-1$
 	}
 	
 	/* (non-Javadoc)

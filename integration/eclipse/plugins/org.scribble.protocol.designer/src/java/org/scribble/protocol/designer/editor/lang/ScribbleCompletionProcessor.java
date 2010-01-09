@@ -80,8 +80,8 @@ public class ScribbleCompletionProcessor implements IContentAssistProcessor {
 		
 		ICompletionProposal[] result= new ICompletionProposal[proposals.length];
 		for (int i= 0; i < proposals.length; i++) {
-			IContextInformation info= new ContextInformation(proposals[i], MessageFormat.format(ScribbleEditorMessages.getString("CompletionProcessor.Proposal.ContextInfo.pattern"), new Object[] { proposals[i] })); //$NON-NLS-1$
-			result[i]= new CompletionProposal(proposals[i], documentOffset, 0, proposals[i].length(), null, proposals[i], info, MessageFormat.format(ScribbleEditorMessages.getString("CompletionProcessor.Proposal.hoverinfo.pattern"), new Object[] { proposals[i]})); //$NON-NLS-1$
+			IContextInformation info= new ContextInformation(proposals[i], MessageFormat.format(ProtocolEditorMessages.getString("CompletionProcessor.Proposal.ContextInfo.pattern"), new Object[] { proposals[i] })); //$NON-NLS-1$
+			result[i]= new CompletionProposal(proposals[i], documentOffset, 0, proposals[i].length(), null, proposals[i], info, MessageFormat.format(ProtocolEditorMessages.getString("CompletionProcessor.Proposal.hoverinfo.pattern"), new Object[] { proposals[i]})); //$NON-NLS-1$
 		}
 		return result;
 	}
@@ -93,8 +93,8 @@ public class ScribbleCompletionProcessor implements IContentAssistProcessor {
 		IContextInformation[] result= new IContextInformation[5];
 		for (int i= 0; i < result.length; i++)
 			result[i]= new ContextInformation(
-				MessageFormat.format(ScribbleEditorMessages.getString("CompletionProcessor.ContextInfo.display.pattern"), new Object[] { new Integer(i), new Integer(documentOffset) }),  //$NON-NLS-1$
-				MessageFormat.format(ScribbleEditorMessages.getString("CompletionProcessor.ContextInfo.value.pattern"), new Object[] { new Integer(i), new Integer(documentOffset - 5), new Integer(documentOffset + 5)})); //$NON-NLS-1$
+				MessageFormat.format(ProtocolEditorMessages.getString("CompletionProcessor.ContextInfo.display.pattern"), new Object[] { new Integer(i), new Integer(documentOffset) }),  //$NON-NLS-1$
+				MessageFormat.format(ProtocolEditorMessages.getString("CompletionProcessor.ContextInfo.value.pattern"), new Object[] { new Integer(i), new Integer(documentOffset - 5), new Integer(documentOffset + 5)})); //$NON-NLS-1$
 		return result;
 	}
 	

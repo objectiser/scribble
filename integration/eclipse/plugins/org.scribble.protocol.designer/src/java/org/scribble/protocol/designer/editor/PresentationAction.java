@@ -31,7 +31,7 @@ public class PresentationAction extends TextEditorAction {
 	 * Constructs and updates the action.
 	 */
 	public PresentationAction() {
-		super(ScribbleEditorMessages.getResourceBundle(), "TogglePresentation.", null); //$NON-NLS-1$
+		super(ProtocolEditorMessages.getResourceBundle(), "TogglePresentation.", null); //$NON-NLS-1$
 		update();
 	}
 	

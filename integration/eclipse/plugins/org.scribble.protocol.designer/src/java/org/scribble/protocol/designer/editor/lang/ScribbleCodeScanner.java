@@ -16,13 +16,11 @@
  */
 package org.scribble.protocol.designer.editor.lang;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.*;
-import org.scribble.protocol.designer.editor.*;
 import org.scribble.protocol.designer.editor.util.*;
 import org.scribble.protocol.designer.keywords.ProtocolKeyWordProvider;
 
@@ -48,7 +46,7 @@ public class ScribbleCodeScanner extends RuleBasedScanner {
 		IToken comment= new Token(new TextAttribute(provider.getColor(ScribbleColorProvider.SINGLE_LINE_COMMENT)));
 		IToken other= new Token(new TextAttribute(provider.getColor(ScribbleColorProvider.DEFAULT)));
 
-		List rules= new ArrayList();
+		List<Object> rules= new ArrayList<Object>();
 
 		// Add rule for single line comments.
 		rules.add(new EndOfLineRule("//", comment)); //$NON-NLS-1$

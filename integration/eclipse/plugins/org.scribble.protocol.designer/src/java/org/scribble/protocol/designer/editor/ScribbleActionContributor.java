@@ -37,9 +37,9 @@ public class ScribbleActionContributor extends TextEditorActionContributor {
 	 */
 	public ScribbleActionContributor() {
 		super();
-		fContentAssistProposal= new RetargetTextEditorAction(ScribbleEditorMessages.getResourceBundle(), "ContentAssistProposal."); //$NON-NLS-1$
+		fContentAssistProposal= new RetargetTextEditorAction(ProtocolEditorMessages.getResourceBundle(), "ContentAssistProposal."); //$NON-NLS-1$
 		fContentAssistProposal.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS); 
-		fContentAssistTip= new RetargetTextEditorAction(ScribbleEditorMessages.getResourceBundle(), "ContentAssistTip."); //$NON-NLS-1$
+		fContentAssistTip= new RetargetTextEditorAction(ProtocolEditorMessages.getResourceBundle(), "ContentAssistTip."); //$NON-NLS-1$
 		fContentAssistTip.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_CONTEXT_INFORMATION);
 		fTogglePresentation= new PresentationAction();
 	}

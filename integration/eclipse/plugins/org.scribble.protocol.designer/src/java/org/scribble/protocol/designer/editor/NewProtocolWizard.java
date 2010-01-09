@@ -17,12 +17,6 @@
 package org.scribble.protocol.designer.editor;
 
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.events.*;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -48,15 +42,16 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.scribble.protocol.model.ModelReference;
-import org.scribble.protocol.model.Notation;
 
 /**
  * This class provides the wizard responsible for creating
  * new Protocol Global definitions.
  */
-public class NewScribbleWizard extends Wizard implements INewWizard {
+public class NewProtocolWizard extends Wizard implements INewWizard {
 
-    /**
+    private static final String PROTOCOL_FILE_EXTENSION = "spr";
+
+	/**
      * This method initializes the wizard.
      * 
      * @param workbench The workbench
@@ -66,8 +61,6 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 		m_workbench = workbench;
 		m_selection = selection;
         setWindowTitle("New Scribble Wizard");
-        
-        m_notations.add(new org.scribble.protocol.model.ProtocolNotation());
 	}
 	
 	/**
@@ -103,8 +96,6 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 							
 							byte[] b=new byte[0];
 							
-							Notation notation=m_notations.get(m_notationSelection.getNotationIndex());
-							
 							// Identify the model reference from the resource
 							org.eclipse.core.runtime.IPath path=modelFile.getFullPath();
 							org.eclipse.core.runtime.IPath fqnPath=path.removeFirstSegments(1);
@@ -122,13 +113,13 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 								namespace += segments[i];
 							}
 							
-							String type=null;
+							//String type=null;
 							String located=null;
 							
 							if (local != null) {
 								int nindex=local.lastIndexOf('.');
 								if (nindex != -1) {
-									type = local.substring(nindex+1);
+									//type = local.substring(nindex+1);
 									local = local.substring(0, nindex);
 
 									int pindex=local.lastIndexOf(ModelReference.LOCATED_REFERENCE_SEPARATOR);
@@ -153,7 +144,7 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 							
 							ModelReference ref=new ModelReference(name);
 							
-							String initDesc=notation.getInitialDescription(ref);
+							String initDesc=getInitialDescription(ref);
 							
 							if (initDesc != null) {
 								b = initDesc.getBytes();
@@ -218,6 +209,14 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 			return false;
 		}
 	}
+	
+	protected String getInitialDescription(ModelReference ref) {
+		String ret="namespace "+ref.getNamespace()+";";
+		
+		// TODO: Add default description
+		
+		return(ret);
+	}
 
     /**
      * Get the file from the page.
@@ -237,13 +236,10 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
      */
     public void addPages() {
     	
-    	m_notationSelection = new NotationSelectionPage(m_notations);
-    	
         m_newFileCreationPage = new ScribbleNewFileCreationPage("Whatever", m_selection);
-        m_newFileCreationPage.setTitle("Scribble Definition");
-        m_newFileCreationPage.setDescription("Create a new Scribble Definition");
+        m_newFileCreationPage.setTitle("Protocol");
+        m_newFileCreationPage.setDescription("Create a new Protocol");
 
-        addPage(m_notationSelection);
         addPage(m_newFileCreationPage);
         
         initFileCreationPage();
@@ -252,9 +248,7 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
     protected void initFileCreationPage() {
         String defaultModelBaseFilename = "My";
         
-        Notation notation=m_notations.get(m_notationSelection.getNotationIndex());
-        
-        String defaultModelFilenameExtension = notation.getCode();
+        String defaultModelFilenameExtension = PROTOCOL_FILE_EXTENSION;
         String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 
         // Create a page, set the title, and the initial model file name.
@@ -295,112 +289,7 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
 
     private IWorkbench m_workbench=null;
 	private IStructuredSelection m_selection=null;
-	private java.util.List<org.scribble.protocol.model.Notation> m_notations=
-			new java.util.Vector<org.scribble.protocol.model.Notation>();
 	private ScribbleNewFileCreationPage m_newFileCreationPage=null;
-	private NotationSelectionPage m_notationSelection=null;
-	
-	/**
-	 * This class represents the wizard page for selecting
-	 * a notation.
-	 */
-	public class NotationSelectionPage extends org.eclipse.jface.wizard.WizardPage {
-
-		/**
-		 * Constructor for the notation selection page.
-		 * 
-		 * @param notations The list of notations
-		 */
-		public NotationSelectionPage(java.util.List<Notation> notations) {
-			super("Notation Selection");
-			setTitle("Notation Selection");
-			setDescription("Select the notation for the description to be created");
-			setPageComplete(true);
-			
-			m_notations = notations;
-		}
-
-		/**
-		 * Create the control for the selection page.
-		 * 
-		 * @param parent The parent component
-		 */
-		public void createControl(Composite parent) {
-		    
-			// Create the composite component
-			Composite composite = new Composite(parent, SWT.NONE);
-			composite.setLayout(new GridLayout());
-			composite.setLayoutData(new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_VERTICAL | GridData.VERTICAL_ALIGN_FILL));
-			
-			GridData gd=null;
-
-			Group servgroup=new Group(composite, SWT.H_SCROLL|SWT.V_SCROLL);
-			
-			gd=new GridData();
-			gd.horizontalAlignment = SWT.FILL;
-			gd.verticalAlignment = SWT.FILL;
-			//gd.horizontalSpan = 1;
-			//gd.widthHint = 700;
-			gd.grabExcessHorizontalSpace = true;
-			gd.grabExcessVerticalSpace = true;
-			servgroup.setLayoutData(gd);
-			
-			GridLayout layout = new GridLayout();
-			layout.numColumns = 1;
-			servgroup.setLayout(layout);
-			
-			m_notationList =
-				new org.eclipse.swt.widgets.Combo(servgroup,
-									SWT.H_SCROLL|SWT.V_SCROLL);
-			
-			m_notationList.addSelectionListener(new SelectionListener() {
-
-				public void widgetDefaultSelected(SelectionEvent e) {
-					initFileCreationPage();
-				}
-
-				public void widgetSelected(SelectionEvent e) {
-					initFileCreationPage();
-				}
-				
-			});
-	
-			gd=new GridData();
-			gd.horizontalAlignment = SWT.FILL;
-			gd.verticalAlignment = SWT.FILL;
-			gd.grabExcessHorizontalSpace = true;
-			gd.grabExcessVerticalSpace = true;
-			m_notationList.setLayoutData(gd);
-			
-			for (int i=0; i < m_notations.size(); i++) {
-				m_notationList.add(m_notations.get(i).getName());
-			}
-			
-			if (m_notations.size() > 0) {
-				m_notationList.select(0);
-			}
-			
-			setControl(composite);
-		}
-		
-		/**
-		 * This method returns the notation index currently selected.
-		 * 
-		 * @return The notation index
-		 */
-		public int getNotationIndex() {
-			int ret=0;
-			
-			if (m_notationList != null) {
-				ret = m_notationList.getSelectionIndex();
-			}
-			
-			return(ret);
-		}
-
-		private org.eclipse.swt.widgets.Combo m_notationList=null;
-		private java.util.List<Notation> m_notations=null;
-	}
 
 	/**
      * This is the one page of the wizard.
@@ -435,11 +324,7 @@ public class NewScribbleWizard extends Wizard implements INewWizard {
          */
         protected boolean validatePage() {
             if (super.validatePage()) {
-                String requiredExt = "spg";
-            	int index=m_notationSelection.getNotationIndex();
-            	if (index != -1) {
-            		requiredExt = m_notations.get(index).getCode();
-            	}
+                String requiredExt = PROTOCOL_FILE_EXTENSION;
             	
                 String enteredExt = new Path(getFileName()).getFileExtension();
                 if (enteredExt == null || !enteredExt.equals(requiredExt)) {

@@ -19,13 +19,13 @@ package org.scribble.protocol.designer.editor;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class ScribbleEditorMessages {
+public class ProtocolEditorMessages {
 
-	private static final String RESOURCE_BUNDLE= "org.scribble.designer.editor.ScribbleEditorMessages";//$NON-NLS-1$
+	private static final String RESOURCE_BUNDLE= "org.scribble.designer.editor.ProtocolEditorMessages";//$NON-NLS-1$
 
 	private static ResourceBundle fgResourceBundle= ResourceBundle.getBundle(RESOURCE_BUNDLE);
 
-	private ScribbleEditorMessages() {
+	private ProtocolEditorMessages() {
 	}
 
 	public static String getString(String key) {

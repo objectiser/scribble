@@ -245,7 +245,7 @@ public class ScribbleAutoIndentStrategy extends DefaultIndentLineAutoEditStrateg
 			command.text= buf.toString();
 
 		} catch (BadLocationException excp) {
-			System.out.println(ScribbleEditorMessages.getString("AutoIndent.error.bad_location_1")); //$NON-NLS-1$
+			System.out.println(ProtocolEditorMessages.getString("AutoIndent.error.bad_location_1")); //$NON-NLS-1$
 		}
 	}
 	
@@ -281,7 +281,7 @@ public class ScribbleAutoIndentStrategy extends DefaultIndentLineAutoEditStrateg
 				}
 			}
 		} catch (BadLocationException excp) {
-			System.out.println(ScribbleEditorMessages.getString("AutoIndent.error.bad_location_2")); //$NON-NLS-1$
+			System.out.println(ProtocolEditorMessages.getString("AutoIndent.error.bad_location_2")); //$NON-NLS-1$
 		}
 	}
 }
