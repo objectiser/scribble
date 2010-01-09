@@ -25,7 +25,7 @@ public class DeclarationValidatorRuleTest {
 
 	@org.junit.Test
 	public void testValidateNoDuplicate() {
-		Definition defn=new TestDefinition();
+		Protocol defn=new Protocol();
 		TestDeclaration decl=new TestDeclaration();
 		decl.setName(TEST_NAME);
 
@@ -42,7 +42,7 @@ public class DeclarationValidatorRuleTest {
 	
 	@org.junit.Test
 	public void testValidateSingleLevelDuplicate() {
-		Definition defn=new TestDefinition();
+		Protocol defn=new Protocol();
 		TestDeclaration decl1=new TestDeclaration();
 		decl1.setName(TEST_NAME);
 
@@ -73,7 +73,7 @@ public class DeclarationValidatorRuleTest {
 	
 	@org.junit.Test
 	public void testValidateDuplicateInSinglePathBehaviour() {
-		Definition defn=new TestDefinition();
+		Protocol defn=new Protocol();
 		TestDeclaration decl1=new TestDeclaration();
 		decl1.setName(TEST_NAME);
 

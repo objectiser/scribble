@@ -26,9 +26,9 @@ import org.scribble.protocol.conformance.impl.BehaviourListIterator;
 import org.scribble.protocol.conformance.impl.BehaviourListPaths;
 import org.scribble.protocol.conformance.impl.SyncPoint;
 import org.scribble.protocol.model.Behaviour;
-import org.scribble.protocol.model.Definition;
 import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.model.MultiPathBehaviour;
+import org.scribble.protocol.model.Protocol;
 
 public class BehaviourListComparatorRule implements ComparatorRule {
 
@@ -761,7 +761,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 		//if (b instanceof SinglePathBehaviour &&
 		if (b.isGroupingConstruct() &&
 				b.isConditional()) {
-			Definition d=b.enclosingDefinition();
+			Protocol d=b.enclosingProtocol();
 			
 			if (d != null && d.getLocatedName() != null &&
 					d.getLocatedName().getParticipant() != null &&
@@ -791,7 +791,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 		if (blp.getSourceBehaviour() instanceof MultiPathBehaviour &&
 				((MultiPathBehaviour)blp.getSourceBehaviour()).
 							isMutuallyExclusivePaths()) {
-			Definition d=blp.getSourceBehaviour().enclosingDefinition();
+			Protocol d=blp.getSourceBehaviour().enclosingProtocol();
 			
 			if (d != null && d.getLocatedName() != null &&
 					d.getLocatedName().getParticipant() != null &&
@@ -817,7 +817,7 @@ public class BehaviourListComparatorRule implements ComparatorRule {
 	protected boolean isDecisionMaker(BehaviourList b) {
 		boolean ret=false;
 		
-		Definition d=b.getBlock().enclosingDefinition();
+		Protocol d=b.getBlock().enclosingProtocol();
 			
 		if (d != null && d.getLocatedName() != null &&
 				d.getLocatedName().getParticipant() != null &&

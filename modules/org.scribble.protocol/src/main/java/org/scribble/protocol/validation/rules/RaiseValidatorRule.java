@@ -37,7 +37,7 @@ public class RaiseValidatorRule implements ProtocolComponentValidatorRule {
 			ModelObject act=elem.getParent();
 			
 			while (f_found == false && act != null &&
-					(act instanceof Definition) == false) {
+					(act instanceof Protocol) == false) {
 			
 				if (act instanceof TryEscape) {
 					TryEscape te=(TryEscape)act;

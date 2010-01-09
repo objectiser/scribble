@@ -163,8 +163,8 @@ public class BehaviourList extends Behaviour
 		} else if (obj instanceof ModelInclude) {
 			ModelInclude include=
 					(ModelInclude)obj;
-			Definition defn=
-					((ModelInclude)obj).getDefinition();
+			Protocol defn=
+					((ModelInclude)obj).getProtocol();
 			
 			if (defn != null) {
 				BehaviourList list=null;

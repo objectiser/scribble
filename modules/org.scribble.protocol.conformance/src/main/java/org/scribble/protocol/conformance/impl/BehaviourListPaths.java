@@ -17,9 +17,9 @@
 package org.scribble.protocol.conformance.impl;
 
 import org.scribble.protocol.model.Behaviour;
-import org.scribble.protocol.model.Definition;
 import org.scribble.protocol.model.MultiPathBehaviour;
 import org.scribble.protocol.model.Participant;
+import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.model.SinglePathBehaviour;
 
 /**
@@ -187,14 +187,14 @@ public class BehaviourListPaths extends Behaviour {
 	}
 	
 	/**
-	 * This method returns the definition in which this
+	 * This method returns the protocol in which this
 	 * activity is contained.
 	 * 
-	 * @return The definition, or null if not found
+	 * @return The protocol, or null if not found
 	 */
 	@Override
-	public Definition enclosingDefinition() {
-		return(m_source.enclosingDefinition());
+	public Protocol enclosingProtocol() {
+		return(m_source.enclosingProtocol());
 	}
 	
 	/**

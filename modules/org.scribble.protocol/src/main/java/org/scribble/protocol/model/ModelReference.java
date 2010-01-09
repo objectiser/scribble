@@ -42,7 +42,7 @@ public class ModelReference extends ModelObject {
 	 */
 	public ModelReference(ModelReference ref) {
 		m_name = ref.m_name;
-		m_subDefinitionPath = new SubDefinitionPath(ref.getSubDefinitionPath());
+		m_subDefinitionPath = new SubProtocolPath(ref.getSubDefinitionPath());
 		m_locatedParticipant = ref.m_locatedParticipant;
 		m_inner = ref.m_inner;
 		m_fullyQualified = ref.m_fullyQualified;
@@ -146,7 +146,7 @@ public class ModelReference extends ModelObject {
 	 * 
 	 * @return The sub definition path
 	 */
-	public SubDefinitionPath getSubDefinitionPath() {
+	public SubProtocolPath getSubDefinitionPath() {
 		return(m_subDefinitionPath);
 	}
 	
@@ -381,7 +381,7 @@ public class ModelReference extends ModelObject {
 	public static final String LOCATED_REFERENCE_SEPARATOR="@";
 	
 	private String m_name=null;
-	private SubDefinitionPath m_subDefinitionPath=new SubDefinitionPath();
+	private SubProtocolPath m_subDefinitionPath=new SubProtocolPath();
 	private String m_locatedParticipant=null;
 	private boolean m_inner=false;
 	private boolean m_fullyQualified=false;

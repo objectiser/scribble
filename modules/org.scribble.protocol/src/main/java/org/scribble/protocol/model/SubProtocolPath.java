@@ -20,12 +20,12 @@ package org.scribble.protocol.model;
  * This class provides the path to a definition scope contained
  * within a top level definition.
  */
-public class SubDefinitionPath {
+public class SubProtocolPath {
 
 	/**
 	 * The default constructor.
 	 */
-	public SubDefinitionPath() {		
+	public SubProtocolPath() {		
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class SubDefinitionPath {
 	 * 
 	 * @param elems The array of path elements
 	 */
-	public SubDefinitionPath(String[] elems) {
+	public SubProtocolPath(String[] elems) {
 		for (int i=0; i < elems.length; i++) {
 			m_path.add(elems[i]);
 		}
@@ -45,7 +45,7 @@ public class SubDefinitionPath {
 	 * 
 	 * @param sdp The path to copy
 	 */
-	public SubDefinitionPath(SubDefinitionPath sdp) {
+	public SubProtocolPath(SubProtocolPath sdp) {
 		m_path.addAll(sdp.m_path);
 	}
 	
@@ -112,8 +112,8 @@ public class SubDefinitionPath {
 	public boolean equals(Object other) {
 		boolean ret=false;
 		
-		if (other instanceof SubDefinitionPath) {
-			SubDefinitionPath sdp=(SubDefinitionPath)other;
+		if (other instanceof SubProtocolPath) {
+			SubProtocolPath sdp=(SubProtocolPath)other;
 			
 			ret = (m_path.size() ==
 				sdp.m_path.size());

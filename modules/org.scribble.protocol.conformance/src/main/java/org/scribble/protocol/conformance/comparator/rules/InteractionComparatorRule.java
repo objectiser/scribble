@@ -21,10 +21,10 @@ import java.util.logging.Logger;
 
 import org.scribble.common.logging.Journal;
 import org.scribble.protocol.conformance.comparator.ComparatorContext;
-import org.scribble.protocol.model.Definition;
 import org.scribble.protocol.model.Interaction;
 import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.model.Participant;
+import org.scribble.protocol.model.Protocol;
 
 /**
  * This class provides the Interaction comparator rule.
@@ -188,7 +188,7 @@ public class InteractionComparatorRule implements ComparatorRule {
 				}
 				
 				if (other != null) {
-					Definition defn=interaction.enclosingDefinition();
+					Protocol defn=interaction.enclosingProtocol();
 					
 					if (defn != null && defn.getLocatedName() != null) {
 						ret = defn.getLocatedName().getParticipant();
@@ -219,7 +219,7 @@ public class InteractionComparatorRule implements ComparatorRule {
 				}
 				
 				if (other != null) {
-					Definition defn=interaction.enclosingDefinition();
+					Protocol defn=interaction.enclosingProtocol();
 					
 					if (defn != null && defn.getLocatedName() != null) {
 						ret = defn.getLocatedName().getParticipant();
@@ -237,5 +237,5 @@ public class InteractionComparatorRule implements ComparatorRule {
 		return(ret);
 	}
 
-	private static Logger logger = Logger.getLogger("org.scribble.comparator");
+	private static Logger logger = Logger.getLogger(InteractionComparatorRule.class.getName());
 }

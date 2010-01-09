@@ -36,7 +36,7 @@ public abstract class Compose extends ModelInclude {
 	 * 
 	 * @return The protocol
 	 */
-	public Protocol getDefinition() {
+	public Protocol getProtocol() {
 		Protocol ret=m_inlineDefinition;
 		
 		if (ret == null && m_reference != null) {

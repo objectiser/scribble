@@ -34,12 +34,12 @@ public abstract class ModelInclude extends Behaviour {
 	public abstract ModelReference getReference();
 	
 	/**
-	 * This method returns the definition being
+	 * This method returns the protocol being
 	 * included.
 	 * 
-	 * @return The definition
+	 * @return The protocol
 	 */
-	public abstract Definition getDefinition();
+	public abstract Protocol getProtocol();
 	
 	/**
 	 * This method indicates whether the model include is
@@ -105,7 +105,7 @@ public abstract class ModelInclude extends Behaviour {
 	public java.util.List<Participant> initiatorParticipants() {
 		java.util.List<Participant> ret=super.initiatorParticipants();
 		
-		Definition defn=getDefinition();
+		Protocol defn=getProtocol();
 		
 		if (defn != null) {
 			ret.addAll(defn.getBlock().initiatorParticipants());
@@ -130,7 +130,7 @@ public abstract class ModelInclude extends Behaviour {
 		} else {
 			ret = super.finalParticipants();
 			
-			Definition defn=getDefinition();
+			Protocol defn=getProtocol();
 			
 			if (defn != null) {
 				ret.addAll(defn.getBlock().finalParticipants());

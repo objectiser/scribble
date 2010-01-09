@@ -165,7 +165,7 @@ public class Interaction extends Behaviour {
 				ret.add(getFromParticipant());
 			}
 		} else {
-			Definition defn=enclosingDefinition();
+			Protocol defn=enclosingProtocol();
 			
 			if (defn != null) {
 				Participant located=defn.getLocatedName().getParticipant();
@@ -197,7 +197,7 @@ public class Interaction extends Behaviour {
 				ret.add(getToParticipant());
 			}
 		} else {
-			Definition defn=enclosingDefinition();
+			Protocol defn=enclosingProtocol();
 			
 			if (defn != null) {
 				Participant located=defn.getLocatedName().getParticipant();

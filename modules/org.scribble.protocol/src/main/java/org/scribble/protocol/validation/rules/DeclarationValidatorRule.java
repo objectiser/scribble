@@ -21,8 +21,8 @@ import java.util.logging.Logger;
 import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.Block;
 import org.scribble.protocol.model.Declaration;
-import org.scribble.protocol.model.Definition;
 import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.validation.ProtocolComponentValidatorRule;
 
 /**
@@ -101,7 +101,7 @@ public class DeclarationValidatorRule implements ProtocolComponentValidatorRule 
 						// Only continue if the current object
 						// is not a definition, and it is contained
 						// inside a block
-						if ((cur instanceof Definition) == false &&
+						if ((cur instanceof Protocol) == false &&
 								cur.getParent() instanceof Block) {
 							b = (Block)cur.getParent();
 						} else {

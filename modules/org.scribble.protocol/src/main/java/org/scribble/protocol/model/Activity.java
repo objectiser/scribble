@@ -65,16 +65,16 @@ public abstract class Activity extends Statement {
 	}
 
 	/**
-	 * This method returns the definition in which this
+	 * This method returns the protocol in which this
 	 * activity is contained.
 	 * 
-	 * @return The definition, or null if not found
+	 * @return The protocol, or null if not found
 	 */
-	public Definition enclosingDefinition() {
-		Definition ret=null;
+	public Protocol enclosingProtocol() {
+		Protocol ret=null;
 		
 		if (getParent() instanceof Activity) {
-			ret = ((Activity)getParent()).enclosingDefinition();
+			ret = ((Activity)getParent()).enclosingProtocol();
 		}
 		
 		return(ret);
