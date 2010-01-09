@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.scribble.protocol.validation.Validator;
+import org.scribble.protocol.validation.ProtocolValidator;
 import org.scribble.protocol.validation.connectedness.ConnectednessValidator;
 
 public class Activator implements BundleActivator {
@@ -16,9 +16,9 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
         Properties props = new Properties();
         
-        Validator validator=new ConnectednessValidator();
+        ProtocolValidator validator=new ConnectednessValidator();
         
-        context.registerService(Validator.class.getName(), 
+        context.registerService(ProtocolValidator.class.getName(), 
 				validator, props);
 	}
 

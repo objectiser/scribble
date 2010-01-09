@@ -14,17 +14,22 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.validation.connectedness;
+package org.scribble.protocol.conformance.impl;
 
 import org.scribble.common.logging.Journal;
+import org.scribble.protocol.conformance.ProtocolConformer;
+import org.scribble.protocol.conformance.comparator.DefaultComparatorContext;
 import org.scribble.protocol.model.ProtocolModel;
-import org.scribble.protocol.validation.ProtocolValidator;
 
-public class ConnectednessValidator implements ProtocolValidator {
+public class ProtocolConformerImpl implements ProtocolConformer {
 
-	public void validate(ProtocolModel model, Journal logger) {
-		ConnectednessVisitor visitor=new ConnectednessVisitor(logger);
+	public void conforms(ProtocolModel model, ProtocolModel ref, Journal journal) {
+
+		BehaviourList mainBehaviourList=BehaviourList.createBehaviourList(model.getDefinition().getBlock());
+		BehaviourList refBehaviourList=BehaviourList.createBehaviourList(ref.getDefinition().getBlock());
+
+		DefaultComparatorContext context=new DefaultComparatorContext(null, null);
 		
-		model.visit(visitor);
+		context.compare(mainBehaviourList, refBehaviourList, journal, true);
 	}
 }

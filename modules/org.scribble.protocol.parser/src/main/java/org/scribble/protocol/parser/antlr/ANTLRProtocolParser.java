@@ -22,7 +22,7 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ProtocolParser;
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 
 /**
  * This class provides the ANTLR implementation of the Protocol Parser
@@ -31,7 +31,7 @@ import org.scribble.common.logger.ScribbleLogger;
  */
 public class ANTLRProtocolParser implements ProtocolParser {
 
-	public ProtocolModel parse(InputStream is, ScribbleLogger logger) {
+	public ProtocolModel parse(InputStream is, Journal journal) {
 		ProtocolModel ret=null;
 		
         try {
@@ -45,7 +45,7 @@ public class ANTLRProtocolParser implements ProtocolParser {
     		
     		parser.setTreeAdaptor(adaptor);
     		
-    		parser.setLogger(logger);
+    		parser.setJournal(journal);
 
     		parser.description();
     		

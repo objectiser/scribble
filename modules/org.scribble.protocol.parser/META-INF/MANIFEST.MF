@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.scribble.protocol.parser.osgi.Activator
 Bundle-Vendor: www.scribble.org
 Import-Package: org.osgi.framework;version="1.3.0",
- org.scribble.common.logger,
+ org.scribble.common.logging,
  org.scribble.protocol.model,
  org.scribble.protocol.parser
 Export-Package: org.scribble.protocol.parser.antlr

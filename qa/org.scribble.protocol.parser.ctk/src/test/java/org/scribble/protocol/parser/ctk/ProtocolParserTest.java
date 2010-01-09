@@ -20,12 +20,12 @@ import static org.junit.Assert.*;
 
 import java.util.Comparator;
 
-import org.scribble.common.logger.*;
+import org.scribble.common.logging.*;
 import org.scribble.protocol.model.*;
 
 public class ProtocolParserTest {
 	
-	public ProtocolModel getModel(String filename, ScribbleLogger logger) {
+	public ProtocolModel getModel(String filename, Journal logger) {
 		ProtocolModel ret=null;
 		
 		java.io.InputStream is=

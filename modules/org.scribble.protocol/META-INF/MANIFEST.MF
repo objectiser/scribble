@@ -8,7 +8,8 @@ Bundle-Vendor: www.scribble.org
 Import-Package: org.osgi.framework,
  org.osgi.util.tracker
 Require-Bundle: org.scribble.common
-Export-Package: org.scribble.protocol.model,
+Export-Package: org.scribble.protocol.conformance,
+ org.scribble.protocol.model,
  org.scribble.protocol.parser,
  org.scribble.protocol.validation,
  org.scribble.protocol.validation.rules

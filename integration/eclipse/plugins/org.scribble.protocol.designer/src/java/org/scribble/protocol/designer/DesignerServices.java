@@ -17,7 +17,7 @@
 package org.scribble.protocol.designer;
 
 import org.scribble.protocol.parser.ProtocolParser;
-import org.scribble.protocol.validation.ValidationManager;
+import org.scribble.protocol.validation.ProtocolValidationManager;
 
 /**
  * This class provides a manager for accessing services used
@@ -26,11 +26,11 @@ import org.scribble.protocol.validation.ValidationManager;
  */
 public class DesignerServices {
 	
-	public static ValidationManager getValidationManager() {
+	public static ProtocolValidationManager getValidationManager() {
 		return(m_validationManager);
 	}
 	
-	public static void setValidationManager(ValidationManager vm) {
+	public static void setValidationManager(ProtocolValidationManager vm) {
 		m_validationManager = vm;
 	}
 	
@@ -42,6 +42,6 @@ public class DesignerServices {
 		m_protocolParser = parser;
 	}
 	
-	private static ValidationManager m_validationManager=null;
+	private static ProtocolValidationManager m_validationManager=null;
 	private static ProtocolParser m_protocolParser=null;
 }

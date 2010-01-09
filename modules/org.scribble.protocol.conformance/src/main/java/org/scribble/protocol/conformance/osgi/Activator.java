@@ -4,8 +4,8 @@ import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.scribble.protocol.conformance.Conformer;
-import org.scribble.protocol.conformance.ModelConformer;
+import org.scribble.protocol.conformance.ProtocolConformer;
+import org.scribble.protocol.conformance.impl.ProtocolConformerImpl;
 
 public class Activator implements BundleActivator {
 
@@ -16,9 +16,9 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
         Properties props = new Properties();
         
-        Conformer conformer=new ModelConformer();
+        ProtocolConformer conformer=new ProtocolConformerImpl();
         
-        context.registerService(Conformer.class.getName(), 
+        context.registerService(ProtocolConformer.class.getName(), 
 							conformer, props);
 	}
 

@@ -17,17 +17,17 @@
 package org.scribble.protocol.validation.rules;
 
 import org.scribble.protocol.model.*;
-import org.scribble.protocol.validation.ComponentValidatorRule;
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.protocol.validation.ProtocolComponentValidatorRule;
+import org.scribble.common.logging.Journal;
 
-public class RaiseValidatorRule implements ComponentValidatorRule {
+public class RaiseValidatorRule implements ProtocolComponentValidatorRule {
 
 	public Class<? extends ModelObject> getValidatedClass() {
 		return(org.scribble.protocol.model.Raise.class);
 	}
 	
 	public void validate(ModelObject obj,
-					ScribbleLogger logger) {
+					Journal logger) {
 		Raise elem=(Raise)obj;
 
 		if (elem.getType() != null) {

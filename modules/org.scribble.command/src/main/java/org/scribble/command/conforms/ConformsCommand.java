@@ -16,9 +16,8 @@
  */
 package org.scribble.command.conforms;
 
-import org.scribble.common.logger.ScribbleLogger;
-import org.scribble.protocol.conformance.Conformer;
-import org.scribble.protocol.model.Protocol;
+import org.scribble.common.logging.Journal;
+import org.scribble.protocol.conformance.ProtocolConformer;
 import org.scribble.protocol.parser.ProtocolParser;
 
 public class ConformsCommand implements org.scribble.command.Command {
@@ -26,15 +25,15 @@ public class ConformsCommand implements org.scribble.command.Command {
 	public ConformsCommand() {	
 	}
 	
-	public void setLogger(ScribbleLogger sl) {
-		m_logger = sl;
+	public void setJournal(Journal journal) {
+		m_journal = journal;
 	}
 	
 	public void setProtocolParser(ProtocolParser parser) {
 		m_protocolParser = parser;
 	}
 	
-	public void setConformer(Conformer conformer) {
+	public void setConformer(ProtocolConformer conformer) {
 		m_conformer = conformer;
 	}
 	
@@ -54,44 +53,44 @@ public class ConformsCommand implements org.scribble.command.Command {
 			java.io.File f2=new java.io.File(args[1]);
 			
 			if (f1.exists() == false) {
-				m_logger.error("File not found '"+args[0]+"'", null);
+				m_journal.error("File not found '"+args[0]+"'", null);
 			} else if (f2.exists() == false) {
-				m_logger.error("File not found '"+args[1]+"'", null);
+				m_journal.error("File not found '"+args[1]+"'", null);
 			} else {
 				try {
 					java.io.InputStream is=new java.io.FileInputStream(f1);
 					
 					org.scribble.protocol.model.ProtocolModel p1=
-							m_protocolParser.parse(is, m_logger);
+							m_protocolParser.parse(is, m_journal);
 			
 					is.close();
 					
 					is=new java.io.FileInputStream(f2);
 					
 					org.scribble.protocol.model.ProtocolModel p2=
-							m_protocolParser.parse(is, m_logger);
+							m_protocolParser.parse(is, m_journal);
 			
 					is.close();
 					
 					if (p1 != null && p2 != null) {
-						m_conformer.conforms(p1, p2, m_logger);
+						m_conformer.conforms(p1, p2, m_journal);
 						
 						ret = true;
 					}
 				} catch(Exception e) {
-					m_logger.error("Failed to check conformance of '"+
+					m_journal.error("Failed to check conformance of '"+
 							args[0]+"' against '"+args[1]+"': "+e, null);
 					e.printStackTrace();
 				}
 			}
 		} else {
-			m_logger.error("CONFORMS EXPECTING 2 PARAMETERS", null);
+			m_journal.error("CONFORMS EXPECTING 2 PARAMETERS", null);
 		}
 		
 		return(ret);
 	}
 
-	private ScribbleLogger m_logger=null;
+	private Journal m_journal=null;
 	private ProtocolParser m_protocolParser=null;
-	private Conformer m_conformer=null;
+	private ProtocolConformer m_conformer=null;
 }

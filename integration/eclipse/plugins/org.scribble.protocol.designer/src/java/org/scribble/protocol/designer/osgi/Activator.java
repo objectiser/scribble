@@ -27,8 +27,8 @@ import org.scribble.protocol.designer.editor.*;
 import org.scribble.protocol.designer.editor.lang.*;
 import org.scribble.protocol.designer.editor.util.*;
 import org.scribble.protocol.parser.ProtocolParser;
-import org.scribble.protocol.validation.DefaultValidationManager;
-import org.scribble.protocol.validation.ValidationManager;
+import org.scribble.protocol.validation.DefaultProtocolValidationManager;
+import org.scribble.protocol.validation.ProtocolValidationManager;
 
 import java.util.logging.*;
 import org.eclipse.core.runtime.IStatus;
@@ -62,7 +62,7 @@ public class Activator extends AbstractUIPlugin {
 
 		// TODO: Obtain validation manager pre-initialised
 		
-		ValidationManager vm=new DefaultValidationManager();
+		ProtocolValidationManager vm=new DefaultProtocolValidationManager();
 		vm.addValidator(new org.scribble.protocol.validation.ProtocolComponentValidator());
 		
 		DesignerServices.setValidationManager(vm);

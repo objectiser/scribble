@@ -16,18 +16,18 @@
  */
 package org.scribble.protocol.validation.rules;
 
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.Interaction;
 import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.model.Participant;
-import org.scribble.protocol.validation.ComponentValidatorRule;
+import org.scribble.protocol.validation.ProtocolComponentValidatorRule;
 
 /**
  * This class provides the validation rule for the Interaction
  * model component.
  *
  */
-public class InteractionValidatorRule implements ComponentValidatorRule {
+public class InteractionValidatorRule implements ProtocolComponentValidatorRule {
 
 	/**
 	 * This method returns the class being validated.
@@ -45,7 +45,7 @@ public class InteractionValidatorRule implements ComponentValidatorRule {
 	 * @param logger The logger
 	 */
 	public void validate(ModelObject obj,
-					ScribbleLogger logger) {
+					Journal logger) {
 		Interaction elem=(Interaction)obj;
 		
 		// Identify definition and whether it has a located role

@@ -14,17 +14,20 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.parser;
+package org.scribble.common.logging;
 
-import org.scribble.common.logging.Journal;
-import org.scribble.protocol.model.*;
+import java.io.Serializable;
 
-/**
- * This interface represents the protocol parser.
- *
- */
-public interface ProtocolParser {
+public interface Journal {
 
-	public ProtocolModel parse(java.io.InputStream is, Journal journal);
+	public void error(String issue, java.util.Map<String,Serializable> props);
+	
+	public void warning(String issue, java.util.Map<String,Serializable> props);
+	
+	public void info(String issue, java.util.Map<String,Serializable> props);
+
+	public void debug(String issue, java.util.Map<String,Serializable> props);
+
+	public void trace(String issue, java.util.Map<String,Serializable> props);
 
 }

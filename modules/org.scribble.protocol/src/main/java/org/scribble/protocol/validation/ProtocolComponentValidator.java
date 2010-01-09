@@ -16,14 +16,101 @@
  */
 package org.scribble.protocol.validation;
 
+import org.scribble.common.logging.Journal;
+import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.validation.rules.RaiseValidatorRule;
 
-public class ProtocolComponentValidator extends DefaultComponentValidator {
+import java.util.logging.*;
 
+public class ProtocolComponentValidator implements ProtocolValidator {
+	
+	private java.util.Map<Class<? extends ModelObject>, ProtocolComponentValidatorRule> m_rules=
+		new java.util.HashMap<Class<? extends ModelObject>, ProtocolComponentValidatorRule>();
+
+	private static Logger _log=Logger.getLogger(ProtocolComponentValidator.class.getName());
+	
 	public ProtocolComponentValidator() {
 		
 		// Register protocol component validator rules
-		register(new RaiseValidatorRule());
+		register(new RaiseValidatorRule());	
+	}
+	
+	protected void register(ProtocolComponentValidatorRule rule) {
+		m_rules.put(rule.getValidatedClass(), rule);
+	}
+
+	protected void unregister(ProtocolComponentValidatorRule rule) {
+		m_rules.remove(rule.getValidatedClass());
+	}
+	
+	protected ProtocolComponentValidatorRule getRule(Class<? extends ModelObject> cls) {
+		return(m_rules.get(cls));
+	}
+
+	public void validate(org.scribble.protocol.model.ProtocolModel model,
+						Journal logger) {
 		
+		model.visit(new ValidatingVisitor(logger));
+	}
+
+	public class ValidatingVisitor implements org.scribble.protocol.model.Visitor {
+		
+		public ValidatingVisitor(Journal logger) {
+			m_logger = logger;
+		}
+		
+		/**
+		 * This method can be used to prepare for
+		 * visiting the supplied model object.
+		 * 
+		 * @param obj The model object
+		 */
+		public void prepare(ModelObject obj) {
+			
+			// TODO: Decide how best to deal with grouping constructs
+		}
+		
+		@SuppressWarnings("unchecked")
+		public boolean visit(ModelObject obj) {
+		
+			// Find validation rule for each class up the
+			// inheritance hierarchy that are derived from
+			// the ModelObject
+			Class<? extends ModelObject> cls=obj.getClass();
+			
+			while (cls != null) {
+				ProtocolComponentValidatorRule rule=getRule(cls);
+				
+				if (_log.isLoggable(Level.FINEST)) {
+					_log.finest("Component rule for class="+cls+" is "+rule);
+				}
+				
+				if (rule != null) {
+					rule.validate(obj, m_logger);
+				}
+				
+				if (cls != ModelObject.class) {
+					cls = (Class<? extends ModelObject>)cls.getSuperclass();
+				} else {
+					cls = null;
+				}
+			}
+			
+			return(true);
+		}
+		
+		/**
+		 * This method can be used to conclude any
+		 * work associated with visiting the supplied 
+		 * model object.
+		 * 
+		 * @param obj The model object
+		 */
+		public void conclude(ModelObject obj) {
+			
+			// TODO: Decide how best to deal with grouping constructs
+		}
+
+		private Journal m_logger=null;
 	}
 }

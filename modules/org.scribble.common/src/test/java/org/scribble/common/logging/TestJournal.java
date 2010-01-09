@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.parser.ctk;
+package org.scribble.common.logging;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -23,7 +23,7 @@ import org.scribble.common.logging.Journal;
 
 import static org.junit.Assert.*;
 
-public class TestScribbleLogger implements Journal {
+public class TestJournal implements Journal {
 
 	public void debug(String issue, Map<String, Serializable> props) {
 	}

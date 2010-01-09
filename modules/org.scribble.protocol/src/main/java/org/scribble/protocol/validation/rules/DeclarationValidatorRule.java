@@ -18,19 +18,19 @@ package org.scribble.protocol.validation.rules;
 
 import java.util.logging.Logger;
 
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.Block;
 import org.scribble.protocol.model.Declaration;
 import org.scribble.protocol.model.Definition;
 import org.scribble.protocol.model.ModelObject;
-import org.scribble.protocol.validation.ComponentValidatorRule;
+import org.scribble.protocol.validation.ProtocolComponentValidatorRule;
 
 /**
  * This class provides the validation rule for the Declaration
  * model component.
  *
  */
-public class DeclarationValidatorRule implements ComponentValidatorRule {
+public class DeclarationValidatorRule implements ProtocolComponentValidatorRule {
 
 	private static final Logger _log=Logger.getLogger(DeclarationValidatorRule.class.getName());
 	
@@ -50,7 +50,7 @@ public class DeclarationValidatorRule implements ComponentValidatorRule {
 	 * @param logger The logger
 	 */
 	public void validate(ModelObject obj,
-					ScribbleLogger logger) {
+					Journal logger) {
 		Declaration elem=(Declaration)obj;
 		
 		// Check name has been defined

@@ -14,17 +14,22 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.parser;
+package org.scribble.protocol.conformance;
 
 import org.scribble.common.logging.Journal;
-import org.scribble.protocol.model.*;
 
-/**
- * This interface represents the protocol parser.
- *
- */
-public interface ProtocolParser {
+public interface ProtocolConformer {
 
-	public ProtocolModel parse(java.io.InputStream is, Journal journal);
-
+	/**
+	 * This method checks whether the supplied model conforms to
+	 * the reference model.
+	 * 
+	 * @param model The model to be verified
+	 * @param ref The reference model
+	 * @param logger The logger
+	 */
+	public void conforms(org.scribble.protocol.model.ProtocolModel model,
+			org.scribble.protocol.model.ProtocolModel ref,
+				Journal logger);
+	
 }

@@ -28,10 +28,10 @@ import org.scribble.command.conforms.ConformsCommand;
 import org.scribble.command.parse.ParseCommand;
 import org.scribble.command.validate.ValidateCommand;
 import org.scribble.command.*;
-import org.scribble.common.logger.ScribbleLogger;
-import org.scribble.protocol.conformance.Conformer;
+import org.scribble.common.logging.Journal;
+import org.scribble.protocol.conformance.ProtocolConformer;
 import org.scribble.protocol.parser.ProtocolParser;
-import org.scribble.protocol.validation.ValidationManager;
+import org.scribble.protocol.validation.ProtocolValidationManager;
 
 public class Activator implements BundleActivator {
 
@@ -67,8 +67,8 @@ public class Activator implements BundleActivator {
         		ServiceReference sr = ev.getServiceReference();
         		switch(ev.getType()) {
         		case ServiceEvent.REGISTERED:
-        			ValidationManager vm=
-        				(ValidationManager)context.getService(sr);
+        			ProtocolValidationManager vm=
+        				(ProtocolValidationManager)context.getService(sr);
         			vc.setValidationManager(vm);
         			break;
         		case ServiceEvent.UNREGISTERING:
@@ -82,11 +82,11 @@ public class Activator implements BundleActivator {
         		ServiceReference sr = ev.getServiceReference();
         		switch(ev.getType()) {
         		case ServiceEvent.REGISTERED:
-        			ScribbleLogger sl=
-        				(ScribbleLogger)context.getService(sr);
-        			pc.setLogger(sl);
-        			vc.setLogger(sl);
-        			cc.setLogger(sl);
+        			Journal sl=
+        				(Journal)context.getService(sr);
+        			pc.setJournal(sl);
+        			vc.setJournal(sl);
+        			cc.setJournal(sl);
         			break;
         		case ServiceEvent.UNREGISTERING:
         			break;
@@ -116,8 +116,8 @@ public class Activator implements BundleActivator {
         		ServiceReference sr = ev.getServiceReference();
         		switch(ev.getType()) {
         		case ServiceEvent.REGISTERED:
-        			Conformer conformer=
-        				(Conformer)context.getService(sr);
+        			ProtocolConformer conformer=
+        				(ProtocolConformer)context.getService(sr);
         			cc.setConformer(conformer);
         			break;
         		case ServiceEvent.UNREGISTERING:
@@ -126,10 +126,10 @@ public class Activator implements BundleActivator {
         	}
         };
               
-        String filter1 = "(objectclass=" + ValidationManager.class.getName() + ")";
-        String filter2 = "(objectclass=" + ScribbleLogger.class.getName() + ")";
+        String filter1 = "(objectclass=" + ProtocolValidationManager.class.getName() + ")";
+        String filter2 = "(objectclass=" + Journal.class.getName() + ")";
         String filter3 = "(objectclass=" + ProtocolParser.class.getName() + ")";
-        String filter4 = "(objectclass=" + Conformer.class.getName() + ")";
+        String filter4 = "(objectclass=" + ProtocolConformer.class.getName() + ")";
         
         try {
         	context.addServiceListener(sl1, filter1);

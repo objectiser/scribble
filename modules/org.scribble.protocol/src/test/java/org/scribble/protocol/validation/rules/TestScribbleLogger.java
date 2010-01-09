@@ -19,11 +19,11 @@ package org.scribble.protocol.validation.rules;
 import java.io.Serializable;
 import java.util.Map;
 
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 
 import static org.junit.Assert.*;
 
-public class TestScribbleLogger implements ScribbleLogger {
+public class TestScribbleLogger implements Journal {
 
 	public void debug(String issue, Map<String, Serializable> props) {
 	}

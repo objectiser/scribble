@@ -4,6 +4,6 @@ Bundle-Name: Scribble Protocol Parser CTK
 Bundle-SymbolicName: org.scribble.protocol.parser.ctk
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: www.scribble.org
-Import-Package: org.scribble.common.logger,
+Import-Package: org.scribble.common.logging,
  org.scribble.protocol.model,
  org.scribble.protocol.parser

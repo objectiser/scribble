@@ -18,7 +18,7 @@ package org.scribble.protocol.validation.connectedness;
 
 import java.util.Collections;
 
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.Block;
 import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.model.Participant;
@@ -26,7 +26,7 @@ import org.scribble.protocol.model.Visitor;
 
 public class ConnectednessVisitor implements Visitor {
 	
-	public ConnectednessVisitor(ScribbleLogger logger) {
+	public ConnectednessVisitor(Journal logger) {
 		m_logger = logger;
 	}
 
@@ -71,5 +71,5 @@ public class ConnectednessVisitor implements Visitor {
 	public void prepare(ModelObject obj) {
 	}
 	
-	private ScribbleLogger m_logger=null;
+	private Journal m_logger=null;
 }

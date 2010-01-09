@@ -20,9 +20,9 @@ import java.io.Serializable;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 
-public class EclipseScribbleLogger implements ScribbleLogger {
+public class EclipseScribbleLogger implements Journal {
 
 	public EclipseScribbleLogger(IFile file) {
 		m_file = file;

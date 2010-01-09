@@ -23,12 +23,12 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
-import org.scribble.common.logger.ScribbleLogger;
-import org.scribble.common.logger.ConsoleScribbleLogger;
-import org.scribble.protocol.validation.DefaultValidationManager;
-import org.scribble.protocol.validation.ValidationManager;
+import org.scribble.common.logging.ConsoleJournal;
+import org.scribble.common.logging.Journal;
+import org.scribble.protocol.validation.DefaultProtocolValidationManager;
+import org.scribble.protocol.validation.ProtocolValidationManager;
 import org.scribble.protocol.validation.ProtocolComponentValidator;
-import org.scribble.protocol.validation.Validator;
+import org.scribble.protocol.validation.ProtocolValidator;
 
 public class Activator implements BundleActivator {
 
@@ -42,18 +42,18 @@ public class Activator implements BundleActivator {
 
         Properties props = new Properties();
 
-        final ValidationManager vm=new DefaultValidationManager();
+        final ProtocolValidationManager vm=new DefaultProtocolValidationManager();
         
-        context.registerService(ValidationManager.class.getName(), 
+        context.registerService(ProtocolValidationManager.class.getName(), 
 							vm, props);
         
         _log.fine("Registered Validation Manager");
         
-        context.registerService(ScribbleLogger.class.getName(), 
-				new ConsoleScribbleLogger(), props);
+        context.registerService(Journal.class.getName(), 
+				new ConsoleJournal(), props);
 
         m_tracker = new ServiceTracker(context,
-        		org.scribble.protocol.validation.Validator.class.getName(),
+        		org.scribble.protocol.validation.ProtocolValidator.class.getName(),
         				null) {
         	
 			public Object addingService(ServiceReference ref) {
@@ -61,7 +61,7 @@ public class Activator implements BundleActivator {
 				
 				_log.fine("Validator has been added: "+ret);
 				
-				vm.addValidator((Validator)ret);
+				vm.addValidator((ProtocolValidator)ret);
 				
 				return(ret);
 			}
@@ -74,7 +74,7 @@ public class Activator implements BundleActivator {
 		// Register protocol validator
         props = new Properties();
 
-        context.registerService(Validator.class.getName(), 
+        context.registerService(ProtocolValidator.class.getName(), 
 				new ProtocolComponentValidator(), props);        
 	}
 

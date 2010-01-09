@@ -16,22 +16,22 @@
  */
 package org.scribble.command.validate;
 
-import org.scribble.common.logger.*;
+import org.scribble.common.logging.*;
 import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.parser.ProtocolParser;
-import org.scribble.protocol.validation.ValidationManager;
+import org.scribble.protocol.validation.ProtocolValidationManager;
 
 public class ValidateCommand implements org.scribble.command.Command {
 
 	public ValidateCommand() {
 	}
 	
-	public void setValidationManager(ValidationManager vm) {
+	public void setValidationManager(ProtocolValidationManager vm) {
 		m_validationManager = vm;
 	}
 	
-	public void setLogger(ScribbleLogger sl) {
-		m_logger = sl;
+	public void setJournal(Journal journal) {
+		m_journal = journal;
 	}
 	
 	public void setProtocolParser(ProtocolParser parser) {
@@ -50,24 +50,24 @@ public class ValidateCommand implements org.scribble.command.Command {
 		boolean ret=false;
 		
 		if (args.length == 1) {
-			m_logger.info("PARSE "+args[0], null);
+			m_journal.info("PARSE "+args[0], null);
 			
 			java.io.File f=new java.io.File(args[0]);
 			
 			if (f.exists() == false) {
-				m_logger.error("File not found '"+args[0]+"'", null);
+				m_journal.error("File not found '"+args[0]+"'", null);
 			} else {
 				// TODO: Check if protocol
 				try {
 					java.io.InputStream is=new java.io.FileInputStream(f);
 			
 					org.scribble.protocol.model.ProtocolModel model=
-							m_protocolParser.parse(is, m_logger);
+							m_protocolParser.parse(is, m_journal);
 			
 					if (model != null) {
 						System.out.println("VALIDATE "+args[0]);
 						
-						m_validationManager.validate(model, m_logger);
+						m_validationManager.validate(model, m_journal);
 						
 						ret = true;						
 					}
@@ -75,7 +75,7 @@ public class ValidateCommand implements org.scribble.command.Command {
 					is.close();
 					
 				} catch(Exception e) {
-					m_logger.error("Failed to parse file '"+args[0]+"'", null);
+					m_journal.error("Failed to parse file '"+args[0]+"'", null);
 				}
 			}
 		} else {
@@ -85,7 +85,7 @@ public class ValidateCommand implements org.scribble.command.Command {
 		return(ret);
 	}
 
-	private ValidationManager m_validationManager=null;
-	private ScribbleLogger m_logger=null;
+	private ProtocolValidationManager m_validationManager=null;
+	private Journal m_journal=null;
 	private ProtocolParser m_protocolParser=null;
 }

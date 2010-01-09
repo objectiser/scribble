@@ -14,17 +14,15 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.parser;
+package org.scribble.protocol.validation;
 
-import org.scribble.common.logging.Journal;
-import org.scribble.protocol.model.*;
+public interface ProtocolValidationManager {
+	
+	public void addValidator(ProtocolValidator validator);
 
-/**
- * This interface represents the protocol parser.
- *
- */
-public interface ProtocolParser {
+	public void removeValidator(ProtocolValidator validator);
 
-	public ProtocolModel parse(java.io.InputStream is, Journal journal);
-
+	public void validate(org.scribble.protocol.model.ProtocolModel model,
+				org.scribble.common.logging.Journal journal);
+	
 }

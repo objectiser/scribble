@@ -14,17 +14,32 @@
  * limitations under the License.
  *
  */
-package org.scribble.protocol.parser;
+package org.scribble.protocol.validation;
 
 import org.scribble.common.logging.Journal;
-import org.scribble.protocol.model.*;
+import org.scribble.protocol.model.ModelObject;
 
 /**
- * This interface represents the protocol parser.
+ * This interface represents the validation rule for the
+ * model components.
  *
  */
-public interface ProtocolParser {
+public interface ProtocolComponentValidatorRule {
 
-	public ProtocolModel parse(java.io.InputStream is, Journal journal);
+	/**
+	 * This method returns the class being validated.
+	 * 
+	 * @return The class being validated
+	 */
+	public Class<? extends ModelObject> getValidatedClass();
+	
+	/**
+	 * This method validates the supplied model object.
+	 * 
+	 * @param obj The model object being validated
+	 * @param logger The logger
+	 */
+	public void validate(ModelObject obj,
+					Journal logger);
 
 }

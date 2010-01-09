@@ -16,7 +16,7 @@
  */
 package org.scribble.command.parse;
 
-import org.scribble.common.logger.ScribbleLogger;
+import org.scribble.common.logging.Journal;
 import org.scribble.protocol.parser.ProtocolParser;
 
 public class ParseCommand implements org.scribble.command.Command {
@@ -24,8 +24,8 @@ public class ParseCommand implements org.scribble.command.Command {
 	public ParseCommand() {	
 	}
 	
-	public void setLogger(ScribbleLogger sl) {
-		m_logger = sl;
+	public void setJournal(Journal journal) {
+		m_journal = journal;
 	}
 	
 	public void setProtocolParser(ProtocolParser parser) {
@@ -44,33 +44,33 @@ public class ParseCommand implements org.scribble.command.Command {
 		boolean ret=false;
 		
 		if (args.length == 1) {
-			m_logger.info("PARSE "+args[0], null);
+			m_journal.info("PARSE "+args[0], null);
 			
 			java.io.File f=new java.io.File(args[0]);
 			
 			if (f.exists() == false) {
-				m_logger.error("File not found '"+args[0]+"'", null);
+				m_journal.error("File not found '"+args[0]+"'", null);
 			} else {
 				// TODO: Check if protocol
 				try {
 					java.io.InputStream is=new java.io.FileInputStream(f);
 			
-					m_protocolParser.parse(is, m_logger);
+					m_protocolParser.parse(is, m_journal);
 			
 					is.close();
 					
 					ret = true;
 				} catch(Exception e) {
-					m_logger.error("Failed to parse file '"+args[0]+"'", null);
+					m_journal.error("Failed to parse file '"+args[0]+"'", null);
 				}
 			}
 		} else {
-			m_logger.error("PARSE EXPECTING 1 PARAMETER", null);
+			m_journal.error("PARSE EXPECTING 1 PARAMETER", null);
 		}
 		
 		return(ret);
 	}
 
-	private ScribbleLogger m_logger=null;
+	private Journal m_journal=null;
 	private ProtocolParser m_protocolParser=null;
 }
