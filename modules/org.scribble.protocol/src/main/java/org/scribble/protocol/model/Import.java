@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents an import definition associated with a model.
  * 
  */
-public class Import extends Statement {
+public class Import extends ModelObject {
 
 	private static final long serialVersionUID = -5422814413966814121L;
 

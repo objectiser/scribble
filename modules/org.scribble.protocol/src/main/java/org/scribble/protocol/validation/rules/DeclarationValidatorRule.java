@@ -19,6 +19,7 @@ package org.scribble.protocol.validation.rules;
 import java.util.logging.Logger;
 
 import org.scribble.common.logging.Journal;
+import org.scribble.protocol.model.Activity;
 import org.scribble.protocol.model.Block;
 import org.scribble.protocol.model.Declaration;
 import org.scribble.protocol.model.ModelObject;
@@ -61,21 +62,21 @@ public class DeclarationValidatorRule implements ProtocolComponentValidatorRule 
 			// declaration, to ensure that only one declaration
 			// exists with this name, in the scope
 			Block b=null;
-			ModelObject cur=elem;
+			Activity cur=elem;
 			
 			if (cur.getParent() instanceof Block) {
 				b = (Block)elem.getParent();
 			}
 			
 			while (cur != null && b != null) {
-				int index=b.getContents().indexOf(cur);
+				int index=b.indexOf(cur);
 				
 				if (index == -1) {
 					_log.warning("Declaration not part of parent block");
 					cur = null;
 				} else {
 					for (int i=0; i < index; i++) {
-						ModelObject mo=b.getContents().get(i);
+						ModelObject mo=b.get(i);
 						
 						if (mo instanceof Declaration) {
 							Declaration decl=(Declaration)mo;
@@ -96,16 +97,22 @@ public class DeclarationValidatorRule implements ProtocolComponentValidatorRule 
 					}
 					
 					if (cur != null) {
-						cur = b.getParent();
 						
-						// Only continue if the current object
-						// is not a definition, and it is contained
-						// inside a block
-						if ((cur instanceof Protocol) == false &&
-								cur.getParent() instanceof Block) {
-							b = (Block)cur.getParent();
+						if (b.getParent() instanceof Activity) {
+							cur = (Activity)b.getParent();
+							
+							// Only continue if the current object
+							// is not a definition, and it is contained
+							// inside a block
+							if ((cur instanceof Protocol) == false &&
+									cur.getParent() instanceof Block) {
+								b = (Block)cur.getParent();
+							} else {
+								b = null;
+							}
 						} else {
 							b = null;
+							cur = null;
 						}
 					}
 				}

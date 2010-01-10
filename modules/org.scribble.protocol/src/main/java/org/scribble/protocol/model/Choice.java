@@ -78,7 +78,6 @@ public class Choice extends MultiPathBehaviour {
 	 * 
 	 * @return The list of blocks
 	 */
-	@Reference(containment=true)
 	public java.util.List<Block> getBlocks() {
 		return(m_blocks);
 	}

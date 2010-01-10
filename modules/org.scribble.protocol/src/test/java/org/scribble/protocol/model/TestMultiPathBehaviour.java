@@ -20,7 +20,6 @@ import org.scribble.protocol.model.Block;
 import org.scribble.protocol.model.ContainmentList;
 import org.scribble.protocol.model.MultiPathBehaviour;
 import org.scribble.protocol.model.OrderingConstraint;
-import org.scribble.protocol.model.Reference;
 
 public class TestMultiPathBehaviour extends MultiPathBehaviour {
 	
@@ -35,7 +34,6 @@ public class TestMultiPathBehaviour extends MultiPathBehaviour {
 	 * 
 	 * @return The list of blocks
 	 */
-	@Reference(containment=true)
 	public java.util.List<Block> getBlocks() {
 		return(m_blocks);
 	}

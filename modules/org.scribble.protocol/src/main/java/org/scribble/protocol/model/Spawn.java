@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents the Spawn construct.
  * 
  */
-public class Spawn extends Compose {
+public class Spawn extends ModelInclude {
 
 	private static final long serialVersionUID = -7446521849639232039L;
 

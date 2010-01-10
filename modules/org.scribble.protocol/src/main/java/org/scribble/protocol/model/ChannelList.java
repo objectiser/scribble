@@ -29,7 +29,6 @@ public class ChannelList extends Activity {
 	 * 
 	 * @return The list of channels
 	 */
-	@Reference(containment=true)
 	public java.util.List<Channel> getChannels() {
 		return(m_channels);
 	}

@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents the namespace associated with a model.
  * 
  */
-public class Namespace extends Statement {
+public class Namespace extends ModelObject {
 
 	private static final long serialVersionUID = 2546583254402988900L;
 

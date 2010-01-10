@@ -37,7 +37,6 @@ public class TryEscape extends MultiPathBehaviour {
 	 * 
 	 * @return The block of activities
 	 */
-	@Reference(containment=true)
 	public Block getBlock() {
 		return(m_block);
 	}
@@ -65,7 +64,6 @@ public class TryEscape extends MultiPathBehaviour {
 	 * 
 	 * @return The list of escape blocks
 	 */
-	@Reference(containment=true)
 	public java.util.List<EscapeBlock> getEscapeBlocks() {
 		return(m_escapeBlocks);
 	}

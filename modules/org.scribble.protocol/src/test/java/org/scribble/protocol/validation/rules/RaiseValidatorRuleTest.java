@@ -31,7 +31,7 @@ public class RaiseValidatorRuleTest {
 		raise.setType(tref);
 		
 		TryEscape te=new TryEscape();
-		te.getBlock().getContents().add(raise);
+		te.getBlock().add(raise);
 		
 		TypeReference catchType=new TypeReference();
 		catchType.setName("ns.lp");
@@ -63,7 +63,7 @@ public class RaiseValidatorRuleTest {
 		raise.setType(tref);
 		
 		TryEscape te=new TryEscape();
-		te.getBlock().getContents().add(raise);
+		te.getBlock().add(raise);
 		
 		TypeReference catchType=new TypeReference();
 		catchType.setName("ns.lp2");

@@ -35,7 +35,7 @@ public class ConnectednessValidatorTest {
 		model.setDefinition(defn);
 		
 		Interaction interaction1=new Interaction();
-		defn.getBlock().getContents().add(interaction1);
+		defn.getBlock().add(interaction1);
 		
 		Participant fromP=new Participant();
 		fromP.setName("fromPart");
@@ -47,7 +47,7 @@ public class ConnectednessValidatorTest {
 		interaction1.setToParticipant(toP);
 		
 		Interaction interaction2=new Interaction();
-		defn.getBlock().getContents().add(interaction2);
+		defn.getBlock().add(interaction2);
 		
 		interaction2.setFromParticipant(toP);
 		interaction2.setToParticipant(fromP);
@@ -69,7 +69,7 @@ public class ConnectednessValidatorTest {
 		model.setDefinition(defn);
 		
 		Interaction interaction1=new Interaction();
-		defn.getBlock().getContents().add(interaction1);
+		defn.getBlock().add(interaction1);
 		
 		Participant fromP1=new Participant();
 		fromP1.setName("fromPart1");
@@ -81,7 +81,7 @@ public class ConnectednessValidatorTest {
 		interaction1.setToParticipant(toP1);
 		
 		Interaction interaction2=new Interaction();
-		defn.getBlock().getContents().add(interaction2);
+		defn.getBlock().add(interaction2);
 		
 		Participant fromP2=new Participant();
 		fromP2.setName("fromPart2");

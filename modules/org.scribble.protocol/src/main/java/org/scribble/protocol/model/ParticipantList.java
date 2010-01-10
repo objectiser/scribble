@@ -29,7 +29,6 @@ public class ParticipantList extends Activity {
 	 * 
 	 * @return The list of participants
 	 */
-	@Reference(containment=true)
 	public java.util.List<Participant> getParticipants() {
 		return(m_participants);
 	}

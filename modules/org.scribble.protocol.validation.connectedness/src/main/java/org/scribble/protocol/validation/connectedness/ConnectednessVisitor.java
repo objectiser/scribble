@@ -33,15 +33,15 @@ public class ConnectednessVisitor extends DefaultVisitor {
 		java.util.List<Participant> precedingInitiator=null;
 		java.util.List<Participant> precedingFinal=null;
 		
-		for (int i=0; i < block.getContents().size(); i++) {
+		for (int i=0; i < block.size(); i++) {
 			
 			if (precedingInitiator != null &&
 					precedingFinal != null &&
-					block.getContents().get(i).initiatorParticipants().size() > 0) {
+					block.get(i).initiatorParticipants().size() > 0) {
 				if (Collections.disjoint(precedingInitiator,
-						block.getContents().get(i).initiatorParticipants()) &&
+						block.get(i).initiatorParticipants()) &&
 						Collections.disjoint(precedingFinal,
-								block.getContents().get(i).initiatorParticipants())) {
+								block.get(i).initiatorParticipants())) {
 					
 					m_logger.error(org.scribble.common.util.MessageUtil.format(
 							java.util.PropertyResourceBundle.getBundle(
@@ -51,9 +51,9 @@ public class ConnectednessVisitor extends DefaultVisitor {
 				}
 			}
 			
-			if (block.getContents().get(i).initiatorParticipants().size() > 0) {
-				precedingInitiator = block.getContents().get(i).initiatorParticipants();
-				precedingFinal = block.getContents().get(i).finalParticipants();
+			if (block.get(i).initiatorParticipants().size() > 0) {
+				precedingInitiator = block.get(i).initiatorParticipants();
+				precedingFinal = block.get(i).finalParticipants();
 			}
 		}
 		

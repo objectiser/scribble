@@ -29,7 +29,6 @@ public class Interaction extends Behaviour {
 	 * 
 	 * @return The message signature
 	 */
-	@Reference(containment=true)
 	public MessageSignature getMessageSignature() {
 		return(m_messageSignature);
 	}

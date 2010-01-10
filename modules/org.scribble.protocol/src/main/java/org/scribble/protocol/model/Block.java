@@ -30,9 +30,60 @@ public class Block extends Activity {
 	 * 
 	 * @return The contents
 	 */
-	@Reference(containment=true)
 	public java.util.List<Activity> getContents() {
 		return(m_contents);
+	}
+	
+	/**
+	 * This method adds an activity to the block.
+	 * 
+	 * @param act The activity
+	 * @return Whether the activity has been added
+	 */
+	public boolean add(Activity act) {
+		return(m_contents.add(act));
+	}
+	
+	/**
+	 * This method removes an activity from the block.
+	 * 
+	 * @param act The activity
+	 * @return Whether the activity has been removed
+	 */
+	public boolean remove(Activity act) {
+		return(m_contents.remove(act));
+	}
+	
+	/**
+	 * This method returns the number of activities
+	 * in the block.
+	 * 
+	 * @return The number of activities
+	 */
+	public int size() {
+		return(m_contents.size());
+	}
+	
+	/**
+	 * This method returns the activity at the specified
+	 * index.
+	 * 
+	 * @param index The index
+	 * @return The activity
+	 * @throws IndexOutOfBoundsException 
+	 */
+	public Activity get(int index) throws IndexOutOfBoundsException {
+		return(m_contents.get(index));
+	}
+	
+	/**
+	 * This method returns the index of the supplied activity.
+	 * 
+	 * @param act The activity
+	 * @return The index, or -1 if the activity is not found
+	 */
+	public int indexOf(Activity act) {
+		return(m_contents.indexOf(act));
 	}
 	
 	/**

@@ -29,7 +29,7 @@ public class DeclarationValidatorRuleTest {
 		TestDeclaration decl=new TestDeclaration();
 		decl.setName(TEST_NAME);
 
-		defn.getBlock().getContents().add(decl);
+		defn.getBlock().add(decl);
 	
 		DeclarationValidatorRule rule=new DeclarationValidatorRule();
 		
@@ -46,15 +46,15 @@ public class DeclarationValidatorRuleTest {
 		TestDeclaration decl1=new TestDeclaration();
 		decl1.setName(TEST_NAME);
 
-		defn.getBlock().getContents().add(decl1);
+		defn.getBlock().add(decl1);
 		
 		Interaction in=new Interaction();
-		defn.getBlock().getContents().add(in);
+		defn.getBlock().add(in);
 	
 		TestDeclaration decl2=new TestDeclaration();
 		decl2.setName(TEST_NAME);
 
-		defn.getBlock().getContents().add(decl2);
+		defn.getBlock().add(decl2);
 	
 		DeclarationValidatorRule rule=new DeclarationValidatorRule();
 		
@@ -77,18 +77,18 @@ public class DeclarationValidatorRuleTest {
 		TestDeclaration decl1=new TestDeclaration();
 		decl1.setName(TEST_NAME);
 
-		defn.getBlock().getContents().add(decl1);
+		defn.getBlock().add(decl1);
 		
 		TestSinglePathBehaviour spb=new TestSinglePathBehaviour();
-		defn.getBlock().getContents().add(spb);
+		defn.getBlock().add(spb);
 		
 		Interaction in=new Interaction();
-		spb.getBlock().getContents().add(in);
+		spb.getBlock().add(in);
 	
 		TestDeclaration decl2=new TestDeclaration();
 		decl2.setName(TEST_NAME);
 
-		spb.getBlock().getContents().add(decl2);
+		spb.getBlock().add(decl2);
 	
 		DeclarationValidatorRule rule=new DeclarationValidatorRule();
 		
@@ -111,22 +111,22 @@ public class DeclarationValidatorRuleTest {
 		TestDeclaration decl1=new TestDeclaration();
 		decl1.setName(TEST_NAME);
 
-		defn.getBlock().getContents().add(decl1);
+		defn.getBlock().add(decl1);
 		
 		TestMultiPathBehaviour mpb=new TestMultiPathBehaviour();
-		defn.getBlock().getContents().add(mpb);
+		defn.getBlock().add(mpb);
 		
 		mpb.createNewPath();
 		
 		Block path=mpb.createNewPath();
 		
 		Interaction in=new Interaction();
-		path.getContents().add(in);
+		path.add(in);
 	
 		TestDeclaration decl2=new TestDeclaration();
 		decl2.setName(TEST_NAME);
 
-		path.getContents().add(decl2);
+		path.add(decl2);
 	
 		DeclarationValidatorRule rule=new DeclarationValidatorRule();
 		

@@ -352,7 +352,7 @@ public class ProtocolParserTest {
 		seller.setName("Seller");
 		rl.getParticipants().add(seller);
 		
-		protocol.getBlock().getContents().add(rl);
+		protocol.getBlock().add(rl);
 		
 		Interaction interaction=new Interaction();
 		
@@ -364,7 +364,7 @@ public class ProtocolParserTest {
 		interaction.setFromParticipant(buyer);
 		interaction.setToParticipant(seller);
 		
-		protocol.getBlock().getContents().add(interaction);
+		protocol.getBlock().add(interaction);
 		
 		verify(model, expected);
 	}
@@ -401,7 +401,7 @@ public class ProtocolParserTest {
 		seller.setName("Seller");
 		rl.getParticipants().add(seller);
 		
-		protocol.getBlock().getContents().add(rl);
+		protocol.getBlock().add(rl);
 
 		Raise raise=new Raise();
 		
@@ -411,7 +411,7 @@ public class ProtocolParserTest {
 		
 		raise.getParticipants().add(seller);
 		
-		protocol.getBlock().getContents().add(raise);
+		protocol.getBlock().add(raise);
 		
 		verify(model, expected);
 	}

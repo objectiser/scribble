@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents the base class for all Scribble definition
  * components.
  */
-public abstract class Activity extends Statement {
+public abstract class Activity extends ModelObject {
 	
 	private static final long serialVersionUID = 907254090600526766L;
 

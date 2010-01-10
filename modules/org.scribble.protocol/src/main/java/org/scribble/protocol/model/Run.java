@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents the Run construct.
  * 
  */
-public class Run extends Compose {
+public class Run extends ModelInclude {
 
 	private static final long serialVersionUID = 7877693795925137333L;
 

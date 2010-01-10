@@ -65,7 +65,6 @@ public class LocatedName extends ModelObject {
 	 * 
 	 * @return The located participant
 	 */
-	@Reference(containment=true)
 	public Participant getParticipant() {
 		return(m_participant);
 	}

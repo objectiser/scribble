@@ -33,7 +33,6 @@ public class CatchBlock extends EscapeBlock {
 	 * 
 	 * @return The type
 	 */
-	@Reference(containment=true)
 	public TypeReference getType() {
 		return(m_type);
 	}

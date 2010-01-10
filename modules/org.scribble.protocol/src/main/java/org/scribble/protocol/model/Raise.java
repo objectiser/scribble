@@ -47,7 +47,6 @@ public class Raise extends Behaviour {
 	 * 
 	 * @return The type
 	 */
-	@Reference(containment=true)
 	public TypeReference getType() {
 		return(m_type);
 	}

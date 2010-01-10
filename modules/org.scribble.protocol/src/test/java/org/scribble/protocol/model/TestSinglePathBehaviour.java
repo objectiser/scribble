@@ -18,7 +18,6 @@ package org.scribble.protocol.model;
 
 import org.scribble.protocol.model.Behaviour;
 import org.scribble.protocol.model.Block;
-import org.scribble.protocol.model.Reference;
 import org.scribble.protocol.model.SinglePathBehaviour;
 
 public class TestSinglePathBehaviour extends Behaviour
@@ -30,7 +29,6 @@ public class TestSinglePathBehaviour extends Behaviour
 		m_block.setParent(this);
 	}
 	
-	@Reference(containment=true)
 	public Block getBlock() {
 		return(m_block);
 	}

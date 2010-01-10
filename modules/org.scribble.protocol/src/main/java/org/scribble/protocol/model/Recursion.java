@@ -58,7 +58,6 @@ public class Recursion extends Declaration
 	 * 
 	 * @return The block of activities
 	 */
-	@Reference(containment=true)
 	public Block getBlock() {
 		return(m_block);
 	}

@@ -59,7 +59,6 @@ public class MessageSignature extends ModelObject {
 	 * 
 	 * @return The list of type references
 	 */
-	@Reference(containment=true)
 	public java.util.List<TypeReference> getTypes() {
 		return(m_types);
 	}

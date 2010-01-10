@@ -26,32 +26,6 @@ public abstract class ModelInclude extends Behaviour {
 	private static final long serialVersionUID = 5201789723150072145L;
 
 	/**
-	 * This method returns the reference associated with
-	 * the included model.
-	 * 
-	 * @return The model reference
-	 */
-	public abstract ModelReference getReference();
-	
-	/**
-	 * This method returns the protocol being
-	 * included.
-	 * 
-	 * @return The protocol
-	 */
-	public abstract Protocol getProtocol();
-	
-	/**
-	 * This method indicates whether the model include is
-	 * an inline definition.
-	 * 
-	 * @return Whether an inline definition
-	 */
-	public boolean isInline() {
-		return(false);
-	}
-
-	/**
 	 * This method returns the bindings for the
 	 * composition construct.
 	 * 
@@ -141,5 +115,148 @@ public abstract class ModelInclude extends Behaviour {
 		return(ret);
 	}
 
+	/**
+	 * This method returns the associated protocol.
+	 * 
+	 * @return The protocol
+	 */
+	public Protocol getProtocol() {
+		Protocol ret=m_inlineDefinition;
+		
+		if (ret == null && m_reference != null) {
+
+			/*
+			// Check if local reference
+			if (m_reference.isInner()) {
+				
+				// Search in containing conversation
+				ModelObject cur=getParent();
+				
+				while (ret == null && cur != null) {
+					if (cur instanceof Protocol) {
+						Protocol prot=(Protocol)cur;
+						
+						// Check if conversation contains
+						// sub-conversation of interest
+						for (int i=0; ret == null && i < 
+								prot.getBlock().getContents().size(); i++) {
+							if (prot.getBlock().getContents().get(i) instanceof Protocol) {
+								Protocol subprot=(Protocol)
+									prot.getBlock().getContents().get(i);
+		
+								if (subprot.getLocatedName() != null &&
+										subprot.getLocatedName().getName() != null &&
+										m_reference.getAlias().equals(
+											subprot.getLocatedName().getName()) &&
+									((m_reference.getLocatedRole() == null &&
+											subprot.getLocatedName().getRole() == null) ||
+									((m_reference.getLocatedRole() != null &&
+											subprot.getLocatedName().getRole() != null &&
+											m_reference.getLocatedRole().equals(
+												subprot.getLocatedName().getRole().getName()))))) {
+									
+									ret = subprot;
+								}
+							}
+						}
+					}
+					
+					cur = cur.getParent();
+				}
+				
+			} else {
+				ModelRepository mrep=(ModelRepository)
+							RegistryFactory.getRegistry().getExtension(
+										ModelRepository.class, null);
+				
+				if (mrep != null) {
+					java.util.List<ModelInfo> models=
+							mrep.getModels(m_reference,
+									new DefaultModelListener());
+					
+					for (int i=0; ret == null &&
+									i < models.size(); i++) {
+						if (models.get(i).getModel() instanceof ProtocolModel) {
+							ret = ((ProtocolModel)models.get(i).getModel()).getProtocol();
+						}
+					}
+				}
+			}
+			*/
+		}
+		
+		return(ret);
+	}
+	
+	/**
+	 * This method returns the protocol reference associated
+	 * with the run construct.
+	 * 
+	 * @return The protocol reference, or null if not defined
+	 */
+	public ProtocolReference getReference() {
+		return(m_reference);
+	}
+	
+	/**
+	 * This method sets the protocol reference associated
+	 * with the run construct.
+	 * 
+	 * @param ref The protocol reference
+	 */
+	public void setReference(ProtocolReference ref) {
+		
+		if (m_reference != null) {
+			m_reference.setParent(null);
+		}
+		
+		m_reference = ref;
+		
+		if (m_reference != null) {
+			m_reference.setParent(this);
+		}
+	}
+	
+	/**
+	 * This method indicates whether the model include is
+	 * an inline definition.
+	 * 
+	 * @return Whether an inline definition
+	 */
+	public boolean isInline() {
+		return(getInlineDefinition() != null);
+	}
+
+	/**
+	 * This method returns the inline definition associated
+	 * with the model include construct.
+	 * 
+	 * @return The inline definition, or null if not defined
+	 */
+	public Protocol getInlineDefinition() {
+		return(m_inlineDefinition);
+	}
+	
+	/**
+	 * This method sets the inline definition associated
+	 * with the run construct.
+	 * 
+	 * @param definition The inner definition
+	 */
+	public void setInlineDefinition(Protocol definition) {
+		
+		if (m_inlineDefinition != null) {
+			m_inlineDefinition.setParent(null);
+		}
+		
+		m_inlineDefinition = definition;
+		
+		if (m_inlineDefinition != null) {
+			m_inlineDefinition.setParent(this);
+		}
+	}
+
+	private ProtocolReference m_reference=null;
+	private Protocol m_inlineDefinition=null;
 	private java.util.List<DeclarationBinding> m_bindings=new java.util.Vector<DeclarationBinding>();
 }

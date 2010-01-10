@@ -46,7 +46,6 @@ public class Protocol extends Activity {
 	 * 
 	 * @return The name
 	 */
-	@Reference(containment=true)
 	public LocatedName getLocatedName() {
 		return(m_locatedName);
 	}
@@ -93,7 +92,6 @@ public class Protocol extends Activity {
 	 * 
 	 * @return The list of models that must be conformed to
 	 */
-	@Reference(containment=true)
 	public java.util.List<ConformanceReference> getConformsTo() {
 		return(m_conformsTo);
 	}
@@ -104,7 +102,6 @@ public class Protocol extends Activity {
 	 * 
 	 * @return The list of models this definition implements
 	 */
-	@Reference(containment=true)
 	public java.util.List<ImplementsReference> getImplements() {
 		return(m_implements);
 	}
@@ -115,7 +112,6 @@ public class Protocol extends Activity {
 	 * 
 	 * @return The block of activities
 	 */
-	@Reference(containment=true)
 	public Block getBlock() {
 		
 		if (m_contents == null) {

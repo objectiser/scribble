@@ -55,7 +55,6 @@ public class ProtocolModel extends ModelObject {
 	 * 
 	 * @return The namespace
 	 */
-	@Reference(containment=true)
 	public Namespace getNamespace() {
 		return(m_namespace);
 	}
@@ -65,7 +64,6 @@ public class ProtocolModel extends ModelObject {
 	 * 
 	 * @return The import definitions
 	 */
-	@Reference(containment=true)
 	public java.util.List<Import> getImports() {
 		return(m_imports);
 	}
@@ -76,7 +74,6 @@ public class ProtocolModel extends ModelObject {
 	 * 
 	 * @return The definition
 	 */
-	@Reference(containment=true)
 	public Protocol getDefinition() {
 		return(m_definition);
 	}
