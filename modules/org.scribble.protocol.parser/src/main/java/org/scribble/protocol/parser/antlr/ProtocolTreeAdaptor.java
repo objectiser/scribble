@@ -65,7 +65,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		// created after processing the named grammer rule
 		m_parserGroupingRuleClass.put("qualifiedName", String.class);
 		m_parserGroupingRuleClass.put("qualifiedNameWithMeta", String.class);
-		m_parserGroupingRuleClass.put("sequenceDef", Block.class);
+		m_parserGroupingRuleClass.put("blockDef", Block.class);
 		m_parserGroupingRuleClass.put("interactionDef", Interaction.class);
 		m_parserGroupingRuleClass.put("interactionSignatureDef", MessageSignature.class);
 		m_parserGroupingRuleClass.put("typeReferenceDef", TypeReference.class);
@@ -86,6 +86,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_listClass.put("contents", Activity.class);
 		m_listClass.put("participants", Participant.class);
 		m_listClass.put("types", TypeReference.class);
+		m_listClass.put("blocks", Block.class);
 	}
 	
 	public ProtocolModel getProtocolModel() {

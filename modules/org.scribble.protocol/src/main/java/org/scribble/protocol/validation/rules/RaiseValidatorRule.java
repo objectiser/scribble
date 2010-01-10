@@ -43,11 +43,11 @@ public class RaiseValidatorRule implements ProtocolComponentValidatorRule {
 					TryEscape te=(TryEscape)act;
 					
 					for (int i=0; f_found == false &&
-							i < te.getEscapeBlocks().size(); i++) {
+							i < te.getBlocks().size(); i++) {
 						
-						if (te.getEscapeBlocks().get(i) instanceof CatchBlock &&
+						if (te.getBlocks().get(i) instanceof CatchBlock &&
 								elem.getType().equals(((CatchBlock)
-									te.getEscapeBlocks().get(i)).getType())) {
+									te.getBlocks().get(i)).getType())) {
 							f_found = true;
 						}
 					}

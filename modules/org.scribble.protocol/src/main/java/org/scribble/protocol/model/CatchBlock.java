@@ -66,12 +66,16 @@ public class CatchBlock extends EscapeBlock {
 		
 		if (visitor.startCatchBlock(this)) {
 		
+			for (Participant p : getParticipants()) {
+				p.visit(visitor);
+			}
+			
 			if (getType() != null) {
 				getType().visit(visitor);
 			}
 			
-			for (int i=0; i < getContents().size(); i++) {
-				getContents().get(i).visit(visitor);
+			for (Activity act : getContents()) {
+				act.visit(visitor);
 			}
 		}
 		

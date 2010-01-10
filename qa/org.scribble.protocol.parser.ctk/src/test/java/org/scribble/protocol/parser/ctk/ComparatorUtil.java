@@ -39,6 +39,9 @@ public class ComparatorUtil {
 		m_comparators.put(ModelReference.class, new ModelReferenceComparator());
 		m_comparators.put(LocatedName.class, new LocatedNameComparator());
 		m_comparators.put(Raise.class, new RaiseComparator());
+		m_comparators.put(TryEscape.class, new TryEscapeComparator());
+		m_comparators.put(CatchBlock.class, new CatchBlockComparator());
+		m_comparators.put(InterruptBlock.class, new InterruptBlockComparator());
 	}
 
 	public static Comparator<ModelObject> getComparator(Class<? extends ModelObject> cls) {

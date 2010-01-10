@@ -403,4 +403,101 @@ public class ProtocolParserTest {
 		
 		verify(model, expected);
 	}
+
+	@org.junit.Test
+	public void testTryCatchInterrupt() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("TryCatchInterrupt", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("TryCatchInterrupt");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+
+		TryEscape tryEscape=new TryEscape();
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setName("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		Block b=new Block();
+		
+		b.add(interaction);
+		
+		tryEscape.getBlocks().add(b);
+
+		CatchBlock catchBlock=new CatchBlock();
+		
+		catchBlock.getParticipants().add(seller);
+		
+		tref=new TypeReference();
+		tref.setName("NoStock");
+		catchBlock.setType(tref);
+		
+		interaction=new Interaction();
+		
+		ms=new MessageSignature();
+		tref=new TypeReference();
+		tref.setName("OutOfStock");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(seller);
+		interaction.setToParticipant(buyer);
+		
+		catchBlock.add(interaction);
+
+		tryEscape.getBlocks().add(catchBlock);
+		
+		InterruptBlock interruptBlock=new InterruptBlock();
+		
+		interruptBlock.getParticipants().add(buyer);
+		
+		interaction=new Interaction();
+		
+		ms=new MessageSignature();
+		tref=new TypeReference();
+		tref.setName("OrderExpired");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		interruptBlock.add(interaction);
+
+		tryEscape.getBlocks().add(interruptBlock);
+		
+		protocol.getBlock().add(tryEscape);
+		
+		verify(model, expected);
+	}
 }

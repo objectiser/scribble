@@ -75,16 +75,18 @@ qualifiedNameWithMeta: ID ( '.' ( '*' | qualifiedNameWithMeta ) )? ;
 
 importStatement: 'import'^ qualifiedNameWithMeta ( 'as' ID )? ';'! ;
 
-protocolDef: 'protocol'^ locatedNameDef sequenceDef ;
+protocolDef: 'protocol'^ locatedNameDef blockDef ;
 
 locatedNameDef: ID ( '@' participantName )? ;
+
+blockDef: sequenceDef ;
 
 sequenceDef: '{'! activityListDef '}'! ;
 
 activityListDef: ( activityDef )* ;
 
 activityDef: participantListDef | channelListDef | interactionDef | 
-			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef;
+			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef | tryEscapeDef ;
 
 participantListDef: 'participant'^ participantDef ( ',' participantDef )* ';'! ;
 
@@ -104,29 +106,29 @@ interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' parti
 
 raiseDef: 'raise'^ '@' participantName ( ',' participantName )* typeReferenceDef ';'! ;
 
-choiceDef: 'choice'^ '@' participantName ( ',' participantName )* sequenceDef ( 'or' sequenceDef )* ;
+choiceDef: 'choice'^ '@' participantName ( ',' participantName )* blockDef ( 'or' blockDef )* ;
 
-parallelDef: 'parallel'^ sequenceDef ( 'and' sequenceDef )* ;
+parallelDef: 'parallel'^ blockDef ( 'and' blockDef )* ;
 
-splitDef: 'split'^ sequenceDef ( 'and' sequenceDef )* ;
+splitDef: 'split'^ blockDef ( 'and' blockDef )* ;
 
-repeatDef: 'repeat'^ '@' participantName ( ',' participantName )* sequenceDef ;
+repeatDef: 'repeat'^ '@' participantName ( ',' participantName )* blockDef ;
 
 runDef: 'run'^ ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';'! ) ;
 
-inlineProtocolDef: 'protocol'^ ( boundParameters )? sequenceDef ;
+inlineProtocolDef: 'protocol'^ ( boundParameters )? blockDef ;
 
 boundParameters: '(' boundParameter ( ',' boundParameter )* ')' ;
 
 boundParameter: ID 'for' ID ;
 
-tryEscapeDef: 'try'^ sequenceDef ( catchOrInterruptBlockDef )+ ;
+tryEscapeDef: 'try'^ blockDef ( catchOrInterruptBlockDef )+ ;
 
 catchOrInterruptBlockDef: catchBlockDef | interruptBlockDef ;
 
-catchBlockDef: 'catch'^ typeReferenceDef sequenceDef ;
+catchBlockDef: 'catch'^ '@' participantName ( ',' participantName )* typeReferenceDef sequenceDef ;
 
-interruptBlockDef: 'interrupt'^ sequenceDef ;
+interruptBlockDef: 'interrupt'^ '@' participantName ( ',' participantName )* sequenceDef ;
 
 
 /*-----------------------------------------------

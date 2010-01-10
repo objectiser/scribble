@@ -1,0 +1,13 @@
+namespace example.helloworld;
+
+protocol TryCatchInterrupt {
+	participant Buyer, Seller;
+
+	try {
+		Order from Buyer to Seller;
+	} catch @ Seller NoStock {
+		OutOfStock from Seller to Buyer;
+	} interrupt @ Buyer {
+		OrderExpired from Buyer to Seller;
+	}
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Scribble.org
+ * Copyright 2009-10 Scribble.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,27 @@ package org.scribble.protocol.parser.ctk.comparators;
 
 import java.util.Comparator;
 import org.scribble.protocol.model.*;
+import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
-public class BlockComparator implements Comparator<ModelObject> {
+public class CatchBlockComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		Block m=(Block)arg0;
-		Block e=(Block)arg1;
+		CatchBlock m=(CatchBlock)arg0;
+		CatchBlock e=(CatchBlock)arg1;
 		
 		if (m.size() != e.size()) {
+			return(1);
+		}
+		
+		if (m.getParticipants().size() != e.getParticipants().size()) {
+			return(1);
+		}
+
+		TypeReferenceComparator trefcomp=(TypeReferenceComparator)
+					ComparatorUtil.getComparator(TypeReference.class);
+		
+		if (trefcomp.compare(m.getType(), e.getType()) != 0) {
 			return(1);
 		}
 		

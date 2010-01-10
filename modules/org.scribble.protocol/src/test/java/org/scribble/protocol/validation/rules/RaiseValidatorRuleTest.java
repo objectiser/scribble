@@ -30,8 +30,12 @@ public class RaiseValidatorRuleTest {
 		//tref.setNotation("spr");
 		raise.setType(tref);
 		
+		Block b=new Block();
+		
 		TryEscape te=new TryEscape();
-		te.getBlock().add(raise);
+		b.add(raise);
+		
+		te.getBlocks().add(b);
 		
 		TypeReference catchType=new TypeReference();
 		catchType.setName("ns.lp");
@@ -41,7 +45,7 @@ public class RaiseValidatorRuleTest {
 		CatchBlock cb=new CatchBlock();
 		cb.setType(catchType);
 		
-		te.getEscapeBlocks().add(cb);
+		te.getBlocks().add(cb);
 			
 		RaiseValidatorRule rule=new RaiseValidatorRule();
 		
@@ -63,7 +67,12 @@ public class RaiseValidatorRuleTest {
 		raise.setType(tref);
 		
 		TryEscape te=new TryEscape();
-		te.getBlock().add(raise);
+		
+		Block b=new Block();
+		
+		b.add(raise);
+		
+		te.getBlocks().add(b);
 		
 		TypeReference catchType=new TypeReference();
 		catchType.setName("ns.lp2");
@@ -73,7 +82,7 @@ public class RaiseValidatorRuleTest {
 		CatchBlock cb=new CatchBlock();
 		cb.setType(catchType);
 		
-		te.getEscapeBlocks().add(cb);
+		te.getBlocks().add(cb);
 			
 		RaiseValidatorRule rule=new RaiseValidatorRule();
 		

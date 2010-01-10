@@ -29,7 +29,7 @@ public class TryEscape extends MultiPathBehaviour {
 	 * 
 	 */
 	public TryEscape() {
-		m_block.setParent(this);
+		//m_block.setParent(this);
 	}
 	
 	/**
@@ -37,15 +37,18 @@ public class TryEscape extends MultiPathBehaviour {
 	 * 
 	 * @return The block of activities
 	 */
+	/*
 	public Block getBlock() {
 		return(m_block);
 	}
+	*/
 	
 	/**
 	 * This method sets the block.
 	 * 
 	 * @param block The block
 	 */
+	/*
 	public void setBlock(Block block) {
 		if (m_block != null) {
 			m_block.setParent(null);
@@ -57,15 +60,18 @@ public class TryEscape extends MultiPathBehaviour {
 			m_block.setParent(this);
 		}
 	}
+	*/
 
 	/**
-	 * This method returns the list of mutually exclusive
-	 * escape blocks.
+	 * This method returns the list of blocks. The first
+	 * block will contain the normal activities, with the
+	 * remaining blocks being derivations of the
+	 * Escape Block.
 	 * 
-	 * @return The list of escape blocks
+	 * @return The list of blocks
 	 */
-	public java.util.List<EscapeBlock> getEscapeBlocks() {
-		return(m_escapeBlocks);
+	public java.util.List<Block> getBlocks() {
+		return(m_blocks);
 	}
 	
 	/**
@@ -77,9 +83,9 @@ public class TryEscape extends MultiPathBehaviour {
 	public java.util.List<Block> getPaths() {
 		java.util.List<Block> ret=new java.util.Vector<Block>();
 		
-		ret.add(getBlock());
+		//ret.add(getBlock());
 		
-		ret.addAll(getEscapeBlocks());
+		ret.addAll(getBlocks());
 
 		return(ret);
 	}
@@ -154,6 +160,6 @@ public class TryEscape extends MultiPathBehaviour {
 		visitor.endTryEscape(this);
 	}
 
-	private Block m_block=new Block();
-	private java.util.List<EscapeBlock> m_escapeBlocks=new ContainmentList<EscapeBlock>(this, EscapeBlock.class);
+	//private Block m_block=new Block();
+	private java.util.List<Block> m_blocks=new ContainmentList<Block>(this, Block.class);
 }

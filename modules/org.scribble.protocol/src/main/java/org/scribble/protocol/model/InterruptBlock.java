@@ -36,8 +36,12 @@ public class InterruptBlock extends EscapeBlock {
 		
 		if (visitor.startInterruptBlock(this)) {
 		
-			for (int i=0; i < getContents().size(); i++) {
-				getContents().get(i).visit(visitor);
+			for (Participant p : getParticipants()) {
+				p.visit(visitor);
+			}
+			
+			for (Activity act : getContents()) {
+				act.visit(visitor);
 			}
 		}
 		
