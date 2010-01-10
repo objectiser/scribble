@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents the RecursionBlock construct.
  * 
  */
-public class RecursionBlock extends Declaration
+public class Recursion extends Declaration
 				implements SinglePathBehaviour {
 
 	private static final long serialVersionUID = -3777899920653462575L;
@@ -29,7 +29,7 @@ public class RecursionBlock extends Declaration
 	 * This is the default constructor.
 	 * 
 	 */
-	public RecursionBlock() {
+	public Recursion() {
 		m_block.setParent(this);
 	}
 	
@@ -115,6 +115,22 @@ public class RecursionBlock extends Declaration
 		return(false);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startRecursion(this);
+		
+		if (getBlock() != null) {
+			getBlock().visit(visitor);
+		}
+		
+		visitor.endRecursion(this);
+	}
+
 	private String m_name=null;
 	private Block m_block=new Block();
 }

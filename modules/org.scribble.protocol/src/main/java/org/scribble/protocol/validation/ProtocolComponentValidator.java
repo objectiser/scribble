@@ -18,16 +18,17 @@ package org.scribble.protocol.validation;
 
 import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.Raise;
 import org.scribble.protocol.validation.rules.RaiseValidatorRule;
 
-import java.util.logging.*;
+//import java.util.logging.*;
 
 public class ProtocolComponentValidator implements ProtocolValidator {
 	
 	private java.util.Map<Class<? extends ModelObject>, ProtocolComponentValidatorRule> m_rules=
 		new java.util.HashMap<Class<? extends ModelObject>, ProtocolComponentValidatorRule>();
 
-	private static Logger _log=Logger.getLogger(ProtocolComponentValidator.class.getName());
+	//private static Logger _log=Logger.getLogger(ProtocolComponentValidator.class.getName());
 	
 	public ProtocolComponentValidator() {
 		
@@ -53,64 +54,23 @@ public class ProtocolComponentValidator implements ProtocolValidator {
 		model.visit(new ValidatingVisitor(logger));
 	}
 
-	public class ValidatingVisitor implements org.scribble.protocol.model.Visitor {
+	public class ValidatingVisitor extends org.scribble.protocol.model.DefaultVisitor {
 		
 		public ValidatingVisitor(Journal logger) {
 			m_logger = logger;
 		}
 		
 		/**
-		 * This method can be used to prepare for
-		 * visiting the supplied model object.
+		 * This method visits a raise component.
 		 * 
-		 * @param obj The model object
+		 * @param elem The raise
 		 */
-		public void prepare(ModelObject obj) {
+		public void visitRaise(Raise elem) {
+			RaiseValidatorRule rule=new RaiseValidatorRule();
 			
-			// TODO: Decide how best to deal with grouping constructs
+			rule.validate(elem, m_logger);
 		}
 		
-		@SuppressWarnings("unchecked")
-		public boolean visit(ModelObject obj) {
-		
-			// Find validation rule for each class up the
-			// inheritance hierarchy that are derived from
-			// the ModelObject
-			Class<? extends ModelObject> cls=obj.getClass();
-			
-			while (cls != null) {
-				ProtocolComponentValidatorRule rule=getRule(cls);
-				
-				if (_log.isLoggable(Level.FINEST)) {
-					_log.finest("Component rule for class="+cls+" is "+rule);
-				}
-				
-				if (rule != null) {
-					rule.validate(obj, m_logger);
-				}
-				
-				if (cls != ModelObject.class) {
-					cls = (Class<? extends ModelObject>)cls.getSuperclass();
-				} else {
-					cls = null;
-				}
-			}
-			
-			return(true);
-		}
-		
-		/**
-		 * This method can be used to conclude any
-		 * work associated with visiting the supplied 
-		 * model object.
-		 * 
-		 * @param obj The model object
-		 */
-		public void conclude(ModelObject obj) {
-			
-			// TODO: Decide how best to deal with grouping constructs
-		}
-
 		private Journal m_logger=null;
 	}
 }

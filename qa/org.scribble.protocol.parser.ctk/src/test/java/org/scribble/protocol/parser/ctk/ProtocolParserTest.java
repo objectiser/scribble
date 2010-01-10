@@ -112,19 +112,209 @@ public class ProtocolParserTest {
 		model.visit(new Visitor() {
 
 			@Override
-			public void conclude(ModelObject obj) {
+			public void endBlock(Block elem) {
+				// TODO Auto-generated method stub
+				
 			}
 
 			@Override
-			public void prepare(ModelObject obj) {
+			public void endCatchBlock(CatchBlock elem) {
+				// TODO Auto-generated method stub
+				
 			}
 
 			@Override
-			public boolean visit(ModelObject obj) {
-				ret.add(obj);
+			public void endChannelList(ChannelList elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endChoice(Choice elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endEscapeBlock(EscapeBlock elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endInterruptBlock(InterruptBlock elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endParallel(Parallel elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endParticipantList(ParticipantList elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endProtocol(Protocol elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endRecursion(Recursion elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endRepeat(Repeat elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endTryEscape(TryEscape elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public boolean startBlock(Block elem) {
+				ret.add(elem);
 				return true;
 			}
-			
+
+			@Override
+			public boolean startCatchBlock(CatchBlock elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startChannelList(ChannelList elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startChoice(Choice elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startEscapeBlock(EscapeBlock elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startInterruptBlock(InterruptBlock elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startParallel(Parallel elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startParticipantList(ParticipantList elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startProtocol(Protocol elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startRecursion(Recursion elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startRepeat(Repeat elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startTryEscape(TryEscape elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public void visitChannel(Channel elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitDeclarationBinding(DeclarationBinding elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitImport(Import elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitInteraction(Interaction elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitLocatedName(LocatedName elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitMessageSignature(MessageSignature elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitModelReference(ModelReference elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitNamespace(Namespace elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitParticipant(Participant elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitRaise(Raise elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitRecur(Recur elem) {
+				ret.add(elem);
+			}
+
+			@Override
+			public void visitRun(Run elem) {
+				ret.add(elem);
+			}
+
 		});
 		
 		return(ret);

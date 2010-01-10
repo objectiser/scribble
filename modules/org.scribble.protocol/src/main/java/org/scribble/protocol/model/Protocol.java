@@ -324,6 +324,26 @@ public class Protocol extends Activity {
 		return(ret);
 	}
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startProtocol(this);
+		
+		if (getLocatedName() != null) {
+			getLocatedName().visit(visitor);
+		}
+		
+		if (getBlock() != null) {
+			getBlock().visit(visitor);
+		}
+		
+		visitor.endProtocol(this);
+	}
+	
 	private LocatedName m_locatedName=null;
 	private boolean m_stateless=false;
 	private java.util.List<ConformanceReference> m_conformsTo=

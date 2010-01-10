@@ -100,5 +100,15 @@ public class Participant extends Declaration {
 		return(ret);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitParticipant(this);
+	}
+	
 	private String m_name=null;	
 }

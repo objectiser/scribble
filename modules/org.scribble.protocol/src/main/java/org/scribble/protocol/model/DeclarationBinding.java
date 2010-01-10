@@ -78,6 +78,16 @@ public class DeclarationBinding extends ModelObject {
 		return(m_boundName);
 	}
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitDeclarationBinding(this);
+	}
+
 	private Declaration m_declaration=null;
 	private String m_boundName=null;
 }

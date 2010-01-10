@@ -182,6 +182,22 @@ public class Choice extends MultiPathBehaviour {
 		return(ret);
 	}
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startChoice(this);
+		
+		for (Block b : getPaths()) {
+			b.visit(visitor);
+		}
+		
+		visitor.endChoice(this);
+	}
+	
 	private java.util.List<Block> m_blocks=new ContainmentList<Block>(this, Block.class);
 	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 }

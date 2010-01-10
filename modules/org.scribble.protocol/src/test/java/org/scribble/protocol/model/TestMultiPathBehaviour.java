@@ -105,4 +105,10 @@ public class TestMultiPathBehaviour extends MultiPathBehaviour {
 	}
 
 	private java.util.List<Block> m_blocks=new ContainmentList<Block>(this, Block.class);
+
+	@Override
+	public void visit(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
 }

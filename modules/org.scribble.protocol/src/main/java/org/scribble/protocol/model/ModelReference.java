@@ -377,6 +377,16 @@ public class ModelReference extends ModelObject {
 		return("Ref["+getName()+subdefnpath+"]");
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitModelReference(this);
+	}
+
 	public static final String NAMESPACES_TO_MONITOR="NamespacesToMonitor";
 	public static final String LOCATED_REFERENCE_SEPARATOR="@";
 	

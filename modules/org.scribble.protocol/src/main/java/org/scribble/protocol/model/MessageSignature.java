@@ -91,6 +91,20 @@ public class MessageSignature extends ModelObject {
 		return(ret);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitMessageSignature(this);
+		
+		for (TypeReference tref : getTypes()) {
+			tref.visit(visitor);
+		}
+	}
+
 	private String m_operation=null;
 	private java.util.List<TypeReference> m_types=
 			new ContainmentList<TypeReference>(this, TypeReference.class);

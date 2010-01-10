@@ -120,6 +120,16 @@ public class Channel extends Declaration {
 		return(getName());
 	}
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitChannel(this);
+	}
+	
 	private String m_name=null;
 	private Participant m_fromParticipant=null;
 	private Participant m_toParticipant=null;

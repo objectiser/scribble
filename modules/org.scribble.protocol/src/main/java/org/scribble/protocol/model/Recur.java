@@ -37,7 +37,7 @@ public class Recur extends Behaviour {
 	 * 
 	 * @return The recursion block
 	 */
-	public RecursionBlock getRecursionBlock() {
+	public Recursion getRecursionBlock() {
 		return(m_recursionBlock);
 	}
 	
@@ -47,9 +47,19 @@ public class Recur extends Behaviour {
 	 * 
 	 * @param recursion The recursion block
 	 */
-	public void setRecursionBlock(RecursionBlock recursion) {
+	public void setRecursionBlock(Recursion recursion) {
 		m_recursionBlock = recursion;
 	}
 
-	private RecursionBlock m_recursionBlock=null;
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitRecur(this);
+	}
+
+	private Recursion m_recursionBlock=null;
 }

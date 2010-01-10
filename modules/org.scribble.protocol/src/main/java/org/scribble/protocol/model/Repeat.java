@@ -157,6 +157,22 @@ public class Repeat extends Behaviour implements SinglePathBehaviour {
 		return(ret);
 	}
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startRepeat(this);
+		
+		if (getBlock() != null) {
+			getBlock().visit(visitor);
+		}
+		
+		visitor.endRepeat(this);
+	}
+
 	private Block m_block=new Block();
 	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 }

@@ -16,7 +16,7 @@
  */
 package org.scribble.protocol.model;
 
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 /**
  * This is the generic object from which all Scribble model objects
@@ -81,7 +81,9 @@ public abstract class ModelObject implements java.io.Serializable {
 	 * 
 	 * @param visitor The visitor
 	 */
-	public void visit(Visitor visitor) {
+	public abstract void visit(Visitor visitor);
+		
+		/*
 		boolean visitContained=visitor.visit(this);
 		
 		if (visitContained) {
@@ -147,8 +149,9 @@ public abstract class ModelObject implements java.io.Serializable {
 			}
 		}
 	}
+	*/
 	
-	private static Logger logger = Logger.getLogger("org.scribble.model");
+	//private static Logger logger = Logger.getLogger(ModelObject.class.getName());
 
 	private ModelObject m_parent=null;
 	private java.util.Map<String,java.io.Serializable> m_properties=

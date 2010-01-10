@@ -140,6 +140,22 @@ public class TryEscape extends MultiPathBehaviour {
 		return(OrderingConstraint.Unordered);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startTryEscape(this);
+		
+		for (Block path : getPaths()) {
+			path.visit(visitor);
+		}
+		
+		visitor.endTryEscape(this);
+	}
+
 	private Block m_block=new Block();
 	private java.util.List<EscapeBlock> m_escapeBlocks=new ContainmentList<EscapeBlock>(this, EscapeBlock.class);
 }

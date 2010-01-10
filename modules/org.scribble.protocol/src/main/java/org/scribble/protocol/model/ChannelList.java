@@ -34,5 +34,21 @@ public class ChannelList extends Activity {
 		return(m_channels);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startChannelList(this);
+		
+		for (Channel ch : getChannels()) {
+			ch.visit(visitor);
+		}
+		
+		visitor.endChannelList(this);
+	}
+	
 	private java.util.List<Channel> m_channels=new ContainmentList<Channel>(this, Channel.class);
 }

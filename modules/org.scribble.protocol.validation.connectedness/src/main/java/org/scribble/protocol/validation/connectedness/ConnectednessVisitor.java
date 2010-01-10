@@ -20,55 +20,44 @@ import java.util.Collections;
 
 import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.Block;
-import org.scribble.protocol.model.ModelObject;
+import org.scribble.protocol.model.DefaultVisitor;
 import org.scribble.protocol.model.Participant;
-import org.scribble.protocol.model.Visitor;
 
-public class ConnectednessVisitor implements Visitor {
+public class ConnectednessVisitor extends DefaultVisitor {
 	
 	public ConnectednessVisitor(Journal logger) {
 		m_logger = logger;
 	}
 
-	public boolean visit(ModelObject obj) {
+	public boolean startBlock(Block block) {
+		java.util.List<Participant> precedingInitiator=null;
+		java.util.List<Participant> precedingFinal=null;
 		
-		if (obj instanceof Block) {
-			Block block=(Block)obj;
-			java.util.List<Participant> precedingInitiator=null;
-			java.util.List<Participant> precedingFinal=null;
+		for (int i=0; i < block.getContents().size(); i++) {
 			
-			for (int i=0; i < block.getContents().size(); i++) {
-				
-				if (precedingInitiator != null &&
-						precedingFinal != null &&
-						block.getContents().get(i).initiatorParticipants().size() > 0) {
-					if (Collections.disjoint(precedingInitiator,
-							block.getContents().get(i).initiatorParticipants()) &&
-							Collections.disjoint(precedingFinal,
-									block.getContents().get(i).initiatorParticipants())) {
-						
-						m_logger.error(org.scribble.common.util.MessageUtil.format(
-								java.util.PropertyResourceBundle.getBundle(
-								"org.scribble.protocol.validation.connectedness.Messages"),
-									"_ACTIVITY_NOT_CONNECTED",
-									new String[]{}), null);
-					}
-				}
-				
-				if (block.getContents().get(i).initiatorParticipants().size() > 0) {
-					precedingInitiator = block.getContents().get(i).initiatorParticipants();
-					precedingFinal = block.getContents().get(i).finalParticipants();
+			if (precedingInitiator != null &&
+					precedingFinal != null &&
+					block.getContents().get(i).initiatorParticipants().size() > 0) {
+				if (Collections.disjoint(precedingInitiator,
+						block.getContents().get(i).initiatorParticipants()) &&
+						Collections.disjoint(precedingFinal,
+								block.getContents().get(i).initiatorParticipants())) {
+					
+					m_logger.error(org.scribble.common.util.MessageUtil.format(
+							java.util.PropertyResourceBundle.getBundle(
+							"org.scribble.protocol.validation.connectedness.Messages"),
+								"_ACTIVITY_NOT_CONNECTED",
+								new String[]{}), null);
 				}
 			}
-		}		
+			
+			if (block.getContents().get(i).initiatorParticipants().size() > 0) {
+				precedingInitiator = block.getContents().get(i).initiatorParticipants();
+				precedingFinal = block.getContents().get(i).finalParticipants();
+			}
+		}
 		
 		return(true);
-	}
-
-	public void conclude(ModelObject obj) {
-	}
-
-	public void prepare(ModelObject obj) {
 	}
 	
 	private Journal m_logger=null;

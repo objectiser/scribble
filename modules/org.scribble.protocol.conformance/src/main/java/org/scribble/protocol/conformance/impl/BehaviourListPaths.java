@@ -21,6 +21,7 @@ import org.scribble.protocol.model.MultiPathBehaviour;
 import org.scribble.protocol.model.Participant;
 import org.scribble.protocol.model.Protocol;
 import org.scribble.protocol.model.SinglePathBehaviour;
+import org.scribble.protocol.model.Visitor;
 
 /**
  * This class represents the group of behaviour list paths
@@ -209,6 +210,12 @@ public class BehaviourListPaths extends Behaviour {
 	@Override
 	public java.util.List<Participant> initiatorParticipants() {
 		return(m_source.initiatorParticipants());
+	}
+
+	@Override
+	public void visit(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private Behaviour m_source=null;

@@ -57,5 +57,27 @@ public class CatchBlock extends EscapeBlock {
 		}
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		
+		if (visitor.startCatchBlock(this)) {
+		
+			if (getType() != null) {
+				getType().visit(visitor);
+			}
+			
+			for (int i=0; i < getContents().size(); i++) {
+				getContents().get(i).visit(visitor);
+			}
+		}
+		
+		visitor.endCatchBlock(this);
+	}
+	
 	private TypeReference m_type=null;
 }

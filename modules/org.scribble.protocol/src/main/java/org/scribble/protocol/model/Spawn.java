@@ -40,4 +40,15 @@ public class Spawn extends Compose {
 	public boolean isAsynchronous() {
 		return(true);
 	}
+
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		// TODO: May not be required
+	}
+
 }

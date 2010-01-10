@@ -73,6 +73,22 @@ public class ParticipantList extends Activity {
 		m_open = open;
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startParticipantList(this);
+		
+		for (Participant p : getParticipants()) {
+			p.visit(visitor);
+		}
+		
+		visitor.endParticipantList(this);
+	}
+	
 	private boolean m_open=false;
 	private java.util.List<Participant> m_participants=
 			new ContainmentList<Participant>(this, Participant.class);

@@ -125,6 +125,16 @@ public class LocatedName extends ModelObject {
 		return("Name["+getName()+" loc="+m_participant+"]");
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitLocatedName(this);
+	}
+
 	private String m_name=null;
 	private Participant m_participant=null;
 }

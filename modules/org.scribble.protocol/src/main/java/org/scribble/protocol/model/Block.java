@@ -71,6 +71,24 @@ public class Block extends Activity {
 		return(ret);
 	}
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		
+		if (visitor.startBlock(this)) {
+		
+			for (int i=0; i < getContents().size(); i++) {
+				getContents().get(i).visit(visitor);
+			}
+		}
+		
+		visitor.endBlock(this);
+	}
+	
 	private java.util.List<Activity> m_contents=
 		new ContainmentList<Activity>(this, Activity.class);
 }

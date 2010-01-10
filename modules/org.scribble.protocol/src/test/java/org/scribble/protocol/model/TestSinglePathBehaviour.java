@@ -60,4 +60,10 @@ public class TestSinglePathBehaviour extends Behaviour
 	}
 
 	private Block m_block=new Block();
+
+	@Override
+	public void visit(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
 }

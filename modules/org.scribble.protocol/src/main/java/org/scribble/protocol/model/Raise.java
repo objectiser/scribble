@@ -71,6 +71,16 @@ public class Raise extends Behaviour {
 		}
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitRaise(this);
+	}
+
 	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 	private TypeReference m_type=null;
 }

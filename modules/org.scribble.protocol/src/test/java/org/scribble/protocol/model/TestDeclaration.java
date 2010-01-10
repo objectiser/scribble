@@ -21,5 +21,11 @@ import org.scribble.protocol.model.Declaration;
 public class TestDeclaration extends Declaration {
 
 	private static final long serialVersionUID = -5679676401473084570L;
+
+	@Override
+	public void visit(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

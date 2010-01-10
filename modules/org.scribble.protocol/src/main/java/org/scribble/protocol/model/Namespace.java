@@ -48,5 +48,15 @@ public class Namespace extends Statement {
 		m_name = name;
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitNamespace(this);
+	}
+	
 	private String m_name=null;
 }

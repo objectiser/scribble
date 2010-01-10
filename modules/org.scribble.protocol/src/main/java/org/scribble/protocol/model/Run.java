@@ -40,4 +40,14 @@ public class Run extends Compose {
 	public boolean isAsynchronous() {
 		return(false);
 	}
+	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitRun(this);
+	}
 }

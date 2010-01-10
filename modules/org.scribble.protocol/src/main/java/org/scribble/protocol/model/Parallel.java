@@ -107,5 +107,21 @@ public class Parallel extends MultiPathBehaviour {
 		return(OrderingConstraint.Unordered);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.startParallel(this);
+		
+		for (Block b : getPaths()) {
+			b.visit(visitor);
+		}
+		
+		visitor.endParallel(this);
+	}
+	
 	private java.util.List<Block> m_blocks=new ContainmentList<Block>(this, Block.class);
 }

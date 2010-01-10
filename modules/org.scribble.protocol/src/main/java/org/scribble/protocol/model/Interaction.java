@@ -291,6 +291,32 @@ public class Interaction extends Behaviour {
 		return(ret.toString());
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitInteraction(this);
+		
+		if (getMessageSignature() != null) {
+			getMessageSignature().visit(visitor);
+		}
+		
+		if (getFromParticipant() != null) {
+			getFromParticipant().visit(visitor);
+		}
+		
+		if (getToParticipant() != null) {
+			getToParticipant().visit(visitor);
+		}
+		
+		if (getChannel() != null) {
+			getChannel().visit(visitor);
+		}
+	}
+	
 	private MessageSignature m_messageSignature=null;
 	private Channel m_channel=null;
 	private Participant m_fromParticipant=null;

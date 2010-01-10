@@ -26,4 +26,22 @@ public class InterruptBlock extends EscapeBlock {
 
 	private static final long serialVersionUID = -5384952960277487512L;
 
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		
+		if (visitor.startInterruptBlock(this)) {
+		
+			for (int i=0; i < getContents().size(); i++) {
+				getContents().get(i).visit(visitor);
+			}
+		}
+		
+		visitor.endInterruptBlock(this);
+	}
+	
 }

@@ -106,6 +106,25 @@ public class ProtocolModel extends ModelObject {
 		return(ret);
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		
+		if (getNamespace() != null) {
+			getNamespace().visit(visitor);
+		}
+		
+		for (Import imp : getImports()) {
+			imp.visit(visitor);
+		}
+		
+		getDefinition().visit(visitor);
+	}
+	
 	private Namespace m_namespace=null;
 	private Protocol m_definition=null;
 	private java.util.List<Import> m_imports=

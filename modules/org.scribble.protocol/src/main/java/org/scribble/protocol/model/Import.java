@@ -68,6 +68,16 @@ public class Import extends Statement {
 		m_alias = alias;
 	}
 	
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		visitor.visitImport(this);
+	}
+	
 	private String m_name=null;
 	private String m_alias=null;
 }

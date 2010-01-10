@@ -27,14 +27,36 @@ public abstract class EscapeBlock extends Block {
 	private static final long serialVersionUID = -2794418546744091644L;
 
 	/**
-	 * This method returns the list of roles at which
+	 * This method returns the list of participants at which
 	 * the escape decision is located.
 	 * 
-	 * @return The list of roles
+	 * @return The list of participants
 	 */
-	public java.util.List<Participant> getRoles() {
+	public java.util.List<Participant> getParticipants() {
 		return(m_roles);
 	}
 		
+	/**
+	 * This method visits the model object using the supplied
+	 * visitor.
+	 * 
+	 * @param visitor The visitor
+	 */
+	public void visit(Visitor visitor) {
+		
+		if (visitor.startEscapeBlock(this)) {
+		
+			for (Participant p : getParticipants()) {
+				p.visit(visitor);
+			}
+			
+			for (int i=0; i < getContents().size(); i++) {
+				getContents().get(i).visit(visitor);
+			}
+		}
+		
+		visitor.endEscapeBlock(this);
+	}
+	
 	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 }
