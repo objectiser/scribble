@@ -55,6 +55,9 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("parallel", Parallel.class);
 		//m_tokenClass("split", Split.class);
 		m_tokenClass.put("raise", Raise.class);
+		m_tokenClass.put("try", TryEscape.class);
+		m_tokenClass.put("catch", CatchBlock.class);
+		m_tokenClass.put("interrupt", InterruptBlock.class);
 
 		//m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
 

@@ -79,26 +79,6 @@ public class DefaultVisitor implements Visitor {
 	 * This method indicates the start of a
 	 * block.
 	 * 
-	 * @param elem The escape block
-	 * @return Whether to process the contents
-	 */
-	public boolean startEscapeBlock(EscapeBlock elem) {
-		return(m_defaultGroupReturn);
-	}
-	
-	/**
-	 * This method indicates the end of a
-	 * block.
-	 * 
-	 * @param elem The escape block
-	 */
-	public void endEscapeBlock(EscapeBlock elem) {
-	}
-	
-	/**
-	 * This method indicates the start of a
-	 * block.
-	 * 
 	 * @param elem The interrupt block
 	 * @return Whether to process the contents
 	 */

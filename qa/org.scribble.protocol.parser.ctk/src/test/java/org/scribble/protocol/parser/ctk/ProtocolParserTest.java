@@ -136,12 +136,6 @@ public class ProtocolParserTest {
 			}
 
 			@Override
-			public void endEscapeBlock(EscapeBlock elem) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
 			public void endInterruptBlock(InterruptBlock elem) {
 				// TODO Auto-generated method stub
 				
@@ -203,12 +197,6 @@ public class ProtocolParserTest {
 
 			@Override
 			public boolean startChoice(Choice elem) {
-				ret.add(elem);
-				return true;
-			}
-
-			@Override
-			public boolean startEscapeBlock(EscapeBlock elem) {
 				ret.add(elem);
 				return true;
 			}

@@ -102,15 +102,15 @@ participantName: ID ;
 
 interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' ID )? ';'! ;
 
-raiseDef: 'raise'^ '@' participantName typeReferenceDef ';'! ;
+raiseDef: 'raise'^ '@' participantName ( ',' participantName )* typeReferenceDef ';'! ;
 
-choiceDef: 'choice'^ '@' participantName sequenceDef ( 'or' sequenceDef )* ;
+choiceDef: 'choice'^ '@' participantName ( ',' participantName )* sequenceDef ( 'or' sequenceDef )* ;
 
 parallelDef: 'parallel'^ sequenceDef ( 'and' sequenceDef )* ;
 
 splitDef: 'split'^ sequenceDef ( 'and' sequenceDef )* ;
 
-repeatDef: 'repeat'^ '@' participantName sequenceDef ;
+repeatDef: 'repeat'^ '@' participantName ( ',' participantName )* sequenceDef ;
 
 runDef: 'run'^ ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';'! ) ;
 
@@ -120,6 +120,20 @@ boundParameters: '(' boundParameter ( ',' boundParameter )* ')' ;
 
 boundParameter: ID 'for' ID ;
 
+tryEscapeDef: 'try'^ sequenceDef ( catchOrInterruptBlockDef )+ ;
+
+catchOrInterruptBlockDef: catchBlockDef | interruptBlockDef ;
+
+catchBlockDef: 'catch'^ typeReferenceDef sequenceDef ;
+
+interruptBlockDef: 'interrupt'^ sequenceDef ;
+
+
+/*-----------------------------------------------
+TO DO:
+Declaration (variables) possibly - but that may need
+lookahead to avoid conflict with interactions.
+-------------------------------------------------*/
 
 
 

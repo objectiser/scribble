@@ -36,27 +36,5 @@ public abstract class EscapeBlock extends Block {
 		return(m_roles);
 	}
 		
-	/**
-	 * This method visits the model object using the supplied
-	 * visitor.
-	 * 
-	 * @param visitor The visitor
-	 */
-	public void visit(Visitor visitor) {
-		
-		if (visitor.startEscapeBlock(this)) {
-		
-			for (Participant p : getParticipants()) {
-				p.visit(visitor);
-			}
-			
-			for (int i=0; i < getContents().size(); i++) {
-				getContents().get(i).visit(visitor);
-			}
-		}
-		
-		visitor.endEscapeBlock(this);
-	}
-	
 	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
 }
