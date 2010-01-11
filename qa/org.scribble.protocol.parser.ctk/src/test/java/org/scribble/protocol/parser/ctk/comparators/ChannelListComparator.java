@@ -20,19 +20,20 @@ import java.util.Comparator;
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
-public class ParticipantListComparator implements Comparator<ModelObject> {
+public class ChannelListComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		ParticipantList m=(ParticipantList)arg0;
-		ParticipantList e=(ParticipantList)arg1;
+		ChannelList m=(ChannelList)arg0;
+		ChannelList e=(ChannelList)arg1;
 		
-		if (m.getParticipants().size() == e.getParticipants().size()) {
-			ParticipantComparator pcomp=(ParticipantComparator)
-						ComparatorUtil.getComparator(Participant.class);
+		if (m.getChannels().size() == e.getChannels().size()) {
+			ChannelComparator chcomp=(ChannelComparator)
+					ComparatorUtil.getComparator(Channel.class);
 			
-			for (int i=0; i < m.getParticipants().size(); i++) {
-				if (pcomp.compare(m.getParticipants().get(i), e.getParticipants().get(i)) != 0) {
+			for (int i=0; i < m.getChannels().size(); i++) {
+				// Use the channel comparator
+				if (chcomp.compare(m.getChannels().get(i), e.getChannels().get(i)) != 0) {
 					return(1);
 				}
 			}

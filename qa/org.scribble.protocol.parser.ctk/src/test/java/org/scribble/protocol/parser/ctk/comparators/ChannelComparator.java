@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Scribble.org
+ * Copyright 2009-10 Scribble.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,31 @@ package org.scribble.protocol.parser.ctk.comparators;
 
 import java.util.Comparator;
 import org.scribble.protocol.model.*;
-import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
-public class ParticipantListComparator implements Comparator<ModelObject> {
+public class ChannelComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		ParticipantList m=(ParticipantList)arg0;
-		ParticipantList e=(ParticipantList)arg1;
+		Channel m=(Channel)arg0;
+		Channel e=(Channel)arg1;
 		
-		if (m.getParticipants().size() == e.getParticipants().size()) {
-			ParticipantComparator pcomp=(ParticipantComparator)
-						ComparatorUtil.getComparator(Participant.class);
-			
-			for (int i=0; i < m.getParticipants().size(); i++) {
-				if (pcomp.compare(m.getParticipants().get(i), e.getParticipants().get(i)) != 0) {
-					return(1);
-				}
+		if (m.getName().equals(e.getName()) == false) {
+			return(1);
+		}
+		
+		if (m.getFromParticipant() == null || e.getFromParticipant() == null) {
+			if (m.getFromParticipant() != e.getFromParticipant()) {
+				return(1);
 			}
-		} else {
+		} else if (m.getFromParticipant().getName().equals(e.getFromParticipant().getName()) == false) {
+			return(1);
+		}
+		
+		if (m.getToParticipant() == null || e.getToParticipant() == null) {
+			if (m.getToParticipant() != e.getToParticipant()) {
+				return(1);
+			}
+		} else if (m.getToParticipant().getName().equals(e.getToParticipant().getName()) == false) {
 			return(1);
 		}
 		

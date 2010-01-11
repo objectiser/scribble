@@ -88,7 +88,7 @@ public class Channel extends ModelObject {
 	 * 
 	 * @param role The 'to' participant
 	 */
-	public void setToRole(Participant participant) {
+	public void setToParticipant(Participant participant) {
 		m_toParticipant = participant;
 	}
 	

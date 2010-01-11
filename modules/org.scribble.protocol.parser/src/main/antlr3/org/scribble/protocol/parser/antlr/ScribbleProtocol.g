@@ -88,21 +88,23 @@ activityListDef: ( activityDef )* ;
 activityDef: participantListDef | channelListDef | interactionDef | 
 			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef | tryEscapeDef ;
 
-participantListDef: 'participant'^ participantDef ( ',' participantDef )* ';'! ;
+participantListDef: 'participant'^ participantDef ( ','! participantDef )* ';'! ;
 
 participantDef: ID ;
 
-channelListDef: 'channel'^ channelDef ( ',' channelDef )* ';'! ;
+participantName: ID ;
 
-channelDef: ID ( 'from' ID )? ( 'to' ID )? ;
+channelListDef: 'channel'^ channelDef ( ','! channelDef )* ';'! ;
+
+channelDef: ID ( 'from' participantName )? ( 'to' participantName )? ;
+
+channelName: ID ;
 
 typeReferenceDef: qualifiedName ;
 
 interactionSignatureDef: ( typeReferenceDef | ID '(' ')' ) ;
 
-participantName: ID ;
-
-interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' ID )? ';'! ;
+interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' channelName )? ';'! ;
 
 raiseDef: 'raise'^ '@' participantName ( ',' participantName )* typeReferenceDef ';'! ;
 

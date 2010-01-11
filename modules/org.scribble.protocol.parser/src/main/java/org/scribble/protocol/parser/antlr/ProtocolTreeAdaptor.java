@@ -51,6 +51,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("import", Import.class);
 		m_tokenClass.put("protocol", Protocol.class);
 		m_tokenClass.put("participant", ParticipantList.class);
+		m_tokenClass.put("channel", ChannelList.class);
 		m_tokenClass.put("choice", Choice.class);
 		m_tokenClass.put("parallel", Parallel.class);
 		//m_tokenClass("split", Split.class);
@@ -71,6 +72,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("typeReferenceDef", TypeReference.class);
 		m_parserGroupingRuleClass.put("participantName", Participant.class);
 		m_parserGroupingRuleClass.put("participantDef", Participant.class);
+		m_parserGroupingRuleClass.put("channelName", String.class);
+		m_parserGroupingRuleClass.put("channelDef", Channel.class);
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		
 		// When a partcular class has multiple properties of the
@@ -85,6 +88,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_listClass.put("imports", Import.class);
 		m_listClass.put("contents", Activity.class);
 		m_listClass.put("participants", Participant.class);
+		m_listClass.put("channels", Channel.class);
 		m_listClass.put("types", TypeReference.class);
 		m_listClass.put("blocks", Block.class);
 	}
@@ -268,7 +272,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 								java.util.List list=(java.util.List)
 										pds[i].getReadMethod().invoke(parent);
 								
-								_log.info("Adding "+child+" to list: "+
+								_log.fine("Adding "+child+" to list: "+
 										list+" on parent "+parent);
 								list.add(child);
 							}
@@ -281,7 +285,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 					if (pd != null && pd.getWriteMethod() != null) {
 						
 						_log.fine("Set property '"+pd.getName()+
-								"' on="+parent+" to="+child);
+								"' on="+parent+" (class="+parent.getClass()+") to="+child);
 						
 						pd.getWriteMethod().invoke(parent, child);
 					}

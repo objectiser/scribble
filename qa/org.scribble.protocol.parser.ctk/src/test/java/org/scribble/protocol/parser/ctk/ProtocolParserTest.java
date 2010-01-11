@@ -358,6 +358,65 @@ public class ProtocolParserTest {
 	}
 	
 	@org.junit.Test
+	public void testSingleInteractionWithChannel() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("SingleInteractionWithChannel", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("SingleInteractionWithChannel");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+		
+		ChannelList cl=new ChannelList();
+		Channel ch=new Channel();
+		ch.setName("mych");
+		ch.setFromParticipant(buyer);
+		ch.setToParticipant(seller);
+		
+		cl.getChannels().add(ch);
+		
+		protocol.getBlock().add(cl);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setName("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		protocol.getBlock().add(interaction);
+		
+		verify(model, expected);
+	}
+	
+	@org.junit.Test
 	public void testRaise() {
 		TestJournal logger=new TestJournal();
 		
