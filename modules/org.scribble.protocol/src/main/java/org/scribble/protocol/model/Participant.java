@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents a role.
  * 
  */
-public class Participant extends Declaration {
+public class Participant extends ModelObject {
 
 	private static final long serialVersionUID = 3368940100177769548L;
 

@@ -158,7 +158,7 @@ public class BehaviourList extends Behaviour
 		while (iter.hasNext()) {
 			DeclarationBinding db=iter.next();
 			
-			ret.put(db.getBoundName(), db.getDeclaration().getName());
+			ret.put(db.getBoundName(), db.getLocalName());
 		}
 		
 		return(ret);

@@ -268,7 +268,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 								java.util.List list=(java.util.List)
 										pds[i].getReadMethod().invoke(parent);
 								
-								_log.finest("Adding "+child+" to list: "+
+								_log.info("Adding "+child+" to list: "+
 										list+" on parent "+parent);
 								list.add(child);
 							}

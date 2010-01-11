@@ -16,7 +16,6 @@
  */
 package org.scribble.protocol.model;
 
-
 /**
  * This class represents the protocol notation.
  */
@@ -226,77 +225,6 @@ public class Protocol extends Activity {
 		for (int i=0; ret != null && 
 					i < subPath.getPathElementCount(); i++) {
 			ret = ret.getSubProtocol(subPath.getPathElement(i));
-		}
-		
-		return(ret);
-	}
-	
-	/**
-	 * This method return the top level declarations associated
-	 * with the definition.
-	 * 
-	 * @return The declarations
-	 */
-	public java.util.Set<Declaration> getDeclarations() {
-		java.util.Set<Declaration> ret=new java.util.HashSet<Declaration>();
-		
-		// Check if definition has a located role
-		if (getLocatedName().getParticipant() != null) {
-			ret.add(getLocatedName().getParticipant());
-		}
-		
-		// Check activities for suitable declarations
-		java.util.Iterator<Activity> iter=getBlock().getContents().iterator();
-		
-		while (iter.hasNext()) {
-			Activity act=iter.next();
-			
-			if (act instanceof ParticipantList) {
-				ret.addAll(((ParticipantList)act).getParticipants());
-			} else if (act instanceof ChannelList) {
-				ret.addAll(((ChannelList)act).getChannels());
-			}
-		}
-		
-		return(ret);
-	}
-		
-	/**
-	 * This method returns the named top level declaration,
-	 * associated with this definition.
-	 * 
-	 * @param name The declaration name
-	 * @return The declaration, or null if not found
-	 */
-	public Declaration getDeclaration(String name) {
-		Declaration ret=null;
-		
-		java.util.Iterator<Declaration> iter=getDeclarations().iterator();
-		while (ret == null && iter.hasNext()) {
-			ret = iter.next();
-			
-			if (ret.getName().equals(name) == false) {
-				ret = null;
-			}
-		}
-		
-		return(ret);
-	}
-	
-	/**
-	 * This method returns the list of roles defined at
-	 * the top level of the definition.
-	 * 
-	 * @return The list of roles
-	 */
-	public java.util.List<Participant> getRoles() {
-		java.util.List<Participant> ret=new java.util.Vector<Participant>();
-		
-		for (int i=0; i < getBlock().getContents().size(); i++) {
-		
-			if (getBlock().getContents().get(i) instanceof ParticipantList) {
-				ret.addAll(((ParticipantList)getBlock().getContents().get(i)).getParticipants());
-			}
 		}
 		
 		return(ret);

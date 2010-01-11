@@ -42,7 +42,7 @@ public abstract class ModelInclude extends Behaviour {
 	 * @param decl The declaration
 	 * @return The declaration binding, or null if not found
 	 */
-	public DeclarationBinding getDeclarationBinding(Declaration decl) {
+	public DeclarationBinding getDeclarationBinding(String declName) {
 		DeclarationBinding ret=null;
 		
 		java.util.Iterator<DeclarationBinding> iter=getBindings().iterator();
@@ -50,7 +50,7 @@ public abstract class ModelInclude extends Behaviour {
 		while (ret == null && iter.hasNext()) {
 			ret = iter.next();
 			
-			if (ret.getDeclaration() != decl) {
+			if (ret.getLocalName().equals(declName) == false) {
 				ret = null;
 			}
 		}

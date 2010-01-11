@@ -41,9 +41,13 @@ public class DefaultModelOutliner implements ModelOutliner {
 		
 		if (ret == null) {
 			
+			/* TODO:
+			 * Find way to extract name from protocol objects.
+			 * 
 			if (obj instanceof org.scribble.protocol.model.Declaration) {
 				ret = ((org.scribble.protocol.model.Declaration)obj).getName();
 			}
+			*/
 		}
 		
 		return(ret);
@@ -64,9 +68,11 @@ public class DefaultModelOutliner implements ModelOutliner {
 
 		if (ret == null) {
 			
-			if (obj instanceof org.scribble.protocol.model.Declaration) {
-				ret = ScribbleImages.getImage("declaration.png");
-			} else if (obj instanceof org.scribble.protocol.model.Activity) {
+			/*
+			 * TODO:
+			 * Find way to derive images from the relevant model types
+			 */
+			if (obj instanceof org.scribble.protocol.model.Activity) {
 				ret = ScribbleImages.getImage("activity.png");
 			}
 		}

@@ -20,7 +20,7 @@ package org.scribble.protocol.model;
  * This class represents the RecursionBlock construct.
  * 
  */
-public class Recursion extends Declaration
+public class Recursion extends ModelObject
 				implements SinglePathBehaviour {
 
 	private static final long serialVersionUID = -3777899920653462575L;

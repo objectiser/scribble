@@ -31,33 +31,33 @@ public class DeclarationBinding extends ModelObject {
 	}
 	
 	/**
-	 * This constructor initializes the declaration and bound
+	 * This constructor initializes the declaration (local name) and bound
 	 * name.
 	 * 
-	 * @param decl The declaration
+	 * @param localName The local name
 	 * @param boundName The bound name
 	 */
-	public DeclarationBinding(Declaration decl, String boundName) {
-		m_declaration = decl;
+	public DeclarationBinding(String localName, String boundName) {
+		m_localName = localName;
 		m_boundName = boundName;
 	}
 	
 	/**
-	 * This method sets the declaration.
+	 * This method sets the local name.
 	 * 
-	 * @param decl The declaration
+	 * @param localName The local name
 	 */
-	public void setDeclaration(Declaration decl) {
-		m_declaration = decl;
+	public void setLocalName(String localName) {
+		m_localName = localName;
 	}
 	
 	/**
-	 * This method returns the declaration.
+	 * This method returns the local name.
 	 * 
-	 * @return The declaration
+	 * @return The local name
 	 */
-	public Declaration getDeclaration() {
-		return(m_declaration);
+	public String getLocalName() {
+		return(m_localName);
 	}
 
 	/**
@@ -88,6 +88,6 @@ public class DeclarationBinding extends ModelObject {
 		visitor.visitDeclarationBinding(this);
 	}
 
-	private Declaration m_declaration=null;
+	private String m_localName=null;
 	private String m_boundName=null;
 }
