@@ -72,7 +72,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("typeReferenceDef", TypeReference.class);
 		m_parserGroupingRuleClass.put("participantName", Participant.class);
 		m_parserGroupingRuleClass.put("participantDef", Participant.class);
-		m_parserGroupingRuleClass.put("channelName", String.class);
+		m_parserGroupingRuleClass.put("channelName", Channel.class);
 		m_parserGroupingRuleClass.put("channelDef", Channel.class);
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		

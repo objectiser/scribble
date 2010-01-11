@@ -33,6 +33,9 @@ public class InteractionComparator implements Comparator<ModelObject> {
 		Comparator<ModelObject> pcomp=
 			ComparatorUtil.getComparator(Participant.class);
 		
+		Comparator<ModelObject> chcomp=
+			ComparatorUtil.getComparator(Channel.class);
+		
 		if (mscomp.compare(m.getMessageSignature(),
 					e.getMessageSignature()) != 0) {
 			return(1);
@@ -53,6 +56,15 @@ public class InteractionComparator implements Comparator<ModelObject> {
 			}
 		} else if (pcomp.compare(m.getToParticipant(),
 				e.getToParticipant()) != 0) {
+			return(1);
+		}
+		
+		if (m.getChannel() == null) {
+			if (e.getChannel() != null) {
+				return(1);
+			}
+		} else if (chcomp.compare(m.getChannel(),
+				e.getChannel()) != 0) {
 			return(1);
 		}
 		

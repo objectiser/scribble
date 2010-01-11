@@ -2,7 +2,7 @@ namespace example.helloworld;
 
 protocol SingleInteractionWithChannel {
 	participant Buyer, Seller;
-	channel mych;
+	channel mych from Buyer to Seller;
 
-	Order from Buyer to Seller via mych;
+	Order via mych;
 }
