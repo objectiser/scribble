@@ -616,4 +616,146 @@ public class ProtocolParserTest {
 		
 		verify(model, expected);
 	}
+	
+	@org.junit.Test
+	public void testChoice() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("Choice", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("SingleInteraction");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+		
+		Choice choice=new Choice();
+		
+		Block b1=new Block();
+		choice.getBlocks().add(b1);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setName("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		b1.add(interaction);
+		
+		Block b2=new Block();
+		choice.getBlocks().add(b2);
+		
+		interaction=new Interaction();
+		
+		ms=new MessageSignature();
+		tref=new TypeReference();
+		tref.setName("Cancel");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		b2.add(interaction);
+		
+		protocol.getBlock().add(choice);
+		
+		verify(model, expected);
+	}
+	
+	@org.junit.Test
+	public void testParallel() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("Parallel", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("SingleInteraction");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+		
+		Parallel parallel=new Parallel();
+		
+		Block b1=new Block();
+		parallel.getBlocks().add(b1);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setName("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		b1.add(interaction);
+		
+		Block b2=new Block();
+		parallel.getBlocks().add(b2);
+		
+		interaction=new Interaction();
+		
+		ms=new MessageSignature();
+		tref=new TypeReference();
+		tref.setName("Cancel");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		b2.add(interaction);
+		
+		protocol.getBlock().add(parallel);
+		
+		verify(model, expected);
+	}
 }
