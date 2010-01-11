@@ -20,12 +20,12 @@ import java.util.Comparator;
 import org.scribble.protocol.model.*;
 import org.scribble.protocol.parser.ctk.ComparatorUtil;
 
-public class ChoiceComparator implements Comparator<ModelObject> {
+public class RepeatComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		Choice m=(Choice)arg0;
-		Choice e=(Choice)arg1;
+		Repeat m=(Repeat)arg0;
+		Repeat e=(Repeat)arg1;
 		
 		if (m.getParticipants().size() != e.getParticipants().size()) {
 			return(1);
@@ -39,8 +39,8 @@ public class ChoiceComparator implements Comparator<ModelObject> {
 				return(1);
 			}
 		}
-
-		if (m.getPaths().size() != e.getPaths().size()) {
+		
+		if (m.getBlock().size() != e.getBlock().size()) {
 			return(1);
 		}
 		

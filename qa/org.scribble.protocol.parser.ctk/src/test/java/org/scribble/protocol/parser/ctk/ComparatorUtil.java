@@ -46,6 +46,7 @@ public class ComparatorUtil {
 		m_comparators.put(InterruptBlock.class, new InterruptBlockComparator());
 		m_comparators.put(Choice.class, new ChoiceComparator());
 		m_comparators.put(Parallel.class, new ParallelComparator());
+		m_comparators.put(Repeat.class, new RepeatComparator());
 	}
 
 	public static Comparator<ModelObject> getComparator(Class<? extends ModelObject> cls) {

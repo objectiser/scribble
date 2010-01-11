@@ -1,11 +1,9 @@
 namespace example.helloworld;
 
-protocol Parallel {
+protocol Repeat {
 	participant Buyer, Seller;
 
-	parallel {
+	repeat @ Buyer {
 		Order from Buyer to Seller;
-	} and {
-		Cancel from Buyer to Seller;
 	}
 }

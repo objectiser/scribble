@@ -358,6 +358,63 @@ public class ProtocolParserTest {
 	}
 	
 	@org.junit.Test
+	public void testSingleInteractionRPC() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("SingleInteractionRPC", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("SingleInteractionRPC");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		
+		ms.setOperation("submit");
+		
+		TypeReference tref1=new TypeReference();
+		tref1.setName("Order");
+		ms.getTypes().add(tref1);
+		
+		TypeReference tref2=new TypeReference();
+		tref2.setName("Customer");
+		ms.getTypes().add(tref2);
+
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		protocol.getBlock().add(interaction);
+		
+		verify(model, expected);
+	}
+	
+	@org.junit.Test
 	public void testSingleInteractionWithChannel() {
 		TestJournal logger=new TestJournal();
 		
@@ -653,6 +710,8 @@ public class ProtocolParserTest {
 		
 		Choice choice=new Choice();
 		
+		choice.getParticipants().add(buyer);
+		
 		Block b1=new Block();
 		choice.getBlocks().add(b1);
 		
@@ -709,7 +768,7 @@ public class ProtocolParserTest {
 		expected.setDefinition(protocol);
 		
 		LocatedName ln=new LocatedName();
-		ln.setName("SingleInteraction");
+		ln.setName("Parallel");
 		protocol.setLocatedName(ln);
 		
 		ParticipantList rl=new ParticipantList();
@@ -755,6 +814,61 @@ public class ProtocolParserTest {
 		b2.add(interaction);
 		
 		protocol.getBlock().add(parallel);
+		
+		verify(model, expected);
+	}
+	
+	@org.junit.Test
+	public void testRepeat() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=getModel("Repeat", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setDefinition(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("Repeat");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+		
+		Repeat repeat=new Repeat();
+		
+		repeat.getParticipants().add(buyer);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setName("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		repeat.getBlock().add(interaction);
+		
+		protocol.getBlock().add(repeat);
 		
 		verify(model, expected);
 	}

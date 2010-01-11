@@ -55,7 +55,7 @@ public class Choice extends MultiPathBehaviour {
 		Participant role=locatedParticipant();
 		
 		// Check if not a decision making role
-		if (role != null && m_roles.contains(role) == false) {
+		if (role != null && m_participants.contains(role) == false) {
 			ret = true;
 		}
 		
@@ -63,13 +63,13 @@ public class Choice extends MultiPathBehaviour {
 	}
 	
 	/**
-	 * This method returns the list of roles at which
+	 * This method returns the list of participants at which
 	 * the choice decision is located.
 	 * 
-	 * @return The list of roles
+	 * @return The list of participants
 	 */
-	public java.util.List<Participant> getRoles() {
-		return(m_roles);
+	public java.util.List<Participant> getParticipants() {
+		return(m_participants);
 	}
 	
 	/**
@@ -159,9 +159,9 @@ public class Choice extends MultiPathBehaviour {
 	public java.util.List<Participant> initiatorParticipants() {
 		java.util.List<Participant> ret=super.initiatorParticipants();
 
-		for (int i=0; i < getRoles().size(); i++) {
-			if (ret.contains(getRoles().get(i)) == false) {
-				ret.add(getRoles().get(i));
+		for (int i=0; i < getParticipants().size(); i++) {
+			if (ret.contains(getParticipants().get(i)) == false) {
+				ret.add(getParticipants().get(i));
 			}
 		}
 		
@@ -198,5 +198,5 @@ public class Choice extends MultiPathBehaviour {
 	}
 	
 	private java.util.List<Block> m_blocks=new ContainmentList<Block>(this, Block.class);
-	private java.util.List<Participant> m_roles=new java.util.Vector<Participant>();
+	private java.util.List<Participant> m_participants=new java.util.Vector<Participant>();
 }

@@ -102,7 +102,7 @@ channelName: ID ;
 
 typeReferenceDef: qualifiedName ;
 
-interactionSignatureDef: ( typeReferenceDef | ID '(' ')' ) ;
+interactionSignatureDef: ( typeReferenceDef | ID '('! typeReferenceDef ( ','! typeReferenceDef )* ')'! ) ;
 
 interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' channelName )? ';'! ;
 
