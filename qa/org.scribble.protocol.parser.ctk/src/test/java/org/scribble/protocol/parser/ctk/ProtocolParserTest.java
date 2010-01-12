@@ -326,7 +326,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("SingleInteraction");
@@ -375,7 +375,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("SingleInteractionRPC");
@@ -432,7 +432,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("SingleInteractionWithChannel");
@@ -490,7 +490,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("SingleInteractionWithChannel");
@@ -548,7 +548,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("Raise");
@@ -595,7 +595,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("TryCatchInterrupt");
@@ -692,7 +692,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("SingleInteraction");
@@ -765,7 +765,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("Parallel");
@@ -836,7 +836,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("Repeat");
@@ -891,7 +891,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("RunSubProtocol");
@@ -975,7 +975,7 @@ public class ProtocolParserTest {
 		expected.setNamespace(ns);
 		
 		Protocol protocol=new Protocol();
-		expected.setDefinition(protocol);
+		expected.setProtocol(protocol);
 		
 		LocatedName ln=new LocatedName();
 		ln.setName("RunInlineProtocol");

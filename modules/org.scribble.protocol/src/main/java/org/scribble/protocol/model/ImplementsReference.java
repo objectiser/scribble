@@ -29,7 +29,7 @@ public class ImplementsReference extends NameMappingReference {
 	 * 
 	 * @param notation The notation
 	 */
-	public ImplementsReference(String notation) {
+	public ImplementsReference() {
 	}
 	
 	/**

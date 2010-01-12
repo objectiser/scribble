@@ -249,6 +249,25 @@ public class Protocol extends Activity {
 	}
 
 	/**
+	 * This method returns the list of participants defined at
+	 * the top level of the definition.
+	 * 
+	 * @return The list of participants
+	 */
+	public java.util.List<Participant> getParticipants() {
+		java.util.List<Participant> ret=new java.util.Vector<Participant>();
+		
+		for (int i=0; i < getBlock().getContents().size(); i++) {
+		
+			if (getBlock().getContents().get(i) instanceof ParticipantList) {
+				ret.addAll(((ParticipantList)getBlock().getContents().get(i)).getParticipants());
+			}
+		}
+		
+		return(ret);
+	}
+	
+	/**
 	 * This method visits the model object using the supplied
 	 * visitor.
 	 * 

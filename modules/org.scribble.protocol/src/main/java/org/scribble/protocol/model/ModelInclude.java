@@ -172,8 +172,7 @@ public abstract class ModelInclude extends Behaviour {
 				if (mrep != null) {
 					java.util.List<ModelInfo> models=
 							mrep.getModels(m_reference,
-									new DefaultModelListener());
-					
+									new DefaultJournal					
 					for (int i=0; ret == null &&
 									i < models.size(); i++) {
 						if (models.get(i).getModel() instanceof ProtocolModel) {
@@ -224,7 +223,7 @@ public abstract class ModelInclude extends Behaviour {
 	 * @return Whether an inline definition
 	 */
 	public boolean isInline() {
-		return(getInlineDefinition() != null);
+		return(getInlineProtocol() != null);
 	}
 
 	/**
@@ -233,7 +232,7 @@ public abstract class ModelInclude extends Behaviour {
 	 * 
 	 * @return The inline definition, or null if not defined
 	 */
-	public Protocol getInlineDefinition() {
+	public Protocol getInlineProtocol() {
 		return(m_inlineDefinition);
 	}
 	

@@ -32,7 +32,7 @@ public class ConnectednessValidatorTest {
 		ProtocolModel model=new ProtocolModel();
 
 		Protocol defn=new Protocol();
-		model.setDefinition(defn);
+		model.setProtocol(defn);
 		
 		Interaction interaction1=new Interaction();
 		defn.getBlock().add(interaction1);
@@ -66,7 +66,7 @@ public class ConnectednessValidatorTest {
 		ProtocolModel model=new ProtocolModel();
 
 		Protocol defn=new Protocol();
-		model.setDefinition(defn);
+		model.setProtocol(defn);
 		
 		Interaction interaction1=new Interaction();
 		defn.getBlock().add(interaction1);

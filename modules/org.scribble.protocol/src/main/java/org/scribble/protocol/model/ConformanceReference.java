@@ -27,9 +27,8 @@ public class ConformanceReference extends NameMappingReference {
 	/**
 	 * This is the constructor for the conformance reference.
 	 * 
-	 * @param notation The notation
 	 */
-	public ConformanceReference(String notation) {
+	public ConformanceReference() {
 	}
 	
 	/**

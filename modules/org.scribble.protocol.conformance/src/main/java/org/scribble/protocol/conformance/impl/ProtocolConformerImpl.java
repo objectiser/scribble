@@ -25,8 +25,8 @@ public class ProtocolConformerImpl implements ProtocolConformer {
 
 	public void conforms(ProtocolModel model, ProtocolModel ref, Journal journal) {
 
-		BehaviourList mainBehaviourList=BehaviourList.createBehaviourList(model.getDefinition().getBlock());
-		BehaviourList refBehaviourList=BehaviourList.createBehaviourList(ref.getDefinition().getBlock());
+		BehaviourList mainBehaviourList=BehaviourList.createBehaviourList(model.getProtocol().getBlock());
+		BehaviourList refBehaviourList=BehaviourList.createBehaviourList(ref.getProtocol().getBlock());
 
 		DefaultComparatorContext context=new DefaultComparatorContext(null, null);
 		

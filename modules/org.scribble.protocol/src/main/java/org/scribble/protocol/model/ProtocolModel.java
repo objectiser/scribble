@@ -74,7 +74,7 @@ public class ProtocolModel extends ModelObject {
 	 * 
 	 * @return The definition
 	 */
-	public Protocol getDefinition() {
+	public Protocol getProtocol() {
 		return(m_definition);
 	}
 	
@@ -84,7 +84,7 @@ public class ProtocolModel extends ModelObject {
 	 * 
 	 * @param defn The definition
 	 */
-	public void setDefinition(Protocol defn) {
+	public void setProtocol(Protocol defn) {
 		m_definition = defn;
 	}
 	
@@ -96,8 +96,8 @@ public class ProtocolModel extends ModelObject {
 	public boolean isLocated() {
 		boolean ret=false;
 		
-		if (getDefinition() != null) {
-			ret = (getDefinition().getLocatedName().getParticipant() != null);
+		if (getProtocol() != null) {
+			ret = (getProtocol().getLocatedName().getParticipant() != null);
 		}
 		
 		return(ret);
@@ -119,7 +119,7 @@ public class ProtocolModel extends ModelObject {
 			imp.visit(visitor);
 		}
 		
-		getDefinition().visit(visitor);
+		getProtocol().visit(visitor);
 	}
 	
 	private Namespace m_namespace=null;
