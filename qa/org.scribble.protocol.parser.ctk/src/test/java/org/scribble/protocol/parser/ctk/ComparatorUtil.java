@@ -38,6 +38,7 @@ public class ComparatorUtil {
 		m_comparators.put(Interaction.class, new InteractionComparator());
 		m_comparators.put(MessageSignature.class, new MessageSignatureComparator());
 		m_comparators.put(TypeReference.class, new TypeReferenceComparator());
+		m_comparators.put(ProtocolReference.class, new ProtocolReferenceComparator());
 		m_comparators.put(ModelReference.class, new ModelReferenceComparator());
 		m_comparators.put(LocatedName.class, new LocatedNameComparator());
 		m_comparators.put(Raise.class, new RaiseComparator());
@@ -47,6 +48,8 @@ public class ComparatorUtil {
 		m_comparators.put(Choice.class, new ChoiceComparator());
 		m_comparators.put(Parallel.class, new ParallelComparator());
 		m_comparators.put(Repeat.class, new RepeatComparator());
+		m_comparators.put(Run.class, new RunComparator());
+		m_comparators.put(DeclarationBinding.class, new DeclarationBindingComparator());
 	}
 
 	public static Comparator<ModelObject> getComparator(Class<? extends ModelObject> cls) {

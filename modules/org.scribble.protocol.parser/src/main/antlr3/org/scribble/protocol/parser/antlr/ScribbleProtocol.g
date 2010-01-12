@@ -10,6 +10,7 @@ tokens {
 	MINUS	= '-' ;
 	MULT	= '*' ;
 	DIV	= '/' ;
+	FULLSTOP = '.' ;
 }
 
 @header {
@@ -86,7 +87,8 @@ sequenceDef: '{'! activityListDef '}'! ;
 activityListDef: ( activityDef )* ;
 
 activityDef: participantListDef | channelListDef | interactionDef | 
-			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef | tryEscapeDef ;
+			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef | 
+			tryEscapeDef | protocolDef ;
 
 participantListDef: 'participant'^ participantDef ( ','! participantDef )* ';'! ;
 
@@ -106,21 +108,21 @@ interactionSignatureDef: ( typeReferenceDef | ID '('! typeReferenceDef ( ','! ty
 
 interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' channelName )? ';'! ;
 
-raiseDef: 'raise'^ '@' participantName ( ',' participantName )* typeReferenceDef ';'! ;
+raiseDef: 'raise'^ '@' participantName ( ','! participantName )* typeReferenceDef ';'! ;
 
-choiceDef: 'choice'^ '@' participantName ( ',' participantName )* blockDef ( 'or' blockDef )* ;
+choiceDef: 'choice'^ '@' participantName ( ','! participantName )* blockDef ( 'or' blockDef )* ;
 
 parallelDef: 'parallel'^ blockDef ( 'and' blockDef )* ;
 
 splitDef: 'split'^ blockDef ( 'and' blockDef )* ;
 
-repeatDef: 'repeat'^ '@' participantName ( ',' participantName )* blockDef ;
+repeatDef: 'repeat'^ '@' participantName ( ','! participantName )* blockDef ;
 
-runDef: 'run'^ ( inlineProtocolDef | qualifiedName ( '@' ID )? ( boundParameters )? ';'! ) ;
+runDef: 'run'^ ( inlineProtocolDef | protocolRefDef ( '('! boundParameter ( ','! boundParameter )* ')'! )? ';'! ) ;
 
-inlineProtocolDef: 'protocol'^ ( boundParameters )? blockDef ;
+protocolRefDef: ID ( '@' participantName )? ;
 
-boundParameters: '(' boundParameter ( ',' boundParameter )* ')' ;
+inlineProtocolDef: 'protocol' ( '('! boundParameter ( ','! boundParameter )* ')'! )? blockDef ;
 
 boundParameter: ID 'for' ID ;
 

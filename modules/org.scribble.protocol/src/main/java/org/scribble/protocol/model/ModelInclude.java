@@ -243,7 +243,7 @@ public abstract class ModelInclude extends Behaviour {
 	 * 
 	 * @param definition The inner definition
 	 */
-	public void setInlineDefinition(Protocol definition) {
+	public void setInlineProtocol(Protocol definition) {
 		
 		if (m_inlineDefinition != null) {
 			m_inlineDefinition.setParent(null);

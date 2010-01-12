@@ -1,0 +1,11 @@
+namespace example.helloworld;
+
+protocol RunInlineProtocol {
+	participant Buyer, Seller;
+
+	run protocol (Buyer for SubBuyer, Seller for SubSeller) {
+		participant SubBuyer, SubSeller;
+		
+		Order from SubBuyer to SubSeller;
+	}
+}

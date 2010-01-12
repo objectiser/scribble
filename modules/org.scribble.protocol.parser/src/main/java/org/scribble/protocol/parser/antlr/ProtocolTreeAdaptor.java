@@ -60,10 +60,11 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("try", TryEscape.class);
 		m_tokenClass.put("catch", CatchBlock.class);
 		m_tokenClass.put("interrupt", InterruptBlock.class);
+		m_tokenClass.put("run", Run.class);
 
 		//m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
 
-		// This may defines the model object that should be
+		// This may define the model object that should be
 		// created after processing the named grammer rule
 		m_parserGroupingRuleClass.put("qualifiedName", String.class);
 		m_parserGroupingRuleClass.put("qualifiedNameWithMeta", String.class);
@@ -76,13 +77,17 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("channelName", Channel.class);
 		m_parserGroupingRuleClass.put("channelDef", Channel.class);
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
+		m_parserGroupingRuleClass.put("protocolRefDef", ProtocolReference.class);
+		m_parserGroupingRuleClass.put("boundParameter", DeclarationBinding.class);
 		
-		// When a partcular class has multiple properties of the
+		// When a particular class has multiple properties of the
 		// same type, then a preceding token must be used to
 		// determine which property to set. This map provides the
 		// mapping between the property name and the token.
 		m_propertyToken.put("fromParticipant", "from");
 		m_propertyToken.put("toParticipant", "to");
+		m_propertyToken.put("boundName", "for");
+		m_propertyToken.put("localName", "");
 		
 		// Defines the list element base type associated with a
 		// property name
@@ -92,6 +97,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_listClass.put("channels", Channel.class);
 		m_listClass.put("types", TypeReference.class);
 		m_listClass.put("blocks", Block.class);
+		m_listClass.put("bindings", DeclarationBinding.class);
 	}
 	
 	public ProtocolModel getProtocolModel() {
@@ -113,21 +119,6 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		_log.finest("Token class for '"+token.getText()+
 				"' is: "+cls);
 
-		/*
-		if (cls == null && m_parser != null &&
-				m_parser.getRuleInvocationStack().size() > 0) {
-			
-			for (int i=m_parser.getRuleInvocationStack().size()-1;
-						cls == null && i >= 0; i--) {
-				cls = m_parserRuleClass.get(m_parser.getRuleInvocationStack().get(i));
-
-				_log.finest("Parser rule class for '"+
-						m_parser.getRuleInvocationStack().get(i)+
-						"' is: "+cls);
-			}
-		}
-		*/
-		
 		if (cls != null) {
 			try {
 				ret = cls.newInstance();
@@ -214,12 +205,10 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 			
 			for (int i=0; i < nil.size(); i++) {
 				
-				if (nil.get(i) instanceof Token) {
-					if (((Token)nil.get(i)).getType() == ScribbleProtocolParser.ID) {
-						buf.append(((Token)nil.get(i)).getText());
-					} else {
-						m_currentToken = (Token)nil.get(i);
-					}
+				if (nil.get(i) instanceof Token &&
+						(((Token)nil.get(i)).getType() == ScribbleProtocolParser.ID ||
+							((Token)nil.get(i)).getType() == ScribbleProtocolParser.FULLSTOP)) {
+					buf.append(((Token)nil.get(i)).getText());
 				} else {
 					if (buf.length() > 0) {
 						addChild(parent, buf.toString());
@@ -227,8 +216,12 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 						buf = new StringBuffer();
 					}
 					
+					if (nil.get(i) instanceof Token) {
+						m_currentToken = (Token)nil.get(i);
+					}
+
 					addChild(parent, nil.get(i));
-				}
+				}				
 			}
 			
 			if (buf.length() > 0) {
@@ -259,6 +252,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 							String token=m_propertyToken.get(pds[i].getName());
 							
 							if ((token == null ||
+									(token.length() == 0 && m_currentToken == null) ||
 									(m_currentToken != null && 
 										token.equals(m_currentToken.getText()))) &&
 										pds[i].getWriteMethod() != null) {
