@@ -1,0 +1,7 @@
+namespace example.helloworld;
+
+protocol SingleInteraction@Buyer {
+	participant Seller;
+
+	Order to Seller;
+}

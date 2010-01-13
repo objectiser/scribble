@@ -1,0 +1,7 @@
+namespace example.helloworld;
+
+protocol SingleInteractionRPC {
+	participant Buyer, Seller;
+
+	submit(Order,Customer) from Buyer to Seller;
+}

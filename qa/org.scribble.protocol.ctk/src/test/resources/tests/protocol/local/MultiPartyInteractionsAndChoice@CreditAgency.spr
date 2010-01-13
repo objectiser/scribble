@@ -1,0 +1,14 @@
+namespace example.helloworld;
+
+protocol MultiPartyInteractionsAndChoice@CreditAgency {
+	participant Buyer, Broker, Seller;
+
+	CreditCheck from Broker;
+	
+	choice @ CreditAgency {
+		CreditOk to Broker;
+		
+	} or {
+		InsufficientCredit to Broker;
+	}
+}

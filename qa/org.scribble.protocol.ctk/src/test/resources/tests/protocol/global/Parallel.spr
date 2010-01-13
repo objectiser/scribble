@@ -1,0 +1,11 @@
+namespace example.helloworld;
+
+protocol Parallel {
+	participant Buyer, Seller;
+
+	parallel {
+		Order from Buyer to Seller;
+	} and {
+		Cancel from Buyer to Seller;
+	}
+}

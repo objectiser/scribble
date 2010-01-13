@@ -1,0 +1,19 @@
+namespace example.helloworld;
+
+protocol MultiPartyInteractionsAndChoice@Buyer {
+	participant Broker, CreditAgency, Seller;
+
+	Order to Broker;
+	
+	choice @ CreditAgency {
+		
+		choice @ Seller {
+			Confirmation from Broker;
+		} or {
+			OutOfStock from Broker;
+		}
+	
+	} or {
+		InsufficientCredit from Broker;
+	}
+}

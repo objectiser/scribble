@@ -6,6 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.scribble.protocol.projection.osgi.Activator
 Bundle-Vendor: www.scribble.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.osgi.framework;version="1.3.0"
-Require-Bundle: org.scribble.common,
- org.scribble.protocol
+Import-Package: org.osgi.framework;version="1.3.0",
+ org.scribble.common.logging,
+ org.scribble.common.util,
+ org.scribble.protocol.model,
+ org.scribble.protocol.projection
+Export-Package: org.scribble.protocol.projection.impl

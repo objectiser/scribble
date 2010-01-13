@@ -56,8 +56,7 @@ public class CTKUtil {
 		ProtocolModel ret=null;
 		
 		java.io.InputStream is=
-				ClassLoader.getSystemResourceAsStream("tests/"+
-							filename+".spr");
+				ClassLoader.getSystemResourceAsStream(filename);
 		
 		if (is == null) {
 			fail("Failed to load protocol '"+filename+"'");
@@ -335,4 +334,30 @@ public class CTKUtil {
 		return(ret);
 	}
 	
+	public static ProtocolModel project(ProtocolModel model, Participant participant,
+									Journal logger) {
+		ProtocolModel ret=null;
+		
+		org.scribble.protocol.projection.ProtocolProjector projector=null;
+		
+		try {
+			String clsName=System.getProperty("scribble.protocol.projector");
+			
+			if (clsName == null) {
+				clsName = "org.scribble.protocol.projection.impl.ProtocolProjectorImpl";
+			}
+			
+			Class<?> cls=Class.forName(clsName);
+			
+			projector = (org.scribble.protocol.projection.ProtocolProjector)
+								cls.newInstance();
+
+		} catch(Exception e) {
+			fail("Failed to get Protocol projector: "+e);
+		}
+
+		ret = projector.project(model, participant, logger);
+		
+		return(ret);
+	}	
 }

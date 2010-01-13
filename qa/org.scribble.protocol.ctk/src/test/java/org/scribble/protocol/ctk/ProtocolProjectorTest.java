@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Scribble.org
+ * Copyright 2009-10 Scribble.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ import static org.junit.Assert.*;
 
 import org.scribble.protocol.model.*;
 
-public class ProtocolParserTest {
+public class ProtocolProjectorTest {
 	
 	@org.junit.Test
-	public void testSingleInteraction() {
+	public void testSingleInteractionAtBuyer() {
 		TestJournal logger=new TestJournal();
 		
 		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/SingleInteraction.spr", logger);
@@ -32,45 +32,89 @@ public class ProtocolParserTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		// Build expected model
-		ProtocolModel expected=new ProtocolModel();
+		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/SingleInteraction@Buyer.spr", logger);
 		
-		Namespace ns=new Namespace();
-		ns.setName("example.helloworld");
-		expected.setNamespace(ns);
+		assertNotNull(buyer);
 		
-		Protocol protocol=new Protocol();
-		expected.setProtocol(protocol);
+		assertTrue(logger.getErrorCount() == 0);
 		
-		LocatedName ln=new LocatedName();
-		ln.setName("SingleInteraction");
-		protocol.setLocatedName(ln);
+		// Produce projection of model to buyer
+		Participant participant=new Participant("Buyer");
+		ProtocolModel expected=CTKUtil.project(model, participant, logger);
 		
-		ParticipantList rl=new ParticipantList();
-		Participant buyer=new Participant();
-		buyer.setName("Buyer");
-		rl.getParticipants().add(buyer);
-		Participant seller=new Participant();
-		seller.setName("Seller");
-		rl.getParticipants().add(seller);
-		
-		protocol.getBlock().add(rl);
-		
-		Interaction interaction=new Interaction();
-		
-		MessageSignature ms=new MessageSignature();
-		TypeReference tref=new TypeReference();
-		tref.setName("Order");
-		ms.getTypes().add(tref);
-		interaction.setMessageSignature(ms);
-		interaction.setFromParticipant(buyer);
-		interaction.setToParticipant(seller);
-		
-		protocol.getBlock().add(interaction);
-		
-		CTKUtil.verify(model, expected);
+		CTKUtil.verify(buyer, expected);
 	}
 	
+	@org.junit.Test
+	public void testSingleInteractionAtSeller() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/SingleInteraction.spr", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/SingleInteraction@Seller.spr", logger);
+		
+		assertNotNull(buyer);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Produce projection of model to buyer
+		Participant participant=new Participant("Seller");
+		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		
+		CTKUtil.verify(buyer, expected);
+	}
+	
+	@org.junit.Test
+	public void testMultiPartyInteractionsAndChoiceAtBuyer() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/MultiPartyInteractionsAndChoice.spr", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/MultiPartyInteractionsAndChoice@Buyer.spr", logger);
+		
+		assertNotNull(expected);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Produce projection of model to buyer
+		Participant participant=new Participant("Buyer");
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
+		
+		CTKUtil.verify(projected, expected);
+	}
+	
+	@org.junit.Test
+	public void testMultiPartyInteractionsAndChoiceAtSeller() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/MultiPartyInteractionsAndChoice.spr", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/MultiPartyInteractionsAndChoice@Seller.spr", logger);
+		
+		assertNotNull(expected);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Produce projection of model to buyer
+		Participant participant=new Participant("Seller");
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
+		
+		CTKUtil.verify(projected, expected);
+	}
+	
+	/*
 	@org.junit.Test
 	public void testSingleInteractionRPC() {
 		TestJournal logger=new TestJournal();
@@ -749,4 +793,5 @@ public class ProtocolParserTest {
 				
 		CTKUtil.verify(model, expected);
 	}
+	*/
 }
