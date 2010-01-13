@@ -197,5 +197,24 @@ public class DefaultProjectorContext implements ProjectorContext {
 		m_rules.add(new ConformanceReferenceProjectorRule());
 		m_rules.add(new ImplementsReferenceProjectorRule());
 		m_rules.add(new ImportProjectorRule());
+		m_rules.add(new InteractionProjectorRule());
+		m_rules.add(new InterruptBlockProjectorRule());
+		m_rules.add(new LocatedNameProjectorRule());
+		m_rules.add(new MessageSignatureProjectorRule());
+		m_rules.add(new NamespaceProjectorRule());
+		m_rules.add(new ParallelProjectorRule());
+		m_rules.add(new ParticipantListProjectorRule());
+		m_rules.add(new ParticipantProjectorRule());
+		m_rules.add(new ProtocolModelProjectorRule());
+		m_rules.add(new ProtocolProjectorRule());
+		m_rules.add(new ProtocolReferenceProjectorRule());
+		m_rules.add(new RaiseProjectorRule());
+		m_rules.add(new RecurProjectorRule());
+		m_rules.add(new RecursionProjectorRule());
+		m_rules.add(new RepeatProjectorRule());
+		m_rules.add(new RunProjectorRule());
+		m_rules.add(new SpawnProjectorRule());
+		m_rules.add(new TryEscapeProjectorRule());
+		m_rules.add(new TypeReferenceProjectorRule());
 	}
 }
