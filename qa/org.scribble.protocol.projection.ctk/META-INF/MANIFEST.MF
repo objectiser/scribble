@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Scribble Protocol Projection CTK
-Bundle-SymbolicName: org.scribble.protocol.projection.ctk
-Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.scribble.protocol.projection.ctk.osgi.Activator
-Bundle-Vendor: www.scribble.org
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.osgi.framework;version="1.3.0"

@@ -1,8 +1,0 @@
-namespace example.helloworld;
-
-protocol SingleInteractionWithChannel {
-	participant Buyer, Seller;
-	channel mych from Buyer to Seller;
-
-	Order via mych;
-}
