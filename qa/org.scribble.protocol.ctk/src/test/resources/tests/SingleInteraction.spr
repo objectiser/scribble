@@ -1,7 +1,0 @@
-namespace example.helloworld;
-
-protocol SingleInteraction {
-	participant Buyer, Seller;
-
-	Order from Buyer to Seller;
-}

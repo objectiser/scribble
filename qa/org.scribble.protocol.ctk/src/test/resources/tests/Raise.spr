@@ -1,7 +1,0 @@
-namespace example.helloworld;
-
-protocol Raise {
-	participant Buyer, Seller;
-
-	raise @ Seller ExcType;
-}

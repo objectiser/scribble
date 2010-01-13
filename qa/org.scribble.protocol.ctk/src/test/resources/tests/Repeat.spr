@@ -1,9 +1,0 @@
-namespace example.helloworld;
-
-protocol Repeat {
-	participant Buyer, Seller;
-
-	repeat @ Buyer {
-		Order from Buyer to Seller;
-	}
-}
