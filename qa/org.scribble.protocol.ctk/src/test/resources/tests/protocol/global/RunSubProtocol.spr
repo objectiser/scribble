@@ -3,7 +3,7 @@ namespace example.helloworld;
 protocol RunSubProtocol {
 	participant Buyer, Seller;
 
-	run Sub(Buyer for SubBuyer, Seller for SubSeller);
+	run Sub(SubBuyer = Buyer, SubSeller = Seller);
 
 	protocol Sub {
 		participant SubBuyer, SubSeller;

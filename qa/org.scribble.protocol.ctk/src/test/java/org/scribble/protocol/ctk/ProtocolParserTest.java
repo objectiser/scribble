@@ -129,122 +129,6 @@ public class ProtocolParserTest {
 	}
 	
 	@org.junit.Test
-	public void testSingleInteractionWithChannel() {
-		TestJournal logger=new TestJournal();
-		
-		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/SingleInteractionWithChannel.spr", logger);
-		
-		assertNotNull(model);
-		
-		assertTrue(logger.getErrorCount() == 0);
-		
-		// Build expected model
-		ProtocolModel expected=new ProtocolModel();
-		
-		Namespace ns=new Namespace();
-		ns.setName("example.helloworld");
-		expected.setNamespace(ns);
-		
-		Protocol protocol=new Protocol();
-		expected.setProtocol(protocol);
-		
-		LocatedName ln=new LocatedName();
-		ln.setName("SingleInteractionWithChannel");
-		protocol.setLocatedName(ln);
-		
-		ParticipantList rl=new ParticipantList();
-		Participant buyer=new Participant();
-		buyer.setName("Buyer");
-		rl.getParticipants().add(buyer);
-		Participant seller=new Participant();
-		seller.setName("Seller");
-		rl.getParticipants().add(seller);
-		
-		protocol.getBlock().add(rl);
-		
-		ChannelList cl=new ChannelList();
-		Channel ch=new Channel();
-		ch.setName("mych");
-		
-		cl.getChannels().add(ch);
-		
-		protocol.getBlock().add(cl);
-		
-		Interaction interaction=new Interaction();
-		
-		MessageSignature ms=new MessageSignature();
-		TypeReference tref=new TypeReference();
-		tref.setName("Order");
-		ms.getTypes().add(tref);
-		interaction.setMessageSignature(ms);
-		interaction.setFromParticipant(buyer);
-		interaction.setToParticipant(seller);
-		interaction.setChannel(new Channel("mych"));
-
-		protocol.getBlock().add(interaction);
-		
-		CTKUtil.verify(model, expected);
-	}
-	
-	@org.junit.Test
-	public void testSingleInteractionWithChannel2() {
-		TestJournal logger=new TestJournal();
-		
-		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/SingleInteractionWithChannel2.spr", logger);
-		
-		assertNotNull(model);
-		
-		assertTrue(logger.getErrorCount() == 0);
-		
-		// Build expected model
-		ProtocolModel expected=new ProtocolModel();
-		
-		Namespace ns=new Namespace();
-		ns.setName("example.helloworld");
-		expected.setNamespace(ns);
-		
-		Protocol protocol=new Protocol();
-		expected.setProtocol(protocol);
-		
-		LocatedName ln=new LocatedName();
-		ln.setName("SingleInteractionWithChannel");
-		protocol.setLocatedName(ln);
-		
-		ParticipantList rl=new ParticipantList();
-		Participant buyer=new Participant();
-		buyer.setName("Buyer");
-		rl.getParticipants().add(buyer);
-		Participant seller=new Participant();
-		seller.setName("Seller");
-		rl.getParticipants().add(seller);
-		
-		protocol.getBlock().add(rl);
-		
-		ChannelList cl=new ChannelList();
-		Channel ch=new Channel();
-		ch.setName("mych");
-		ch.setFromParticipant(buyer);
-		ch.setToParticipant(seller);
-		
-		cl.getChannels().add(ch);
-		
-		protocol.getBlock().add(cl);
-		
-		Interaction interaction=new Interaction();
-		
-		MessageSignature ms=new MessageSignature();
-		TypeReference tref=new TypeReference();
-		tref.setName("Order");
-		ms.getTypes().add(tref);
-		interaction.setMessageSignature(ms);
-		interaction.setChannel(new Channel("mych"));
-		
-		protocol.getBlock().add(interaction);
-		
-		CTKUtil.verify(model, expected);
-	}
-	
-	@org.junit.Test
 	public void testRaise() {
 		TestJournal logger=new TestJournal();
 		
@@ -424,37 +308,26 @@ public class ProtocolParserTest {
 		
 		Choice choice=new Choice();
 		
-		choice.getParticipants().add(buyer);
-		
-		Block b1=new Block();
-		choice.getBlocks().add(b1);
-		
-		Interaction interaction=new Interaction();
+		choice.setFromParticipant(buyer);
+		choice.setToParticipant(seller);
+
+		WhenBlock b1=new WhenBlock();
+		choice.getWhenBlocks().add(b1);
 		
 		MessageSignature ms=new MessageSignature();
 		TypeReference tref=new TypeReference();
 		tref.setName("Order");
 		ms.getTypes().add(tref);
-		interaction.setMessageSignature(ms);
-		interaction.setFromParticipant(buyer);
-		interaction.setToParticipant(seller);
+		b1.setMessageSignature(ms);
 		
-		b1.add(interaction);
-		
-		Block b2=new Block();
-		choice.getBlocks().add(b2);
-		
-		interaction=new Interaction();
+		WhenBlock b2=new WhenBlock();
+		choice.getWhenBlocks().add(b2);
 		
 		ms=new MessageSignature();
 		tref=new TypeReference();
 		tref.setName("Cancel");
 		ms.getTypes().add(tref);
-		interaction.setMessageSignature(ms);
-		interaction.setFromParticipant(buyer);
-		interaction.setToParticipant(seller);
-		
-		b2.add(interaction);
+		b2.setMessageSignature(ms);
 		
 		protocol.getBlock().add(choice);
 		

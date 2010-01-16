@@ -72,9 +72,9 @@ namespaceDeclaration: 'namespace'^ qualifiedName ';'! ;
 
 qualifiedName: ID ( '.' ID )* ;
 
-qualifiedNameWithMeta: ID ( '.' ( '*' | qualifiedNameWithMeta ) )? ;
+urlDef: URL ;
 
-importStatement: 'import'^ qualifiedNameWithMeta ( 'as' ID )? ';'! ;
+importStatement: 'import'^ qualifiedName ( '@' urlDef )? ';'! ;
 
 protocolDef: 'protocol'^ locatedNameDef blockDef ;
 
@@ -86,8 +86,8 @@ sequenceDef: '{'! activityListDef '}'! ;
 
 activityListDef: ( activityDef )* ;
 
-activityDef: participantListDef | channelListDef | interactionDef | 
-			raiseDef  | choiceDef | parallelDef | splitDef | repeatDef | runDef | 
+activityDef: participantListDef | interactionDef | 
+			raiseDef  | choiceDef | parallelDef | optionalDef | repeatDef | runDef | 
 			tryEscapeDef | protocolDef ;
 
 participantListDef: 'participant'^ participantDef ( ','! participantDef )* ';'! ;
@@ -96,27 +96,21 @@ participantDef: ID ;
 
 participantName: ID ;
 
-channelListDef: 'channel'^ channelDef ( ','! channelDef )* ';'! ;
-
-channelDef: ID ( 'from' participantName )? ( 'to' participantName )? ;
-
-channelName: ID ;
-
 typeReferenceDef: qualifiedName ;
 
 interactionSignatureDef: ( typeReferenceDef | ID '('! typeReferenceDef ( ','! typeReferenceDef )* ')'! ) ;
 
-interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ( 'via' channelName )? ';'! ;
+interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ';'! ;
 
-raiseDef: 'raise'^ '@' participantName ( ','! participantName )* typeReferenceDef ';'! ;
+choice: 'choice'^ ;
 
-choiceDef: 'choice'^ '@' participantName ( ','! participantName )* blockDef ( 'or' blockDef )* ;
+choiceDef: choice ( 'from' participantName )? ( 'to' participantName )? '{'! ( whenBlockDef )+ '}'! ;
 
-parallelDef: 'parallel'^ blockDef ( 'and' blockDef )* ;
-
-splitDef: 'split'^ blockDef ( 'and' blockDef )* ;
+whenBlockDef: 'when'^ interactionSignatureDef sequenceDef ;
 
 repeatDef: 'repeat'^ '@' participantName ( ','! participantName )* blockDef ;
+
+optionalDef: 'optional'^ '@' participantName ( ','! participantName )* blockDef ;
 
 runDef: 'run'^ ( inlineProtocolDef | protocolRefDef ( '('! boundParameter ( ','! boundParameter )* ')'! )? ';'! ) ;
 
@@ -124,7 +118,11 @@ protocolRefDef: ID ( '@' participantName )? ;
 
 inlineProtocolDef: 'protocol' ( '('! boundParameter ( ','! boundParameter )* ')'! )? blockDef ;
 
-boundParameter: ID 'for' ID ;
+boundParameter: ID '='! ID ;
+
+parallelDef: 'parallel'^ blockDef ( 'and' blockDef )* ;
+
+raiseDef: 'raise'^ '@' participantName ( ','! participantName )* typeReferenceDef ';'! ;
 
 tryEscapeDef: 'try'^ blockDef ( catchOrInterruptBlockDef )+ ;
 
@@ -155,6 +153,8 @@ factor	: NUMBER ;
  *------------------------------------------------------------------*/
 
 ID : ('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
+
+URL : (ID|':'|'?'|'/')+ ;
 
 NUMBER	: (DIGIT)+ ;
 

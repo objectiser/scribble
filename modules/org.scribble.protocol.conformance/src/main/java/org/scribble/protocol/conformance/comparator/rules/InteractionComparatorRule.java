@@ -173,20 +173,12 @@ public class InteractionComparatorRule implements ComparatorRule {
 		if (from) {
 			ret = interaction.getFromParticipant();
 			
-			if (ret == null && interaction.getChannel() != null) {
-				ret = interaction.getChannel().getFromParticipant();
-			}
-			
 			// If no 'from' role found, and if a 'to' role has
 			// been explicitly defined, then check if 'from' role
 			// can be inferred from the definition's located role
 			if (ret == null) {
 				Participant other=interaction.getToParticipant();
 
-				if (other == null && interaction.getChannel() != null) {
-					other = interaction.getChannel().getToParticipant();
-				}
-				
 				if (other != null) {
 					Protocol defn=interaction.enclosingProtocol();
 					
@@ -204,20 +196,12 @@ public class InteractionComparatorRule implements ComparatorRule {
 		} else {
 			ret = interaction.getToParticipant();
 			
-			if (ret == null && interaction.getChannel() != null) {
-				ret = interaction.getChannel().getToParticipant();
-			}
-			
 			// If no 'to' role found, and if a 'from' role has
 			// been explicitly defined, then check if 'to' role
 			// can be inferred from the definition's located role
 			if (ret == null) {
 				Participant other=interaction.getFromParticipant();
 
-				if (other == null && interaction.getChannel() != null) {
-					other = interaction.getChannel().getFromParticipant();
-				}
-				
 				if (other != null) {
 					Protocol defn=interaction.enclosingProtocol();
 					

@@ -96,6 +96,26 @@ public class DefaultVisitor implements Visitor {
 	}
 	
 	/**
+	 * This method indicates the start of a
+	 * block.
+	 * 
+	 * @param elem The when block
+	 * @return Whether to process the contents
+	 */
+	public boolean startWhenBlock(WhenBlock elem) {
+		return(m_defaultGroupReturn);
+	}
+	
+	/**
+	 * This method indicates the end of a
+	 * block.
+	 * 
+	 * @param elem The when block
+	 */
+	public void endWhenBlock(WhenBlock elem) {
+	}
+	
+	/**
 	 * This method visits a namespace component.
 	 * 
 	 * @param elem The namespace
@@ -109,14 +129,6 @@ public class DefaultVisitor implements Visitor {
 	 * @param elem The import
 	 */
 	public void visitImport(Import elem) {
-	}
-	
-	/**
-	 * This method visits a channel component.
-	 * 
-	 * @param elem The channel
-	 */
-	public void visitChannel(Channel elem) {
 	}
 	
 	/**
@@ -173,14 +185,6 @@ public class DefaultVisitor implements Visitor {
 	 * @param elem The declaration binding
 	 */
 	public void visitDeclarationBinding(DeclarationBinding elem) {
-	}
-	
-	/**
-	 * This method visits a recur component.
-	 * 
-	 * @param elem The recur
-	 */
-	public void visitRecur(Recur elem) {
 	}
 	
 	/**
@@ -253,26 +257,6 @@ public class DefaultVisitor implements Visitor {
 	
 	/**
 	 * This method indicates the start of a
-	 * channel list.
-	 * 
-	 * @param elem The channel list
-	 * @return Whether to process the contents
-	 */
-	public boolean startChannelList(ChannelList elem) {
-		return(m_defaultGroupReturn);
-	}
-	
-	/**
-	 * This method indicates the end of a
-	 * channel list.
-	 * 
-	 * @param elem The channel list
-	 */
-	public void endChannelList(ChannelList elem) {
-	}
-	
-	/**
-	 * This method indicates the start of a
 	 * participant list.
 	 * 
 	 * @param elem The participant list
@@ -312,23 +296,23 @@ public class DefaultVisitor implements Visitor {
 	}
 	
 	/**
-	 * This method indicates the start of a
-	 * recursion.
+	 * This method indicates the start of an
+	 * Optional construct.
 	 * 
-	 * @param elem The recursion
+	 * @param elem The Optional construct
 	 * @return Whether to process the contents
 	 */
-	public boolean startRecursion(Recursion elem) {
+	public boolean startOptional(Optional elem) {
 		return(m_defaultGroupReturn);
 	}
 	
 	/**
-	 * This method indicates the end of a
-	 * recursion.
+	 * This method indicates the end of an
+	 * Optional construct.
 	 * 
-	 * @param elem The recursion
+	 * @param elem The Optional construct
 	 */
-	public void endRecursion(Recursion elem) {
+	public void endOptional(Optional elem) {
 	}
 	
 	/**

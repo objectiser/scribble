@@ -20,14 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.scribble.common.logging.Journal;
-import org.scribble.protocol.conformance.comparator.rules.BehaviourListComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.BlockComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.ChannelComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.ComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.InteractionComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.MessageSignatureComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.ParticipantComparatorRule;
-import org.scribble.protocol.conformance.comparator.rules.TypeReferenceComparatorRule;
+import org.scribble.protocol.conformance.comparator.rules.*;
 import org.scribble.protocol.conformance.impl.NameMap;
 import org.scribble.protocol.model.ModelObject;
 import org.scribble.protocol.model.ModelReference;
@@ -50,7 +43,6 @@ public class DefaultComparatorContext implements ComparatorContext {
 		
 		m_rules.add(new BehaviourListComparatorRule());
 		m_rules.add(new BlockComparatorRule());
-		m_rules.add(new ChannelComparatorRule());
 		m_rules.add(new InteractionComparatorRule());
 		m_rules.add(new MessageSignatureComparatorRule());
 		m_rules.add(new ParticipantComparatorRule());

@@ -112,29 +112,6 @@ public class InteractionProjectorRule implements ProjectorRule {
 			}
 		}
 		
-		if (source.getChannel() != null) {
-			
-			// Find channel in state
-			Object state=context.getState(source.getChannel().getName());
-			
-			if (state instanceof Channel) {
-				Channel c=new Channel();
-				c.setName(source.getChannel().getName());
-				
-				c.derivedFrom(source.getChannel());
-				
-				ret.setChannel(c);
-			}
-			
-			if (source.getChannel().getFromParticipant() != null &&
-					source.getChannel().getFromParticipant().equals(participant)) {
-				f_roleFound = true;
-			} else if (source.getChannel().getToParticipant() != null &&
-					source.getChannel().getToParticipant().equals(participant)) {
-				f_roleFound = true;
-			}
-		}
-		
 		// Check if participant found
 		if (f_roleFound) {
 			ret.setMessageSignature((MessageSignature)

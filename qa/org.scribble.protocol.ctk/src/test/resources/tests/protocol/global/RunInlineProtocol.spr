@@ -3,7 +3,7 @@ namespace example.helloworld;
 protocol RunInlineProtocol {
 	participant Buyer, Seller;
 
-	run protocol (Buyer for SubBuyer, Seller for SubSeller) {
+	run protocol (SubBuyer = Buyer, SubSeller = Seller) {
 		participant SubBuyer, SubSeller;
 		
 		Order from SubBuyer to SubSeller;

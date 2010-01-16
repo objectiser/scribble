@@ -53,28 +53,29 @@ public class ChoiceProjectorRule implements ProjectorRule {
 
 		ret.derivedFrom(source);
 		
-		// Project the list of roles
-		for (int i=0; i < source.getParticipants().size(); i++) {
-			ret.getParticipants().add(new Participant(source.getParticipants().get(i)));
+		if (source.getFromParticipant() != null) {
+			ret.setFromParticipant(new Participant(source.getFromParticipant()));
 		}
 		
-		for (int i=0; i < source.getBlocks().size(); i++) {
-			Block block=(Block)
-					context.project(source.getBlocks().get(i), participant,
+		if (source.getToParticipant() != null) {
+			ret.setToParticipant(new Participant(source.getToParticipant()));
+		}
+		
+		for (int i=0; i < source.getWhenBlocks().size(); i++) {
+			WhenBlock block=(WhenBlock)
+					context.project(source.getWhenBlocks().get(i), participant,
 							l);
 			
 			if (block != null) {
-				ret.getBlocks().add(block);
+				ret.getWhenBlocks().add(block);
 			}
 		}
 		
 		// Check if choice has atleast one path
-		if (ret.getBlocks().size() == 0) {
+		if (ret.getWhenBlocks().size() == 0) {
 			ret = null;
 		}
 		
-		// TODO: Need to cater for optional paths
-
 		return(ret);
 	}
 }

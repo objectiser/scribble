@@ -52,24 +52,6 @@ public class Interaction extends Behaviour {
 	}
 	
 	/**
-	 * This method returns the optional channel.
-	 * 
-	 * @return The channel
-	 */
-	public Channel getChannel() {
-		return(m_channel);
-	}
-	
-	/**
-	 * This method sets the channel.
-	 * 
-	 * @param channel The channel
-	 */
-	public void setChannel(Channel channel) {
-		m_channel = channel;
-	}
-	
-	/**
 	 * This method returns the optional 'from' participant.
 	 * 
 	 * @return The optional 'from' participant
@@ -310,14 +292,9 @@ public class Interaction extends Behaviour {
 		if (getToParticipant() != null) {
 			getToParticipant().visit(visitor);
 		}
-		
-		if (getChannel() != null) {
-			getChannel().visit(visitor);
-		}
 	}
 	
 	private MessageSignature m_messageSignature=null;
-	private Channel m_channel=null;
 	private Participant m_fromParticipant=null;
 	private Participant m_toParticipant=null;
 	private String m_requestLabel=null;

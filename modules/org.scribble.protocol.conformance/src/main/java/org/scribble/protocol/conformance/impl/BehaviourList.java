@@ -288,12 +288,6 @@ public class BehaviourList extends Behaviour
 			return(false);
 		}
 		
-		public boolean startRecursion(Recursion elem) {
-			visitSinglePath(elem);
-			
-			return(false);
-		}
-		
 		protected void visitSinglePath(SinglePathBehaviour spb) {
 			java.util.List<BehaviourList> bllist=
 				new java.util.Vector<BehaviourList>();

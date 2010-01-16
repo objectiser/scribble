@@ -3,9 +3,10 @@ namespace example.helloworld;
 protocol SingleInteraction {
 	participant Buyer, Seller;
 
-	choice @ Buyer {
-		Order from Buyer to Seller;
-	} or {
-		Cancel from Buyer to Seller;
+	choice from Buyer to Seller {
+		when Order {
+		}
+		when Cancel {
+		}
 	}
 }

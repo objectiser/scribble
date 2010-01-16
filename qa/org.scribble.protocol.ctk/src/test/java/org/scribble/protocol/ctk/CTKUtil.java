@@ -23,32 +23,7 @@ import static org.junit.Assert.fail;
 import java.util.Comparator;
 
 import org.scribble.common.logging.Journal;
-import org.scribble.protocol.model.Block;
-import org.scribble.protocol.model.CatchBlock;
-import org.scribble.protocol.model.Channel;
-import org.scribble.protocol.model.ChannelList;
-import org.scribble.protocol.model.Choice;
-import org.scribble.protocol.model.DeclarationBinding;
-import org.scribble.protocol.model.Import;
-import org.scribble.protocol.model.Interaction;
-import org.scribble.protocol.model.InterruptBlock;
-import org.scribble.protocol.model.LocatedName;
-import org.scribble.protocol.model.MessageSignature;
-import org.scribble.protocol.model.ModelObject;
-import org.scribble.protocol.model.ModelReference;
-import org.scribble.protocol.model.Namespace;
-import org.scribble.protocol.model.Parallel;
-import org.scribble.protocol.model.Participant;
-import org.scribble.protocol.model.ParticipantList;
-import org.scribble.protocol.model.Protocol;
-import org.scribble.protocol.model.ProtocolModel;
-import org.scribble.protocol.model.Raise;
-import org.scribble.protocol.model.Recur;
-import org.scribble.protocol.model.Recursion;
-import org.scribble.protocol.model.Repeat;
-import org.scribble.protocol.model.Run;
-import org.scribble.protocol.model.TryEscape;
-import org.scribble.protocol.model.Visitor;
+import org.scribble.protocol.model.*;
 
 public class CTKUtil {
 
@@ -150,12 +125,6 @@ public class CTKUtil {
 			}
 
 			@Override
-			public void endChannelList(ChannelList elem) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
 			public void endChoice(Choice elem) {
 				// TODO Auto-generated method stub
 				
@@ -186,19 +155,25 @@ public class CTKUtil {
 			}
 
 			@Override
-			public void endRecursion(Recursion elem) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
 			public void endRepeat(Repeat elem) {
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
+			public void endOptional(Optional elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
 			public void endTryEscape(TryEscape elem) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void endWhenBlock(WhenBlock elem) {
 				// TODO Auto-generated method stub
 				
 			}
@@ -216,12 +191,6 @@ public class CTKUtil {
 			}
 
 			@Override
-			public boolean startChannelList(ChannelList elem) {
-				ret.add(elem);
-				return true;
-			}
-
-			@Override
 			public boolean startChoice(Choice elem) {
 				ret.add(elem);
 				return true;
@@ -229,6 +198,12 @@ public class CTKUtil {
 
 			@Override
 			public boolean startInterruptBlock(InterruptBlock elem) {
+				ret.add(elem);
+				return true;
+			}
+
+			@Override
+			public boolean startWhenBlock(WhenBlock elem) {
 				ret.add(elem);
 				return true;
 			}
@@ -252,13 +227,13 @@ public class CTKUtil {
 			}
 
 			@Override
-			public boolean startRecursion(Recursion elem) {
+			public boolean startRepeat(Repeat elem) {
 				ret.add(elem);
 				return true;
 			}
 
 			@Override
-			public boolean startRepeat(Repeat elem) {
+			public boolean startOptional(Optional elem) {
 				ret.add(elem);
 				return true;
 			}
@@ -267,11 +242,6 @@ public class CTKUtil {
 			public boolean startTryEscape(TryEscape elem) {
 				ret.add(elem);
 				return true;
-			}
-
-			@Override
-			public void visitChannel(Channel elem) {
-				ret.add(elem);
 			}
 
 			@Override
@@ -316,11 +286,6 @@ public class CTKUtil {
 
 			@Override
 			public void visitRaise(Raise elem) {
-				ret.add(elem);
-			}
-
-			@Override
-			public void visitRecur(Recur elem) {
 				ret.add(elem);
 			}
 

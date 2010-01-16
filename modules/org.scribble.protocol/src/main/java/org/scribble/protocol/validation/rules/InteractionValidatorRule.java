@@ -49,43 +49,38 @@ public class InteractionValidatorRule implements ProtocolComponentValidatorRule 
 		Interaction elem=(Interaction)obj;
 		
 		// Identify definition and whether it has a located role
-		Participant locatedRole=null;
+		Participant locatedParticipant=null;
 		
 		if (elem.enclosingProtocol() != null &&
 				elem.enclosingProtocol().getLocatedName() != null) {
-			locatedRole = elem.enclosingProtocol().getLocatedName().getParticipant();
+			locatedParticipant = elem.enclosingProtocol().getLocatedName().getParticipant();
 		}
 
-		// Check that between the channel and the interaction, there
-		// are 'to' and 'from' roles defined
-		if (elem.getFromParticipant() == null &&
-				(elem.getChannel() == null ||
-						elem.getChannel().getFromParticipant() == null)) {
+		// Check there are 'to' and 'from' participants defined
+		if (elem.getFromParticipant() == null) {
 			
 			// Check if local model and 'to' is not the same as the
-			// located role
-			if (locatedRole == null || elem.getToParticipant() == null ||
-					locatedRole.equals(elem.getToParticipant().getName())) {
+			// located participant
+			if (locatedParticipant == null || elem.getToParticipant() == null ||
+					locatedParticipant.equals(elem.getToParticipant().getName())) {
 			
 				logger.error(org.scribble.common.util.MessageUtil.format(
-						java.util.PropertyResourceBundle.getBundle("org.scribble.validation.Messages"),
-						"_INTERACTION_ROLE",
+						java.util.PropertyResourceBundle.getBundle("org.scribble.protocol.validation.Messages"),
+						"_INTERACTION_PARTICIPANT",
 						new String[]{"from"}), obj.getProperties());
 			}
 		}
 
-		if (elem.getToParticipant() == null &&
-				(elem.getChannel() == null ||
-						elem.getChannel().getToParticipant() == null)) {
+		if (elem.getToParticipant() == null) {
 			
 			// Check if local model and 'from' is not the same as the
-			// located role
-			if (locatedRole == null || elem.getFromParticipant() == null ||
-					locatedRole.equals(elem.getFromParticipant().getName())) {
+			// located participant
+			if (locatedParticipant == null || elem.getFromParticipant() == null ||
+					locatedParticipant.equals(elem.getFromParticipant().getName())) {
 			
 				logger.error(org.scribble.common.util.MessageUtil.format(
-						java.util.PropertyResourceBundle.getBundle("org.scribble.validation.Messages"),
-						"_INTERACTION_ROLE",
+						java.util.PropertyResourceBundle.getBundle("org.scribble.protocol.validation.Messages"),
+						"_INTERACTION_PARTICIPANT",
 						new String[]{"to"}), obj.getProperties());
 			}
 		}

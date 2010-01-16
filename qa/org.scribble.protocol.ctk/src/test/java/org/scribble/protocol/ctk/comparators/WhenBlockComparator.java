@@ -18,31 +18,19 @@ package org.scribble.protocol.ctk.comparators;
 
 import java.util.Comparator;
 
-import org.scribble.protocol.ctk.ComparatorUtil;
 import org.scribble.protocol.model.*;
 
-public class ChoiceComparator implements Comparator<ModelObject> {
+public class WhenBlockComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		Choice m=(Choice)arg0;
-		Choice e=(Choice)arg1;
+		WhenBlock m=(WhenBlock)arg0;
+		WhenBlock e=(WhenBlock)arg1;
 		
-		ParticipantComparator pcomp=(ParticipantComparator)
-					ComparatorUtil.getComparator(Participant.class);
-
-		if (pcomp.compare(m.getFromParticipant(), e.getFromParticipant()) != 0) {
+		if (m.size() != e.size()) {
 			return(1);
 		}
-		
-		if (pcomp.compare(m.getToParticipant(), e.getToParticipant()) != 0) {
-			return(1);
-		}
-		
-		if (m.getPaths().size() != e.getPaths().size()) {
-			return(1);
-		}
-		
+				
 		return(0);
 	}
 }

@@ -58,23 +58,6 @@ public interface Visitor {
 	
 	/**
 	 * This method indicates the start of a
-	 * channel list.
-	 * 
-	 * @param elem The channel list
-	 * @return Whether to process the contents
-	 */
-	public boolean startChannelList(ChannelList elem);
-	
-	/**
-	 * This method indicates the end of a
-	 * channel list.
-	 * 
-	 * @param elem The channel list
-	 */
-	public void endChannelList(ChannelList elem);
-	
-	/**
-	 * This method indicates the start of a
 	 * choice.
 	 * 
 	 * @param elem The choice
@@ -160,23 +143,6 @@ public interface Visitor {
 	
 	/**
 	 * This method indicates the start of a
-	 * recursion.
-	 * 
-	 * @param elem The recursion
-	 * @return Whether to process the contents
-	 */
-	public boolean startRecursion(Recursion elem);
-	
-	/**
-	 * This method indicates the end of a
-	 * recursion.
-	 * 
-	 * @param elem The recursion
-	 */
-	public void endRecursion(Recursion elem);
-	
-	/**
-	 * This method indicates the start of a
 	 * repeat.
 	 * 
 	 * @param elem The repeat
@@ -191,6 +157,23 @@ public interface Visitor {
 	 * @param elem The repeat
 	 */
 	public void endRepeat(Repeat elem);
+	
+	/**
+	 * This method indicates the start of an
+	 * optional construct.
+	 * 
+	 * @param elem The optional construct
+	 * @return Whether to process the contents
+	 */
+	public boolean startOptional(Optional elem);
+	
+	/**
+	 * This method indicates the end of an
+	 * optional.
+	 * 
+	 * @param elem The optional
+	 */
+	public void endOptional(Optional elem);
 	
 	/**
 	 * This method indicates the start of a
@@ -210,11 +193,21 @@ public interface Visitor {
 	public void endTryEscape(TryEscape elem);
 	
 	/**
-	 * This method visits a channel component.
+	 * This method indicates the start of a when
+	 * block.
 	 * 
-	 * @param elem The channel
+	 * @param elem The when block
+	 * @return Whether to process the contents
 	 */
-	public void visitChannel(Channel elem);
+	public boolean startWhenBlock(WhenBlock elem);
+	
+	/**
+	 * This method indicates the end of a when
+	 * block.
+	 * 
+	 * @param elem The when block
+	 */
+	public void endWhenBlock(WhenBlock elem);
 	
 	/**
 	 * This method visits a declaration binding component.
@@ -278,13 +271,6 @@ public interface Visitor {
 	 * @param elem The raise
 	 */
 	public void visitRaise(Raise elem);
-	
-	/**
-	 * This method visits a recur component.
-	 * 
-	 * @param elem The recur
-	 */
-	public void visitRecur(Recur elem);
 	
 	/**
 	 * This method visits a run component.

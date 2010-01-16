@@ -15,7 +15,7 @@
 	</parent>
 
 	<modules>
-		<module>org.scribble.protocol.parser.ctk</module>
+		<module>org.scribble.protocol.ctk</module>
 	</modules>
 
 </project>

@@ -41,7 +41,7 @@ public abstract class MultiPathBehaviour extends Behaviour {
 	 * 
 	 * @return The list of blocks
 	 */
-	public abstract java.util.List<Block> getPaths();
+	public abstract java.util.List<? extends Block> getPaths();
 	
 	/**
 	 * This method creates a new path within the multi-path

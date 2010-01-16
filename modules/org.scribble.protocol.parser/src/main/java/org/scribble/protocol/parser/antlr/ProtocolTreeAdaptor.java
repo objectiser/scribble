@@ -51,11 +51,11 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("import", Import.class);
 		m_tokenClass.put("protocol", Protocol.class);
 		m_tokenClass.put("participant", ParticipantList.class);
-		m_tokenClass.put("channel", ChannelList.class);
-		m_tokenClass.put("choice", Choice.class);
+		//m_tokenClass.put("choice", Choice.class);
+		m_tokenClass.put("when", WhenBlock.class);
 		m_tokenClass.put("parallel", Parallel.class);
 		m_tokenClass.put("repeat", Repeat.class);
-		//m_tokenClass("split", Split.class);
+		m_tokenClass.put("optional", Optional.class);
 		m_tokenClass.put("raise", Raise.class);
 		m_tokenClass.put("try", TryEscape.class);
 		m_tokenClass.put("catch", CatchBlock.class);
@@ -67,18 +67,16 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		// This may define the model object that should be
 		// created after processing the named grammer rule
 		m_parserGroupingRuleClass.put("qualifiedName", String.class);
-		m_parserGroupingRuleClass.put("qualifiedNameWithMeta", String.class);
 		m_parserGroupingRuleClass.put("blockDef", Block.class);
 		m_parserGroupingRuleClass.put("interactionDef", Interaction.class);
 		m_parserGroupingRuleClass.put("interactionSignatureDef", MessageSignature.class);
 		m_parserGroupingRuleClass.put("typeReferenceDef", TypeReference.class);
 		m_parserGroupingRuleClass.put("participantName", Participant.class);
 		m_parserGroupingRuleClass.put("participantDef", Participant.class);
-		m_parserGroupingRuleClass.put("channelName", Channel.class);
-		m_parserGroupingRuleClass.put("channelDef", Channel.class);
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		m_parserGroupingRuleClass.put("protocolRefDef", ProtocolReference.class);
 		m_parserGroupingRuleClass.put("boundParameter", DeclarationBinding.class);
+		m_parserGroupingRuleClass.put("choiceDef", Choice.class);
 		
 		// When a particular class has multiple properties of the
 		// same type, then a preceding token must be used to
@@ -94,9 +92,9 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_listClass.put("imports", Import.class);
 		m_listClass.put("contents", Activity.class);
 		m_listClass.put("participants", Participant.class);
-		m_listClass.put("channels", Channel.class);
 		m_listClass.put("types", TypeReference.class);
 		m_listClass.put("blocks", Block.class);
+		m_listClass.put("whenBlocks", WhenBlock.class);
 		m_listClass.put("bindings", DeclarationBinding.class);
 	}
 	
@@ -198,7 +196,10 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 				(java.util.List<Object>)child;
 			
 			// Reset stored token
-			m_currentToken = null;
+			if (nil.size() > 0) {
+				_log.fine("Reset current token");
+				m_currentToken = null;
+			}
 			
 			// Check if ID token
 			StringBuffer buf=new StringBuffer();
@@ -218,6 +219,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 					
 					if (nil.get(i) instanceof Token) {
 						m_currentToken = (Token)nil.get(i);
+						_log.fine("Set current token: "+m_currentToken);
 					}
 
 					addChild(parent, nil.get(i));
@@ -228,14 +230,22 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 				addChild(parent, buf.toString());
 			}
 		} else if (parent != null && child != null) {
+
+			if (parent instanceof Token && child instanceof Token) {
+				m_currentToken = (Token)child;
+				_log.fine("Set current token(2): "+m_currentToken);
+			}
 			
 			if (isNil(parent)) {
 				java.util.List<Object> nil=
 					(java.util.List<Object>)parent;
 
+				_log.finest("Add child: "+child);
 				nil.add(child);
 				
 			} else {
+				_log.finest("Determine if can be set by property descriptor");
+				
 				try {
 					// Get property descriptors for parent class
 					java.beans.BeanInfo bi=
