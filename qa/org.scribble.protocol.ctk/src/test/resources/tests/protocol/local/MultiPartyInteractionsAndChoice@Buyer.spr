@@ -5,15 +5,20 @@ protocol MultiPartyInteractionsAndChoice@Buyer {
 
 	Order to Broker;
 	
-	choice @ CreditAgency {
+	choice from CreditAgency to Broker {
+		when CreditOk {
 		
-		choice @ Seller {
-			Confirmation from Broker;
-		} or {
-			OutOfStock from Broker;
+			choice from Seller to Broker {
+				when Confirmation {
+					Confirmation from Broker;
+				}
+				when OutOfStock {
+					OutOfStock from Broker;
+				}
+			}
 		}
-	
-	} or {
-		InsufficientCredit from Broker;
+		when InsufficientCredit {		
+			InsufficientCredit from Broker;
+		}
 	}
 }

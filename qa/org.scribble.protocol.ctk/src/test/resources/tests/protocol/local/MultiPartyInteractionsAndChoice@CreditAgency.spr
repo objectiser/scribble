@@ -5,10 +5,10 @@ protocol MultiPartyInteractionsAndChoice@CreditAgency {
 
 	CreditCheck from Broker;
 	
-	choice @ CreditAgency {
-		CreditOk to Broker;
-		
-	} or {
-		InsufficientCredit to Broker;
+	choice to Broker {
+		when CreditOk {
+		}
+		when InsufficientCredit {		
+		}
 	}
 }

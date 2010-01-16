@@ -201,6 +201,7 @@ public class DefaultProjectorContext implements ProjectorContext {
 		m_rules.add(new LocatedNameProjectorRule());
 		m_rules.add(new MessageSignatureProjectorRule());
 		m_rules.add(new NamespaceProjectorRule());
+		m_rules.add(new OptionalProjectorRule());
 		m_rules.add(new ParallelProjectorRule());
 		m_rules.add(new ParticipantListProjectorRule());
 		m_rules.add(new ParticipantProjectorRule());
@@ -212,5 +213,6 @@ public class DefaultProjectorContext implements ProjectorContext {
 		m_rules.add(new RunProjectorRule());
 		m_rules.add(new TryEscapeProjectorRule());
 		m_rules.add(new TypeReferenceProjectorRule());
+		m_rules.add(new WhenBlockProjectorRule());
 	}
 }

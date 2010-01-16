@@ -1,5 +1,5 @@
 /*
- * Copyright 2009 Scribble.org
+ * Copyright 2009-10 Scribble.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,27 +17,34 @@
 package org.scribble.protocol.ctk.comparators;
 
 import java.util.Comparator;
+
+import org.scribble.protocol.ctk.ComparatorUtil;
 import org.scribble.protocol.model.*;
 
-public class ParticipantComparator implements Comparator<ModelObject> {
+public class OptionalComparator implements Comparator<ModelObject> {
 
 	@Override
 	public int compare(ModelObject arg0, ModelObject arg1) {
-		Participant m=(Participant)arg0;
-		Participant e=(Participant)arg1;
+		Optional m=(Optional)arg0;
+		Optional e=(Optional)arg1;
 		
-		if (m == null && e == null) {
-			return(0);
-		}
-		
-		if (m == null || e == null){
+		if (m.getParticipants().size() != e.getParticipants().size()) {
 			return(1);
 		}
 		
-		if (m.getName().equals(e.getName())) {
-			return(0);
+		ParticipantComparator pcomp=(ParticipantComparator)
+					ComparatorUtil.getComparator(Participant.class);
+		
+		for (int i=0; i < m.getParticipants().size(); i++) {
+			if (pcomp.compare(m.getParticipants().get(i), e.getParticipants().get(i)) != 0) {
+				return(1);
+			}
 		}
 		
-		return(1);
+		if (m.getBlock().size() != e.getBlock().size()) {
+			return(1);
+		}
+		
+		return(0);
 	}
 }

@@ -1,0 +1,9 @@
+namespace example.helloworld;
+
+protocol Optional {
+	participant Buyer, Seller;
+
+	optional @ Buyer {
+		Order from Buyer to Seller;
+	}
+}

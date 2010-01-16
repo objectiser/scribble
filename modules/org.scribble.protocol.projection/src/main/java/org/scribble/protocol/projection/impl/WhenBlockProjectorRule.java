@@ -20,18 +20,32 @@ import org.scribble.protocol.model.*;
 import org.scribble.common.logging.Journal;
 
 /**
- * This class provides the Block implementation of the
+ * This class provides the WhenBlock implementation of the
  * projector rule.
  */
-public abstract class AbstractBlockProjectorRule implements ProjectorRule {
+public class WhenBlockProjectorRule extends AbstractBlockProjectorRule {
 
+	/**
+	 * This method determines whether the projection rule is
+	 * appropriate for the supplied model object.
+	 * 
+	 * @param obj The model object to be projected
+	 * @return Whether the rule is relevant for the
+	 * 				model object
+	 */
+	public boolean isSupported(ModelObject obj) {
+		return(obj.getClass() == WhenBlock.class);
+	}
+	
 	/**
 	 * This method creates a new block of the appropriate
 	 * type.
 	 * 
 	 * @return The block
 	 */
-	protected abstract Block createBlock();
+	protected Block createBlock() {
+		return(new WhenBlock());
+	}
 	
 	/**
 	 * This method projects the supplied model object based on the
@@ -44,36 +58,18 @@ public abstract class AbstractBlockProjectorRule implements ProjectorRule {
 	 */
 	public ModelObject project(ProjectorContext context, ModelObject model,
 					Participant participant, Journal l) {
-		Block ret=createBlock();
-		Block source=(Block)model;
-		
-		ret.derivedFrom(source);
-		
-		context.pushState();
-		
-		for (int i=0; i < source.getContents().size(); i++) {
-			Activity act=(Activity)
-					context.project(source.getContents().get(i), participant,
-							l);
+		WhenBlock ret=(WhenBlock)super.project(context,
+				model, participant, l);
+		WhenBlock source=(WhenBlock)model;
+
+		if (ret != null && source.getMessageSignature() != null) {
 			
-			if (act != null) {
-				
-				if (act instanceof Block) {
-					// Copy contents
-					ret.getContents().addAll(((Block)act).getContents());
-				} else {
-					ret.getContents().add(act);
-				}
-			}
+			// Project the message signature
+			ret.setMessageSignature((MessageSignature)
+					context.project(source.getMessageSignature(),
+							participant, l));
 		}
 
-		context.popState();
-		
-		// Only return block if it contains atleast one activity
-		if (isFilterOutEmptyContent() && ret.getContents().size() == 0) {
-			ret = null;
-		}
-		
 		return(ret);
 	}
 	
@@ -84,6 +80,6 @@ public abstract class AbstractBlockProjectorRule implements ProjectorRule {
 	 * @return Whether an empty block should be filtered out
 	 */
 	protected boolean isFilterOutEmptyContent() {
-		return(true);
+		return(false);
 	}
 }

@@ -16,14 +16,14 @@
  */
 package org.scribble.protocol.projection.impl;
 
-import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.*;
+import org.scribble.common.logging.Journal;
 
 /**
- * This class provides the Choice implementation of the
+ * This class provides the Optional implementation of the
  * projector rule.
  */
-public class ChoiceProjectorRule implements ProjectorRule {
+public class OptionalProjectorRule implements ProjectorRule {
 
 	/**
 	 * This method determines whether the projection rule is
@@ -34,12 +34,12 @@ public class ChoiceProjectorRule implements ProjectorRule {
 	 * 				model object
 	 */
 	public boolean isSupported(ModelObject obj) {
-		return(obj.getClass() == Choice.class);
+		return(obj.getClass() == Optional.class);
 	}
 	
 	/**
 	 * This method projects the supplied model object based on the
-	 * specified role.
+	 * specified participant.
 	 * 
 	 * @param model The model object
 	 * @param participant The participant
@@ -48,34 +48,23 @@ public class ChoiceProjectorRule implements ProjectorRule {
 	 */
 	public ModelObject project(ProjectorContext context, ModelObject model,
 					Participant participant, Journal l) {
-		Choice ret=new Choice();
-		Choice source=(Choice)model;
+		Optional ret=new Optional();
+		Optional source=(Optional)model;
 
 		ret.derivedFrom(source);
 		
-		if (source.getFromParticipant() != null &&
-				source.getFromParticipant().getName().equals(participant.getName()) == false) {
-			ret.setFromParticipant(new Participant(source.getFromParticipant()));
+		// Project the list of roles
+		for (int i=0; i < source.getParticipants().size(); i++) {
+			ret.getParticipants().add(new Participant(source.getParticipants().get(i)));
 		}
 		
-		if (source.getToParticipant() != null &&
-				source.getToParticipant().getName().equals(participant.getName()) == false) {
-			ret.setToParticipant(new Participant(source.getToParticipant()));
-		}
-		
-		for (int i=0; i < source.getWhenBlocks().size(); i++) {
-			WhenBlock block=(WhenBlock)
-					context.project(source.getWhenBlocks().get(i), participant,
-							l);
+		if (ret != null && source.getBlock() != null) {
 			
-			if (block != null) {
-				ret.getWhenBlocks().add(block);
-			}
-		}
-		
-		// Check if choice has atleast one path
-		if (ret.getWhenBlocks().size() == 0) {
-			ret = null;
+			// Project the block
+			ret.setBlock((Block)
+					context.project(source.getBlock(),
+								participant, l));
+			ret.getBlock().setParent(ret);
 		}
 		
 		return(ret);

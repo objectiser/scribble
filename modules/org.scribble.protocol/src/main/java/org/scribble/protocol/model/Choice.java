@@ -217,6 +217,14 @@ public class Choice extends MultiPathBehaviour {
 	public void visit(Visitor visitor) {
 		visitor.startChoice(this);
 		
+		if (getFromParticipant() != null) {
+			getFromParticipant().visit(visitor);
+		}
+		
+		if (getToParticipant() != null) {
+			getToParticipant().visit(visitor);
+		}
+		
 		for (Block b : getPaths()) {
 			b.visit(visitor);
 		}

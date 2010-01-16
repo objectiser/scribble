@@ -461,6 +461,61 @@ public class ProtocolParserTest {
 	}
 	
 	@org.junit.Test
+	public void testOptional() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/Optional.spr", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Build expected model
+		ProtocolModel expected=new ProtocolModel();
+		
+		Namespace ns=new Namespace();
+		ns.setName("example.helloworld");
+		expected.setNamespace(ns);
+		
+		Protocol protocol=new Protocol();
+		expected.setProtocol(protocol);
+		
+		LocatedName ln=new LocatedName();
+		ln.setName("Optional");
+		protocol.setLocatedName(ln);
+		
+		ParticipantList rl=new ParticipantList();
+		Participant buyer=new Participant();
+		buyer.setName("Buyer");
+		rl.getParticipants().add(buyer);
+		Participant seller=new Participant();
+		seller.setName("Seller");
+		rl.getParticipants().add(seller);
+		
+		protocol.getBlock().add(rl);
+		
+		Optional optional=new Optional();
+		
+		optional.getParticipants().add(buyer);
+		
+		Interaction interaction=new Interaction();
+		
+		MessageSignature ms=new MessageSignature();
+		TypeReference tref=new TypeReference();
+		tref.setName("Order");
+		ms.getTypes().add(tref);
+		interaction.setMessageSignature(ms);
+		interaction.setFromParticipant(buyer);
+		interaction.setToParticipant(seller);
+		
+		optional.getBlock().add(interaction);
+		
+		protocol.getBlock().add(optional);
+		
+		CTKUtil.verify(model, expected);
+	}
+	
+	@org.junit.Test
 	public void testRunSubProtocol() {
 		TestJournal logger=new TestJournal();
 		

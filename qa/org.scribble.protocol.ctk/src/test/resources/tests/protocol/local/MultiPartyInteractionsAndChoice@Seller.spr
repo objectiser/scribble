@@ -3,14 +3,18 @@ namespace example.helloworld;
 protocol MultiPartyInteractionsAndChoice@Seller {
 	participant Buyer, Broker, CreditAgency;
 
-	choice @ CreditAgency {
-	
-		Order from Broker;
-	
-		choice @ Seller {
-			Confirmation to Broker;
-		} or {
-			OutOfStock to Broker;
+	choice from CreditAgency to Broker {
+		when CreditOk {
+			Order from Broker;
+		
+			choice to Broker {
+				when Confirmation {
+				}
+				when OutOfStock {
+				}
+			}
+		}
+		when InsufficientCredit {		
 		}
 	}
 }

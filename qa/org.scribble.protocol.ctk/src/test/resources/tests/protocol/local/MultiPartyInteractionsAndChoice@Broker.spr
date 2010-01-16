@@ -7,24 +7,21 @@ protocol MultiPartyInteractionsAndChoice@Broker {
 	
 	CreditCheck to CreditAgency;
 	
-	choice @ CreditAgency {
-		CreditOk from CreditAgency;
+	choice from CreditAgency {
+		when CreditOk {
+			Order to Seller;
 		
-		Order to Seller;
-		
-		choice @ Seller {
-			Confirmation from Seller;
-			
-			Confirmation to Buyer;
-		} or {
-			OutOfStock from Seller;
-			
-			OutOfStock to Buyer;
+			choice from Seller {
+				when Confirmation {
+					Confirmation to Buyer;
+				}
+				when OutOfStock {
+					OutOfStock to Buyer;
+				}
+			}
 		}
-	
-	} or {
-		InsufficientCredit from CreditAgency;
-		
-		InsufficientCredit to Buyer;
+		when InsufficientCredit {		
+			InsufficientCredit to Buyer;
+		}
 	}
 }
