@@ -32,17 +32,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/SingleInteraction@Buyer.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/SingleInteraction@Buyer.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Buyer");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -55,17 +55,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/SingleInteraction@Seller.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/SingleInteraction@Seller.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Seller");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -78,17 +78,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Choice@Buyer.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Choice@Buyer.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Buyer");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -101,17 +101,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Choice@Seller.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Choice@Seller.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Seller");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -124,17 +124,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Repeat@Buyer.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Repeat@Buyer.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Buyer");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -147,17 +147,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Repeat@Seller.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Repeat@Seller.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Seller");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -170,17 +170,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Parallel@Buyer.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Parallel@Buyer.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Buyer");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -193,17 +193,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Parallel@Seller.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Parallel@Seller.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Seller");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -216,17 +216,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Optional@Buyer.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Optional@Buyer.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Buyer");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -239,17 +239,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Optional@Seller.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Optional@Seller.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Seller");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 
 	@org.junit.Test
@@ -262,17 +262,17 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Raise@Buyer.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Raise@Buyer.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Buyer");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
 	}
 	
 	@org.junit.Test
@@ -285,17 +285,63 @@ public class ProtocolProjectorTest {
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
-		ProtocolModel buyer=CTKUtil.getModel("tests/protocol/local/Raise@Seller.spr", logger);
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/Raise@Seller.spr", logger);
 		
-		assertNotNull(buyer);
+		assertNotNull(expected);
 		
 		assertTrue(logger.getErrorCount() == 0);
 		
 		// Produce projection of model to buyer
 		Participant participant=new Participant("Seller");
-		ProtocolModel expected=CTKUtil.project(model, participant, logger);
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
 		
-		CTKUtil.verify(buyer, expected);
+		CTKUtil.verify(projected, expected);
+	}
+
+	@org.junit.Test
+	public void testRunSubProtocolAtBuyer() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/RunSubProtocol.spr", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/RunSubProtocol@Buyer.spr", logger);
+		
+		assertNotNull(expected);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Produce projection of model to buyer
+		Participant participant=new Participant("Buyer");
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
+		
+		CTKUtil.verify(projected, expected);
+	}
+	
+	@org.junit.Test
+	public void testRunSubProtocolAtSeller() {
+		TestJournal logger=new TestJournal();
+		
+		ProtocolModel model=CTKUtil.getModel("tests/protocol/global/RunSubProtocol.spr", logger);
+		
+		assertNotNull(model);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		ProtocolModel expected=CTKUtil.getModel("tests/protocol/local/RunSubProtocol@Seller.spr", logger);
+		
+		assertNotNull(expected);
+		
+		assertTrue(logger.getErrorCount() == 0);
+		
+		// Produce projection of model to buyer
+		Participant participant=new Participant("Seller");
+		ProtocolModel projected=CTKUtil.project(model, participant, logger);
+		
+		CTKUtil.verify(projected, expected);
 	}
 
 	@org.junit.Test

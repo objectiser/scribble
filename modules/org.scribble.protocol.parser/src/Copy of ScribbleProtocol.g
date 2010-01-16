@@ -110,16 +110,15 @@ repeatDef: 'repeat'^ ( '@' participantName ( ','! participantName )* )? blockDef
 
 optionalDef: 'optional'^ ( '@' participantName ( ','! participantName )* )? blockDef ;
 
-runDef: 'run'^ ( ( ( '@' participantName )? '('! boundParameter ( ','! boundParameter )* ')'! )? inlineProtocolDef | 
-			protocolRefDef ( '('! boundParameter ( ','! boundParameter )* ')'! )? ';'! ) ;
+runDef: 'run'^ ( inlineProtocolDef | protocolRefDef ( '('! boundParameter ( ','! boundParameter )* ')'! )? ';'! ) ;
 
 protocolRefDef: ID ( '@' participantName )? ;
 
-inlineProtocolDef: blockDef ;
+inlineProtocolDef: 'protocol' ( '@' participantName )? ( '('! boundParameter ( ','! boundParameter )* ')'! )? blockDef ;
 
 declarationName: ID ;
 
-boundParameter: declarationName '=' declarationName ;
+boundParameter: declarationName 'for' declarationName ;
 
 parallelDef: 'parallel'^ blockDef ( 'and' blockDef )* ;
 

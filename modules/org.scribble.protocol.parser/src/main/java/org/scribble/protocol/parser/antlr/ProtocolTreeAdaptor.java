@@ -36,6 +36,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		new java.util.HashMap<String, Class<?>>();
 	private static java.util.Map<String,Class<?>> m_parserGroupingRuleClass=
 		new java.util.HashMap<String, Class<?>>();
+	private static java.util.List<String> m_clearTokenListRules=
+		new java.util.Vector<String>();
 	
 	private ScribbleProtocolParser m_parser=null;
 	private Token m_currentToken=null;
@@ -63,7 +65,9 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("interrupt", InterruptBlock.class);
 		m_tokenClass.put("run", Run.class);
 
-		//m_parserRuleClass.put("typeReferenceDef", TypeReference.class);
+		// Clear token list - determines whether prior to processing
+		// a list of tokens, the 'current token' should be cleared
+		m_clearTokenListRules.add("boundParameter");
 
 		// This may define the model object that should be
 		// created after processing the named grammer rule
@@ -77,6 +81,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		m_parserGroupingRuleClass.put("protocolRefDef", ProtocolReference.class);
 		m_parserGroupingRuleClass.put("boundParameter", DeclarationBinding.class);
+		m_parserGroupingRuleClass.put("inlineProtocolDef", Protocol.class);
+		m_parserGroupingRuleClass.put("declarationName", String.class);
 		
 		// When a particular class has multiple properties of the
 		// same type, then a preceding token must be used to
@@ -84,8 +90,8 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		// mapping between the property name and the token.
 		m_propertyToken.put("fromParticipant", "from");
 		m_propertyToken.put("toParticipant", "to");
-		m_propertyToken.put("boundName", "for");
-		m_propertyToken.put("localName", "");
+		m_propertyToken.put("boundName", "");
+		m_propertyToken.put("localName", "=");
 		
 		// Defines the list element base type associated with a
 		// property name
@@ -114,7 +120,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		
 		Class<?> cls=m_tokenClass.get(token.getText());
 		
-		_log.finest("Token class for '"+token.getText()+
+		_log.info("Token class for '"+token.getText()+
 				"' is: "+cls);
 
 		if (cls != null) {
@@ -127,7 +133,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		}
 		
 		if (ret == token && token.getType() != ScribbleProtocolParser.ID) {
-			_log.fine("Set current token="+token);
+			_log.info("Set current token="+token);
 			m_currentToken = token;
 		}
 		
@@ -193,13 +199,27 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void addChild(Object parent, Object child) {
-		_log.fine("Add child: parent="+parent+" child="+child);
+		_log.info("Add child: parent="+parent+" child="+child);
 		
 		// Check if child is a list
 		if (isNil(child)) {
 			java.util.List<Object> nil=
 				(java.util.List<Object>)child;
 			
+			if (m_parser != null &&
+					m_parser.getRuleInvocationStack().size() > 0) {
+				String ruleName=(String)m_parser.getRuleInvocationStack().get(
+						m_parser.getRuleInvocationStack().size()-1);
+								
+				// Before processing the sublist of tokens, clear
+				// the current token - needed for cases like the
+				// 'boundParameter' syntax rule
+				if (nil.size() > 0 && ruleName != null && m_clearTokenListRules.contains(ruleName)) {
+					_log.info("Clear current token before processing sublist of tokens: rule="+ruleName);
+					m_currentToken = null;
+				}
+			}
+				
 			// Check if ID token
 			StringBuffer buf=new StringBuffer();
 			
@@ -218,7 +238,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 					
 					if (nil.get(i) instanceof Token) {
 						m_currentToken = (Token)nil.get(i);
-						_log.fine("Set current token: "+m_currentToken);
+						_log.info("Set current token: "+m_currentToken);
 					}
 
 					addChild(parent, nil.get(i));
@@ -271,7 +291,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 								java.util.List list=(java.util.List)
 										pds[i].getReadMethod().invoke(parent);
 								
-								_log.fine("Adding "+child+" to list: "+
+								_log.info("Adding "+child+" to list: "+
 										list+" on parent "+parent);
 								list.add(child);
 							}
@@ -283,7 +303,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 					// must have a set method
 					if (pd != null && pd.getWriteMethod() != null) {
 						
-						_log.fine("Set property '"+pd.getName()+
+						_log.info("Set property '"+pd.getName()+
 								"' on="+parent+" (class="+parent.getClass()+") to="+child);
 						
 						pd.getWriteMethod().invoke(parent, child);

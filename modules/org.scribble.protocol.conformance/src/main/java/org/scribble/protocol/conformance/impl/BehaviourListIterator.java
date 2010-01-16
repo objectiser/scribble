@@ -17,8 +17,8 @@
 package org.scribble.protocol.conformance.impl;
 
 import org.scribble.protocol.model.Behaviour;
-import org.scribble.protocol.model.ModelInclude;
 import org.scribble.protocol.model.ModelReference;
+import org.scribble.protocol.model.Run;
 
 /**
  * This class provides an iterator implementation over a behaviour list.
@@ -90,18 +90,18 @@ public class BehaviourListIterator implements java.util.Iterator<Behaviour> {
 		
 		if (m_subList != null) {
 			ret = m_subList.getComposedSource();
-		} else if (m_list.getModelInclude() != null) {
-			ret = m_list.getModelInclude().getReference();
+		} else if (m_list.getRun() != null) {
+			ret = m_list.getRun().getReference();
 		}
 		
 		return(ret);
 	}
 	
-	public ModelInclude getModelInclude() {
-		ModelInclude ret=m_list.getModelInclude();
+	public Run getRun() {
+		Run ret=m_list.getRun();
 		
 		if (ret == null && m_subList != null) {
-			ret = m_subList.getModelInclude();
+			ret = m_subList.getRun();
 		}
 		
 		return(ret);

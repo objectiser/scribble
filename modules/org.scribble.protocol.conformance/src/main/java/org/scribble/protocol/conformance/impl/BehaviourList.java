@@ -62,7 +62,7 @@ public class BehaviourList extends Behaviour
 	 * @param defn The block
 	 * @param include The model inclusion construct
 	 */
-	protected BehaviourList(Block defn, org.scribble.protocol.model.ModelInclude include) {
+	protected BehaviourList(Block defn, org.scribble.protocol.model.Run include) {
 		m_block = defn;
 		m_include = include;
 		
@@ -173,12 +173,12 @@ public class BehaviourList extends Behaviour
 	}
 	
 	/**
-	 * This method returns the optional model include
+	 * This method returns the optional run activity
 	 * associated with the contained behaviour activities.
 	 * 
-	 * @return The optional model include
+	 * @return The optional run activity
 	 */
-	public ModelInclude getModelInclude() {
+	public Run getRun() {
 		return(m_include);
 	}
 	
@@ -228,7 +228,7 @@ public class BehaviourList extends Behaviour
 	}
 	
 	private Block m_block=null;
-	private ModelInclude m_include=null;
+	private Run m_include=null;
 	private java.util.Map<String,String> m_nameMap=null;
 	private java.util.List<Behaviour> m_list=new java.util.Vector<Behaviour>();
 	
@@ -320,7 +320,7 @@ public class BehaviourList extends Behaviour
 		
 		public void visitRun(Run run) {
 			Protocol defn=
-				((ModelInclude)run).getProtocol();
+				((Run)run).getProtocol();
 		
 			if (defn != null) {
 				BehaviourList list=null;
@@ -366,133 +366,5 @@ public class BehaviourList extends Behaviour
 				}
 			}			
 		}
-
-		/*
-		public boolean visit(ModelObject obj) {
-			boolean ret=false;
-			
-			if (obj instanceof MultiPathBehaviour) {
-				MultiPathBehaviour paths=
-						(MultiPathBehaviour)obj;
-				java.util.List<BehaviourList> bllist=
-						new java.util.Vector<BehaviourList>();
-				
-				for (int i=0; i < paths.getPaths().size(); i++) {
-					Block block=paths.getPaths().get(i);
-					
-					BehaviourList bl=new BehaviourList(block);
-					
-					//bl.derivedFrom(block);
-					
-					bl.setNameMap(m_nameMap);
-					
-					//block.visit(bl);
-					
-					bllist.add(bl);
-				}
-				
-				BehaviourListPaths blpaths=new BehaviourListPaths((Behaviour)obj,
-										bllist);
-				
-				if (blpaths.isVisible()) {
-					addToList(blpaths);
-				}
-
-			} else if (obj instanceof SinglePathBehaviour) {
-				SinglePathBehaviour path=
-						(SinglePathBehaviour)obj;
-				java.util.List<BehaviourList> bllist=
-						new java.util.Vector<BehaviourList>();
-				
-				BehaviourList bl=new BehaviourList(path.getBlock());
-					
-				//bl.derivedFrom(path.getBlock());
-					
-				bl.setNameMap(m_nameMap);
-					
-				//path.getBlock().visit(bl);
-					
-				bllist.add(bl);
-				
-				BehaviourListPaths blpaths=new BehaviourListPaths((Behaviour)obj,
-										bllist);
-				
-				if (blpaths.isVisible()) {
-					addToList(blpaths);
-				}
-
-			} else if (obj instanceof ModelInclude) {
-				ModelInclude include=
-						(ModelInclude)obj;
-				Protocol defn=
-						((ModelInclude)obj).getProtocol();
-				
-				if (defn != null) {
-					BehaviourList list=null;
-					
-					// Check if external model - if so, then
-					// need to supply reference to list, so can be
-					// used in error reporting
-					if (include.getReference() != null &&
-								include.getReference().isInner() == false) {
-						list = new BehaviourList(defn.getBlock(), include);
-					} else {
-						list = new BehaviourList(defn.getBlock());
-					}
-					
-					list.setNameMap(getNameMap(include.getBindings()));
-					
-//					list.derivedFrom(include);
-					
-//					defn.visit(list);
-				
-					// Add list, if async (to identify existence of
-					// async composed conversation), or if the list
-					// has elements
-					if (include.isAsynchronous()) {
-						
-						// If async, then need to add 'behaviour
-						// list path' to isolate the behaviour
-						// list, to ensure it does not get merged
-						// into the outer list (as with the
-						// sync run)
-						java.util.List<BehaviourList> bllist=
-							new java.util.Vector<BehaviourList>();
-					
-						bllist.add(list);
-					
-						BehaviourListPaths blpaths=new BehaviourListPaths((Behaviour)obj,
-											bllist);
-					
-						addToList(blpaths);
-						
-					} else if (list.getBehaviourList().size() > 0) {
-						addToList(list);					
-					}
-				}
-				
-			} else if (obj instanceof Block) {
-				
-				// Iterate through each activity checking its a behaviour
-				ret = true;
-				
-			} else if (obj instanceof Behaviour) {
-				addToList((Behaviour)obj);
-			
-				// Only recursively check for behaviours
-				// inside other behaviours. This will ensure
-				// inner protocols will not be indirectly
-				// processed - only if invoked as part of
-				// a run statement.
-				ret = true;
-				
-			} else if (obj == m_block) {
-				// Visiting the main definition, so visit contents
-				ret = true;
-			}
-			
-			return(ret);
-		}
-		*/
 	}
 }

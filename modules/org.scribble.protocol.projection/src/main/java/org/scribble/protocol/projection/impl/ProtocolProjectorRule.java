@@ -75,19 +75,6 @@ public class ProtocolProjectorRule implements ProjectorRule {
 								participant, l);
 				prot.setLocatedName(modelName);
 				
-				// Project 'conforms to' references
-				for (int i=0; i < source.getConformsTo().size(); i++) {
-					ConformanceReference ref=source.getConformsTo().get(i);
-					
-					ConformanceReference projectedRef=
-						(ConformanceReference)context.project(ref,
-								participant, l);
-					
-					if (projectedRef != null) {
-						prot.getConformsTo().add(projectedRef);
-					}
-				}
-				
 				context.pushScope();
 				
 				prot.setBlock((Block)context.project(source.getBlock(),

@@ -296,6 +296,26 @@ public class DefaultVisitor implements Visitor {
 	}
 	
 	/**
+	 * This method indicates the start of a
+	 * run.
+	 * 
+	 * @param elem The run
+	 * @return Whether to process the contents
+	 */
+	public boolean startRun(Run elem) {
+		return(m_defaultGroupReturn);
+	}
+	
+	/**
+	 * This method indicates the end of a
+	 * run.
+	 * 
+	 * @param elem The run
+	 */
+	public void endRun(Run elem) {
+	}
+	
+	/**
 	 * This method indicates the start of an
 	 * Optional construct.
 	 * 

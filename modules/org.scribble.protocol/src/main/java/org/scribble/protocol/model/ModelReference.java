@@ -393,7 +393,7 @@ public class ModelReference extends ModelObject {
 	private String m_name=null;
 	private SubProtocolPath m_subDefinitionPath=new SubProtocolPath();
 	private String m_locatedParticipant=null;
-	private boolean m_inner=false;
+	private boolean m_inner=true;
 	private boolean m_fullyQualified=false;
 	private boolean m_placeholder=false;
 	private java.util.Hashtable<String, Object> m_properties=new java.util.Hashtable<String, Object>();

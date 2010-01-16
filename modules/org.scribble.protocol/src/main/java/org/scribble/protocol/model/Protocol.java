@@ -86,26 +86,6 @@ public class Protocol extends Activity {
 	}
 	
 	/**
-	 * This method returns the list of models that this definition
-	 * must conform to.
-	 * 
-	 * @return The list of models that must be conformed to
-	 */
-	public java.util.List<ConformanceReference> getConformsTo() {
-		return(m_conformsTo);
-	}
-	
-	/**
-	 * This method returns the list of models that this definition
-	 * implements.
-	 * 
-	 * @return The list of models this definition implements
-	 */
-	public java.util.List<ImplementsReference> getImplements() {
-		return(m_implements);
-	}
-	
-	/**
 	 * This method returns the block of activities associated
 	 * with the definition.
 	 * 
@@ -289,9 +269,5 @@ public class Protocol extends Activity {
 	
 	private LocatedName m_locatedName=null;
 	private boolean m_stateless=false;
-	private java.util.List<ConformanceReference> m_conformsTo=
-			new ContainmentList<ConformanceReference>(this, ConformanceReference.class);
-	private java.util.List<ImplementsReference> m_implements=
-			new ContainmentList<ImplementsReference>(this, ImplementsReference.class);
 	private Block m_contents=null;
 }

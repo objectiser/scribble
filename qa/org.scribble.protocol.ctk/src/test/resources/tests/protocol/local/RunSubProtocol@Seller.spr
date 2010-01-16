@@ -1,0 +1,13 @@
+namespace example.helloworld;
+
+protocol RunSubProtocol@Seller {
+	participant Buyer;
+
+	run Sub@SubSeller(SubBuyer = Buyer);
+
+	protocol Sub@SubSeller {
+		participant SubBuyer;
+		
+		Order from SubBuyer;
+	}
+}

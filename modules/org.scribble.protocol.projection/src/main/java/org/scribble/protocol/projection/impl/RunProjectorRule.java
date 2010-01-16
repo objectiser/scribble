@@ -16,13 +16,14 @@
  */
 package org.scribble.protocol.projection.impl;
 
+import org.scribble.common.logging.Journal;
 import org.scribble.protocol.model.*;
 
 /**
  * This class provides the Run implementation of the
  * projector rule.
  */
-public class RunProjectorRule extends ModelIncludeProjectorRule {
+public class RunProjectorRule implements ProjectorRule {
 
 	/**
 	 * This method determines whether the projection rule is
@@ -37,11 +38,76 @@ public class RunProjectorRule extends ModelIncludeProjectorRule {
 	}
 	
 	/**
-	 * This method creates the model include object being projected.
+	 * This method projects the supplied model object based on the
+	 * specified role.
 	 * 
-	 * @return The model include
+	 * @param model The model object
+	 * @param participant The participant
+	 * @param l The model listener
+	 * @return The projected model object
 	 */
-	protected ModelInclude createModelInclude() {
-		return(new Run());
+	public ModelObject project(ProjectorContext context, ModelObject model,
+					Participant participant, Journal l) {
+		Run ret=new Run();
+		Run source=(Run)model;
+		
+		ret.derivedFrom(source);
+		
+		java.util.Iterator<DeclarationBinding> iter=
+					source.getBindings().iterator();
+		while (iter.hasNext()) {
+			DeclarationBinding db=iter.next();
+			
+			// Don't project declaration if same as role - this
+			// will be done in the model include statement,
+			// not the bindings
+			if (db.getLocalName().equals(participant.getName()) == false) {
+				
+				DeclarationBinding dbcopy=
+						new DeclarationBinding(db.getLocalName(),
+									db.getBoundName());
+					
+				dbcopy.derivedFrom(db);
+					
+				ret.getBindings().add(dbcopy);
+			}
+		}
+		
+		Participant mappedParticipant=participant;
+		
+		// Determine whether role name has been mapped
+		DeclarationBinding db=null;
+		if ((db=source.getDeclarationBinding(participant.getName())) != null) {
+			String rename=db.getBoundName();
+			
+			if (rename != null) {
+				mappedParticipant = new Participant();
+				mappedParticipant.setName(rename);
+			}
+		}
+		
+		if (source.getReference() != null) {
+			
+			// Store protocol against mapped participant
+			Protocol defn=source.getProtocol();
+			
+			if (defn != null &&
+					defn.getParticipants().contains(mappedParticipant)) {
+				
+				// If inner reference, then record interest
+				// in project of definition against this mapped
+				// role
+				if (source.getReference().isInner()) {
+					context.registerInterest(defn, mappedParticipant);
+				}
+				
+				ret.setReference((ProtocolReference)context.project(
+							source.getReference(), mappedParticipant, l));
+			} else {
+				ret = null;
+			}
+		}
+
+		return(ret);
 	}
 }
