@@ -1,0 +1,11 @@
+namespace example.helloworld;
+
+protocol Parallel@Buyer {
+	participant Seller;
+
+	parallel {
+		Order to Seller;
+	} and {
+		Cancel to Seller;
+	}
+}

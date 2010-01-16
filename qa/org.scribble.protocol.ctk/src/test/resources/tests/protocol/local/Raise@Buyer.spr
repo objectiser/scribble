@@ -1,0 +1,5 @@
+namespace example.helloworld;
+
+protocol Raise@Buyer {
+	participant Seller;
+}

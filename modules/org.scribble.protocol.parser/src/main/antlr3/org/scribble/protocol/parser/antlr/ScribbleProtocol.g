@@ -106,9 +106,9 @@ choiceDef: 'choice'^ ( 'from' participantName )? ( 'to' participantName )? '{'! 
 
 whenBlockDef: 'when'^ interactionSignatureDef sequenceDef ;
 
-repeatDef: 'repeat'^ '@' participantName ( ','! participantName )* blockDef ;
+repeatDef: 'repeat'^ ( '@' participantName ( ','! participantName )* )? blockDef ;
 
-optionalDef: 'optional'^ '@' participantName ( ','! participantName )* blockDef ;
+optionalDef: 'optional'^ ( '@' participantName ( ','! participantName )* )? blockDef ;
 
 runDef: 'run'^ ( inlineProtocolDef | protocolRefDef ( '('! boundParameter ( ','! boundParameter )* ')'! )? ';'! ) ;
 
@@ -126,9 +126,9 @@ tryEscapeDef: 'try'^ blockDef ( catchOrInterruptBlockDef )+ ;
 
 catchOrInterruptBlockDef: catchBlockDef | interruptBlockDef ;
 
-catchBlockDef: 'catch'^ '@' participantName ( ',' participantName )* typeReferenceDef sequenceDef ;
+catchBlockDef: 'catch'^ ( '@' participantName ( ',' participantName )* )? typeReferenceDef sequenceDef ;
 
-interruptBlockDef: 'interrupt'^ '@' participantName ( ',' participantName )* sequenceDef ;
+interruptBlockDef: 'interrupt'^ ( '@' participantName ( ',' participantName )* )? sequenceDef ;
 
 
 /*-----------------------------------------------

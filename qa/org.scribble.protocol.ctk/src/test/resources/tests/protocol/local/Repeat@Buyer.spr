@@ -1,0 +1,9 @@
+namespace example.helloworld;
+
+protocol Repeat@Buyer {
+	participant Seller;
+
+	repeat {
+		Order to Seller;
+	}
+}

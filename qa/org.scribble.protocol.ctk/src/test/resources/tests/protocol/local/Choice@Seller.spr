@@ -1,0 +1,12 @@
+namespace example.helloworld;
+
+protocol SingleInteraction@Seller {
+	participant Buyer;
+
+	choice from Buyer {
+		when Order {
+		}
+		when Cancel {
+		}
+	}
+}

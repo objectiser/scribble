@@ -55,7 +55,9 @@ public class OptionalProjectorRule implements ProjectorRule {
 		
 		// Project the list of roles
 		for (int i=0; i < source.getParticipants().size(); i++) {
-			ret.getParticipants().add(new Participant(source.getParticipants().get(i)));
+			if (source.getParticipants().get(i).getName().equals(participant.getName()) == false) {
+				ret.getParticipants().add(new Participant(source.getParticipants().get(i)));
+			}
 		}
 		
 		if (ret != null && source.getBlock() != null) {
