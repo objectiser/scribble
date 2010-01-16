@@ -102,9 +102,7 @@ interactionSignatureDef: ( typeReferenceDef | ID '('! typeReferenceDef ( ','! ty
 
 interactionDef: interactionSignatureDef ( 'from' participantName )? ( 'to' participantName )? ';'! ;
 
-choice: 'choice'^ ;
-
-choiceDef: choice ( 'from' participantName )? ( 'to' participantName )? '{'! ( whenBlockDef )+ '}'! ;
+choiceDef: 'choice'^ ( 'from' participantName )? ( 'to' participantName )? '{'! ( whenBlockDef )+ '}'! ;
 
 whenBlockDef: 'when'^ interactionSignatureDef sequenceDef ;
 

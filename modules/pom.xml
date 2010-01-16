@@ -19,6 +19,7 @@
 		<module>org.scribble.protocol</module>
 		<module>org.scribble.protocol.parser</module>
 		<module>org.scribble.protocol.validation.connectedness</module>
+		<module>org.scribble.protocol.projection</module>
 		<module>org.scribble.protocol.conformance</module>
 		<module>org.scribble.command</module>
 	</modules>

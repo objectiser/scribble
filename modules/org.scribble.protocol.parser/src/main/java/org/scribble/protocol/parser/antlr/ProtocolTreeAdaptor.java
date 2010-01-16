@@ -27,6 +27,7 @@ import org.scribble.protocol.model.*;
 
 public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 
+	private static final String ACTIVITY_RULE_NAME = "activityDef";
 	private static java.util.Map<String,String> m_propertyToken=
 		new java.util.HashMap<String, String>();
 	private static java.util.Map<String,Class<?>> m_tokenClass=
@@ -51,7 +52,7 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_tokenClass.put("import", Import.class);
 		m_tokenClass.put("protocol", Protocol.class);
 		m_tokenClass.put("participant", ParticipantList.class);
-		//m_tokenClass.put("choice", Choice.class);
+		m_tokenClass.put("choice", Choice.class);
 		m_tokenClass.put("when", WhenBlock.class);
 		m_tokenClass.put("parallel", Parallel.class);
 		m_tokenClass.put("repeat", Repeat.class);
@@ -76,7 +77,6 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		m_parserGroupingRuleClass.put("locatedNameDef", LocatedName.class);
 		m_parserGroupingRuleClass.put("protocolRefDef", ProtocolReference.class);
 		m_parserGroupingRuleClass.put("boundParameter", DeclarationBinding.class);
-		m_parserGroupingRuleClass.put("choiceDef", Choice.class);
 		
 		// When a particular class has multiple properties of the
 		// same type, then a preceding token must be used to
@@ -124,6 +124,11 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		if (ret == token && token.getType() != ScribbleProtocolParser.ID) {
+			_log.fine("Set current token="+token);
+			m_currentToken = token;
 		}
 		
 		return(ret);
@@ -195,12 +200,6 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 			java.util.List<Object> nil=
 				(java.util.List<Object>)child;
 			
-			// Reset stored token
-			if (nil.size() > 0) {
-				_log.fine("Reset current token");
-				m_currentToken = null;
-			}
-			
 			// Check if ID token
 			StringBuffer buf=new StringBuffer();
 			
@@ -231,11 +230,6 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 			}
 		} else if (parent != null && child != null) {
 
-			if (parent instanceof Token && child instanceof Token) {
-				m_currentToken = (Token)child;
-				_log.fine("Set current token(2): "+m_currentToken);
-			}
-			
 			if (isNil(parent)) {
 				java.util.List<Object> nil=
 					(java.util.List<Object>)parent;
@@ -422,11 +416,18 @@ public class ProtocolTreeAdaptor implements org.antlr.runtime.tree.TreeAdaptor {
 		// Check if intermediate node required
 		if (m_parser != null &&
 				m_parser.getRuleInvocationStack().size() > 0) {
-			Class<?> cls = m_parserGroupingRuleClass.get(
-						m_parser.getRuleInvocationStack().get(
-							m_parser.getRuleInvocationStack().size()-1));
+			String ruleName=(String)m_parser.getRuleInvocationStack().get(
+					m_parser.getRuleInvocationStack().size()-1);
+			
+			Class<?> cls = m_parserGroupingRuleClass.get(ruleName);
 			
 			_log.finest("Parser grouping rule class="+cls);
+			
+			// Check if rule invocation is associated with activity
+			if (ruleName.equals(ACTIVITY_RULE_NAME)) {
+				_log.fine("Reset current token");
+				m_currentToken = null;
+			}
 			
 			if (cls != null) {
 				

@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.scribble.qa</groupId>
-  <artifactId>org.scribble.protocol.ctk</artifactId>
+  <groupId>org.scribble.modules</groupId>
+  <artifactId>org.scribble.protocol.projection</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Scribble::QA::Protocol::CTK</name>
+  <name>Scribble::Modules::Protocol::Projection</name>
 
   <parent>
     <groupId>org.scribble</groupId>
-    <artifactId>qa</artifactId>
+    <artifactId>modules</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
@@ -25,29 +25,9 @@
       <version>${scribble.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.scribble.modules</groupId>
-      <artifactId>org.scribble.protocol.parser</artifactId>
-      <version>${scribble.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.scribble.modules</groupId>
-      <artifactId>org.scribble.protocol.projection</artifactId>
-      <version>${scribble.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.osgi.core</artifactId>
       <version>${osgi.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.antlr</groupId>
-      <artifactId>antlr</artifactId>
-      <version>${antlr.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>      
-      <scope>test</scope>
     </dependency>
   </dependencies>
   
